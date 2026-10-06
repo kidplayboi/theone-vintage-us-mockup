@@ -29,4 +29,13 @@ export const icon = {
   // 판매 방식 아이콘(결정 99) — 글을 못 읽어도 모양으로: 망치 = 실시간 입찰 · 시계 = 블라인드 입찰(기한) · 가격표 = 고정가
   gavel: svg('<path d="M4 20l7-7M9 6l6 6M7 8l4-4 6 6-4 4zM14 15l2-2 4 4-2 2z"/>'),
   clock: svg('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'),
+  // 카테고리 아이콘 8(운영 카테고리 그대로) — 칩에서 글 앞에 14px
+  bag: svg('<path d="M6 9h12l1 11H5z"/><path d="M9 9V7a3 3 0 0 1 6 0v2"/>'),
+  watch: svg('<circle cx="12" cy="12" r="5"/><path d="M9.2 7.2L9.8 3h4.4l.6 4.2M9.2 16.8l.6 4.2h4.4l.6-4.2M12 10v2l1.5 1"/>'),
+  gem: svg('<path d="M7 4h10l4 5-9 11L3 9z"/><path d="M3 9h18M9.5 4L12 20M14.5 4L12 20"/>'),
+  shirt: svg('<path d="M8 4l4 2 4-2 4 4-3 2v10H7V10L4 8z"/>'),
+  glasses: svg('<circle cx="7.5" cy="14" r="3.5"/><circle cx="16.5" cy="14" r="3.5"/><path d="M11 14h2M4 14l2-6h12l2 6"/>'),
+  sparkles: svg('<path d="M12 4l1.8 4.2L18 10l-4.2 1.8L12 16l-1.8-4.2L6 10l4.2-1.8z"/><path d="M19 15l.8 1.7 1.7.8-1.7.8L19 20l-.8-1.7-1.7-.8 1.7-.8z"/>'),
+  cup: svg('<path d="M5 8h11v6a5 5 0 0 1-10 0z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2M4 20h14"/>'),
+  coin: svg('<circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5h3.5a1.75 1.75 0 0 1 0 3.5h-2a1.75 1.75 0 0 0 0 3.5H15"/>'),
 };

@@ -1,14 +1,15 @@
 // 제품 공통 틀 v4 — 초록 마스트헤드(워드마크·검색·판매 방식·계정) · 흰 카테고리 줄(카테고리 8 + Brands ▾) · 브랜드 펼침 · 서랍 · 흰 푸터 · 모바일 아래 탭
 // 검은 facts 띠는 뺐다(결정 69). 근거: Bezel 마스트헤드(ref-bezel-s00) · 1stDibs/Rebag/WGACA/Fashionphile 카테고리 줄 안의 Designers 항목(결정 71)
-import { icon } from './icons.js?v=8fb20ff5e5';
-import * as store from './store.js?v=8fb20ff5e5';
-import { brandName } from './data.js?v=8fb20ff5e5';
+import { icon } from './icons.js?v=886fdf05f2';
+import * as store from './store.js?v=886fdf05f2';
+import { brandName } from './data.js?v=886fdf05f2';
 
-// 운영 사이트 상단 메뉴 그대로(Premium Auction · Express · Classic · How It Works)
+// 운영 사이트 상단 메뉴 그대로(Premium Auction · Express · Classic · How It Works) — 셋은 운영사의 판매 프로그램. Express·Classic 은 지금 재고 0.
+// 네 번째 칸 = 마우스 올리면 뜨는 설명(형 10/6 "이거 뭐임?") — 정확한 정의는 의뢰처 확인 항목
 const SALES = [
-  ['premium', 'Premium Auction', 'shop.html'],
-  ['express', 'Express', 'shop.html?sale=express'],
-  ['classic', 'Classic', 'shop.html?sale=classic'],
+  ['premium', 'Premium Auction', 'shop.html', 'Our main program — every lot listed today'],
+  ['express', 'Express', 'shop.html?sale=express', 'A separate sale program · no lots listed right now'],
+  ['classic', 'Classic', 'shop.html?sale=classic', 'A separate sale program · no lots listed right now'],
 ];
 // 운영 사이트 카테고리 칩 그대로(10/6 실측 8개 + All)
 export const CATEGORIES = [
@@ -54,8 +55,8 @@ function megaHTML(data) {
 }
 
 function headerHTML(page, cat, data) {
-  const sales = SALES.map(([key, label, href]) =>
-    `<a href="${href}" ${key === page ? 'aria-current="page"' : ''}>${label}</a>`).join('');
+  const sales = SALES.map(([key, label, href, tip]) =>
+    `<a href="${href}" title="${tip}" ${key === page ? 'aria-current="page"' : ''}>${label}</a>`).join('');
   const cats = [['', 'All lots'], ...CATEGORIES].map(([key, label]) => {
     const on = page === 'premium' && cat === key;
     return `<li><a href="shop.html${key ? `?cat=${key}` : ''}" ${on ? 'aria-current="page"' : ''}>${label}</a></li>`;

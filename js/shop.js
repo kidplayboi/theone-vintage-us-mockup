@@ -1,13 +1,13 @@
 // 목록 페이지 v3 — 운영 사이트 분류 전부(형 10/6 "없애면 안 댐"): 판매 방식 탭 4 · 카테고리 9(개수) · 브랜드 40(개수) ·
 // 정렬 · 페이지당 20/50/100 · 검색 · 시간대 · 쪽 번호 · Premium/Express/Classic. 탭 모양은 Bezel 경매 목록(Live 327 / Ending soon 108)
-import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=8fb20ff5e5';
-import { mountChrome, bindNewsletter, CATEGORIES } from './chrome.js?v=8fb20ff5e5';
-import { mountReview, paintNotes } from './review.js?v=8fb20ff5e5';
-import { cardHTML, bindCards, startTicker } from './card.js?v=8fb20ff5e5';
-import { icon } from './icons.js?v=8fb20ff5e5';
-import { openLot } from './lotmodal.js?v=8fb20ff5e5';
-import { initMotion, revealOnScroll } from './motion.js?v=8fb20ff5e5';
-import * as store from './store.js?v=8fb20ff5e5';
+import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=886fdf05f2';
+import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=886fdf05f2';
+import { mountReview, paintNotes } from './review.js?v=886fdf05f2';
+import { cardHTML, bindCards, startTicker } from './card.js?v=886fdf05f2';
+import { icon } from './icons.js?v=886fdf05f2';
+import { openLot } from './lotmodal.js?v=886fdf05f2';
+import { initMotion, revealOnScroll } from './motion.js?v=886fdf05f2';
+import * as store from './store.js?v=886fdf05f2';
 
 const KINDS = [['', 'All lots'], ['RT', 'Live bid'], ['LOW', 'Time limit'], ['MALL', 'Mall']];
 // 고른 판매 방식이 뭔지 한 줄로(처음 온 미국 손님용). 두 색: 초록 = 경매(Live bid · Time limit), 슬레이트 = 고정가(Mall) — 결정 95
@@ -66,8 +66,10 @@ async function main() {
 
 function render() {
   renderHead();
+  $('[data-filters]').hidden = ui.sale !== 'premium'; // Express · Classic 은 재고 0 — 필터 대신 설명 빈 상태
   renderKinds();
   renderCats();
+  renderBrands();
   renderGrid();
   paintNotes();
   revealOnScroll();
@@ -92,10 +94,17 @@ function renderHead() {
 }
 
 // 판매 방식 숫자 = 운영 API. 입찰(B) 시안에서는 전 재고를 Live bid 로 본다(검토 막대에서 A 로 바꾸면 운영 숫자 그대로)
+// 고른 카테고리·브랜드 안의 숫자로(형 10/6 "Jewelry 골랐는데 Live bid 24,132" 지적). Express·Classic 은 운영 재고 0
 function kindCounts() {
+  if (ui.sale !== 'premium') return { '': 0, RT: 0, LOW: 0, MALL: 0 };
   const k = data.meta.kinds || {};
-  if (store.setting('sale') !== 'B') return k;
-  return { '': data.meta.total, RT: data.meta.total, LOW: 0, MALL: 0 };
+  const total = data.meta.total || 1;
+  const base = ui.cat ? (data.meta.categories.find(c => c.name === ui.cat) || { n: 0 }).n
+    : ui.brand ? (data.meta.brands.find(b => b.name === ui.brand) || { n: 0 }).n : total;
+  if (store.setting('sale') === 'B') return { '': base, RT: base, LOW: 0, MALL: 0 };
+  const part = v => (v ? Math.round(v / total * base) : 0); // 운영 API 는 종류별 개수를 전체로만 준다 → 비율로 나눈다
+  const rt = part(k.RT), low = part(k.LOW);
+  return { '': base, RT: rt, LOW: low, MALL: Math.max(0, base - rt - low) };
 }
 
 function renderKinds() {
@@ -108,10 +117,36 @@ function renderKinds() {
   $('[data-kind-help]').textContent = KIND_HELP[ui.kind];
 }
 
+// 카테고리 — 아이콘 칩. 경매에서 가장 많이 사는 셋(Bags · Watches · Jewelry)을 앞에 모으고 선으로 구분(형 10/6 · 결정 100). 운영 9개는 전부 남는다
+const CAT_ICON = { Bag: 'bag', Watch: 'watch', Jewelry: 'gem', Clothing: 'shirt', Accessories: 'glasses', Variety: 'sparkles', Tableware: 'cup', Coin: 'coin' };
+const CAT_MAIN = ['Bag', 'Watch', 'Jewelry'];
 function renderCats() {
   const counts = Object.fromEntries(data.meta.categories.map(c => [c.name, c.n]));
-  const chip = (key, label, n) => `<button class="chip" type="button" data-cat="${key}" aria-pressed="${ui.cat === key}">${label} <span class="n">${n.toLocaleString('en-US')}</span></button>`;
-  $('[data-cats]').innerHTML = chip('', 'All', data.meta.total) + CATEGORIES.map(([key, label]) => chip(key, label, counts[key] || 0)).join('');
+  const chip = (key, label, n) => `<button class="chip" type="button" data-cat="${key}" aria-pressed="${ui.cat === key}">${CAT_ICON[key] ? icon[CAT_ICON[key]] : ''}${label} <span class="n">${n.toLocaleString('en-US')}</span></button>`;
+  const main = CATEGORIES.filter(([k]) => CAT_MAIN.includes(k));
+  const rest = CATEGORIES.filter(([k]) => !CAT_MAIN.includes(k));
+  $('[data-cats]').innerHTML = chip('', 'All', data.meta.total)
+    + main.map(([key, label]) => chip(key, label, counts[key] || 0)).join('')
+    + '<span class="chip-sep" aria-hidden="true"></span>'
+    + rest.map(([key, label]) => chip(key, label, counts[key] || 0)).join('');
+}
+
+// 브랜드 — 드롭다운 대신 칩(형 10/6 · 결정 100). 주요 8(홈 큐레이션과 같음) + 'More brands' 로 40개 전부
+const BRAND_TOP = ['HERMES', 'LOUIS VUITTON', 'CHANEL', 'ROLEX', 'Cartier', 'Christian Dior', 'Van Cleef&Arpels', 'Gucci'];
+let brandsOpen = false;
+function renderBrands() {
+  const all = brandList(data);
+  const top = BRAND_TOP.map(n => all.find(b => b.name === n)).filter(Boolean);
+  const rest = all.filter(b => !BRAND_TOP.includes(b.name));
+  const chip = b => `<button class="chip" type="button" data-brand-chip="${esc(b.name)}" aria-pressed="${ui.brand === b.name}">${esc(brandName(b.name))} <span class="n">${b.n.toLocaleString('en-US')}</span></button>`;
+  const pickedInRest = rest.find(b => b.name === ui.brand);
+  $('[data-brands]').innerHTML = `<button class="chip" type="button" data-brand-chip="" aria-pressed="${!ui.brand}">All brands <span class="n">${all.length}</span></button>`
+    + top.map(chip).join('')
+    + (pickedInRest && !brandsOpen ? chip(pickedInRest) : '')
+    + `<button class="chip chip-more" type="button" data-brands-toggle aria-expanded="${brandsOpen}">${brandsOpen ? 'Fewer brands' : `More brands`}${icon.down}</button>`;
+  const panel = $('[data-brands-all]');
+  panel.hidden = !brandsOpen;
+  panel.innerHTML = rest.map(chip).join('');
 }
 
 function kindOf(lot) {
@@ -162,11 +197,14 @@ function renderGrid() {
   if (!list.length) {
     const kindName = (KINDS.find(k => k[0] === ui.kind) || [])[1];
     const none = ui.sale !== 'premium' || (ui.kind && !liveCount());
+    const other = ui.sale !== 'premium';
     grid.innerHTML = `<div class="empty">
-      <p class="label">${ui.sale !== 'premium' ? SALES[ui.sale] : (ui.kind ? kindName : 'No results')}</p>
-      <p class="display">${none ? 'No lots listed right now' : 'Nothing matches these filters'}</p>
-      <p class="muted">${none ? 'New lots are listed every week. Premium Auction lots are available today.' : 'Try another category or brand, or clear the search.'}</p>
-      <button class="btn ghost" type="button" data-reset>${ui.sale !== 'premium' ? 'Browse Premium Auction' : 'Clear filters'}</button></div>`;
+      <p class="label">${other ? SALES[ui.sale] : (ui.kind ? kindName : 'No results')}</p>
+      <p class="display">${none ? `No ${other ? SALES[ui.sale] : ''} lots listed right now` : 'Nothing matches these filters'}</p>
+      <p class="muted">${other
+        ? `${SALES[ui.sale]} is a separate sale program on TheOne, alongside Premium Auction. Nothing is listed there this week — all ${data.meta.total.toLocaleString('en-US')} lots are in Premium Auction today.`
+        : (none ? 'New lots are listed every week. Premium Auction lots are available today.' : 'Try another category or brand, or clear the search.')}</p>
+      <button class="btn${other ? '' : ' ghost'}" type="button" data-reset>${other ? 'Browse Premium Auction' : 'Clear filters'}</button></div>`;
     $('[data-pages]').innerHTML = '';
     return;
   }
@@ -196,9 +234,6 @@ function renderPages(pages, count) {
 }
 
 function fillSelects() {
-  const brands = [...data.meta.brands.filter(b => b.name !== 'Others'), ...data.meta.brands.filter(b => b.name === 'Others')];
-  $('[data-brand]').innerHTML = '<option value="">All brands</option>' +
-    brands.map(b => `<option value="${esc(b.name)}" ${b.name === ui.brand ? 'selected' : ''}>${esc(brandName(b.name))} (${b.n.toLocaleString('en-US')})</option>`).join('');
   $('[data-sort]').innerHTML = SORTS.map(([v, label]) => `<option value="${v}" ${v === ui.sort ? 'selected' : ''}>${label}</option>`).join('');
   const tz = store.setting('tz');
   $('[data-tz]').innerHTML = TIMEZONES.map(([v, label]) => `<option value="${v}" ${v === tz ? 'selected' : ''}>${label}</option>`).join('');
@@ -227,13 +262,15 @@ function bindControls() {
   main.addEventListener('click', e => {
     const kind = e.target.closest('[data-kind]');
     const cat = e.target.closest('[data-cat]');
+    const brand = e.target.closest('[data-brand-chip]');
     const page = e.target.closest('[data-page]');
     if (kind) Object.assign(ui, { kind: kind.dataset.kind, page: 1 });
     else if (cat) Object.assign(ui, { cat: cat.dataset.cat, page: 1 });
+    else if (brand) Object.assign(ui, { brand: brand.dataset.brandChip, page: 1 });
+    else if (e.target.closest('[data-brands-toggle]')) { brandsOpen = !brandsOpen; renderBrands(); paintNotes(); return; }
     else if (page && !page.disabled) { ui.page = Number(page.dataset.page); renderGrid(); paintNotes(); revealOnScroll(); top(); return; }
     else if (e.target.closest('[data-reset]')) {
       Object.assign(ui, { sale: 'premium', kind: '', cat: '', brand: '', q: '', page: 1 });
-      $('[data-brand]').value = '';
       $('[data-q]').value = '';
       const siteQ = document.getElementById('site-q');
       if (siteQ) siteQ.value = '';
@@ -241,7 +278,6 @@ function bindControls() {
     syncUrl();
     render();
   });
-  $('[data-brand]').addEventListener('change', e => { ui.brand = e.target.value; ui.page = 1; syncUrl(); render(); });
   $('[data-sort]').addEventListener('change', e => { ui.sort = e.target.value; ui.page = 1; syncUrl(); render(); });
   $('[data-per]').addEventListener('change', e => { ui.per = Number(e.target.value); ui.page = 1; render(); });
   $('[data-tz]').addEventListener('change', e => store.setSetting('tz', e.target.value));

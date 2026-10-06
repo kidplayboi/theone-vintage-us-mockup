@@ -1,14 +1,14 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES } from './data.js?v=71e7d9c546';
-import { mountChrome, bindNewsletter } from './chrome.js?v=71e7d9c546';
-import { mountReview, paintNotes } from './review.js?v=71e7d9c546';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=71e7d9c546';
-import { openLot } from './lotmodal.js?v=71e7d9c546';
-import { mountHero } from './hero.js?v=71e7d9c546';
-import { initMotion, revealOnScroll } from './motion.js?v=71e7d9c546';
-import { icon } from './icons.js?v=71e7d9c546';
-import * as store from './store.js?v=71e7d9c546';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES } from './data.js?v=c986507e2b';
+import { mountChrome, bindNewsletter } from './chrome.js?v=c986507e2b';
+import { mountReview, paintNotes } from './review.js?v=c986507e2b';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=c986507e2b';
+import { openLot } from './lotmodal.js?v=c986507e2b';
+import { mountHero } from './hero.js?v=c986507e2b';
+import { initMotion, revealOnScroll } from './motion.js?v=c986507e2b';
+import { icon } from './icons.js?v=c986507e2b';
+import * as store from './store.js?v=c986507e2b';
 
 const HOUR = 3600000;
 // 히어로 = 배경을 지운 실재고 4점(assets/hero)

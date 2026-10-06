@@ -45,7 +45,8 @@
 
 /* ── 2 Live now — 초록 띠(브랜드색 자리 ②). 왼쪽 흰 카드(Phillips) + 카드 3장(까사 구조) ── */
 /* 바탕은 연한 회녹(결정 98 · 형 10/6 "진초록 + 흰 바탕이 붙어 눈 아픔") — 초록은 머리띠 · CTA · 카드 띠에만 */
-.live { background: #EEF2EF; color: var(--body); padding: var(--s8) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+/* 클래스는 .live-sec — .live 는 배지(.badge.live)·점(.dot)과 이름이 겹쳐 초록 배지가 142px 로 늘어났다(10/6 실측) */
+.live-sec { background: #EEF2EF; color: var(--body); padding: var(--s8) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .live-in { display: grid; grid-template-columns: 296px minmax(0, 1fr); gap: var(--s6); align-items: start; }
 .live-card { display: grid; gap: var(--s3); align-content: start; padding: var(--s5); border-radius: var(--r-lg); background: var(--canvas); color: var(--body); box-shadow: inset 0 0 0 1px var(--line); }
 .live-now { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-13); font-weight: var(--w-ui); color: var(--live); }

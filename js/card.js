@@ -1,16 +1,16 @@
 // 로트 카드 v4 — 까사 정보 구조의 정돈판(결정 72 · v4-lock §6)
 // 띠(마감 · 카운트다운 · 남은 시간 막대) → 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 배지 1
 // 1시간 안이면 띠 글이 "Ending soon" 으로 바뀌고 숫자가 빨강(더윈 12). 카드 어디를 눌러도 상세 창(더윈 4). 모바일은 띠 대신 가격 줄의 알약(BaT · 결정 79)
-import { usd, jpy, cardImg, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName } from './data.js?v=5d4a7c1308';
-import { icon } from './icons.js?v=5d4a7c1308';
-import * as store from './store.js?v=5d4a7c1308';
-import { toast } from './chrome.js?v=5d4a7c1308';
+import { usd, jpy, cardImg, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName } from './data.js?v=9f1e5de50c';
+import { icon } from './icons.js?v=9f1e5de50c';
+import * as store from './store.js?v=9f1e5de50c';
+import { toast } from './chrome.js?v=9f1e5de50c';
 
 const HOUR = 3600000;
 const DAY = 86400000;
 const WINDOW = 72 * HOUR; // 예시 경매 한 회차 길이 — 띠의 진행막대 비율에만 쓴다
-// 판매 방식 → 색 클래스(결정 93 · 운영 코드 RT/LOW/MALL 그대로). 띠·배지·점·목록 탭이 같은 이름을 쓴다
-export const KIND_CLASS = { RT: 'live', LOW: 'time', MALL: 'mall' };
+// 판매 방식 → 색 클래스(결정 95 · 두 색). 경매 둘(RT 실시간 입찰 · LOW 블라인드 입찰)은 'live' 초록, 고정가 MALL 은 'mall' 슬레이트. 띠·배지·점·목록 탭이 같은 이름
+export const KIND_CLASS = { RT: 'live', LOW: 'live', MALL: 'mall' };
 
 // 남은 시간 문구 — 하루 넘으면 "3 days left", 하루 안이면 시:분:초
 export function remain(ends) {
@@ -57,9 +57,9 @@ function bandHTML(b, sale) {
   const cls = `card-band kind-${KIND_CLASS[b.code] || 'live'}`;
   if (!b.ends) return `<div class="${cls}"><span class="card-band-l">${esc(b.kind)} · buy it now</span><b>${esc(b.right)}</b></div>`;
   const hot = b.tone === 'hot';
-  // 왼쪽 글은 종류의 말투로: 입찰 = "Ends …"(마감) · Time limit = "until …"(기한) · Mall = "buy it now · until …"(상시, 올라와 있는 동안)
+  // 왼쪽 글은 종류의 말투로: 실시간 입찰 = "Ends …"(마감) · Time limit(블라인드 입찰) = "bids close …" · Mall = "buy it now · until …"(상시, 올라와 있는 동안)
   const left = b.code === 'RT' ? `Ends ${esc(b.date)} · ${esc(b.time)}`
-    : b.code === 'LOW' ? `${esc(b.kind)} · until ${esc(b.date)} · ${esc(b.time)}`
+    : b.code === 'LOW' ? `${esc(b.kind)} · bids close ${esc(b.date)} · ${esc(b.time)}`
     : `${esc(b.kind)} · buy it now · until ${esc(b.date)}`;
   // Mall 은 시계(00:00:00)가 아니라 "144 days left" 꼴 — 경매처럼 보이지 않게(data-clock 없음)
   const clock = b.code === 'MALL' && !hot ? '' : 'data-clock';

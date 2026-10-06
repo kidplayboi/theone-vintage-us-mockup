@@ -95,12 +95,9 @@ p { text-wrap: pretty; }
 .badge.ending, .badge.alert { background: var(--ending-bg); color: var(--ending); }
 .badge.action, .badge.navy { background: var(--action-bg); color: var(--action); }
 .badge.brand { background: var(--brand); color: var(--on-brand); }
-/* 판매 방식 배지(결정 93) — Live bid 는 .live 와 같은 초록 */
-.badge.time { background: var(--kind-time-bg); color: var(--kind-time); }
+/* 판매 방식 배지(결정 95 · 두 색) — 경매(Live bid · Time limit)는 .live 초록, 고정가(Mall)는 슬레이트 */
 .badge.mall { background: var(--kind-mall-bg); color: var(--kind-mall); }
-.dot.time { background: var(--kind-time); }
 .dot.mall { background: var(--kind-mall); }
-.on-dark .badge.time { background: rgba(251, 237, 227, .16); color: #F2B28C; }
 .on-dark .badge.mall { background: rgba(232, 238, 246, .16); color: #B9CBE3; }
 .on-dark .badge.quiet, .on-dark .badge:not(.live):not(.ending):not(.action) { background: rgba(255, 255, 255, .12); color: var(--on-brand); }
 .on-dark .badge.live { background: rgba(52, 211, 153, .18); color: var(--mint); }

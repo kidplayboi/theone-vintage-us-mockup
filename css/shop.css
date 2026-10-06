@@ -7,7 +7,7 @@
 .tz-pick { display: grid; gap: 4px; justify-items: end; }
 .tz-pick .input { width: 240px; min-height: 38px; font-size: var(--fs-13); }
 
-/* 판매 방식 탭 — 운영 사이트처럼 넷이 색으로 갈린다(의뢰처 요청 · 결정 93). 글자색 = 종류색, 고른 것은 종류색으로 채움 */
+/* 판매 방식 탭 — 두 색(결정 95): 경매(Live bid · Time limit) 초록, 고정가(Mall) 슬레이트. 글자색 = 묶음색, 고른 것은 묶음색으로 채움 */
 .kind-tabs { display: flex; flex-wrap: wrap; gap: var(--s2); padding-top: var(--s2); overflow-x: auto; scrollbar-width: none; }
 .kind-tabs::-webkit-scrollbar { display: none; }
 .kind-tab {
@@ -18,13 +18,11 @@
 }
 .kind-tab .dot { width: 8px; height: 8px; }
 .kind-tab .num { font-size: var(--fs-13); font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
-.kind-tab[data-kind="RT"] { color: var(--kind-live); }
-.kind-tab[data-kind="LOW"] { color: var(--kind-time); }
+.kind-tab[data-kind="RT"], .kind-tab[data-kind="LOW"] { color: var(--kind-live); }
 .kind-tab[data-kind="MALL"] { color: var(--kind-mall); }
 .kind-tab:hover { border-color: currentColor; }
 .kind-tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-brand); }
-.kind-tab[aria-selected="true"][data-kind="RT"] { background: var(--kind-live-band); border-color: var(--kind-live-band); }
-.kind-tab[aria-selected="true"][data-kind="LOW"] { background: var(--kind-time-band); border-color: var(--kind-time-band); }
+.kind-tab[aria-selected="true"][data-kind="RT"], .kind-tab[aria-selected="true"][data-kind="LOW"] { background: var(--kind-live-band); border-color: var(--kind-live-band); }
 .kind-tab[aria-selected="true"][data-kind="MALL"] { background: var(--kind-mall-band); border-color: var(--kind-mall-band); }
 .kind-tab[aria-selected="true"] .num { color: rgba(255, 255, 255, .72); }
 .kind-tab[aria-selected="true"] .dot { background: #FFFFFF; }

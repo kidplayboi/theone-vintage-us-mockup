@@ -93,10 +93,9 @@
   --fs-11: 12px;
   --r-sm: var(--r-md);
 
-  /* 판매 방식 색(의뢰처 요청 · 형 10/6 · 결정 93) — 운영 사이트의 Live bid 남색 / Time limit 빨강 / Mall 주황을 우리 팔레트로 옮김:
-     Live bid = 브랜드 초록 · Time limit = 번트 오렌지 · Mall = 슬레이트. 빨강은 긴급(종료 임박)·오류 전용으로 남긴다 */
+  /* 판매 방식 색 — 두 색만(형 10/6 · 결정 95): 경매(Live bid + Time limit 블라인드 입찰) = 브랜드 초록 · 고정가(Mall) = 슬레이트.
+     운영 사이트는 넷을 남색/빨강/주황으로 가르지만 색이 많으면 손님이 못 읽는다. 빨강은 긴급(종료 임박)·오류 전용 */
   --kind-live: var(--live);        --kind-live-bg: var(--live-bg);   --kind-live-band: var(--brand);
-  --kind-time: #B4531A;            --kind-time-bg: #FBEDE3;          --kind-time-band: #8F3F0F;
   --kind-mall: #2F4A6E;            --kind-mall-bg: #E8EEF6;          --kind-mall-band: #2A3F5C;
 }
 

@@ -1,44 +1,50 @@
-/* 디자인 토큰 — 기획안 35쪽 + 대비 실측 보정(docs/design/refs/2026-10-06-us-mockup.md) */
+/* 디자인 토큰 v2 — 형 10/6 "PDF보다 딸린다·폰트 별로" → 기획안 PDF 원본 CSS의 체계로(docs/design/refs/2026-10-06-v2-plan.md) */
 :root {
-  --paper: #F6F4EF;
+  /* 바탕·글자 — PDF :root 값 */
+  --paper: #F3EFE7;
+  --paper-2: #EAE4D8;      /* PDF --paper2 · 정보 띠 */
   --white: #FFFFFF;
-  --ink: #15151A;
-  --gray: #6A6A73;
-  --gray-on-ink: #A9A6A0;
-  --navy: #123A5E;
-  --navy-hover: #0E2F4D;
-  --gold: #8A6A36;
-  --rank: #4A2E22;
-  --line: #DDD9CF;
-  --line-on-ink: #34343B;
+  --ink: #1C1A17;
+  --body: #433D36;
+  --gray: #6A635A;         /* PDF #8B847A 는 미색 위 3.22 → 5.17 */
+  --line: #D3CBBD;
+  --line-soft: #E2DCD0;
 
-  --live: #1F8A4C;
-  --live-text: #187843;
-  --ending: #B42318;
+  /* 강조 — 초록은 운영 사이트 카드 띠 실측값(까사 마감 띠 계열) */
+  --green: #2F5440;        /* 주 버튼 · 흰 글자 8.5:1 */
+  --green-hover: #244635;
+  --band: #3F6B4E;         /* 카드 상태 띠 · 흰 글자 6.1:1 */
+  --green-tint: #E3EBE4;
+  --gold: #7E5F2E;         /* 이탤릭 눈썹 · PDF #8A6A36 은 미색 위 4.36 → 5.14 */
+  --brick: #8E3B2E;        /* 이탤릭 번호 */
+  --rank: #4A2E22;         /* 등급 배지 */
+
+  /* 의미색 — 점과 글자 */
+  --live: #2F7A4B;
+  --ending: #B42318;       /* 마감 1시간 전(더윈 12) */
   --reserve: #B54708;
 
-  /* 2차 — 색으로 구역을 나눈다(결정 40~43). 값은 인트로 영상에서 뽑은 색: 살롱 #1E140F · 가죽 #704C3E · 황동 #8C765C */
-  --espresso: #1C1410;      /* 어두운 띠 — Bezel 진행 중 경매 띠 자리 */
-  --cream: #F3EDE3;         /* 어두운 띠 위 글자 15.6:1 */
-  --stone: #B3A79A;         /* 어두운 띠 위 보조 글자 7.7:1 */
-  --brass: #C2A36B;         /* 어두운 띠 위 라벨 7.6:1 */
-  --ending-on-dark: #F08A7E;
-  --sand: #ECE4D6;          /* 밝은 띠 — Rebag 베이지 면 자리 */
-  --sand-deep: #E2D6C1;
-  --gray-on-sand: #5F5F68;  /* 5.0:1 */
-  --signal: #2BD45B;        /* 'New' 라벨 면 — Loupe NO RESERVE 초록, 글자는 잉크 9.3:1 */
+  /* 어두운 면 — PDF 섹션 오프너 */
+  --dark: #141210;
+  --on-dark: #F3EFE7;      /* 16.3:1 */
+  --on-dark-2: #B5AC9F;    /* 8.3:1 */
+  --brass: #C2A36B;        /* 어두운 면 위 이탤릭 눈썹 7.8:1 */
+  --line-on-dark: rgba(243, 239, 231, .16);
+  --ending-on-dark: #F08A7E; /* 7.5:1 */
 
-  --display: 'Bodoni Moda', 'Didot', Georgia, serif;
-  --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+  /* 서체 — 제목·가격 = Cormorant Garamond, 나머지 = Pretendard. 모노 서체는 쓰지 않는다 */
+  --serif: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  --fs-56: 56px;
-  --fs-30: 30px;
-  --fs-20: 20px;
-  --fs-16: 16px;
-  --fs-15: 15px;
-  --fs-13: 13px;
-  --fs-11: 11px;
+  /* 크기 8단 — 세리프 64·44·32·24 · 눈썹/리드 20 · 산세리프 15·13·11 */
+  --fs-display: 64px;
+  --fs-h1: 44px;
+  --fs-h2: 32px;
+  --fs-h3: 24px;
+  --fs-lede: 20px;        /* 눈썹(세리프 이탤릭)·리드 문장 */
+  --fs-body: 15px;
+  --fs-small: 13px;
+  --fs-label: 11px;
 
   --r: 2px;
 
@@ -50,15 +56,19 @@
   --s6: 32px;
   --s7: 48px;
   --s8: 72px;
+  --s9: 96px;              /* PDF 페이지 여백 */
 
-  --wrap: 1248px;
-  --gutter: 24px;
+  --wrap: 1280px;
+  --gutter: 32px;
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
 
 @media (max-width: 720px) {
   :root {
-    --fs-56: 40px;
+    --fs-display: 44px;
+    --fs-h1: 34px;
+    --fs-h2: 28px;
     --gutter: 16px;
+    --s9: 56px;
   }
 }

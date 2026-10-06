@@ -1,7 +1,7 @@
 // 히어로 — 영상은 남기고 관문만 없앤다(19쪽 · 결정 1 · 34)
 // 첫 방문: 7초 재생 → 마지막 장면에 멈춤 → 판매 카드가 올라온다. 스크롤·키 입력이 있으면 바로 올린다.
 // 다시 온 손님 · 움직임 줄이기 설정: 영상 없이 마지막 장면 사진과 카드.
-import * as store from './store.js?v=ffe41d4f8e';
+import * as store from './store.js?v=20c3d06a4d';
 
 export function mountHero() {
   const hero = document.querySelector('[data-hero]');

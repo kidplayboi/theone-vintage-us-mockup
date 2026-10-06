@@ -294,7 +294,13 @@ def main():
         "categories": facets.get("categories", []),
         "rate": round(sorted(usd_rates)[len(usd_rates) // 2], 2) if usd_rates else None,
         "graded": sum(1 for x in lots if x["grade"]),
+        # 운영 사이트 분류 그대로(형 10/6: 본 사이트 카테고리는 없애면 안 된다) — 브랜드·출발지·판매 방식 개수
+        "brands": [{"name": b["name"], "n": b["n"]} for b in facets.get("brands", [])],
+        "ships": api(facets=1, kind="MALL").get("ships", []),
+        "kinds": {k: (facets.get("total") or 0) if not k else api(kind=k).get("total", 0) for k in ("", "RT", "LOW", "MALL")},
     }
+    if not meta["kinds"][""]:
+        meta["kinds"][""] = meta["total"]
     DATA.write_text(json.dumps({"meta": meta, "lots": lots}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"saved {len(lots)} lots · graded {meta['graded']} · rate {meta['rate']} → {DATA}")
 

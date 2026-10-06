@@ -1,25 +1,19 @@
-// 상세 오른쪽 칸의 동작 — 제안 · 요청 · 관심 폴더 · 공유 · 내 메모 · 입찰(B)
+// 상세 정보 칸의 동작 — 창 안 문의·제안(더윈 4) · 관심 폴더 · 공유 · 내 메모 · 입찰(B)
 // 서버가 없으니 결과는 이 브라우저 저장소에만 남는다
-import { usd, bidStep, exampleAuction, fullName } from './data.js?v=ffe41d4f8e';
-import * as store from './store.js?v=ffe41d4f8e';
-import { toast } from './chrome.js?v=ffe41d4f8e';
-import { openRequest } from './request.js?v=ffe41d4f8e';
+import { usd, bidStep, exampleAuction, fullName, lotUrl } from './data.js?v=20c3d06a4d';
+import * as store from './store.js?v=20c3d06a4d';
+import { toast } from './chrome.js?v=20c3d06a4d';
 
-export function bindBuy(box, lot, rerender) {
+// signal — 상세 창처럼 여닫는 곳은 닫을 때 감시를 끊는다(문서 클릭 감시가 쌓이지 않게)
+export function bindBuy(box, lot, rerender, { signal } = {}) {
   box.addEventListener('click', e => {
     const t = e.target;
-    const req = t.closest('[data-request]');
-    if (req) {
-      openRequest(lot, {
-        message: req.hasAttribute('data-ask-price') ? 'Please send me the price and availability for this lot.' : '',
-        onSent: rerender,
-      });
-      return;
-    }
-    if (t.closest('[data-offer-open]')) return openOffer(box, t.closest('[data-offer-open]'));
+    const open = t.closest('[data-inquire]');
+    if (open) return openInquiry(box, open.dataset.inquire);
+    if (t.closest('[data-inquiry-cancel]')) return closeInquiry(box);
     if (t.closest('[data-withdraw]')) {
       store.update('offers', list => list.filter(o => !(o.lot === lot.lot && o.status === 'waiting')));
-      toast('Offer withdrawn');
+      toast('Cancelled');
       return rerender();
     }
     if (t.closest('[data-fake]')) return toast(t.closest('[data-fake]').dataset.fake);
@@ -51,16 +45,16 @@ export function bindBuy(box, lot, rerender) {
     }
     if (t.closest('[data-offer-open-b]')) {
       store.setSetting('sale', 'A');
-      return toast('Switched to offers — make your offer below');
+      toast('Switched to offers — make your offer below');
     }
   });
 
   box.addEventListener('submit', e => {
-    if (e.target.matches('[data-offer-form]')) { e.preventDefault(); sendOffer(e.target, lot, rerender); }
+    if (e.target.matches('[data-inquiry]')) { e.preventDefault(); sendInquiry(e.target, lot, rerender); }
     if (e.target.matches('[data-bid-form]')) { e.preventDefault(); placeBid(e.target, lot); }
   });
 
-  // 내 메모 — 손님 혼자 보는 메모, 입력을 멈추면 저장(11쪽 3번)
+  // 내 메모 — 손님 혼자 보는 메모, 입력을 멈추면 저장(더윈 2 · 11쪽 3번)
   let timer;
   box.addEventListener('input', e => {
     if (!e.target.matches('[data-note-text]')) return;
@@ -76,45 +70,55 @@ export function bindBuy(box, lot, rerender) {
   document.addEventListener('click', e => {
     const pop = box.querySelector('[data-watch-pop]');
     if (pop && !pop.hidden && !e.target.closest('[data-watch-pop], [data-watch]')) closePop(box);
-  });
+  }, { signal });
   box.addEventListener('keydown', e => { if (e.key === 'Escape') closePop(box); });
 }
 
-function openOffer(box, btn) {
-  const form = box.querySelector('[data-offer-form]');
-  const open = form.hidden;
-  form.hidden = !open;
-  btn.setAttribute('aria-expanded', String(open));
-  const note = box.querySelector('[data-offer-note]');
-  if (note) note.hidden = open;
-  if (open) form.querySelector('input').select();
+function openInquiry(box, mode) {
+  box.querySelectorAll('[data-inquiry]').forEach(f => { f.hidden = f.dataset.mode !== mode; });
+  const actions = box.querySelector('[data-actions]');
+  if (actions) actions.hidden = true;
+  const form = box.querySelector(`[data-inquiry][data-mode="${mode}"]`);
+  if (form) (form.querySelector('[name="amount"]') || form.querySelector('[name="email"]')).focus();
 }
 
-function sendOffer(form, lot, rerender) {
-  const input = form.querySelector('[data-offer-input]');
-  const help = form.querySelector('[data-offer-help]');
-  const amount = Number(String(input.value).replace(/[^0-9.]/g, ''));
-  if (!amount || amount <= 0) {
-    input.setAttribute('aria-invalid', 'true');
-    help.textContent = 'Please enter your offer in US dollars.';
-    help.classList.add('field-error');
-    input.focus();
+function closeInquiry(box) {
+  box.querySelectorAll('[data-inquiry]').forEach(f => { f.hidden = true; });
+  const actions = box.querySelector('[data-actions]');
+  if (actions) actions.hidden = false;
+}
+
+function sendInquiry(form, lot, rerender) {
+  const err = form.querySelector('[data-inquiry-error]');
+  const email = form.email.value.trim();
+  const amountInput = form.querySelector('[name="amount"]');
+  const amount = amountInput ? Number(String(amountInput.value).replace(/[^0-9.]/g, '')) : null;
+  form.querySelectorAll('[aria-invalid]').forEach(el => el.setAttribute('aria-invalid', 'false'));
+  if (amountInput && (!amount || amount <= 0)) {
+    amountInput.setAttribute('aria-invalid', 'true');
+    err.textContent = 'Please enter your offer in US dollars.';
+    amountInput.focus();
     return;
   }
-  input.setAttribute('aria-invalid', 'false');
-  help.classList.remove('field-error');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    form.email.setAttribute('aria-invalid', 'true');
+    err.textContent = 'Please enter a valid email address so we can reply.';
+    form.email.focus();
+    return;
+  }
+  err.textContent = '';
   const btn = form.querySelector('[type="submit"]');
   btn.classList.add('is-loading');
   setTimeout(() => {
     btn.classList.remove('is-loading');
     if (store.setting('sendFails')) {
-      help.textContent = "We couldn't send your offer. Please try again in a moment.";
-      help.classList.add('field-error');
+      err.textContent = "We couldn't send your message. Please try again in a moment.";
       return;
     }
+    const type = form.dataset.mode === 'offer' ? 'offer' : 'inquiry';
     store.update('offers', list => [...list.filter(o => !(o.lot === lot.lot && o.status === 'waiting')),
-      { lot: lot.lot, type: 'offer', amount: Math.round(amount), status: 'waiting', at: Date.now() }]);
-    toast(`Offer of ${usd(amount)} sent`);
+      { lot: lot.lot, type, amount: type === 'offer' ? Math.round(amount) : lot.usd, box: form.box.checked, status: 'waiting', at: Date.now() }]);
+    toast(type === 'offer' ? `Offer of ${usd(amount)} sent` : 'Inquiry sent — we reply within one business day');
     rerender();
   }, 700);
 }
@@ -138,7 +142,7 @@ function placeBid(form, lot) {
 }
 
 async function share(lot) {
-  const url = location.href;
+  const url = new URL(lotUrl(lot), location.href).href; // 상세 창에서 공유해도 상품 주소로
   const title = `${fullName(lot)} — TheOne Vintage`;
   try {
     if (navigator.share) { await navigator.share({ title, url }); return; }

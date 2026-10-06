@@ -8,22 +8,22 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2315151A'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23C9A96E'%3ET%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=JetBrains+Mono:wght@400&family=Jost:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="css/tokens.css?v=ffe41d4f8e">
-<link rel="stylesheet" href="css/base.css?v=ffe41d4f8e">
-<link rel="stylesheet" href="css/chrome.css?v=ffe41d4f8e">
-<link rel="stylesheet" href="css/pages.css?v=ffe41d4f8e">
-<link rel="stylesheet" href="css/review.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/tokens.css?v=20c3d06a4d">
+<link rel="stylesheet" href="css/base.css?v=20c3d06a4d">
+<link rel="stylesheet" href="css/chrome.css?v=20c3d06a4d">
+<link rel="stylesheet" href="css/pages.css?v=20c3d06a4d">
+<link rel="stylesheet" href="css/review.css?v=20c3d06a4d">
 </head>
 <body>
 <div id="review"></div>
 <header id="top"></header>
 <main class="auth-page">
-  <figure class="auth-img"><img src="assets/editorial/gold_chain.jpg" alt="Gold curb chain on black velvet" width="1800" height="1013"></figure>
+  <figure class="auth-img"><img src="assets/editorial/gen/watch_tray.jpg" alt="A vintage gold watch on a green velvet tray" width="1200" height="1500"></figure>
   <form class="auth-form" novalidate data-signin data-note="가입할 이유 하나 = 판매가는 회원에게만(21쪽 · Loupe·까사·KREAM 공통). 시안이라 실제 로그인은 없다 — 누르면 로그인 상태로 바뀐다." data-ref="21쪽">
-    <p class="label">Account</p>
-    <h1 class="display d56">Sign in</h1>
+    <span class="kicker">Welcome back</span>
+    <h1 class="display d-display">Sign in</h1>
     <p class="muted">See sold prices and keep your offers and saved lots in one place.</p>
     <label class="field"><span>Email</span><input class="input" type="email" name="email" autocomplete="email" required></label>
     <label class="field"><span>Password</span><input class="input" type="password" name="password" autocomplete="current-password" required minlength="8"></label>
@@ -34,8 +34,8 @@
 </main>
 <footer id="foot"></footer>
 <script type="module">
-  import { startPage } from './js/page.js?v=ffe41d4f8e';
-  import * as store from './js/store.js?v=ffe41d4f8e';
+  import { startPage } from './js/page.js?v=20c3d06a4d';
+  import * as store from './js/store.js?v=20c3d06a4d';
   startPage({ page: 'signin' });
   const form = document.querySelector('[data-signin]');
   form.addEventListener('submit', e => {

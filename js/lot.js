@@ -1,15 +1,14 @@
-// 로트 상세 — 사진 · 오른쪽 칸 · 상태 스코어카드 · 총액과 시세 · 상세 표 · 비슷한 상품 · 따라오는 바(25~29쪽)
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=ffe41d4f8e';
-import { mountChrome, bindNewsletter } from './chrome.js?v=ffe41d4f8e';
-import { mountReview, paintNotes } from './review.js?v=ffe41d4f8e';
-import { cardHTML, bindCards, startTicker } from './card.js?v=ffe41d4f8e';
-import { openQuick } from './quickview.js?v=ffe41d4f8e';
-import { galleryHTML, mountGallery } from './gallery.js?v=ffe41d4f8e';
-import { buyHTML, lotState } from './buybox.js?v=ffe41d4f8e';
-import { bindBuy } from './lotactions.js?v=ffe41d4f8e';
-import { openRequest } from './request.js?v=ffe41d4f8e';
-import { initMotion, revealOnScroll } from './motion.js?v=ffe41d4f8e';
-import * as store from './store.js?v=ffe41d4f8e';
+// 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=20c3d06a4d';
+import { mountChrome, bindNewsletter } from './chrome.js?v=20c3d06a4d';
+import { mountReview, paintNotes } from './review.js?v=20c3d06a4d';
+import { cardHTML, bindCards, startTicker } from './card.js?v=20c3d06a4d';
+import { openLot } from './lotmodal.js?v=20c3d06a4d';
+import { galleryHTML, mountGallery } from './gallery.js?v=20c3d06a4d';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES } from './buybox.js?v=20c3d06a4d';
+import { bindBuy } from './lotactions.js?v=20c3d06a4d';
+import { initMotion, revealOnScroll } from './motion.js?v=20c3d06a4d';
+import * as store from './store.js?v=20c3d06a4d';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -58,10 +57,10 @@ async function main() {
   startTicker();
   initMotion();
   $('[data-condition]').addEventListener('click', e => {
-    if (e.target.closest('[data-ask-photos]')) openRequest(lot, { message: 'Could you send detailed photos of the corners, handles and interior?' });
+    if (e.target.closest('[data-ask-photos]')) askInBox('Could you send detailed photos of the corners, handles and interior?');
   });
   window.addEventListener('store:change', e => {
-    if (e.detail.key === 'settings' || e.detail.key === 'offers') { renderBuy(); renderSticky(); mountReview({ page: 'lot' }); }
+    if (e.detail.key === 'settings' || e.detail.key === 'offers') { renderBuy(); renderPrice(); renderSticky(); mountReview({ page: 'lot' }); }
   });
 }
 
@@ -98,24 +97,32 @@ function renderCondition() {
     </div>`;
 }
 
-// 총액을 쪼개 보여 주고, 시세와 견줄 수 있게(27쪽) — 금액 칸은 운영 데이터로 채운다
+// 총액을 항목별로(더윈 1·6·10 · 기획안 27쪽) — 요율은 조사 전, '총액 예상' 표기일 때만 예시 숫자
 function renderPrice() {
-  const rows = ['Our fee', 'Express shipping to the US', 'Import duties, prepaid', 'Inspection in Tokyo'];
+  const total = store.setting('priceMode') === 'total' && lot.usd;
+  const e = lot.usd ? estimate(lot) : null; // 상자는 선택 — 총액에서 빼고 줄에 '선택 시'로(정보 칸 총액과 같은 값)
+  const cell = v => (total ? `<td class="num">${usd(v)}</td>` : '<td class="num muted">In your quote</td>');
   const q = encodeURIComponent(`${lot.brand} ${lot.title}`); // 외부 검색은 브랜드를 붙여야 정확하다
   const signedIn = store.get('signedIn');
   $('[data-price]').innerHTML = `
-    <div class="price-grid band-sand" data-reveal data-note="샌드 띠 = 정보 구역(결정 41). 왼쪽은 현재 How it works '비용' 표의 항목 그대로, 금액은 회신 때 확정이라 비워 둔다. 오른쪽은 우리 판매 기록 먼저, 외부 비교는 링크 하나(까사 국내 시세 검색 → 미국판)." data-ref="27쪽">
-      <div>
-        <p class="label">Your US-delivered total</p>
+    <div class="sec-head"><div><span class="kicker">The whole price</span><h2 class="display d30">What you'll pay, line by line</h2></div></div>
+    <div class="price-grid" data-reveal data-note="더윈 1: 관세는 재질별로 다르고, FedEx·DHL 외곽·대형 추가금까지 전부 체크해 총액. 더윈 10: 낙찰가·관세·수수료·배송비·감정서. 금액은 조사 전 — 검토 막대 '가격 표기: 총액 예상'을 켜면 예시 요율로 채워 본다(수수료 10% = 더윈 16)." data-ref="더윈 1·6·10">
+      <div class="price-card">
+        <p class="label">Your US-delivered total${total ? ' · example rates' : ''}</p>
         <table class="total">
-          <tr><td>Lot price</td><td class="num">${lot.usd ? usd(lot.usd) : 'On request'}</td></tr>
-          ${rows.map(r => `<tr><td>${r}</td><td class="num muted">In your quote</td></tr>`).join('')}
-          <tr class="sum"><td>Total, delivered</td><td class="num">$ —</td></tr>
+          <tr><td>Item price</td><td class="num">${lot.usd ? usd(lot.usd) : 'On request'}</td></tr>
+          <tr><td>Import duties<span>Rate depends on material — leather, canvas, precious metal</span></td>${cell(e ? e.duty : 0)}</tr>
+          <tr><td>Our service fee</td>${cell(e ? e.fee : 0)}</tr>
+          <tr><td>Express shipping to the US<span>FedEx or DHL · remote-area and oversize surcharges included</span></td>${cell(e ? e.ship : 0)}</tr>
+          <tr><td>Rigid box to keep the shape<span>Optional · recommended for structured bags</span></td>${total ? `<td class="num muted">+${usd(EXAMPLE_RATES.box)} if selected</td>` : '<td class="num muted">If selected</td>'}</tr>
+          <tr><td>Inspection in Tokyo</td><td class="num">Included</td></tr>
+          <tr><td>Certificate of authenticity<span>Optional, on request</span></td><td class="num muted">On request</td></tr>
+          <tr class="sum"><td>Total, delivered</td><td class="num">${total ? usd(e.total) : '$ —'}</td></tr>
         </table>
-        <p class="t13 muted">We confirm this total before you pay. Nothing is charged when you request, and nothing on arrival.</p>
+        <p class="t13 muted">We confirm this total before you pay. Nothing is charged when you inquire, and nothing on arrival.</p>
       </div>
-      <div>
-        <p class="label">Compare prices</p>
+      <div class="price-card">
+        <p class="label">Recent results</p>
         <p class="t13 muted">${esc(fullName(lot))} · sold through TheOne</p>
         <table class="total compare">
           ${['A', 'B', 'C'].map(r => `<tr><td>${esc(lot.title)} · Rank ${r}</td><td class="num">${signedIn ? '$X,XXX' : '<span class="blur">$0,000</span>'}</td></tr>`).join('')}
@@ -125,6 +132,17 @@ function renderPrice() {
         <a class="text-link t13 ext" href="https://www.google.com/search?tbm=shop&q=${q}" target="_blank" rel="noopener noreferrer">Compare on other marketplaces ↗</a>
       </div>
     </div>`;
+}
+
+// 사진 요청 · 따라오는 바 → 정보 칸의 문의 칸을 열고 메시지를 채운다
+function askInBox(message) {
+  const box = $('[data-buy]');
+  box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const btn = box.querySelector('[data-inquire="inquiry"]');
+  if (!btn) return;
+  btn.click();
+  const form = box.querySelector('[data-inquiry][data-mode="inquiry"]');
+  if (form && message) form.message.value = message;
 }
 
 function renderDetails() {
@@ -143,7 +161,7 @@ function renderSimilar() {
   const host = $('[data-similar]');
   host.innerHTML = `<div class="sec-head"><h2 class="display d30">Similar pieces</h2><a class="text-link t13" href="index.html?cat=${encodeURIComponent(lot.genre)}#lots">All ${esc(lot.genre.toLowerCase())}</a></div>
     <div class="grid">${list.map(x => cardHTML(x, { sale: store.setting('sale') })).join('')}</div>`;
-  bindCards(host, data.lots, { onQuick: openQuick });
+  bindCards(host, data.lots, { onOpen: openLot });
   revealOnScroll();
 }
 
@@ -158,11 +176,11 @@ function renderSticky() {
     <div class="sticky-name"><p class="label">Lot ${esc(lot.lot)}</p><p>${esc(fullName(lot))}</p></div>
     <div class="sticky-cell"><p class="label">${sale === 'B' ? 'Current bid' : 'Price'}</p><p class="num">${sale === 'B' ? usd(a.bid) : (lot.usd ? usd(lot.usd) : 'On request')}</p></div>
     <div class="sticky-cell hide-sm"><p class="label">${sale === 'B' ? 'Ends' : 'Condition'}</p><p>${sale === 'B' ? formatEnds(a.ends) : (g ? `Rank ${esc(g.overall)}` : 'Not graded')}</p></div>
-    <button class="btn" type="button" data-sticky-cta>${sale === 'B' ? 'Place bid' : (lot.usd ? 'Request this lot' : 'Ask for price')}</button>
+    <button class="btn" type="button" data-sticky-cta>${sale === 'B' ? 'Place bid' : (lot.usd ? 'Inquire' : 'Ask for price')}</button>
   </div>`;
   bar.querySelector('[data-sticky-cta]').addEventListener('click', () => {
     if (sale === 'B') { $('[data-buy]').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
-    openRequest(lot, { onSent: renderBuy });
+    askInBox('');
   });
 }
 
@@ -182,7 +200,7 @@ function notFound(id) {
     <div class="empty"><p class="label">Lot ${esc(id || '')}</p><p class="display d30">This lot is no longer available.</p>
     <p class="muted">Here are similar pieces.</p></div>
     <div class="grid">${data.lots.slice(0, 4).map(x => cardHTML(x)).join('')}</div></div>`;
-  bindCards($('[data-lot-root]'), data.lots, { onQuick: openQuick });
+  bindCards($('[data-lot-root]'), data.lots, { onOpen: openLot });
 }
 
 main();

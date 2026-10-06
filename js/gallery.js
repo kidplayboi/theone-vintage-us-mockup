@@ -1,7 +1,7 @@
 // 상세 사진 — 기본은 가로 스크롤 스냅(스크립트 없이도 스와이프),
 // 불러와지면 Embla(MIT)로 끌어 넘기기, PhotoSwipe(MIT)로 확대(결정 48). 불러오기에 실패해도 갤러리는 동작한다
-import { photo, esc, fullName } from './data.js?v=ffe41d4f8e';
-import { icon } from './icons.js?v=ffe41d4f8e';
+import { photo, esc, fullName } from './data.js?v=20c3d06a4d';
+import { icon } from './icons.js?v=20c3d06a4d';
 
 const EMBLA = 'https://cdn.jsdelivr.net/npm/embla-carousel@8.6.0/esm/embla-carousel.esm.js';
 const PSWP_LIGHTBOX = 'https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js';
@@ -26,6 +26,7 @@ export function galleryHTML(lot) {
         <button class="icon-btn" type="button" aria-label="Next photo" data-next>${icon.right}</button>
       </div>
     </div>
+    <p class="g-caption" data-note="사진 밑에 장수(더윈 7). 실재고는 사진 ${lot.photoTotal}장 — 시안에는 ${lot.photos}장만 담았다." data-ref="더윈 7"><span class="num" data-caption>Photo 1 of ${lot.photos}</span><span>${lot.photoTotal} photos on file · tap to zoom</span></p>
     <div class="g-thumbs" data-note="실재고는 사진 ${lot.photoTotal}장 — 시안에는 ${lot.photos}장만 담았다. 사진을 누르면 PhotoSwipe로 확대·핀치 줌(명품은 소재·마감을 확대해 봐야 신뢰한다 — Baymard 명품 감사)." data-ref="11쪽 4번 · 결정 48">${thumbs}</div>`;
 }
 
@@ -40,6 +41,8 @@ export async function mountGallery(root, lot) {
   const paint = i => {
     index = i;
     count.textContent = `${i + 1} / ${lot.photos}`;
+    const cap = root.querySelector('[data-caption]');
+    if (cap) cap.textContent = `Photo ${i + 1} of ${lot.photos}`;
     thumbs.forEach((t, k) => t.setAttribute('aria-current', String(k === i)));
   };
   const go = i => {

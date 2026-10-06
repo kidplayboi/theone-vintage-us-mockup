@@ -30,7 +30,7 @@ function warnOnce(err) {
 }
 
 export const DEFAULTS = {
-  settings: { sale: 'A', notes: false, examples: true, state: 'auto', sendFails: false },
+  settings: { sale: 'A', notes: false, examples: true, state: 'auto', sendFails: false, tz: 'auto', priceMode: 'item' },
   saved: {},
   folders: ['Shortlist', 'Gifts', 'Later'],
   notes: {},

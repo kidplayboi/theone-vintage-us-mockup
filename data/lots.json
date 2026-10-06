@@ -45,7 +45,187 @@
    }
   ],
   "rate": 150.3,
-  "graded": 9
+  "graded": 9,
+  "brands": [
+   {
+    "name": "Others",
+    "n": 9327
+   },
+   {
+    "name": "LOUIS VUITTON",
+    "n": 2479
+   },
+   {
+    "name": "HERMES",
+    "n": 1865
+   },
+   {
+    "name": "CHANEL",
+    "n": 1566
+   },
+   {
+    "name": "Gucci",
+    "n": 1089
+   },
+   {
+    "name": "NIKE",
+    "n": 600
+   },
+   {
+    "name": "PRADA",
+    "n": 548
+   },
+   {
+    "name": "Christian Dior",
+    "n": 455
+   },
+   {
+    "name": "Celine",
+    "n": 367
+   },
+   {
+    "name": "Bottega Veneta",
+    "n": 314
+   },
+   {
+    "name": "adidas",
+    "n": 280
+   },
+   {
+    "name": "FENDI",
+    "n": 278
+   },
+   {
+    "name": "LOEWE",
+    "n": 274
+   },
+   {
+    "name": "Yves Saint Laurent",
+    "n": 262
+   },
+   {
+    "name": "COACH",
+    "n": 261
+   },
+   {
+    "name": "Ferragamo",
+    "n": 249
+   },
+   {
+    "name": "Balenciaga",
+    "n": 244
+   },
+   {
+    "name": "Cartier",
+    "n": 202
+   },
+   {
+    "name": "kate spade",
+    "n": 191
+   },
+   {
+    "name": "ROLEX",
+    "n": 181
+   },
+   {
+    "name": "Michael Kors",
+    "n": 149
+   },
+   {
+    "name": "SEIKO",
+    "n": 140
+   },
+   {
+    "name": "BURBERRY",
+    "n": 135
+   },
+   {
+    "name": "FURLA",
+    "n": 133
+   },
+   {
+    "name": "miu miu",
+    "n": 125
+   },
+   {
+    "name": "CASIO",
+    "n": 116
+   },
+   {
+    "name": "Van Cleef&Arpels",
+    "n": 106
+   },
+   {
+    "name": "VALENTINO",
+    "n": 99
+   },
+   {
+    "name": "BVLGARI",
+    "n": 84
+   },
+   {
+    "name": "Samantha Thavasa",
+    "n": 80
+   },
+   {
+    "name": "TIFFANY",
+    "n": 75
+   },
+   {
+    "name": "Chloe",
+    "n": 73
+   },
+   {
+    "name": "ARMANI",
+    "n": 70
+   },
+   {
+    "name": "OMEGA",
+    "n": 68
+   },
+   {
+    "name": "APPLE",
+    "n": 66
+   },
+   {
+    "name": "MARC JACOBS",
+    "n": 64
+   },
+   {
+    "name": "TORY BURCH",
+    "n": 60
+   },
+   {
+    "name": "REGAL",
+    "n": 48
+   },
+   {
+    "name": "ISSEY MIYAKE",
+    "n": 47
+   },
+   {
+    "name": "MONCLER",
+    "n": 46
+   }
+  ],
+  "ships": [
+   {
+    "code": "JP",
+    "n": 23655,
+    "name": "Ships from Japan"
+   },
+   {
+    "code": "KR",
+    "n": 477,
+    "name": "Ships from Korea"
+   }
+  ],
+  "kinds": {
+   "": 24132,
+   "RT": 0,
+   "LOW": 0,
+   "MALL": 24128
+  }
  },
  "lots": [
   {

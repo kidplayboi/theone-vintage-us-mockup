@@ -1,6 +1,6 @@
 // 제품 공통 틀 — 상단 띠 · 헤더 · 메뉴 서랍 · 푸터 · 모바일 아래 탭 · 알림 한 줄
-import { icon } from './icons.js?v=ffe41d4f8e';
-import * as store from './store.js?v=ffe41d4f8e';
+import { icon } from './icons.js?v=20c3d06a4d';
+import * as store from './store.js?v=20c3d06a4d';
 
 const NAV = [
   ['premium', 'Premium', 'index.html?sale=premium#lots'],
@@ -12,7 +12,7 @@ const NAV = [
 const TABS = [
   ['shop', 'Shop', 'index.html#lots'],
   ['ending', 'Ending', 'index.html#ending'],
-  ['offers', 'Offers', 'offers.html'],
+  ['offers', 'My page', 'offers.html'],
   ['saved', 'Saved', 'saved.html'],
 ];
 
@@ -47,7 +47,7 @@ function headerHTML(page) {
       <nav class="nav-links" aria-label="Main">${links}</nav>
       <div class="nav-aside">
         <a href="saved.html" ${page === 'saved' ? 'aria-current="page"' : ''}>Saved<span class="nav-count num" data-saved-count></span></a>
-        <a href="offers.html" ${page === 'offers' ? 'aria-current="page"' : ''}>My offers</a>
+        <a href="offers.html" ${page === 'offers' ? 'aria-current="page"' : ''}>My page</a>
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@ function headerHTML(page) {
       ${NAV.map(([, label, href]) => `<a href="${href}">${label}</a>`).join('')}
       <a href="how-we-grade.html">How we grade</a>
       <a href="saved.html">Saved</a>
-      <a href="offers.html">My offers</a>
+      <a href="offers.html">My page</a>
     </nav>
     <p class="drawer-foot t13 muted">Ships to the United States · Prices in USD · Duties prepaid</p>
   </div>`;
@@ -92,7 +92,7 @@ function paintAccount() {
   document.querySelectorAll('[data-account]').forEach(el => {
     el.innerHTML = signedIn
       ? `<a href="offers.html">Account</a><span aria-hidden="true">/</span><button type="button" data-signout>Sign out</button>`
-      : `<a href="sign-in.html">Sign in</a>`;
+      : `<a href="sign-in.html">Sign in</a><span aria-hidden="true">·</span><a href="sign-in.html">Create account</a>`;
   });
   document.querySelectorAll('[data-signout]').forEach(b => b.addEventListener('click', () => {
     store.set('signedIn', false);
@@ -105,6 +105,20 @@ function footerHTML() {
   return `
   <div class="foot on-dark">
     <div class="wrap">
+      <div class="foot-lead">
+        <div>
+          <span class="kicker">From Tokyo, to your door</span>
+          <p class="display">Japan's dealer auctions, inspected by hand and delivered with duties prepaid.</p>
+        </div>
+        <form class="foot-news" data-news novalidate>
+          <label class="label" for="news-email">New lots, every week</label>
+          <div class="foot-news-row">
+            <input class="input" id="news-email" type="email" name="email" placeholder="Email address" autocomplete="email" required>
+            <button class="btn" type="submit">Sign up</button>
+          </div>
+          <p class="foot-news-msg" data-news-msg role="status"></p>
+        </form>
+      </div>
       <div class="foot-grid">
         <div>
           <p class="label">Buy</p>
@@ -112,14 +126,14 @@ function footerHTML() {
             <li><a href="how-it-works.html">How it works</a></li>
             <li><a href="how-we-grade.html">How we grade</a></li>
             <li><a href="how-it-works.html#pay">Shipping &amp; duties</a></li>
-            <li class="pending" data-note="결제 수단 정책이 정해지면 연다(40쪽 질문 3). 지금은 자리만." data-ref="33쪽">Payment</li>
+            <li class="pending" data-note="결제 수단 정책이 정해지면 연다(40쪽 질문 3 · 더윈: 경매 특성상 현금 진행 검토 중). 지금은 자리만." data-ref="33쪽">Payment</li>
           </ul>
         </div>
         <div>
           <p class="label">Help</p>
           <ul>
             <li><a href="how-it-works.html#faq">FAQ</a></li>
-            <li class="pending" data-note="연락처 페이지 미작성. 현재 사이트도 연락 수단은 요청서뿐." data-ref="33쪽">Contact us</li>
+            <li class="pending" data-note="연락처 페이지 미작성. 문의는 상품 창의 Inquire로(더윈 4)." data-ref="33쪽">Contact us</li>
             <li class="pending" data-note="반품 정책이 정해진 뒤에만 연다. 없는 약속은 먼저 쓰지 않는다." data-ref="33·37쪽">Returns</li>
             <li><a href="offers.html">Track an order</a></li>
           </ul>
@@ -132,18 +146,10 @@ function footerHTML() {
             <li class="pending" data-note="언론 자료가 있을 때만(Bezel 언론 로고 줄)." data-ref="33쪽">Press</li>
           </ul>
         </div>
-        <form class="foot-news" data-news novalidate>
-          <label class="label" for="news-email">New lots, every week</label>
-          <div class="foot-news-row">
-            <input class="input" id="news-email" type="email" name="email" placeholder="Email address" autocomplete="email" required>
-            <button class="btn" type="submit">Sign up</button>
-          </div>
-          <p class="t13 foot-news-msg" data-news-msg role="status"></p>
-        </form>
       </div>
       <div class="foot-base">
         <p>© 2026 TheOne Biz Co., Ltd. · Authenticated in Tokyo · Escrow protected</p>
-        <p class="label">TheOne exchange rate · $1 = ¥${rate || '—'}</p>
+        <p>TheOne exchange rate · $1 = ¥${rate || '—'}</p>
       </div>
     </div>
   </div>`;

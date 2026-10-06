@@ -3,7 +3,7 @@ let cache;
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=ffe41d4f8e').then(r => {
+    cache = fetch('data/lots.json?v=20c3d06a4d').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     });
@@ -97,6 +97,30 @@ export function similar(lots, lot, n = 4) {
   const genre = others.filter(x => x.genre === lot.genre && x.brand !== lot.brand);
   return [...same, ...genre, ...others].filter((x, i, a) => a.indexOf(x) === i).slice(0, n);
 }
+
+// 시간대 — 운영 사이트의 "Your local time" 선택 그대로(Auto · 미국 6개 · 도쿄 · UTC)
+export const TIMEZONES = [
+  ['auto', 'Auto (my device)'], ['America/New_York', 'Eastern — New York'], ['America/Chicago', 'Central — Chicago'],
+  ['America/Denver', 'Mountain — Denver'], ['America/Phoenix', 'Arizona — Phoenix'], ['America/Los_Angeles', 'Pacific — Los Angeles'],
+  ['America/Anchorage', 'Alaska — Anchorage'], ['Pacific/Honolulu', 'Hawaii — Honolulu'], ['Asia/Tokyo', 'Japan — Tokyo'], ['UTC', 'UTC'],
+];
+export function tzName(tz) {
+  return !tz || tz === 'auto' ? Intl.DateTimeFormat().resolvedOptions().timeZone : tz;
+}
+export function localTime(date, tz) {
+  const zone = tzName(tz);
+  const d = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: zone });
+  const t = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: zone, timeZoneName: 'short' });
+  return `${d} · ${t}`;
+}
+export function localParts(date, tz) {
+  const zone = tzName(tz);
+  return {
+    date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: zone }),
+    time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: zone, timeZoneName: 'short' }),
+  };
+}
+export const KIND = { MALL: 'Mall', RT: 'Live bid', LOW: 'Time limit' };
 
 export function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

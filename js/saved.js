@@ -1,11 +1,11 @@
 // Saved — 관심 목록 폴더 세 개, 손님이 이름을 붙인다(11쪽 1번). 내 메모는 카드 아래에(11쪽 3번)
-import { esc } from './data.js?v=ffe41d4f8e';
-import { startPage } from './page.js?v=ffe41d4f8e';
-import { paintNotes } from './review.js?v=ffe41d4f8e';
-import { cardHTML, bindCards } from './card.js?v=ffe41d4f8e';
-import { openQuick } from './quickview.js?v=ffe41d4f8e';
-import { revealOnScroll } from './motion.js?v=ffe41d4f8e';
-import * as store from './store.js?v=ffe41d4f8e';
+import { esc } from './data.js?v=20c3d06a4d';
+import { startPage } from './page.js?v=20c3d06a4d';
+import { paintNotes } from './review.js?v=20c3d06a4d';
+import { cardHTML, bindCards } from './card.js?v=20c3d06a4d';
+import { openLot } from './lotmodal.js?v=20c3d06a4d';
+import { revealOnScroll } from './motion.js?v=20c3d06a4d';
+import * as store from './store.js?v=20c3d06a4d';
 
 let data;
 let folder = 'all';
@@ -70,7 +70,7 @@ async function main() {
     if (f) { folder = f.dataset.folder; render(); }
     if (e.target.closest('[data-rename]')) rename();
   });
-  bindCards(document.querySelector('[data-saved-grid]'), data.lots, { onQuick: openQuick });
+  bindCards(document.querySelector('[data-saved-grid]'), data.lots, { onOpen: openLot });
   window.addEventListener('store:change', e => { if (['saved', 'settings', 'folders', '*'].includes(e.detail.key)) render(); });
   render();
 }

@@ -30,6 +30,7 @@ function warnOnce(err) {
 }
 
 export const DEFAULTS = {
+  // priceMode 는 형 결정(10/6 · 결정 88)으로 '상품가 크게' 고정 — 키는 옛 저장값 호환용으로만 남긴다
   settings: { sale: 'B', notes: false, examples: true, state: 'auto', sendFails: false, tz: 'auto', priceMode: 'item', payState: 'auto' },
   saved: {},
   folders: ['Shortlist', 'Gifts', 'Later'],

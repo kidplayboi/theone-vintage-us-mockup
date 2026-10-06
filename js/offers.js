@@ -1,11 +1,11 @@
 // My page v4 — 까사 마이페이지 네 칸(더윈 9): 할 일 / 진행 중 / 결과 확정 / 완료. 할 일 있는 칸만 amber(결정 77)
 // 낙찰·수락 행은 펼치면 정산표(더윈 10), 결제는 pay.html(결정 78). 입찰(B)과 정가·제안(A)은 칸 이름과 예시 행만 다르다
-import { usd, esc, cardImg, lotUrl, shortDate, fullName, exampleAuction, bidStep, localParts } from './data.js?v=f35c47a528';
-import { startPage } from './page.js?v=f35c47a528';
-import { paintNotes } from './review.js?v=f35c47a528';
-import { toast } from './chrome.js?v=f35c47a528';
-import { estimate, EXAMPLE_RATES } from './buybox.js?v=f35c47a528';
-import * as store from './store.js?v=f35c47a528';
+import { usd, esc, cardImg, lotUrl, shortDate, fullName, exampleAuction, bidStep, localParts } from './data.js?v=1db980d128';
+import { startPage } from './page.js?v=1db980d128';
+import { paintNotes } from './review.js?v=1db980d128';
+import { toast } from './chrome.js?v=1db980d128';
+import { estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=1db980d128';
+import * as store from './store.js?v=1db980d128';
 
 const CELLS = {
   B: {
@@ -97,13 +97,13 @@ function rows() {
 function settlement(r) {
   const paid = r.paid;
   const e = estimate({ ...r.lot, usd: r.mine || r.lot.usd }, { box: paid ? paid.box : true });
-  const cert = paid && paid.cert ? 60 : 0;
+  const cert = paid && paid.cert ? EXAMPLE_RATES.cert : 0;
   const total = paid ? paid.total : e.total + cert;
   return `<tr class="settle-row"><td colspan="5"><div class="settle">
-    <p class="label">${paid ? 'Paid' : 'Invoice'} · example rates until policy is set</p>
+    <p class="label">${paid ? 'Paid' : 'Invoice'}${RATES_LABEL}</p>
     <table class="total">
       <tr><td>${bidding() ? 'Hammer price' : 'Accepted offer'}</td><td class="num">${usd(r.mine || r.lot.usd)}</td></tr>
-      <tr><td>Buyer's fee<span>10% of the hammer price</span></td><td class="num">${usd(e.fee)}</td></tr>
+      <tr><td>Buyer's fee<span>${Math.round(EXAMPLE_RATES.fee * 100)}% of the hammer price</span></td><td class="num">${usd(e.fee)}</td></tr>
       <tr><td>Import duties<span>Rate by material · ${esc(r.lot.genre.toLowerCase())}</span></td><td class="num">${usd(e.duty)}</td></tr>
       <tr><td>Shipping · DHL Express<span>${(paid ? paid.box : true) ? `Incl. rigid box +${usd(EXAMPLE_RATES.box)}` : 'Tokyo to your door, insured'}</span></td><td class="num">${usd(e.ship)}</td></tr>
       <tr><td>Certificate of authenticity<span>Optional</span></td><td class="num">${cert ? usd(cert) : '<span class="muted">—</span>'}</td></tr>

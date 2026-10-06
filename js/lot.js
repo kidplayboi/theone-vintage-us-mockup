@@ -1,14 +1,14 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=f35c47a528';
-import { mountChrome, bindNewsletter } from './chrome.js?v=f35c47a528';
-import { mountReview, paintNotes } from './review.js?v=f35c47a528';
-import { cardHTML, bindCards, startTicker } from './card.js?v=f35c47a528';
-import { openLot } from './lotmodal.js?v=f35c47a528';
-import { galleryHTML, mountGallery } from './gallery.js?v=f35c47a528';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES } from './buybox.js?v=f35c47a528';
-import { bindBuy } from './lotactions.js?v=f35c47a528';
-import { initMotion, revealOnScroll } from './motion.js?v=f35c47a528';
-import * as store from './store.js?v=f35c47a528';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=1db980d128';
+import { mountChrome, bindNewsletter } from './chrome.js?v=1db980d128';
+import { mountReview, paintNotes } from './review.js?v=1db980d128';
+import { cardHTML, bindCards, startTicker } from './card.js?v=1db980d128';
+import { openLot } from './lotmodal.js?v=1db980d128';
+import { galleryHTML, mountGallery } from './gallery.js?v=1db980d128';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=1db980d128';
+import { bindBuy } from './lotactions.js?v=1db980d128';
+import { initMotion, revealOnScroll } from './motion.js?v=1db980d128';
+import * as store from './store.js?v=1db980d128';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -97,27 +97,26 @@ function renderCondition() {
     </div>`;
 }
 
-// 총액을 항목별로(더윈 1·6·10 · 기획안 27쪽) — 요율은 조사 전, '총액 예상' 표기일 때만 예시 숫자
+// 총액을 항목별로(더윈 1·6·10 · 기획안 27쪽) — 숫자는 EXAMPLE_RATES 한 곳(형 실값 오면 그 파일만 교체 · 결정 89)
 function renderPrice() {
-  const total = store.setting('priceMode') === 'total' && lot.usd;
-  const e = lot.usd ? estimate(lot) : null; // 상자는 선택 — 총액에서 빼고 줄에 '선택 시'로(정보 칸 총액과 같은 값)
-  const cell = v => (total ? `<td class="num">${usd(v)}</td>` : '<td class="num muted">In your quote</td>');
+  const e = lot.usd ? estimate(lot) : null; // 상자·감정서는 선택 — 총액에서 빼고 줄에 '선택 시'로(청구서와 같은 값)
+  const cell = v => (e ? `<td class="num">${usd(v)}</td>` : '<td class="num muted">In your quote</td>');
   const q = encodeURIComponent(`${lot.brand} ${lot.title}`); // 외부 검색은 브랜드를 붙여야 정확하다
   const signedIn = store.get('signedIn');
   $('[data-price]').innerHTML = `
     <div class="sec-head"><h2 class="display d30">What you'll pay, line by line</h2></div>
-    <div class="price-grid" data-reveal data-note="더윈 1: 관세는 재질별로 다르고, FedEx·DHL 외곽·대형 추가금까지 전부 체크해 총액. 더윈 10: 낙찰가·관세·수수료·배송비·감정서. 금액은 조사 전 — 검토 막대 '가격 표기: 총액 예상'을 켜면 예시 요율로 채워 본다(수수료 10% = 더윈 16)." data-ref="더윈 1·6·10">
+    <div class="price-grid" data-reveal data-note="더윈 1: 관세는 재질별로 다르고, DHL 외곽·대형 추가금까지 전부 체크해 총액. 더윈 10: 낙찰가·관세·수수료·배송비·감정서. 숫자는 EXAMPLE_RATES 한 곳에서 — 형이 실값을 주면 그 파일만 바꾸고 'example rates' 문구가 사라진다(결정 89)." data-ref="더윈 1·6·10 · 결정 88·89">
       <div class="price-card">
-        <p class="label">Your US-delivered total${total ? ' · example rates' : ''}</p>
+        <p class="label">Your US-delivered total${RATES_LABEL}</p>
         <table class="total">
           <tr><td>Item price</td><td class="num">${lot.usd ? usd(lot.usd) : 'On request'}</td></tr>
           <tr><td>Import duties<span>Rate depends on material — leather, canvas, precious metal</span></td>${cell(e ? e.duty : 0)}</tr>
-          <tr><td>Our service fee</td>${cell(e ? e.fee : 0)}</tr>
-          <tr><td>Express shipping to the US<span>FedEx or DHL · remote-area and oversize surcharges included</span></td>${cell(e ? e.ship : 0)}</tr>
-          <tr><td>Rigid box to keep the shape<span>Optional · recommended for structured bags</span></td>${total ? `<td class="num muted">+${usd(EXAMPLE_RATES.box)} if selected</td>` : '<td class="num muted">If selected</td>'}</tr>
+          <tr><td>Buyer's fee<span>${Math.round(EXAMPLE_RATES.fee * 100)}% of the item price</span></td>${cell(e ? e.fee : 0)}</tr>
+          <tr><td>Express shipping to the US<span>DHL Express · remote-area and oversize surcharges included</span></td>${cell(e ? e.ship : 0)}</tr>
+          <tr><td>Rigid box to keep the shape<span>Optional · recommended for structured bags</span></td><td class="num muted">+${usd(EXAMPLE_RATES.box)} if selected</td></tr>
           <tr><td>Inspection in Tokyo</td><td class="num">Included</td></tr>
-          <tr><td>Certificate of authenticity<span>Optional, on request</span></td><td class="num muted">On request</td></tr>
-          <tr class="sum"><td>Total, delivered</td><td class="num">${total ? usd(e.total) : '$ —'}</td></tr>
+          <tr><td>Certificate of authenticity<span>Optional</span></td><td class="num muted">+${usd(EXAMPLE_RATES.cert)} if selected</td></tr>
+          <tr class="sum"><td>Total, delivered</td><td class="num">${e ? usd(e.total) : '$ —'}</td></tr>
         </table>
         <p class="t13 muted">We confirm this total before you pay. Nothing is charged when you inquire, and nothing on arrival.</p>
       </div>

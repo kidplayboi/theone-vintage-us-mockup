@@ -1,10 +1,10 @@
 // 상세 정보 칸 v2 — 상세 창(모달)과 상세 페이지가 같이 쓴다
 // 순서 = 상태 띠 → 브랜드·제목 → 달러(크게) → 등급표 → 문의 → 신뢰 · 도착일 → 메모 · 시세
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급표 보이게)
-import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=f35c47a528';
-import { icon } from './icons.js?v=f35c47a528';
-import { bandInfo, bandLeft } from './card.js?v=f35c47a528';
-import * as store from './store.js?v=f35c47a528';
+import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=1db980d128';
+import { icon } from './icons.js?v=1db980d128';
+import { bandInfo, bandLeft } from './card.js?v=1db980d128';
+import * as store from './store.js?v=1db980d128';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 
@@ -22,8 +22,18 @@ export function myInquiry(lot) {
   return store.get('offers').find(o => o.lot === lot.lot && o.status === 'waiting');
 }
 
-// 총액 예상 — 형 결정 전(더윈 6), 요율은 조사 전이라 예시값(수수료 10% = 더윈 16 메모)
-export const EXAMPLE_RATES = { fee: 0.10, duty: { Bag: 0.09, Watch: 0.064, Jewelry: 0.065, Clothing: 0.16, Accessories: 0.08 }, shipping: 120, box: 45 };
+// 요율 단일 출처 — 형이 실값을 주면 이 한 곳만 바꾼다(10/6 결정 89 · 수수료 10% = 더윈 16). 바꾸기 전까지 화면에 "example rates" 표기
+export const EXAMPLE_RATES = {
+  fee: 0.10,                                                                                   // 구매자 수수료(낙찰가 대비)
+  duty: { Bag: 0.09, Watch: 0.064, Jewelry: 0.065, Clothing: 0.16, Accessories: 0.08 },        // 관세(재질·품목별, 더윈 1)
+  shipping: 120,                                                                               // DHL Express 미국행(더윈 15)
+  box: 45,                                                                                     // 단단한 상자(선택, 더윈 8)
+  cert: 60,                                                                                    // 감정서(선택, 더윈 10)
+  cardMax: 10000,                                                                              // 카드 결제 상한(Loupe 모델)
+  cardFee: 0.03,                                                                               // 카드 결제 수수료
+  example: true,                                                                               // 실값으로 바꾸면 false → "example rates" 문구가 사라진다
+};
+export const RATES_LABEL = EXAMPLE_RATES.example ? ' · example rates until our rates are set' : '';
 export function estimate(lot, { box = false } = {}) {
   const r = EXAMPLE_RATES;
   const duty = Math.round(lot.usd * (r.duty[lot.genre] ?? 0.08));
@@ -47,16 +57,10 @@ function priceBlock(lot) {
     return `<div class="info-price"><p class="price lg ask">Price on request</p>
       <p class="t13 muted">The source has not published a price for this lot. Ask and we reply within one business day.</p></div>`;
   }
-  if (store.setting('priceMode') === 'total') {
-    const e = estimate(lot);
-    return `<div class="info-price" data-note="가격 표기 B안 — 총액 예상을 크게(더윈 6). 요율은 조사 전 예시: 수수료 10%(더윈 16) · 관세는 재질별(더윈 1) · 배송 FedEx 예시 $120." data-ref="더윈 1·6">
-      <p class="label">Est. delivered to the US</p>
-      <p class="price lg">${usd(e.total)}</p>
-      <p class="t13 muted">Item ${usd(e.item)} + duties, fee and shipping · example rates, confirmed in your quote</p></div>`;
-  }
-  return `<div class="info-price" data-note="가격 표기 A안 — 상품가를 크게, 엔화는 작게(더윈 5·6). 검토 막대에서 '총액 예상'으로 바꿔 볼 수 있다." data-ref="더윈 5·6">
+  // 형 확정(10/6 · 결정 88): 상품가를 크게, 엔화는 작게(더윈 5·6). 총액은 아래 항목별 표에서
+  return `<div class="info-price" data-note="가격 표기 = 상품가 크게 + 엔화 작게(더윈 5·6 · 형 확정 10/6 결정 88). 미국 도착 총액은 상세 '항목별 총액' 표와 청구서에서." data-ref="더윈 5·6 · 결정 88">
     <p class="price lg">${usd(lot.usd)}</p>
-    <p class="yen">≈ ${jpy(lot.jpy)} · item price · US-delivered total confirmed within one business day</p></div>`;
+    <p class="yen">≈ ${jpy(lot.jpy)} · item price · US-delivered total itemised below</p></div>`;
 }
 
 // 등급표 — 들어갔을 때 바로 보이게(더윈 14). S~D 척도와 외관·내부 1~3을 한 칸에

@@ -1,19 +1,21 @@
 // 결제 v4 — 낙찰 → 청구서(3일) → 결제 · 에스크로 → 검수·포장(도쿄) → 배송 → 수령(3일 신고) → 완료(결정 78 · v4-lock §7)
 // 서버가 없으니 결제 기록은 이 브라우저에만 남고, My page 행이 그 기록을 읽어 '완료' 칸으로 옮긴다
-import { usd, esc, cardImg, lotUrl, shortDate, fullName, brandName, gradeName, exampleAuction } from './data.js?v=f35c47a528';
-import { startPage } from './page.js?v=f35c47a528';
-import { paintNotes } from './review.js?v=f35c47a528';
-import { toast } from './chrome.js?v=f35c47a528';
-import { estimate, EXAMPLE_RATES } from './buybox.js?v=f35c47a528';
-import { icon } from './icons.js?v=f35c47a528';
-import * as store from './store.js?v=f35c47a528';
+import { usd, esc, cardImg, lotUrl, shortDate, fullName, brandName, gradeName, exampleAuction } from './data.js?v=1db980d128';
+import { startPage } from './page.js?v=1db980d128';
+import { paintNotes } from './review.js?v=1db980d128';
+import { toast } from './chrome.js?v=1db980d128';
+import { estimate, EXAMPLE_RATES } from './buybox.js?v=1db980d128';
+import { icon } from './icons.js?v=1db980d128';
+import * as store from './store.js?v=1db980d128';
 
 const DAY = 86400000;
 const day = n => shortDate(new Date(Date.now() + n * DAY));
 export const PAY_STATES = ['won', 'invoice', 'paid', 'packed', 'shipped', 'delivered', 'complete'];
-const CARD_MAX = 10000;   // Loupe: 카드는 5만 달러까지 +3% — 우리 예시는 1만 달러(형 결정 전)
-const CARD_FEE = 0.03;
-const CERT = 60;          // 감정서 예시 금액
+// 요율은 전부 buybox.js EXAMPLE_RATES 한 곳에서(결정 89) — 여기선 이름만 빌린다
+const CARD_MAX = EXAMPLE_RATES.cardMax;
+const CARD_FEE = EXAMPLE_RATES.cardFee;
+const CERT = EXAMPLE_RATES.cert;
+const RATE_NOTE = EXAMPLE_RATES.example ? 'Example rates until our rates are set' : 'Rates as published';
 const SHIP_TO = { name: 'Jordan Lee', line1: '418 W 14th St, Apt 5B', line2: 'New York, NY 10014', phone: '+1 (212) 555-0147' }; // 예시 주소
 
 let data;
@@ -45,7 +47,7 @@ function invoice(opts) {
   const e = estimate({ ...lot, usd: hammer }, { box: false });
   const rows = [
     [sale === 'B' ? 'Hammer price' : 'Accepted offer', `${sale === 'B' ? `${exampleAuction(lot).bids} bids` : 'Your offer, accepted'}`, hammer],
-    ["Buyer's fee", '10% of the hammer price', e.fee],
+    ["Buyer's fee", `${Math.round(EXAMPLE_RATES.fee * 100)}% of the hammer price`, e.fee],
     ['Import duties', `Rate by material · ${lot.genre.toLowerCase()}`, e.duty],
     ['Shipping · DHL Express', 'Tokyo to your door, insured', EXAMPLE_RATES.shipping],
   ];
@@ -55,7 +57,7 @@ function invoice(opts) {
   const over = total > CARD_MAX;
   if (opts.method === 'card' && !over) {
     const fee = Math.round(total * CARD_FEE);
-    rows.push(['Card processing', '3%', fee]);
+    rows.push(['Card processing', `${Math.round(CARD_FEE * 100)}%`, fee]);
     total += fee;
   }
   return { rows, total, over };
@@ -127,18 +129,18 @@ function invoiceHTML(idx, opts, rec) {
       <div class="invoice-paid"><b>Paid ${usd(total)} · ${rec ? shortDate(new Date(rec.at)) : day(0)}</b><span>${method} · held in escrow until delivered</span></div>
       ${rowsHTML(inv.rows, total)}
       ${shipToHTML()}
-      <p class="pay-note">Example rates — fee, duties and shipping are placeholders until policy is set.</p>`;
+      <p class="pay-note">${RATE_NOTE}${EXAMPLE_RATES.example ? ' — fee, duties and shipping are placeholders.' : '.'}</p>`;
   }
   const signedIn = store.get('signedIn');
   const next = encodeURIComponent(location.pathname.split('/').pop() + location.search);
   return `<h2 class="display d3">Invoice</h2>
-    <p class="invoice-due"><span>Example rates until policy is set</span><b>Pay by ${day(2)}</b></p>
+    <p class="invoice-due"><span>${RATE_NOTE}</span><b>Pay by ${day(2)}</b></p>
     ${rowsHTML(inv.rows, inv.total)}
     <label class="check"><input type="checkbox" name="box" ${opts.box ? 'checked' : ''}> <span><b>Rigid box to keep the shape</b> +${usd(EXAMPLE_RATES.box)} · recommended for structured bags</span></label>
     <label class="check"><input type="checkbox" name="cert" ${opts.cert ? 'checked' : ''}> <span><b>Certificate of authenticity</b> +${usd(CERT)} · optional, issued in Tokyo</span></label>
     <div class="pay-methods" role="radiogroup" aria-label="How to pay">
       <label class="radio" ${inv.over ? 'aria-disabled="true"' : ''}><input type="radio" name="method" value="card" ${opts.method === 'card' ? 'checked' : ''} ${inv.over ? 'disabled' : ''}>
-        <span><b>Card</b><span class="t13">Up to ${usd(CARD_MAX)} · 3% processing fee${inv.over ? ' · not available for this total' : ''}</span></span></label>
+        <span><b>Card</b><span class="t13">Up to ${usd(CARD_MAX)} · ${Math.round(CARD_FEE * 100)}% processing fee${inv.over ? ' · not available for this total' : ''}</span></span></label>
       <label class="radio"><input type="radio" name="method" value="wire" ${opts.method === 'wire' ? 'checked' : ''}>
         <span><b>Bank transfer</b><span class="t13">No fee · clears in 1–2 business days · details by email</span></span></label>
     </div>

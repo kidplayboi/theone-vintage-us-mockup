@@ -1,5 +1,5 @@
 // 시안 도구(제품 밖) — 검토 막대 · 메모 핀. 한국어, 형 검토용(결정 39)
-import * as store from './store.js?v=f35c47a528';
+import * as store from './store.js?v=1db980d128';
 
 export const LOT_STATES = {
   A: [
@@ -43,11 +43,6 @@ export function mountReview({ page = '' } = {}) {
         <button type="button" data-sale="A" aria-pressed="${s.sale === 'A'}">A 정가·제안</button>
         <button type="button" data-sale="B" aria-pressed="${s.sale === 'B'}">B 입찰</button>
       </div>
-      <div class="rv-group" role="group" aria-label="가격 표기(더윈 6)">
-        <span>가격 표기</span>
-        <button type="button" data-price-mode="item" aria-pressed="${s.priceMode !== 'total'}">상품가</button>
-        <button type="button" data-price-mode="total" aria-pressed="${s.priceMode === 'total'}">총액 예상</button>
-      </div>
       <button type="button" class="rv-btn" data-notes aria-pressed="${s.notes}">메모 ${s.notes ? '켜짐' : '꺼짐'}</button>
       ${page === 'lot' ? `<label class="rv-group">상태 <select data-state>${stateOptions}</select></label>
         <button type="button" class="rv-btn" data-fail aria-pressed="${s.sendFails}">보내기 실패 ${s.sendFails ? '켜짐' : '꺼짐'}</button>` : ''}
@@ -59,10 +54,6 @@ export function mountReview({ page = '' } = {}) {
 
   host.querySelectorAll('[data-sale]').forEach(b => b.addEventListener('click', () => {
     store.update('settings', x => ({ ...x, sale: b.dataset.sale, state: 'auto' }));
-    mountReview({ page });
-  }));
-  host.querySelectorAll('[data-price-mode]').forEach(btn => btn.addEventListener('click', () => {
-    store.setSetting('priceMode', btn.dataset.priceMode);
     mountReview({ page });
   }));
   host.querySelector('[data-notes]').addEventListener('click', () => {

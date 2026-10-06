@@ -1,52 +1,50 @@
-/* 디자인 토큰 v2 — 형 10/6 "PDF보다 딸린다·폰트 별로" → 기획안 PDF 원본 CSS의 체계로(docs/design/refs/2026-10-06-v2-plan.md) */
+/* 디자인 토큰 v3 — 주 레퍼런스 Bezel(형이 모은 captures-all · measure-bezel.json 실측). 근거 = docs/design/refs/2026-10-06-v3-lock.md */
 :root {
-  /* 바탕·글자 — PDF :root 값 */
-  --paper: #F3EFE7;
-  --paper-2: #EAE4D8;      /* PDF --paper2 · 정보 띠 */
-  --white: #FFFFFF;
-  --ink: #1C1A17;
-  --body: #433D36;
-  --gray: #6A635A;         /* PDF #8B847A 는 미색 위 3.22 → 5.17 */
-  --line: #D3CBBD;
-  --line-soft: #E2DCD0;
+  /* 바탕 — 흰 본문 · 구획 · 사진 타일(흰 배경 누끼가 multiply 로 녹는 연회색) */
+  --canvas: #FFFFFF;
+  --canvas-2: #F6F5F2;
+  --tile: #F3F2EF;
 
-  /* 강조 — 초록은 운영 사이트 카드 띠 실측값(까사 마감 띠 계열) */
-  --green: #2F5440;        /* 주 버튼 · 흰 글자 8.5:1 */
-  --green-hover: #244635;
-  --band: #3F6B4E;         /* 카드 상태 띠 · 흰 글자 6.1:1 */
-  --green-tint: #E3EBE4;
-  --gold: #7E5F2E;         /* 이탤릭 눈썹 · PDF #8A6A36 은 미색 위 4.36 → 5.14 */
-  --brick: #8E3B2E;        /* 이탤릭 번호 */
-  --rank: #4A2E22;         /* 등급 배지 */
+  /* 글자 */
+  --ink: #111412;
+  --body: #3F4542;
+  --muted: #69706B;        /* 흰 위 5.0:1 */
+  --line: #E6E5E1;
+  --line-2: #D3D2CD;
 
-  /* 의미색 — 점과 글자 */
-  --live: #2F7A4B;
-  --ending: #B42318;       /* 마감 1시간 전(더윈 12) */
-  --reserve: #B54708;
+  /* 초록 — Bezel #061A11 · #1A3A32 계열. 막대·히어로·경매 띠·주 버튼에만 */
+  --green: #0C2219;
+  --green-2: #183A2D;      /* 초록 위 면(카드·입력) */
+  --green-ink: #1A3A32;    /* 흰 위 큰 제목 */
+  --green-hover: #173829;
+  --on-green: #FFFFFF;
+  --on-green-2: rgba(255, 255, 255, .68);
+  --line-on-green: rgba(255, 255, 255, .12);
+  --mint: #34D399;         /* 초록 위 카운트다운에만(Bezel) */
 
-  /* 어두운 면 — PDF 섹션 오프너 */
-  --dark: #141210;
-  --on-dark: #F3EFE7;      /* 16.3:1 */
-  --on-dark-2: #B5AC9F;    /* 8.3:1 */
-  --brass: #C2A36B;        /* 어두운 면 위 이탤릭 눈썹 7.8:1 */
-  --line-on-dark: rgba(243, 239, 231, .16);
-  --ending-on-dark: #F08A7E; /* 7.5:1 */
+  /* 의미색 — 점·글자·작은 배지 */
+  --live: #1E7A4F;
+  --ending: #C0261C;       /* 마감 1시간 전(더윈 12) · 흰 위 5.9:1 */
+  --ending-on-green: #FF8A7A;
+  --reserve: #A15C07;
 
-  /* 서체 — 제목·가격 = Cormorant Garamond, 나머지 = Pretendard. 모노 서체는 쓰지 않는다 */
-  --serif: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
-  --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sans: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-  /* 크기 8단 — 세리프 64·44·32·24 · 눈썹/리드 20 · 산세리프 15·13·11 */
-  --fs-display: 64px;
-  --fs-h1: 44px;
-  --fs-h2: 32px;
-  --fs-h3: 24px;
-  --fs-lede: 20px;        /* 눈썹(세리프 이탤릭)·리드 문장 */
-  --fs-body: 15px;
-  --fs-small: 13px;
-  --fs-label: 11px;
+  /* 글자 크기 8종 */
+  --fs-11: 11px;
+  --fs-12: 12px;
+  --fs-14: 14px;
+  --fs-16: 16px;
+  --fs-20: 20px;
+  --fs-28: 28px;
+  --fs-40: 40px;
+  --fs-56: 56px;
 
-  --r: 2px;
+  /* 모서리 — Bezel 실측 50(알약) · 16(타일) · 4(배지) */
+  --r-pill: 999px;
+  --r-lg: 14px;
+  --r-md: 8px;
+  --r-sm: 4px;
 
   --s1: 4px;
   --s2: 8px;
@@ -55,8 +53,8 @@
   --s5: 24px;
   --s6: 32px;
   --s7: 48px;
-  --s8: 72px;
-  --s9: 96px;              /* PDF 페이지 여백 */
+  --s8: 64px;
+  --s9: 96px;
 
   --wrap: 1280px;
   --gutter: 32px;
@@ -65,10 +63,11 @@
 
 @media (max-width: 720px) {
   :root {
-    --fs-display: 44px;
-    --fs-h1: 34px;
-    --fs-h2: 28px;
+    --fs-56: 36px;
+    --fs-40: 30px;
+    --fs-28: 23px;
     --gutter: 16px;
-    --s9: 56px;
+    --s9: 64px;
+    --s8: 48px;
   }
 }

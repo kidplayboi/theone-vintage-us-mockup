@@ -1,8 +1,8 @@
-/* 시안 도구 — 제품 밖. 한국어라 Pretendard(결정 39) */
+/* 시안 도구 — 제품 밖. 한국어라 시스템 글꼴(결정 39) */
 .review {
   position: relative; z-index: 60;
   background: #0C0C0F; color: #E9E7E2;
-  font: 400 12px/1.4 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  font: 400 12px/1.4 system-ui, 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
   letter-spacing: 0;
 }
 .review-in {
@@ -29,21 +29,21 @@
 
 /* 메모 핀 */
 .note-host { position: relative; }
-body.notes-on [data-note] { outline: 1px dashed rgba(138, 106, 54, .7); outline-offset: 3px; }
+body.notes-on [data-note] { outline: 1px dashed rgba(184, 138, 46, .8); outline-offset: 3px; }
 .note-pin {
   position: absolute; top: -11px; left: -11px; z-index: 35;
   display: grid; place-items: center; width: 22px; height: 22px;
-  border-radius: 2px; background: var(--gold); color: #fff;
-  font: 600 11px/1 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  border-radius: 2px; background: #B88A2E; color: #fff;
+  font: 600 11px/1 system-ui, 'Malgun Gothic', sans-serif;
   box-shadow: 0 2px 6px rgba(21, 21, 26, .25);
 }
-.note-pin:hover { background: var(--rank); }
+.note-pin:hover { background: #8A6418; }
 .note-pop {
   position: absolute; z-index: 200;
   padding: 12px 14px; background: #fff; color: var(--ink);
   border: 1px solid var(--ink); border-radius: 2px;
-  font: 400 13px/1.6 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  font: 400 13px/1.6 system-ui, 'Malgun Gothic', sans-serif;
   word-break: keep-all;
   box-shadow: 0 12px 32px rgba(21, 21, 26, .18);
 }
-.note-ref { display: block; margin-top: 6px; color: var(--gray); font-size: 12px; }
+.note-ref { display: block; margin-top: 6px; color: #69706B; font-size: 12px; }

@@ -1,6 +1,6 @@
 // 브라우저 저장소 — 시안 안의 관심 목록 · 제안 · 메모 · 검토 설정.
 // 사생활 모드처럼 저장이 막히면 이번 방문 동안만 메모리에 둔다.
-const KEY = 'tov-mockup-v1';
+const KEY = 'tov-mockup-v3'; // v3 에서 기본 판매 방식이 B(입찰)로 바뀌어 예전 설정을 이어받지 않는다(결정 67)
 let memory = {};
 let warned = false;
 
@@ -30,7 +30,7 @@ function warnOnce(err) {
 }
 
 export const DEFAULTS = {
-  settings: { sale: 'A', notes: false, examples: true, state: 'auto', sendFails: false, tz: 'auto', priceMode: 'item' },
+  settings: { sale: 'B', notes: false, examples: true, state: 'auto', sendFails: false, tz: 'auto', priceMode: 'item' },
   saved: {},
   folders: ['Shortlist', 'Gifts', 'Later'],
   notes: {},

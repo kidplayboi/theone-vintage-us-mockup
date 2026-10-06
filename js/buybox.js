@@ -1,10 +1,10 @@
 // 상세 정보 칸 v2 — 상세 창(모달)과 상세 페이지가 같이 쓴다
 // 순서 = 상태 띠 → 브랜드·제목 → 달러(크게) → 등급표 → 문의 → 신뢰 · 도착일 → 메모 · 시세
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급표 보이게)
-import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate } from './data.js?v=20c3d06a4d';
-import { icon } from './icons.js?v=20c3d06a4d';
-import { bandInfo, bandLeft } from './card.js?v=20c3d06a4d';
-import * as store from './store.js?v=20c3d06a4d';
+import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=9d7fdc12f6';
+import { icon } from './icons.js?v=9d7fdc12f6';
+import { bandInfo, bandLeft } from './card.js?v=9d7fdc12f6';
+import * as store from './store.js?v=9d7fdc12f6';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 
@@ -34,9 +34,10 @@ export function estimate(lot, { box = false } = {}) {
 
 function head(lot, sale, state) {
   const b = bandInfo(lot, sale, state === 'sold' ? 'sold' : 'auto');
+  const live = b.ends && b.ends - Date.now() < 86400000;
   return `
-    <p class="info-band ${b.tone ? 'is-' + b.tone : ''}"><span>${bandLeft(b)}</span><span class="num">${esc(b.right)}</span></p>
-    <p class="brand-label">${esc(lot.brand)}</p>
+    <p class="info-band ${b.tone ? 'is-' + b.tone : ''}"><span><span class="dot${b.tone === 'hot' ? ' ending' : ''}"></span>${bandLeft(b)}</span><span class="num" ${live ? `data-ends="${b.ends.getTime()}"` : ''}>${esc(b.right)}</span></p>
+    <p class="info-lot"><span class="brand-label">${esc(brandName(lot.brand))}</span><span class="t13 muted">Lot ${esc(lot.lot)}</span></p>
     <h1 class="display info-title">${esc(lot.title)}</h1>
     ${lot.sub ? `<p class="info-sub">${esc(lot.sub)}</p>` : ''}`;
 }
@@ -150,19 +151,22 @@ function bidBox(lot, state) {
     <div class="bid-box">
       <div class="bid-cells">
         <div><p class="label">Current bid</p><p class="price lg">${usd(bid)}</p><p class="t13 muted">${a.bids + (state === 'outbid' ? 1 : 0)} bids</p></div>
-        <div><p class="label">Ends</p><p class="bid-when">${formatEnds(ends)}</p><p class="t13 ${hot ? 'warn' : 'muted'} num"><span data-ends="${ends.getTime()}">${countdown(ends)}</span></p></div>
+        <div><p class="label">Ends</p><p class="bid-when">${formatEnds(ends, store.setting('tz'))}</p><p class="t13 ${hot ? 'warn' : 'muted'} num"><span data-ends="${ends.getTime()}">${countdown(ends)}</span></p></div>
       </div>
       <p class="bid-row"><span><span class="dot ${reserve[0]}"></span> ${reserve[1]}</span><span class="muted">Extended bidding</span></p>
     </div>
     ${line}
-    <form class="bid-form" data-bid-form novalidate>
+    ${store.get('signedIn') ? '' : `<div class="bid-gate" data-note="로그아웃이면 입찰 칸 = 'Register to bid'(Loupe 상세 · Bezel 'SIGN UP'). 현재가는 숨기지 않는다. 문의는 계정 없이도 된다(운영 사이트 FAQ)." data-ref="결정 58">
+      <a class="btn block" href="sign-in.html?mode=create&amp;next=${encodeURIComponent('lot.html?id=' + lot.lot)}">Register to bid</a>
+      <p class="t13 muted">Bidding needs an account. <a class="text-link" href="sign-in.html?next=${encodeURIComponent('lot.html?id=' + lot.lot)}">Log in</a></p></div>`}
+    <form class="bid-form" data-bid-form novalidate ${store.get('signedIn') ? '' : 'hidden'}>
       <label class="visually-hidden" for="max-bid">Your max bid</label>
       <input class="input num" id="max-bid" inputmode="numeric" placeholder="Your max bid · ${usd(bid + step)} or more" data-bid-input>
       <div class="bid-steps">${[1, 2, 4].map(k => `<button class="btn ghost small" type="button" data-step="${bid + step * k}">+${usd(step * k)}</button>`).join('')}</div>
       <p class="field-error" data-bid-error role="alert"></p>
       <button class="btn block" type="submit">Place bid</button>
     </form>
-    <p class="t13 muted">Bidding (option B) is a mockup — times, bids and reserve are examples.</p>`;
+    <p class="t13 muted">Example auction — times, bids and reserve are illustrative in this preview.</p>`;
 }
 
 // 예상 도착 — 오늘 + 회신 1영업일 + 확정 1일 + 배송 6–10일(현재 사이트 문구)
@@ -215,7 +219,7 @@ export function buyHTML(lot) {
   const state = lotState(lot);
   const sale = store.setting('sale');
   const body = sale === 'B'
-    ? `${gradeTable(lot)}${bidBox(lot, state)}`
+    ? `${bidBox(lot, state)}${gradeTable(lot)}`
     : `${priceBlock(lot)}${gradeTable(lot)}${actions(lot, state)}`;
   return `${head(lot, sale, state)}<div class="info-body">${body}${assurance()}</div>${tools(lot)}`;
 }

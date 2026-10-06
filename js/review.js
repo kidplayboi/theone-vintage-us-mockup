@@ -1,5 +1,5 @@
 // 시안 도구(제품 밖) — 검토 막대 · 메모 핀. 한국어, 형 검토용(결정 39)
-import * as store from './store.js?v=20c3d06a4d';
+import * as store from './store.js?v=9d7fdc12f6';
 
 export const LOT_STATES = {
   A: [
@@ -45,9 +45,8 @@ export function mountReview({ page = '' } = {}) {
       ${page === 'lot' ? `<label class="rv-group">상태 <select data-state>${stateOptions}</select></label>
         <button type="button" class="rv-btn" data-fail aria-pressed="${s.sendFails}">보내기 실패 ${s.sendFails ? '켜짐' : '꺼짐'}</button>` : ''}
       ${page === 'offers' || page === 'saved' ? `<button type="button" class="rv-btn" data-examples aria-pressed="${s.examples}">예시 데이터 ${s.examples ? '켜짐' : '꺼짐'}</button>` : ''}
-      ${page === 'home' ? `<button type="button" class="rv-btn" data-intro>첫 방문으로 보기</button>` : ''}
-      <a class="rv-btn" href="states.html">상태 모음</a>
-      <a class="rv-btn" href="https://github.com/kidplayboi/theone-vintage-us-mockup/blob/main/docs/design/refs/2026-10-06-us-mockup.md" target="_blank" rel="noopener">결정 원장</a>
+            <a class="rv-btn" href="states.html">상태 모음</a>
+      <a class="rv-btn" href="https://github.com/kidplayboi/theone-vintage-us-mockup/blob/main/docs/design/refs/2026-10-06-v3-lock.md" target="_blank" rel="noopener">결정 원장</a>
     </div>`;
 
   host.querySelectorAll('[data-sale]').forEach(b => b.addEventListener('click', () => {
@@ -69,8 +68,6 @@ export function mountReview({ page = '' } = {}) {
   if (fail) fail.addEventListener('click', () => { store.setSetting('sendFails', !store.setting('sendFails')); mountReview({ page }); });
   const examples = host.querySelector('[data-examples]');
   if (examples) examples.addEventListener('click', () => { store.setSetting('examples', !store.setting('examples')); mountReview({ page }); });
-  const intro = host.querySelector('[data-intro]');
-  if (intro) intro.addEventListener('click', () => { store.set('introSeen', false); location.reload(); });
 }
 
 // 메모 핀 — [data-note] 를 가진 요소 왼쪽 위에 번호를 단다

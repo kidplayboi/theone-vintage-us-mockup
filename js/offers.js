@@ -1,11 +1,11 @@
 // My page — 까사 마이페이지 네 칸(더윈 9): 바로 대응 필요 / 진행 중 / 결과 확정 / 낙찰 완료
 // 낙찰·확정 행은 펼치면 정산표(더윈 10): 낙찰가 · 관세 · 수수료 · 배송비 · 감정서(필요 시) = 총액
-import { usd, esc, cardImg, lotUrl, shortDate, fullName } from './data.js?v=20c3d06a4d';
-import { startPage } from './page.js?v=20c3d06a4d';
-import { paintNotes } from './review.js?v=20c3d06a4d';
-import { toast } from './chrome.js?v=20c3d06a4d';
-import { estimate } from './buybox.js?v=20c3d06a4d';
-import * as store from './store.js?v=20c3d06a4d';
+import { usd, esc, cardImg, lotUrl, shortDate, fullName } from './data.js?v=9d7fdc12f6';
+import { startPage } from './page.js?v=9d7fdc12f6';
+import { paintNotes } from './review.js?v=9d7fdc12f6';
+import { toast } from './chrome.js?v=9d7fdc12f6';
+import { estimate } from './buybox.js?v=9d7fdc12f6';
+import * as store from './store.js?v=9d7fdc12f6';
 
 const CELLS = {
   action: { label: 'Needs action', hint: 'Reply or pay', tone: 'alert' },
@@ -63,9 +63,8 @@ function settlement(r) {
 function render() {
   const list = rows();
   const counts = Object.fromEntries(Object.keys(CELLS).map(k => [k, list.filter(r => r.cell === k).length]));
-  document.querySelector('[data-cells]').innerHTML = Object.entries(CELLS).map(([k, c], i) => `
+  document.querySelector('[data-cells]').innerHTML = Object.entries(CELLS).map(([k, c]) => `
     <button type="button" class="o-cell${k === 'action' && counts[k] ? ' is-alert' : ''}" data-filter="${k}" aria-pressed="${filter === k}">
-      <span class="roman">${['I', 'II', 'III', 'IV'][i]}</span>
       <span class="o-count num">${counts[k]}</span>
       <span class="o-label">${c.label}</span><span class="t13 muted">${c.hint}</span></button>`).join('');
   const shown = filter ? list.filter(r => r.cell === filter) : list;
@@ -73,7 +72,7 @@ function render() {
   if (!shown.length) {
     body.innerHTML = `<tr><td colspan="5"><div class="o-empty"><p class="display d2">Nothing here yet</p>
       <p class="muted">Inquire or make an offer on any lot and it will show here.</p>
-      <a class="btn ghost" href="index.html#lots">Browse lots</a></div></td></tr>`;
+      <a class="btn ghost" href="shop.html">Browse lots</a></div></td></tr>`;
   } else {
     body.innerHTML = shown.map((r, i) => `
       <tr${r.example ? ' class="is-example"' : ''}>

@@ -1,11 +1,11 @@
 // Saved — 관심 목록 폴더 세 개, 손님이 이름을 붙인다(11쪽 1번). 내 메모는 카드 아래에(11쪽 3번)
-import { esc } from './data.js?v=20c3d06a4d';
-import { startPage } from './page.js?v=20c3d06a4d';
-import { paintNotes } from './review.js?v=20c3d06a4d';
-import { cardHTML, bindCards } from './card.js?v=20c3d06a4d';
-import { openLot } from './lotmodal.js?v=20c3d06a4d';
-import { revealOnScroll } from './motion.js?v=20c3d06a4d';
-import * as store from './store.js?v=20c3d06a4d';
+import { esc } from './data.js?v=9d7fdc12f6';
+import { startPage } from './page.js?v=9d7fdc12f6';
+import { paintNotes } from './review.js?v=9d7fdc12f6';
+import { cardHTML, bindCards } from './card.js?v=9d7fdc12f6';
+import { openLot } from './lotmodal.js?v=9d7fdc12f6';
+import { revealOnScroll } from './motion.js?v=9d7fdc12f6';
+import * as store from './store.js?v=9d7fdc12f6';
 
 let data;
 let folder = 'all';
@@ -33,7 +33,7 @@ function render() {
   document.querySelector('[data-example-line]').hidden = !(examples && !lots.length);
   if (!show.length) {
     grid.innerHTML = `<div class="empty"><p class="display d30">Nothing saved yet</p>
-      <p class="muted">Tap ♡ on any lot to keep it here.</p><a class="btn ghost" href="index.html#lots">Browse lots</a></div>`;
+      <p class="muted">Tap ♡ on any lot to keep it here.</p><a class="btn ghost" href="shop.html">Browse lots</a></div>`;
   } else {
     grid.innerHTML = show.map(lot => `<div class="saved-item">${cardHTML(lot, { sale: store.setting('sale') })}
       ${notes[lot.lot] ? `<p class="saved-note"><span class="label">Your note</span>${esc(notes[lot.lot])}</p>` : ''}</div>`).join('');

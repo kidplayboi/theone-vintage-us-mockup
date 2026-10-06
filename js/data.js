@@ -3,7 +3,7 @@ let cache;
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=20c3d06a4d').then(r => {
+    cache = fetch('data/lots.json?v=9d7fdc12f6').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     });
@@ -35,6 +35,16 @@ export function fullName(lot) {
   return lot.title.toLowerCase().split(/[\s-]+/).includes(word) ? lot.title : `${lot.brand} ${lot.title}`;
 }
 
+// 운영 API 브랜드 이름(LOUIS VUITTON · HERMES · adidas)을 화면용으로 — 필터 값은 원래 이름 그대로 쓴다
+const BRAND_FIX = { HERMES: 'Hermès', 'Van Cleef&Arpels': 'Van Cleef & Arpels' };
+export function brandName(raw) {
+  if (BRAND_FIX[raw]) return BRAND_FIX[raw];
+  if (raw === raw.toUpperCase() || raw === raw.toLowerCase()) {
+    return raw.toLowerCase().replace(/(^|[\s&.-])([a-z])/g, (m, a, b) => a + b.toUpperCase());
+  }
+  return raw;
+}
+
 export const lotUrl = lot => `lot.html?id=${encodeURIComponent(lot.lot)}`;
 export const cardImg = lot => `assets/lots/${lot.lot}/card.jpg`;
 export const photo = (lot, i) => `assets/lots/${lot.lot}/${i}.jpg`;
@@ -56,10 +66,12 @@ function seed(lot) {
   return lot.lot.split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 100000, 7);
 }
 
+// 마감 시각은 페이지를 연 시각 기준으로 고정 — 다시 그려도 카운트다운이 되감기지 않게. 분 단위로 흩어 같은 시각이 겹치지 않게
+const OPENED = Date.now();
 export function exampleAuction(lot) {
   const s = seed(lot);
   const hours = [0.7, 1.2, 3.1, 5.5, 19, 28, 52, 76][s % 8];
-  const ends = new Date(Date.now() + hours * 3600000);
+  const ends = new Date(OPENED + hours * 3600000 + (s % 53) * 60000);
   ends.setSeconds(0, 0);
   return {
     ends,
@@ -76,10 +88,9 @@ export function bidStep(amount) {
   return 250;
 }
 
-export function formatEnds(date) {
-  const day = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
-  const time = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
-  return `${day} · ${time} ET`;
+// 마감 시각 — 손님이 고른 시간대(운영 사이트 "Your local time")로. 카드·상세·따라오는 바가 같은 표기
+export function formatEnds(date, tz) {
+  return localTime(date, tz);
 }
 
 export function countdown(date) {

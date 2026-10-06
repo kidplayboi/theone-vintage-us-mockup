@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>All lots — Premium Auction | TheOne Vintage</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230C2219'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='600' text-anchor='middle' fill='%23FFFFFF'%3ETV%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
+<link rel="stylesheet" href="css/tokens.css?v=9d7fdc12f6">
+<link rel="stylesheet" href="css/base.css?v=9d7fdc12f6">
+<link rel="stylesheet" href="css/chrome.css?v=9d7fdc12f6">
+<link rel="stylesheet" href="css/card.css?v=9d7fdc12f6">
+<link rel="stylesheet" href="css/lot.css?v=9d7fdc12f6">
+<link rel="stylesheet" href="css/shop.css?v=9d7fdc12f6">
+<link rel="stylesheet" href="css/review.css?v=9d7fdc12f6">
+</head>
+<body class="has-tabs page-shop">
+<div id="review"></div>
+<header id="top"></header>
+
+<main class="shop">
+  <div class="wrap" data-shop-top>
+    <nav class="crumbs" aria-label="Breadcrumb" data-crumbs></nav>
+    <div class="shop-head">
+      <div>
+        <h1 class="display d1" data-shop-title>All lots</h1>
+        <p class="shop-count muted" data-count></p>
+      </div>
+      <div class="tz-pick" data-note="운영 사이트 'Your local time' 시간대 선택 그대로(Auto · 미국 7개 · 도쿄 · UTC). 고르면 카드·상세의 마감 시각이 그 시간대로." data-ref="운영 사이트 10/6">
+        <label class="t13 muted" for="tz">Your local time · <span data-tz-name></span></label>
+        <select class="input" id="tz" data-tz></select>
+      </div>
+    </div>
+
+    <div class="kind-tabs" role="tablist" aria-label="Sale type" data-kinds data-note="운영 사이트 판매 방식 탭 All lots / Live bid / Time limit / Mall 그대로, 숫자는 운영 API. 모양만 Bezel 경매 목록 탭(Live 327 · Ending soon 108). 입찰(B) 시안에서는 전 재고를 Live bid 로 보고 센다." data-ref="결정 63"></div>
+    <div class="chips" data-cats aria-label="Category" data-note="운영 사이트 카테고리 칩 9개 + 개수 그대로." data-ref="운영 사이트 10/6"></div>
+    <div class="toolbar">
+      <label class="search"><span class="visually-hidden">Search within results</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>
+        <input class="input" type="search" placeholder="Search item, brand or lot number" data-q></label>
+      <label class="visually-hidden" for="brand">Brand</label>
+      <select class="input" id="brand" data-brand></select>
+      <label class="visually-hidden" for="sort">Sort</label>
+      <select class="input" id="sort" data-sort data-note="운영 정렬 4종(Featured · Newest · 가격 낮은/높은 순)에 'Ending soon' 하나를 더했다 — 운영에 없는 추가(scope 밖), 경매 참여 유도용. 형 확인 대상." data-ref="결정 63"></select>
+      <label class="visually-hidden" for="per">Lots per page</label>
+      <select class="input" id="per" data-per>
+        <option value="20">20 per page</option>
+        <option value="50">50 per page</option>
+        <option value="100">100 per page</option>
+      </select>
+    </div>
+
+    <div class="grid" data-grid aria-live="polite"></div>
+    <nav class="pagination" aria-label="Pages" data-pages></nav>
+  </div>
+</main>
+
+<footer id="foot"></footer>
+<div id="tabs"></div>
+<script type="module" src="js/shop.js?v=9d7fdc12f6"></script>
+</body>
+</html>

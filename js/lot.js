@@ -1,14 +1,14 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=20c3d06a4d';
-import { mountChrome, bindNewsletter } from './chrome.js?v=20c3d06a4d';
-import { mountReview, paintNotes } from './review.js?v=20c3d06a4d';
-import { cardHTML, bindCards, startTicker } from './card.js?v=20c3d06a4d';
-import { openLot } from './lotmodal.js?v=20c3d06a4d';
-import { galleryHTML, mountGallery } from './gallery.js?v=20c3d06a4d';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES } from './buybox.js?v=20c3d06a4d';
-import { bindBuy } from './lotactions.js?v=20c3d06a4d';
-import { initMotion, revealOnScroll } from './motion.js?v=20c3d06a4d';
-import * as store from './store.js?v=20c3d06a4d';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=9d7fdc12f6';
+import { mountChrome, bindNewsletter } from './chrome.js?v=9d7fdc12f6';
+import { mountReview, paintNotes } from './review.js?v=9d7fdc12f6';
+import { cardHTML, bindCards, startTicker } from './card.js?v=9d7fdc12f6';
+import { openLot } from './lotmodal.js?v=9d7fdc12f6';
+import { galleryHTML, mountGallery } from './gallery.js?v=9d7fdc12f6';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES } from './buybox.js?v=9d7fdc12f6';
+import { bindBuy } from './lotactions.js?v=9d7fdc12f6';
+import { initMotion, revealOnScroll } from './motion.js?v=9d7fdc12f6';
+import * as store from './store.js?v=9d7fdc12f6';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -22,7 +22,7 @@ async function main() {
   } catch (err) {
     console.error('[mockup] could not load lots', err);
   }
-  mountChrome({ page: 'premium' });
+  mountChrome({ page: 'premium', cat: 'none', data });
   bindNewsletter();
   if (!data) {
     mountReview({ page: 'lot' });
@@ -39,8 +39,8 @@ async function main() {
 
   store.update('recent', r => [lot.lot, ...r.filter(x => x !== lot.lot)].slice(0, 12));
   document.title = `${fullName(lot)} — Lot ${lot.lot} | TheOne Vintage`;
-  $('[data-crumbs]').innerHTML = `<a href="index.html#lots">Premium</a><span aria-hidden="true">·</span>
-    <a href="index.html?cat=${encodeURIComponent(lot.genre)}#lots">${esc(lot.genre)}</a><span aria-hidden="true">·</span><span>Lot ${esc(lot.lot)}</span>`;
+  $('[data-crumbs]').innerHTML = `<a href="index.html">Home</a><span aria-hidden="true">/</span><a href="shop.html">Premium Auction</a><span aria-hidden="true">/</span>
+    <a href="shop.html?cat=${encodeURIComponent(lot.genre)}">${esc(lot.genre)}</a><span aria-hidden="true">/</span><span>Lot ${esc(lot.lot)}</span>`;
 
   const gallery = $('[data-gallery]');
   gallery.innerHTML = galleryHTML(lot);
@@ -81,7 +81,7 @@ function renderCondition() {
     ? `<div class="marks"><p class="label">Marks noted at auction</p><ul>${lot.notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul>
        <p class="t13 muted">In the auction house's own words. Ask us for detailed photos of any area.</p></div>` : '';
   $('[data-condition]').innerHTML = `
-    <div class="sec-head"><h2 class="display d30">Condition</h2><a class="text-link t13" href="how-we-grade.html">How we grade →</a></div>
+    <div class="sec-head"><h2 class="display d30">Condition</h2><a class="more-link" href="how-we-grade.html">How we grade</a></div>
     <div class="score" data-reveal data-note="Loupe 스코어카드 + Fashionphile 다섯 칸 척도. 현재 사이트에서 배경과 대비 1.11:1로 안 보이던 등급을 가장 크게. 등급 뜻은 현재 How it works 정의(결정 30)." data-ref="26쪽">
       <p class="label">TheOne scorecard</p>
       <div class="score-cells">
@@ -105,7 +105,7 @@ function renderPrice() {
   const q = encodeURIComponent(`${lot.brand} ${lot.title}`); // 외부 검색은 브랜드를 붙여야 정확하다
   const signedIn = store.get('signedIn');
   $('[data-price]').innerHTML = `
-    <div class="sec-head"><div><span class="kicker">The whole price</span><h2 class="display d30">What you'll pay, line by line</h2></div></div>
+    <div class="sec-head"><h2 class="display d30">What you'll pay, line by line</h2></div>
     <div class="price-grid" data-reveal data-note="더윈 1: 관세는 재질별로 다르고, FedEx·DHL 외곽·대형 추가금까지 전부 체크해 총액. 더윈 10: 낙찰가·관세·수수료·배송비·감정서. 금액은 조사 전 — 검토 막대 '가격 표기: 총액 예상'을 켜면 예시 요율로 채워 본다(수수료 10% = 더윈 16)." data-ref="더윈 1·6·10">
       <div class="price-card">
         <p class="label">Your US-delivered total${total ? ' · example rates' : ''}</p>
@@ -159,7 +159,7 @@ function renderDetails() {
 function renderSimilar() {
   const list = similar(data.lots, lot, 4);
   const host = $('[data-similar]');
-  host.innerHTML = `<div class="sec-head"><h2 class="display d30">Similar pieces</h2><a class="text-link t13" href="index.html?cat=${encodeURIComponent(lot.genre)}#lots">All ${esc(lot.genre.toLowerCase())}</a></div>
+  host.innerHTML = `<div class="sec-head"><h2 class="display d30">Similar pieces</h2><a class="more-link" href="shop.html?cat=${encodeURIComponent(lot.genre)}">All ${esc(lot.genre.toLowerCase())} lots</a></div>
     <div class="grid">${list.map(x => cardHTML(x, { sale: store.setting('sale') })).join('')}</div>`;
   bindCards(host, data.lots, { onOpen: openLot });
   revealOnScroll();
@@ -175,8 +175,8 @@ function renderSticky() {
     <img src="${cardImg(lot)}" alt="" width="48" height="48">
     <div class="sticky-name"><p class="label">Lot ${esc(lot.lot)}</p><p>${esc(fullName(lot))}</p></div>
     <div class="sticky-cell"><p class="label">${sale === 'B' ? 'Current bid' : 'Price'}</p><p class="num">${sale === 'B' ? usd(a.bid) : (lot.usd ? usd(lot.usd) : 'On request')}</p></div>
-    <div class="sticky-cell hide-sm"><p class="label">${sale === 'B' ? 'Ends' : 'Condition'}</p><p>${sale === 'B' ? formatEnds(a.ends) : (g ? `Rank ${esc(g.overall)}` : 'Not graded')}</p></div>
-    <button class="btn" type="button" data-sticky-cta>${sale === 'B' ? 'Place bid' : (lot.usd ? 'Inquire' : 'Ask for price')}</button>
+    <div class="sticky-cell hide-sm"><p class="label">${sale === 'B' ? 'Ends' : 'Condition'}</p><p>${sale === 'B' ? formatEnds(a.ends, store.setting('tz')) : (g ? `Rank ${esc(g.overall)}` : 'Not graded')}</p></div>
+    <button class="btn" type="button" data-sticky-cta>${sale === 'B' ? (store.get('signedIn') ? 'Place bid' : 'Register to bid') : (lot.usd ? 'Inquire' : 'Ask for price')}</button>
   </div>`;
   bar.querySelector('[data-sticky-cta]').addEventListener('click', () => {
     if (sale === 'B') { $('[data-buy]').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }

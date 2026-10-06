@@ -129,3 +129,64 @@
   .faq details p { padding-right: 0; }
   .state-table { display: block; overflow-x: auto; }
 }
+
+/* ── How it works v5 — 까사 소개 구조(의뢰처 10/6 · 결정 107). 칸은 연회색 면, 번호는 순서(5단계)에만 ── */
+.page-head .hero-actions { margin-top: var(--s2); }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s3); margin-top: var(--s4); }
+.stat { display: grid; gap: 4px; padding: var(--s4) var(--s5); border-radius: var(--r-lg); background: var(--surface); }
+.stat b { font-size: var(--fs-28); font-weight: var(--w-display); letter-spacing: var(--track-h2); line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.stat span { font-size: var(--fs-13); color: var(--muted); }
+
+.problems { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s4); margin-top: var(--s6); }
+.problem { display: grid; gap: var(--s3); align-content: start; padding: var(--s5); border-radius: var(--r-lg); background: var(--surface); }
+.problem b { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
+.problem li { display: flex; gap: 10px; padding: 5px 0; font-size: var(--fs-14); color: var(--body); }
+.problem li::before { content: "–"; color: var(--muted); flex: none; }
+.problem-note { margin-top: var(--s5); font-size: var(--fs-20); font-weight: var(--w-ui); color: var(--ink); text-wrap: balance; }
+
+.bridge { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); gap: var(--s4); align-items: stretch; margin-top: var(--s6); }
+.bridge-card { display: grid; gap: var(--s3); align-content: start; padding: var(--s5); border-radius: var(--r-lg); background: var(--surface); }
+.bridge-card.is-ours { box-shadow: inset 0 2px 0 var(--brand); }
+.bridge-card b { font-size: var(--fs-20); font-weight: var(--w-ui); color: var(--ink); }
+.bridge-card li { display: flex; gap: 10px; padding: 5px 0; font-size: var(--fs-14); color: var(--body); }
+.bridge-card li::before { content: "·"; color: var(--muted); flex: none; }
+.bridge-card.is-ours li::before { content: "✓"; color: var(--live); }
+.bridge-arrow { display: grid; place-items: center; color: var(--muted); }
+.bridge-arrow svg { width: 24px; height: 24px; }
+
+.audience { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5); margin-top: var(--s6); border-top: 1px solid var(--line); }
+.audience li { display: grid; gap: var(--s2); align-content: start; padding: var(--s4) 0 0; }
+.audience b { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
+.audience p { font-size: var(--fs-14); color: var(--body); }
+
+.services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 var(--s5); margin-top: var(--s6); border-top: 1px solid var(--line); }
+.service { display: grid; grid-template-columns: 40px 1fr; gap: var(--s3); align-items: start; padding: var(--s4) 0; border-bottom: 1px solid var(--line); }
+.service-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--r-md); background: var(--live-bg); color: var(--live); }
+.service-icon svg { width: 18px; height: 18px; }
+.service b { display: block; margin-bottom: 4px; font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
+.service p { font-size: var(--fs-14); color: var(--body); }
+
+.fees-title { margin-top: var(--s7); }
+.fees { max-width: 720px; margin-top: var(--s3); }
+.fees .label { margin-bottom: var(--s2); }
+
+.trust { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s4); margin-top: var(--s6); }
+.trust li { display: grid; gap: 6px; align-content: start; padding: var(--s4) var(--s5); border-radius: var(--r-lg); background: var(--surface); }
+.trust b { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
+.trust span { font-size: var(--fs-13); color: var(--muted); }
+
+@media (max-width: 1180px) {
+  .stats, .trust { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .problems, .audience, .services { grid-template-columns: 1fr; }
+  .bridge { grid-template-columns: 1fr; }
+  .bridge-arrow { height: 32px; }
+  .bridge-arrow svg { transform: rotate(90deg); }
+}
+@media (max-width: 720px) {
+  .stats, .trust { grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  .stat, .trust li { padding: var(--s3) var(--s4); }
+  .stat b { font-size: var(--fs-20); }
+}

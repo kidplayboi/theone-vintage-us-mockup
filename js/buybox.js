@@ -1,10 +1,10 @@
 // 상세 정보 칸 v2 — 상세 창(모달)과 상세 페이지가 같이 쓴다
 // 순서 = 상태 띠 → 브랜드·제목 → 달러(크게) → 등급표 → 문의 → 신뢰 · 도착일 → 메모 · 시세
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급표 보이게)
-import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=c986507e2b';
-import { icon } from './icons.js?v=c986507e2b';
-import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=c986507e2b';
-import * as store from './store.js?v=c986507e2b';
+import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=8eadc4b56a';
+import { icon } from './icons.js?v=8eadc4b56a';
+import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=8eadc4b56a';
+import * as store from './store.js?v=8eadc4b56a';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 
@@ -163,7 +163,7 @@ function bidBox(lot, state) {
   return `
     <div class="bid-box">
       <div class="bid-cells">
-        <div><p class="label">Current bid</p><p class="price lg">${usd(bid)}</p><p class="t13 muted">${a.bids + (state === 'outbid' ? 1 : 0)} bids</p></div>
+        <div><p class="label">Current bid</p><p class="price lg">${usd(bid)}</p><p class="t13 muted">≈ ${jpy(Math.round(bid * (lot.jpy / (lot.usd || 1))))} · ${a.bids + (state === 'outbid' ? 1 : 0)} bids</p></div>
         <div><p class="label">Ends</p><p class="bid-when">${formatEnds(ends, store.setting('tz'))}</p><p class="t13 ${hot ? 'warn' : 'muted'} num"><span data-ends="${ends.getTime()}">${countdown(ends)}</span></p></div>
       </div>
       <p class="bid-row"><span><span class="dot ${reserve[0]}"></span> ${reserve[1]}</span><span class="muted">Extended bidding</span></p>

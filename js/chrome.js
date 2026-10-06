@@ -1,8 +1,8 @@
-// 제품 공통 틀 v3 — 알림 띠 · 초록 막대(워드마크·검색·판매 방식·계정) · 흰 카테고리 줄 · 브랜드 펼침 · 서랍 · 밝은 푸터 · 모바일 아래 탭
-// 근거: Bezel 초록 막대+검색(ref-bezel-s00) · 1stDibs/Rebag/WGACA 카테고리 줄 · Bezel 밝은 4열 푸터(ref-bezel-s07)
-import { icon } from './icons.js?v=9d7fdc12f6';
-import * as store from './store.js?v=9d7fdc12f6';
-import { brandName } from './data.js?v=9d7fdc12f6';
+// 제품 공통 틀 v4 — 초록 마스트헤드(워드마크·검색·판매 방식·계정) · 흰 카테고리 줄(카테고리 8 + Brands ▾) · 브랜드 펼침 · 서랍 · 흰 푸터 · 모바일 아래 탭
+// 검은 facts 띠는 뺐다(결정 69). 근거: Bezel 마스트헤드(ref-bezel-s00) · 1stDibs/Rebag/WGACA/Fashionphile 카테고리 줄 안의 Designers 항목(결정 71)
+import { icon } from './icons.js?v=f35c47a528';
+import * as store from './store.js?v=f35c47a528';
+import { brandName } from './data.js?v=f35c47a528';
 
 // 운영 사이트 상단 메뉴 그대로(Premium Auction · Express · Classic · How It Works)
 const SALES = [
@@ -18,21 +18,20 @@ export const CATEGORIES = [
 
 const TABS = [
   ['shop', 'Shop', 'shop.html'],
-  ['auctions', 'Auctions', 'index.html#auctions'],
+  ['live', 'Live', 'index.html#live'],
   ['offers', 'My page', 'offers.html'],
   ['saved', 'Saved', 'saved.html'],
 ];
 
 const FACTS = 'Ships from Tokyo to the US in 6–10 days · Prices in USD · Duties prepaid';
-const FACTS_HTML = 'Ships from Tokyo to the US in 6–10 days<span class="hide-xs"> · Prices in USD</span> · Duties prepaid';
 
-export function mountChrome({ page = '', cat = '', data = null, ticker = null } = {}) {
+export function mountChrome({ page = '', cat = '', data = null } = {}) {
   const top = document.getElementById('top');
   top.className = 'site-top';
-  top.innerHTML = headerHTML(page, cat, data, ticker);
+  top.innerHTML = headerHTML(page, cat, data);
   document.getElementById('foot').innerHTML = footerHTML();
   const tabs = document.getElementById('tabs');
-  if (tabs) tabs.innerHTML = tabsHTML(page);
+  if (tabs) tabs.innerHTML = tabsHTML(page === 'pay' ? 'offers' : page);
   bindHeader(top);
   paintAccount();
   window.addEventListener('store:change', e => {
@@ -40,26 +39,21 @@ export function mountChrome({ page = '', cat = '', data = null, ticker = null } 
   });
 }
 
-function strip(ticker) {
-  if (!ticker || !ticker.length) return `<div class="strip"><p class="wrap strip-in">${FACTS_HTML}</p></div>`;
-  // 새 상품 띠(Bezel New Listing 티커) — 실재고 등록일 순. 두 벌 이어 붙여 끊김 없이 흐르게
-  const items = ticker.map(t => `<a href="${t.href}"><b>New listing</b><span>${t.text}</span></a>`).join('');
-  return `<div class="strip is-ticker" aria-label="New listings">
-    <div class="ticker"><div class="ticker-track">${items}${items.replace(/<a /g, '<a tabindex="-1" aria-hidden="true" ')}</div></div></div>`;
+// 브랜드 목록 — 'Others' 는 브랜드가 아니라 묶음이라 맨 뒤로
+export function brandList(data) {
+  return [...data.meta.brands.filter(b => b.name !== 'Others'), ...data.meta.brands.filter(b => b.name === 'Others')];
 }
 
 function megaHTML(data) {
   if (!data) return '';
-  // 'Others' 는 브랜드가 아니라 묶음 — 맨 뒤로
-  const brands = [...data.meta.brands.filter(b => b.name !== 'Others'), ...data.meta.brands.filter(b => b.name === 'Others')];
   return `<div class="mega" data-mega-panel hidden>
     <div class="wrap mega-in">
-      <div class="mega-head"><p class="label">Brands</p><a class="more-link" href="shop.html">All ${data.meta.total.toLocaleString('en-US')} lots ${icon.arrow}</a></div>
-      <ul class="mega-list">${brands.map(b => `<li><a href="shop.html?brand=${encodeURIComponent(b.name)}"><span>${brandName(b.name)}</span><span class="num">${b.n.toLocaleString('en-US')}</span></a></li>`).join('')}</ul>
+      <div class="mega-head"><p class="label">Brands · ${data.meta.brands.length}</p><a class="more-link" href="shop.html">All ${data.meta.total.toLocaleString('en-US')} lots ${icon.arrow}</a></div>
+      <ul class="mega-list">${brandList(data).map(b => `<li><a href="shop.html?brand=${encodeURIComponent(b.name)}"><span>${brandName(b.name)}</span><span class="num">${b.n.toLocaleString('en-US')}</span></a></li>`).join('')}</ul>
     </div></div>`;
 }
 
-function headerHTML(page, cat, data, ticker) {
+function headerHTML(page, cat, data) {
   const sales = SALES.map(([key, label, href]) =>
     `<a href="${href}" ${key === page ? 'aria-current="page"' : ''}>${label}</a>`).join('');
   const cats = [['', 'All lots'], ...CATEGORIES].map(([key, label]) => {
@@ -67,21 +61,20 @@ function headerHTML(page, cat, data, ticker) {
     return `<li><a href="shop.html${key ? `?cat=${key}` : ''}" ${on ? 'aria-current="page"' : ''}>${label}</a></li>`;
   }).join('');
   return `
-  ${strip(ticker)}
   <div class="mast on-dark">
     <div class="wrap mast-in">
       <button class="icon-btn mast-menu" type="button" aria-label="Open menu" aria-expanded="false" data-menu>${icon.menu}</button>
-      <a class="wordmark" href="index.html" aria-label="TheOne Vintage home">THEONE VINTAGE</a>
+      <a class="wordmark" href="index.html" aria-label="TheOne Vintage home" translate="no">THEONE VINTAGE</a>
       <form class="mast-search" role="search" action="shop.html" data-search>
         ${icon.search}
         <label class="visually-hidden" for="site-q">Search</label>
-        <input id="site-q" type="search" name="q" placeholder="Search brands, models, lot numbers" autocomplete="off">
+        <input id="site-q" type="search" name="q" placeholder="Search brands, models, lot numbers…" autocomplete="off" spellcheck="false">
       </form>
       <nav class="mast-nav" aria-label="Sale type">${sales}</nav>
       <div class="mast-aside">
         <button class="icon-btn mast-search-btn" type="button" aria-label="Search" aria-expanded="false" data-search-toggle>${icon.search}</button>
         <a class="mast-icon" href="saved.html" aria-label="Saved" ${page === 'saved' ? 'aria-current="page"' : ''}>${icon.heart}<span class="mast-count num" data-saved-count></span></a>
-        <a class="mast-icon hide-sm" href="offers.html" aria-label="My page" ${page === 'offers' ? 'aria-current="page"' : ''}>${icon.user}</a>
+        <a class="mast-icon hide-sm" href="offers.html" aria-label="My page" ${page === 'offers' || page === 'pay' ? 'aria-current="page"' : ''}>${icon.user}</a>
         <span class="mast-account" data-account></span>
       </div>
     </div>
@@ -99,7 +92,7 @@ function headerHTML(page, cat, data, ticker) {
   </nav>
   <div class="drawer" data-drawer hidden>
     <div class="drawer-head">
-      <span class="wordmark">THEONE VINTAGE</span>
+      <span class="wordmark" translate="no">THEONE VINTAGE</span>
       <button class="icon-btn" type="button" aria-label="Close menu" data-menu-close>${icon.close}</button>
     </div>
     <nav class="drawer-links" aria-label="Menu">
@@ -108,6 +101,7 @@ function headerHTML(page, cat, data, ticker) {
       <p class="label">Categories</p>
       <a href="shop.html">All lots</a>
       ${CATEGORIES.map(([key, label]) => `<a href="shop.html?cat=${key}">${label}</a>`).join('')}
+      ${data ? `<p class="label">Brands</p>${brandList(data).slice(0, 12).map(b => `<a href="shop.html?brand=${encodeURIComponent(b.name)}">${brandName(b.name)}</a>`).join('')}<a href="shop.html">All ${data.meta.brands.length} brands</a>` : ''}
       <p class="label">Help</p>
       <a href="how-it-works.html">How it works</a>
       <a href="how-we-grade.html">How we grade</a>
@@ -186,16 +180,16 @@ function footerHTML() {
     <div class="wrap">
       <div class="foot-top">
         <div class="foot-brand">
-          <span class="wordmark">THEONE VINTAGE</span>
-          <p>Pre-owned luxury from Japan's dealer-only auctions — inspected in Tokyo, priced in dollars, delivered to the US with duties prepaid.</p>
+          <span class="wordmark" translate="no">THEONE VINTAGE</span>
+          <p>Pre-owned luxury from Japan's dealer-only auctions — graded in Tokyo, priced in dollars, delivered to the US with duties prepaid.</p>
         </div>
         <form class="foot-news" data-news novalidate>
           <label class="foot-news-title" for="news-email">New lots, every week</label>
           <div class="foot-news-row">
-            <input class="input" id="news-email" type="email" name="email" placeholder="Email address" autocomplete="email" required>
+            <input class="input" id="news-email" type="email" name="email" placeholder="name@example.com…" autocomplete="email" spellcheck="false" required>
             <button class="btn" type="submit">Sign up</button>
           </div>
-          <p class="foot-news-msg" data-news-msg role="status"></p>
+          <p class="foot-news-msg" data-news-msg role="status" aria-live="polite"></p>
         </form>
       </div>
       <div class="foot-grid">
@@ -203,7 +197,7 @@ function footerHTML() {
           <p class="label">Shop</p>
           <ul>
             <li><a href="shop.html">All lots</a></li>
-            <li><a href="index.html#auctions">Live auctions</a></li>
+            <li><a href="index.html#live">Live now</a></li>
             <li><a href="shop.html?cat=Bag">Bags</a></li>
             <li><a href="shop.html?cat=Watch">Watches</a></li>
             <li><a href="shop.html?cat=Jewelry">Jewelry</a></li>
@@ -215,7 +209,7 @@ function footerHTML() {
             <li><a href="how-it-works.html">How it works</a></li>
             <li><a href="how-we-grade.html">How we grade</a></li>
             <li><a href="how-it-works.html#pay">Shipping &amp; duties</a></li>
-            <li class="pending" data-note="결제 수단 정책이 정해지면 연다(40쪽 질문 3 · 더윈: 경매 특성상 현금 진행 검토 중). 지금은 자리만." data-ref="33쪽">Payment</li>
+            <li><a href="pay.html" data-note="낙찰 → 청구서 → 결제 → 배송 흐름의 예시 화면(결정 78). 결제 수단·기한은 정책 확정 전 예시." data-ref="v4-lock §7">Paying for a lot</a></li>
           </ul>
         </div>
         <div>
@@ -232,12 +226,12 @@ function footerHTML() {
           <ul>
             <li><a href="how-it-works.html#why">About TheOne</a></li>
             <li class="pending" data-note="도쿄 사무실 소개 — 사진·주소 자료가 있을 때." data-ref="33쪽">Our Tokyo office</li>
-            <li class="pending" data-note="언론 자료가 있을 때만(Bezel 언론 로고 줄). 없는 로고는 넣지 않는다." data-ref="33쪽">Press</li>
+            <li class="pending" data-note="언론 자료가 있을 때만. 없는 로고는 넣지 않는다." data-ref="33쪽">Press</li>
           </ul>
         </div>
       </div>
       <div class="foot-base">
-        <p>© 2026 TheOne Biz Co., Ltd. · Inspected in Tokyo</p>
+        <p>© 2026 TheOne Biz Co., Ltd. · Graded in Tokyo</p>
         <p class="num">Exchange rate used · $1 = ¥${rate || '—'}</p>
       </div>
     </div>
@@ -253,7 +247,7 @@ export function bindNewsletter(root = document) {
     const msg = form.querySelector('[data-news-msg]');
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
     input.setAttribute('aria-invalid', String(!ok));
-    msg.textContent = ok ? 'Thanks. New lots arrive in your inbox every week.' : 'Please enter a valid email address.';
+    msg.textContent = ok ? 'Thanks. New lots arrive in your inbox every week.' : 'Enter a valid email address, like name@example.com.';
     msg.classList.toggle('is-error', !ok);
     if (ok) form.reset();
   });
@@ -271,10 +265,11 @@ export function toast(message) {
     el = document.createElement('div');
     el.className = 'toast';
     el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
     document.body.appendChild(el);
   }
   el.textContent = message;
   el.classList.add('is-on');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('is-on'), 2200);
+  toastTimer = setTimeout(() => el.classList.remove('is-on'), 2400);
 }

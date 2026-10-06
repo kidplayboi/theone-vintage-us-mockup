@@ -1,88 +1,142 @@
-// My page — 까사 마이페이지 네 칸(더윈 9): 바로 대응 필요 / 진행 중 / 결과 확정 / 낙찰 완료
-// 낙찰·확정 행은 펼치면 정산표(더윈 10): 낙찰가 · 관세 · 수수료 · 배송비 · 감정서(필요 시) = 총액
-import { usd, esc, cardImg, lotUrl, shortDate, fullName } from './data.js?v=9d7fdc12f6';
-import { startPage } from './page.js?v=9d7fdc12f6';
-import { paintNotes } from './review.js?v=9d7fdc12f6';
-import { toast } from './chrome.js?v=9d7fdc12f6';
-import { estimate } from './buybox.js?v=9d7fdc12f6';
-import * as store from './store.js?v=9d7fdc12f6';
+// My page v4 — 까사 마이페이지 네 칸(더윈 9): 할 일 / 진행 중 / 결과 확정 / 완료. 할 일 있는 칸만 amber(결정 77)
+// 낙찰·수락 행은 펼치면 정산표(더윈 10), 결제는 pay.html(결정 78). 입찰(B)과 정가·제안(A)은 칸 이름과 예시 행만 다르다
+import { usd, esc, cardImg, lotUrl, shortDate, fullName, exampleAuction, bidStep, localParts } from './data.js?v=f35c47a528';
+import { startPage } from './page.js?v=f35c47a528';
+import { paintNotes } from './review.js?v=f35c47a528';
+import { toast } from './chrome.js?v=f35c47a528';
+import { estimate, EXAMPLE_RATES } from './buybox.js?v=f35c47a528';
+import * as store from './store.js?v=f35c47a528';
 
 const CELLS = {
-  action: { label: 'Needs action', hint: 'Reply or pay', tone: 'alert' },
-  progress: { label: 'In progress', hint: 'Waiting on us', tone: 'quiet' },
-  confirmed: { label: 'Result confirmed', hint: 'Total confirmed', tone: 'navy' },
-  won: { label: 'Won', hint: 'Paid · on the way', tone: 'ok' },
+  B: {
+    action: { label: 'Needs your action', hint: 'Outbid, or an invoice to pay' },
+    progress: { label: 'Bidding now', hint: "You're the highest bidder" },
+    confirmed: { label: 'Won · to pay', hint: 'Invoice ready' },
+    won: { label: 'Shipped & done', hint: 'On the way or delivered' },
+  },
+  A: {
+    action: { label: 'Needs your action', hint: 'A reply is waiting' },
+    progress: { label: 'In progress', hint: 'Waiting on us' },
+    confirmed: { label: 'Accepted · to pay', hint: 'Total confirmed' },
+    won: { label: 'Shipped & done', hint: 'On the way or delivered' },
+  },
 };
 let data;
 let filter = '';
 const open = new Set();
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
+const bidding = () => store.setting('sale') === 'B';
+const when = d => { const p = localParts(d, store.setting('tz')); return `${p.date} · ${p.time}`; };
+const payUrl = (lot, extra = '') => `pay.html?lot=${encodeURIComponent(lot.lot)}${extra}`;
+
+// 낙찰·수락 행 — 이 브라우저에서 결제했으면 '완료' 칸으로 옮겨 간다(pay.html 이 기록)
+function wonRow(lot, amount, extra) {
+  const paid = store.get('payments')[lot.lot];
+  if (!paid) {
+    return { lot, cell: 'confirmed', badge: `Pay by ${day(2)}`, tone: 'action', mine: amount, price: amount, settle: true,
+      sub: `${bidding() ? 'Won' : 'Accepted'} ${day(-1)} · invoice ready`, action: `<a class="btn small" href="${payUrl(lot, extra)}">Pay now</a>` };
+  }
+  const done = paid.state === 'complete';
+  return { lot, cell: 'won', badge: done ? 'Delivered' : 'Paid · in escrow', tone: 'live', mine: amount, price: amount, settle: true, paid,
+    sub: done ? `Delivered · payment released` : `Paid ${shortDate(new Date(paid.at))} · inspecting and packing in Tokyo`,
+    action: `<a class="btn ghost small" href="${payUrl(lot, extra)}">Track</a>` };
+}
+
+function exampleRows() {
+  const pick = i => data.lots[i];
+  if (bidding()) {
+    const l2 = pick(2), l4 = pick(4), l17 = pick(17);
+    const a2 = exampleAuction(l2), a4 = exampleAuction(l4);
+    const high = a2.bid + bidStep(a2.bid);
+    const max = a4.bid + bidStep(a4.bid) * 2;
+    return [
+      { lot: l2, cell: 'action', badge: 'Outbid', tone: 'ending', mine: a2.bid, price: high, sub: `High bid ${usd(high)} · ends ${when(a2.ends)}`,
+        action: `<a class="btn small" href="${lotUrl(l2)}&sale=B&state=outbid">Raise bid</a>` },
+      { lot: l4, cell: 'progress', badge: 'Highest bidder', tone: 'live', mine: max, price: a4.bid, sub: `Your max ${usd(max)} · ends ${when(a4.ends)}`,
+        action: `<a class="btn ghost small" href="${lotUrl(l4)}&sale=B&state=leading">View</a>` },
+      wonRow(pick(9), pick(9).usd, ''),
+      { lot: l17, cell: 'won', badge: 'Shipped', tone: 'live', mine: l17.usd, price: l17.usd, settle: true, sub: `Arrives ${day(4)} – ${day(8)} · DHL Express`,
+        action: `<a class="btn ghost small" href="${payUrl(l17, '&state=shipped')}">Track</a>` },
+    ];
+  }
+  const off = (lot, k) => Math.round(lot.usd * k / 10) * 10;
+  const l2 = pick(2), l4 = pick(4), l9 = pick(9), l17 = pick(17);
+  return [
+    { lot: l2, cell: 'action', badge: `Counter ${usd(off(l2, 0.96))}`, tone: 'action', mine: off(l2, 0.9), price: l2.usd, sub: `Reply by ${day(2)}`,
+      action: `<a class="btn small" href="${lotUrl(l2)}&sale=A&state=counter">Reply</a>` },
+    { lot: l4, cell: 'progress', badge: 'Offer sent', tone: 'quiet', mine: off(l4, 0.88), price: l4.usd, sub: `Sent ${day(-1)}`,
+      action: `<a class="btn ghost small" href="${lotUrl(l4)}&sale=A&state=offer-sent">View</a>` },
+    wonRow(l9, off(l9, 0.93), `&sale=A&offer=${off(l9, 0.93)}`),
+    { lot: l17, cell: 'won', badge: 'Shipped', tone: 'live', mine: off(l17, 0.95), price: l17.usd, settle: true, sub: `Arrives ${day(4)} – ${day(8)} · DHL Express`,
+      action: `<a class="btn ghost small" href="${payUrl(l17, `&sale=A&offer=${off(l17, 0.95)}&state=shipped`)}">Track</a>` },
+  ];
+}
 
 function rows() {
   const mine = store.get('offers').filter(o => o.status === 'waiting').map(o => {
     const lot = data.lots.find(x => x.lot === o.lot);
-    return lot && { lot, mine: true, kind: o.type, offer: o.type === 'offer' ? o.amount : null, cell: 'progress', badge: o.type === 'offer' ? 'Offer sent' : 'Inquiry sent', sub: `Sent ${shortDate(new Date(o.at))}${o.box ? ' · rigid box' : ''}` };
+    return lot && { lot, mine: o.type === 'offer' ? o.amount : null, price: lot.usd, cell: 'progress', tone: 'quiet', badge: o.type === 'offer' ? 'Offer sent' : 'Inquiry sent',
+      sub: `Sent ${shortDate(new Date(o.at))}${o.box ? ' · rigid box' : ''}`, action: `<button class="btn ghost small" type="button" data-withdraw="${esc(lot.lot)}">Cancel</button>` };
   }).filter(Boolean);
-  if (!store.setting('examples')) return mine;
-  const pick = i => data.lots[i];
-  const ex = [
-    { lot: pick(2), offer: Math.round(pick(2).usd * 0.9 / 10) * 10, cell: 'action', badge: `Counter ${usd(Math.round(pick(2).usd * 0.96 / 10) * 10)}`, sub: `Reply by ${day(2)}` },
-    { lot: pick(4), offer: Math.round(pick(4).usd * 0.88 / 10) * 10, cell: 'progress', badge: 'Offer sent', sub: `Sent ${day(-1)}` },
-    { lot: pick(9), offer: Math.round(pick(9).usd * 0.93 / 10) * 10, cell: 'confirmed', badge: 'To pay', sub: `Accepted ${day(-1)} · pay by ${day(1)}`, settle: true },
-    { lot: pick(17), offer: Math.round(pick(17).usd * 0.95 / 10) * 10, cell: 'won', badge: 'Shipped', sub: `Arrives ${day(4)} – ${day(8)} · FedEx`, settle: true },
-  ].map(r => ({ ...r, example: true }));
-  return [...ex.filter(r => r.cell === 'action'), ...mine, ...ex.filter(r => r.cell !== 'action')];
+  const ex = store.setting('examples') ? exampleRows().map(r => ({ ...r, example: true })) : [];
+  const exIds = new Set(ex.map(r => r.lot.lot));
+  // 이 브라우저에서 pay.html 로 실제 결제한 로트 — 예시 행과 겹치지 않는 것만 '완료' 칸에
+  const paid = Object.entries(store.get('payments')).filter(([id]) => !exIds.has(id)).map(([id, p]) => {
+    const lot = data.lots.find(x => x.lot === id);
+    if (!lot) return null;
+    const done = p.state === 'complete';
+    return { lot, cell: 'won', badge: done ? 'Delivered' : 'Paid · in escrow', tone: 'live', mine: lot.usd, price: lot.usd, settle: true, paid: p,
+      sub: done ? 'Delivered · payment released' : `Paid ${shortDate(new Date(p.at))} · inspecting and packing in Tokyo`,
+      action: `<a class="btn ghost small" href="${payUrl(lot)}">Track</a>` };
+  }).filter(Boolean);
+  return [...ex.filter(r => r.cell === 'action'), ...mine, ...paid, ...ex.filter(r => r.cell !== 'action')];
 }
 
-function action(r) {
-  if (r.cell === 'action') return `<a class="btn small" href="${lotUrl(r.lot)}&state=counter">Reply</a>`;
-  if (r.cell === 'confirmed') return `<a class="btn small" href="${lotUrl(r.lot)}&state=accepted">Pay</a>`;
-  if (r.cell === 'won') return `<button class="btn ghost small" type="button" data-track>Track</button>`;
-  if (r.mine) return `<button class="btn ghost small" type="button" data-withdraw="${esc(r.lot.lot)}">Cancel</button>`;
-  return `<a class="btn ghost small" href="${lotUrl(r.lot)}">View</a>`;
-}
-
-// 정산표 — 금액은 조사 전. 검토 막대 '가격 표기: 총액 예상'이면 예시 요율로 채운다(수수료 10% = 더윈 16)
+// 정산표(더윈 10) — 낙찰가 · 수수료 10%(더윈 16) · 관세(재질별, 더윈 1) · 배송 + 단단한 상자(더윈 8) · 감정서 · 총액. 요율은 정책 확정 전 예시
 function settlement(r) {
-  const ex = store.setting('priceMode') === 'total';
-  const e = estimate({ ...r.lot, usd: r.offer || r.lot.usd }, { box: true });
-  const v = n => (ex ? usd(n) : '<span class="muted">In your quote</span>');
+  const paid = r.paid;
+  const e = estimate({ ...r.lot, usd: r.mine || r.lot.usd }, { box: paid ? paid.box : true });
+  const cert = paid && paid.cert ? 60 : 0;
+  const total = paid ? paid.total : e.total + cert;
   return `<tr class="settle-row"><td colspan="5"><div class="settle">
-    <p class="label">Settlement${ex ? ' · example rates' : ''}</p>
+    <p class="label">${paid ? 'Paid' : 'Invoice'} · example rates until policy is set</p>
     <table class="total">
-      <tr><td>Hammer price</td><td class="num">${usd(r.offer || r.lot.usd)}</td></tr>
-      <tr><td>Import duties<span>By material</span></td><td class="num">${v(e.duty)}</td></tr>
-      <tr><td>Service fee</td><td class="num">${v(e.fee)}</td></tr>
-      <tr><td>Shipping · FedEx<span>Incl. rigid box and surcharges</span></td><td class="num">${v(e.ship)}</td></tr>
-      <tr><td>Certificate of authenticity<span>If requested</span></td><td class="num"><span class="muted">—</span></td></tr>
-      <tr class="sum"><td>Total</td><td class="num">${ex ? usd(e.total) : '$ —'}</td></tr>
+      <tr><td>${bidding() ? 'Hammer price' : 'Accepted offer'}</td><td class="num">${usd(r.mine || r.lot.usd)}</td></tr>
+      <tr><td>Buyer's fee<span>10% of the hammer price</span></td><td class="num">${usd(e.fee)}</td></tr>
+      <tr><td>Import duties<span>Rate by material · ${esc(r.lot.genre.toLowerCase())}</span></td><td class="num">${usd(e.duty)}</td></tr>
+      <tr><td>Shipping · DHL Express<span>${(paid ? paid.box : true) ? `Incl. rigid box +${usd(EXAMPLE_RATES.box)}` : 'Tokyo to your door, insured'}</span></td><td class="num">${usd(e.ship)}</td></tr>
+      <tr><td>Certificate of authenticity<span>Optional</span></td><td class="num">${cert ? usd(cert) : '<span class="muted">—</span>'}</td></tr>
+      <tr class="sum"><td>Total to your door</td><td class="num">${usd(total)}</td></tr>
     </table></div></td></tr>`;
 }
 
 function render() {
+  const cells = CELLS[bidding() ? 'B' : 'A'];
   const list = rows();
-  const counts = Object.fromEntries(Object.keys(CELLS).map(k => [k, list.filter(r => r.cell === k).length]));
-  document.querySelector('[data-cells]').innerHTML = Object.entries(CELLS).map(([k, c]) => `
+  const counts = Object.fromEntries(Object.keys(cells).map(k => [k, list.filter(r => r.cell === k).length]));
+  document.querySelector('[data-cells]').innerHTML = Object.entries(cells).map(([k, c]) => `
     <button type="button" class="o-cell${k === 'action' && counts[k] ? ' is-alert' : ''}" data-filter="${k}" aria-pressed="${filter === k}">
       <span class="o-count num">${counts[k]}</span>
       <span class="o-label">${c.label}</span><span class="t13 muted">${c.hint}</span></button>`).join('');
+  document.querySelector('[data-col-mine]').textContent = bidding() ? 'Your bid' : 'Your offer';
+  document.querySelector('[data-col-price]').textContent = bidding() ? 'Current bid' : 'Price';
   const shown = filter ? list.filter(r => r.cell === filter) : list;
   const body = document.querySelector('[data-rows]');
   if (!shown.length) {
     body.innerHTML = `<tr><td colspan="5"><div class="o-empty"><p class="display d2">Nothing here yet</p>
-      <p class="muted">Inquire or make an offer on any lot and it will show here.</p>
+      <p class="muted">${bidding() ? 'Place a bid on any live lot and it will show here.' : 'Inquire or make an offer on any lot and it will show here.'}</p>
       <a class="btn ghost" href="shop.html">Browse lots</a></div></td></tr>`;
   } else {
     body.innerHTML = shown.map((r, i) => `
       <tr${r.example ? ' class="is-example"' : ''}>
         <td><a class="o-lot" href="${lotUrl(r.lot)}"><img src="${cardImg(r.lot)}" alt="" width="56" height="56" loading="lazy">
           <span><b>${esc(fullName(r.lot))}</b><span class="t13 muted">${esc(r.sub)}</span></span></a></td>
-        <td class="r o-money">${r.offer ? usd(r.offer) : (r.kind === 'inquiry' ? '—' : '—')}</td>
-        <td class="r o-money">${r.lot.usd ? usd(r.lot.usd) : 'On request'}</td>
-        <td class="r"><span class="badge ${CELLS[r.cell].tone}">${esc(r.badge)}</span>
-          ${r.settle ? `<button type="button" class="text-link t13 o-settle" data-settle="${i}" aria-expanded="${open.has(r.lot.lot)}">Settlement</button>` : ''}</td>
-        <td class="r">${action(r)}</td>
+        <td class="r o-money">${r.mine ? usd(r.mine) : '—'}</td>
+        <td class="r o-money">${r.price ? usd(r.price) : 'On request'}</td>
+        <td class="r"><span class="badge ${r.tone === 'quiet' ? '' : r.tone}">${esc(r.badge)}</span>
+          ${r.settle ? `<button type="button" class="text-link t13 o-settle" data-settle="${i}" aria-expanded="${open.has(r.lot.lot)}">${r.paid ? 'Receipt' : 'Invoice'}</button>` : ''}</td>
+        <td class="r">${r.action}</td>
       </tr>${r.settle && open.has(r.lot.lot) ? settlement(r) : ''}`).join('');
   }
   body.querySelectorAll('[data-settle]').forEach(b => b.addEventListener('click', () => {
@@ -104,11 +158,9 @@ async function main() {
     if (w) {
       store.update('offers', l => l.filter(o => !(o.lot === w.dataset.withdraw && o.status === 'waiting')));
       toast('Cancelled');
-      return;
     }
-    if (e.target.closest('[data-track]')) toast('Tracking appears here once the carrier scans the parcel');
   });
-  window.addEventListener('store:change', e => { if (['settings', 'offers', '*'].includes(e.detail.key)) render(); });
+  window.addEventListener('store:change', e => { if (['settings', 'offers', 'payments', '*'].includes(e.detail.key)) render(); });
   render();
 }
 

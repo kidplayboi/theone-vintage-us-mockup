@@ -8,13 +8,13 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230C2219'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='600' text-anchor='middle' fill='%23FFFFFF'%3ETV%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/tokens.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/base.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/chrome.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/card.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/account.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/review.css?v=9d7fdc12f6">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="css/tokens.css?v=f35c47a528">
+<link rel="stylesheet" href="css/base.css?v=f35c47a528">
+<link rel="stylesheet" href="css/chrome.css?v=f35c47a528">
+<link rel="stylesheet" href="css/card.css?v=f35c47a528">
+<link rel="stylesheet" href="css/account.css?v=f35c47a528">
+<link rel="stylesheet" href="css/review.css?v=f35c47a528">
 </head>
 <body class="has-tabs">
 <div id="review"></div>
@@ -23,18 +23,18 @@
   <div class="account-head">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>My page</span></nav>
     <h1 class="display d1">My page</h1>
-    <p class="lede">Everything that needs you comes first — replies, payments, then what's on its way.</p>
+    <p class="lede">Everything that needs you comes first — outbid notices and invoices, then what's on its way.</p>
   </div>
-  <div class="o-cells" data-cells data-note="까사 마이페이지 네 칸 그대로(더윈 9): 바로 대응 필요 / 진행 중 / 결과 확정 / 낙찰 완료. 할 일 있는 칸이 첫 자리. 칸을 누르면 그 상태만. 확정·낙찰 행의 Settlement 를 누르면 낙찰가·관세·수수료·배송비·감정서 정산표(더윈 10). 메모를 켜면 예시 행 왼쪽에 금색 줄." data-ref="더윈 9·10 · 31쪽"></div>
+  <div class="o-cells" data-cells data-note="까사 마이페이지 네 칸 그대로(더윈 9): 바로 대응 필요 / 진행 중 입찰 / 결과 확정(낙찰 · 결제 대기) / 완료. 할 일 있는 칸만 amber(결정 77), 나머지는 연회색 면. 칸을 누르면 그 상태만. 'Invoice'/'Receipt'를 누르면 낙찰가·수수료·관세·배송비·감정서 정산표(더윈 10). 'Pay now'는 결제 화면(pay.html · 결정 78). 메모를 켜면 예시 행 왼쪽에 금색 줄." data-ref="더윈 9·10 · 31쪽 · v4-lock §7"></div>
   <div class="o-table-wrap">
     <table class="rule-table o-table">
-      <thead><tr><th>Lot</th><th class="r">Your offer</th><th class="r">Price</th><th class="r">Status</th><th class="r"><span class="visually-hidden">Action</span></th></tr></thead>
+      <thead><tr><th>Lot</th><th class="r" data-col-mine>Your bid</th><th class="r" data-col-price>Current bid</th><th class="r">Status</th><th class="r"><span class="visually-hidden">Action</span></th></tr></thead>
       <tbody data-rows></tbody>
     </table>
   </div>
 </main>
 <footer id="foot"></footer>
 <div id="tabs"></div>
-<script type="module" src="js/offers.js?v=9d7fdc12f6"></script>
+<script type="module" src="js/offers.js?v=f35c47a528"></script>
 </body>
 </html>

@@ -8,15 +8,15 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230C2219'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='600' text-anchor='middle' fill='%23FFFFFF'%3ETV%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
-<link rel="stylesheet" href="css/tokens.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/base.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/chrome.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/card.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/lot.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/pages.css?v=9d7fdc12f6">
-<link rel="stylesheet" href="css/review.css?v=9d7fdc12f6">
+<link rel="stylesheet" href="css/tokens.css?v=f35c47a528">
+<link rel="stylesheet" href="css/base.css?v=f35c47a528">
+<link rel="stylesheet" href="css/chrome.css?v=f35c47a528">
+<link rel="stylesheet" href="css/card.css?v=f35c47a528">
+<link rel="stylesheet" href="css/lot.css?v=f35c47a528">
+<link rel="stylesheet" href="css/pages.css?v=f35c47a528">
+<link rel="stylesheet" href="css/review.css?v=f35c47a528">
 </head>
 <body>
 <div id="review"></div>
@@ -36,10 +36,10 @@
 </main>
 <footer id="foot"></footer>
 <script type="module">
-  import { startPage } from './js/page.js?v=9d7fdc12f6';
-  import { cardHTML, bindCards, startTicker } from './js/card.js?v=9d7fdc12f6';
-  import { openLot } from './js/lotmodal.js?v=9d7fdc12f6';
-  import { exampleAuction } from './js/data.js?v=9d7fdc12f6';
+  import { startPage } from './js/page.js?v=f35c47a528';
+  import { cardHTML, bindCards, startTicker } from './js/card.js?v=f35c47a528';
+  import { openLot } from './js/lotmodal.js?v=f35c47a528';
+  import { exampleAuction } from './js/data.js?v=f35c47a528';
 
   const data = await startPage({ page: 'states' });
   if (data) {
@@ -48,14 +48,16 @@
     const soon = [...L].filter(x => x.usd && x.until).sort((a, b) => a.until.localeCompare(b.until))[0];
     const noPrice = L.find(x => !x.usd);
     const graded = L.find(x => x.grade && x.usd) || L[0];
+    const hot = [...L].filter(x => x.usd).sort((a, b) => exampleAuction(a).ends - exampleAuction(b).ends)[0];
     const cards = [
-      [L[0], 'A', 'auto', '<b>기본</b> — 달러 먼저, 판매 조건 라벨 한 줄, 엔화는 맨 아래 작게. 마우스를 올리면 테두리가 진해지고 빠른 보기가 뜬다.'],
-      [soon, 'A', 'auto', '<b>판매 기한 임박</b> — 기한 30일 안이면 라벨이 날짜로, 7일 안이면 붉은 글씨.'],
-      [L[1], 'A', 'sold', '<b>판매 완료</b> — 바로 지우지 않고 7일 남긴다. 판매가는 로그인 손님에게만(제안값).'],
-      [noPrice, 'A', 'auto', '<b>가격 미공개</b> — 원천 가격이 0인 상품. 지금 사이트는 ¥0으로 찍힌다(결정 28).'],
-      [graded, 'A', 'auto', '<b>등급 있음</b> — 등급 배지는 사진 왼쪽 위 한 자리.'],
-      [L[1], 'B', 'auto', '<b>입찰(B)</b> — BID · ENDS IN. 1시간 안이면 붉은 글씨. 값은 예시.'],
-      [L.find(x => x.usd && exampleAuction(x).reserve === 'none') || L[6], 'B', 'auto', '<b>입찰 · 최소가 없음</b> — 초록 라벨은 사실일 때만(결정 43). 값은 예시.'],
+      [L[0], 'A', 'auto', '<b>정가(A) 기본</b> — 띠 없음(Mall 상시 판매). 브랜드 · 이름 · 달러 크게 + 엔화 작게. 카드 어디를 눌러도 상세 창.'],
+      [soon, 'A', 'auto', '<b>기한 있는 판매(A)</b> — 머리 띠에 종류 · 기한 · 남은 시간 · 진행막대. 1시간 안이면 "Ending soon" + 빨강(더윈 12).'],
+      [L[1], 'A', 'sold', '<b>판매 완료</b> — 회색 띠 "Ended · 날짜 / Sold", 사진은 흐리게. 판매가는 로그인 손님에게만.'],
+      [noPrice, 'A', 'auto', '<b>가격 미공개</b> — 원천 가격이 0인 상품. "Price on request"(결정 28).'],
+      [graded, 'A', 'auto', '<b>등급 있음</b> — 사진 왼쪽 위 흰 원 안에 등급 글자(까사 등급 배지). 없으면 "Not graded" 배지.'],
+      [L[1], 'B', 'auto', '<b>입찰(B)</b> — 띠: 마감 현지 시각 + 민트 카운트다운 + 막대. 아래: 현재가 · 입찰 수 · 리저브 배지. 북마크에 마우스를 올리면 폴더 1·2·3. 값은 예시.'],
+      [hot, 'B', 'auto', '<b>입찰 · 마감 임박</b> — 띠 글이 "Ending soon", 숫자와 막대가 빨강, 배지도 Ending soon. 값은 예시.'],
+      [L.find(x => x.usd && exampleAuction(x).reserve === 'none') || L[6], 'B', 'auto', '<b>입찰 · 최소가 없음</b> — "No reserve" 배지는 사실일 때만(결정 43). 값은 예시.'],
     ];
     const grid = document.querySelector('[data-card-states]');
     grid.innerHTML = cards.map(([lot, sale, state, cap]) => `<div>${cardHTML(lot, { sale, state })}<p class="state-cap">${cap}</p></div>`).join('');
@@ -77,6 +79,11 @@
       ['상회 입찰됨', 'Outbid · $X', '붉은 문장 + 금액 버튼 바로', "You've been outbid", link('B', 'outbid')],
       ['연장 중', 'Extended · 04:59', 'A late bid added 5 minutes', '—', link('B', 'extended')],
       ['최소가 미달 종료', 'Ended · Reserve not met', 'Make an offer to the seller', "The reserve wasn't met — you can still make an offer", link('B', 'reserve-not-met')],
+      ['낙찰 — 결제 대기', 'Sold · 회색 띠', 'You won · Pay by … · View invoice and pay → pay.html', 'You won — your invoice is ready (pay by …)', link('B', 'won')],
+      ['<b>결제 뒤(pay.html · 7상태)</b>', '', '', '', ''],
+      ['결제됨 · 에스크로', '—', '타임라인 3단계 · 영수증', 'Payment received — held until delivered', `<a href="pay.html?lot=${id}&state=paid">열기</a>`],
+      ['배송 중', '—', 'DHL · 도착 날짜 범위 · Track', 'Your lot has shipped — arrives …', `<a href="pay.html?lot=${id}&state=shipped">열기</a>`],
+      ['수령 · 신고 창', '—', "Everything's fine / Report a problem", 'Delivered — three days to report a problem', `<a href="pay.html?lot=${id}&state=delivered">열기</a>`],
     ];
     document.querySelector('[data-state-rows]').innerHTML = rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('');
   }

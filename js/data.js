@@ -3,7 +3,7 @@ let cache;
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=9d7fdc12f6').then(r => {
+    cache = fetch('data/lots.json?v=f35c47a528').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     });

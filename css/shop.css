@@ -1,20 +1,20 @@
-/* 목록 페이지 v3 — 운영 사이트 분류 전부 + Bezel 경매 목록 탭 */
+/* 목록 페이지 v4 — 운영 사이트 분류 전부(판매 방식 탭 4 · 카테고리 9 · 브랜드 40 · 정렬 · 페이지당 · 검색 · 시간대 · 쪽 번호). 모양은 Bezel 경매 목록 탭 */
 .shop { padding-bottom: var(--s9); }
 
 .shop-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s5); margin-bottom: var(--s5); }
 .shop-head .display { margin: 0; }
 .shop-count { margin-top: 6px; font-size: var(--fs-14); }
 .tz-pick { display: grid; gap: 4px; justify-items: end; }
-.tz-pick .input { width: 240px; min-height: 38px; font-size: var(--fs-12); }
+.tz-pick .input { width: 240px; min-height: 38px; font-size: var(--fs-13); }
 
 /* 판매 방식 탭(Bezel: Live 327 · Ending soon 108) */
 .kind-tabs { display: flex; gap: var(--s6); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
 .kind-tabs::-webkit-scrollbar { display: none; }
-.kind-tab { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 12px 0 14px; font-size: var(--fs-16); color: var(--muted); white-space: nowrap; transition: color .15s var(--ease); }
-.kind-tab .num { font-size: var(--fs-14); color: var(--muted); }
-.kind-tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--green); transform: scaleX(0); transition: transform .2s var(--ease); }
+.kind-tab { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 12px 0 14px; font-size: var(--fs-16); color: var(--muted); white-space: nowrap; transition: color var(--dur-fast) var(--ease-out); }
+.kind-tab .num { font-size: var(--fs-14); color: var(--muted); font-variant-numeric: tabular-nums; }
+.kind-tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--brand); transform: scaleX(0); transition: transform var(--dur) var(--ease-out); }
 .kind-tab:hover { color: var(--ink); }
-.kind-tab[aria-selected="true"] { color: var(--ink); font-weight: 500; }
+.kind-tab[aria-selected="true"] { color: var(--ink); font-weight: var(--w-ui); }
 .kind-tab[aria-selected="true"] .num { color: var(--ink); font-weight: 400; }
 .kind-tab[aria-selected="true"]::after { transform: scaleX(1); }
 
@@ -23,13 +23,13 @@
 .toolbar { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 150px; gap: var(--s2); padding-bottom: var(--s6); }
 .toolbar .search { position: relative; display: block; }
 .toolbar .search svg { position: absolute; left: 12px; top: 50%; width: 16px; height: 16px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
-.toolbar .search .input { padding-left: 36px; }
+.toolbar .search .input { padding-left: 36px; font-size: var(--fs-14); }
 
 .pagination { display: grid; justify-items: center; gap: var(--s3); margin-top: var(--s8); }
 .page-row { display: flex; align-items: center; gap: 4px; }
-.page-btn { display: inline-grid; place-items: center; min-width: 40px; height: 40px; padding: 0 8px; border-radius: var(--r-pill); font-size: var(--fs-14); color: var(--ink); transition: background-color .15s var(--ease); font-variant-numeric: tabular-nums; }
-.page-btn:hover:not([disabled]) { background: var(--canvas-2); }
-.page-btn[aria-current="page"] { background: var(--green); color: var(--on-green); }
+.page-btn { display: inline-grid; place-items: center; min-width: 40px; height: 40px; padding: 0 8px; border-radius: var(--r-pill); font-size: var(--fs-14); color: var(--ink); transition: background-color var(--dur-fast) var(--ease-out); font-variant-numeric: tabular-nums; }
+.page-btn:hover:not([disabled]) { background: var(--surface); }
+.page-btn[aria-current="page"] { background: var(--brand); color: var(--on-brand); }
 .page-btn[disabled] { opacity: .3; cursor: not-allowed; }
 .page-gap { padding: 0 4px; color: var(--muted); }
 .grid > .empty { grid-column: 1 / -1; }

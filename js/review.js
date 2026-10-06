@@ -1,5 +1,5 @@
 // 시안 도구(제품 밖) — 검토 막대 · 메모 핀. 한국어, 형 검토용(결정 39)
-import * as store from './store.js?v=9d7fdc12f6';
+import * as store from './store.js?v=f35c47a528';
 
 export const LOT_STATES = {
   A: [
@@ -17,9 +17,16 @@ export const LOT_STATES = {
     ['outbid', '상회 입찰됨'],
     ['extended', '연장 중'],
     ['reserve-not-met', '최소가 미달 종료'],
+    ['won', '낙찰 — 결제 대기'],
     ['sold', '판매 완료'],
   ],
 };
+
+// 결제 화면(pay.html)의 7상태 — v4-lock §7
+export const PAY_STATE_LABELS = [
+  ['auto', '자동(기록대로)'], ['won', '낙찰'], ['invoice', '청구서 · 결제 기한'], ['paid', '결제됨 · 에스크로'],
+  ['packed', '검수 · 포장(도쿄)'], ['shipped', '배송 중'], ['delivered', '수령 · 신고 창'], ['complete', '완료'],
+];
 
 export function mountReview({ page = '' } = {}) {
   const host = document.getElementById('review');
@@ -44,9 +51,10 @@ export function mountReview({ page = '' } = {}) {
       <button type="button" class="rv-btn" data-notes aria-pressed="${s.notes}">메모 ${s.notes ? '켜짐' : '꺼짐'}</button>
       ${page === 'lot' ? `<label class="rv-group">상태 <select data-state>${stateOptions}</select></label>
         <button type="button" class="rv-btn" data-fail aria-pressed="${s.sendFails}">보내기 실패 ${s.sendFails ? '켜짐' : '꺼짐'}</button>` : ''}
-      ${page === 'offers' || page === 'saved' ? `<button type="button" class="rv-btn" data-examples aria-pressed="${s.examples}">예시 데이터 ${s.examples ? '켜짐' : '꺼짐'}</button>` : ''}
-            <a class="rv-btn" href="states.html">상태 모음</a>
-      <a class="rv-btn" href="https://github.com/kidplayboi/theone-vintage-us-mockup/blob/main/docs/design/refs/2026-10-06-v3-lock.md" target="_blank" rel="noopener">결정 원장</a>
+      ${page === 'offers' || page === 'saved' || page === 'home' ? `<button type="button" class="rv-btn" data-examples aria-pressed="${s.examples}">예시 데이터 ${s.examples ? '켜짐' : '꺼짐'}</button>` : ''}
+      ${page === 'pay' ? `<label class="rv-group">결제 상태 <select data-pay-state>${PAY_STATE_LABELS.map(([v, label]) => `<option value="${v}" ${s.payState === v ? 'selected' : ''}>${label}</option>`).join('')}</select></label>` : ''}
+      <a class="rv-btn" href="states.html">상태 모음</a>
+      <a class="rv-btn" href="https://github.com/kidplayboi/theone-vintage-us-mockup/blob/main/docs/design/refs/2026-10-06-v4-lock.md" target="_blank" rel="noopener">결정 원장</a>
     </div>`;
 
   host.querySelectorAll('[data-sale]').forEach(b => b.addEventListener('click', () => {
@@ -68,6 +76,8 @@ export function mountReview({ page = '' } = {}) {
   if (fail) fail.addEventListener('click', () => { store.setSetting('sendFails', !store.setting('sendFails')); mountReview({ page }); });
   const examples = host.querySelector('[data-examples]');
   if (examples) examples.addEventListener('click', () => { store.setSetting('examples', !store.setting('examples')); mountReview({ page }); });
+  const payState = host.querySelector('[data-pay-state]');
+  if (payState) payState.addEventListener('change', () => store.setSetting('payState', payState.value));
 }
 
 // 메모 핀 — [data-note] 를 가진 요소 왼쪽 위에 번호를 단다

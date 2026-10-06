@@ -1,89 +1,126 @@
-/* 로트 카드 v3 — Bezel 상품 칸(타일 모서리 14 · 브랜드 대문자 · 이름 · 가격) + WGACA 누끼 타일 */
-.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6) var(--s5); }
+/* 로트 카드 v4 — 까사 정보 구조의 정돈판(결정 72 · v4-lock §6)
+   띠(마감 · 카운트다운 · 남은 시간 막대) → 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 배지 1
+   테두리 없음 — 사진 타일의 배경색이 카드의 전부(규칙 A5·A7). 모바일은 띠 대신 가격 줄의 카운트다운 알약(BaT · 결정 79) */
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s7) var(--s5); }
 
 .card { position: relative; display: flex; flex-direction: column; min-width: 0; }
 
-.card-media { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: var(--r-lg); background: var(--tile); }
-.card-media img { width: 100%; height: 100%; object-fit: contain; padding: 8%; mix-blend-mode: multiply; transition: transform .5s var(--ease); }
-.card:hover .card-media img { transform: scale(1.04); }
+/* 띠 — 카드 머리 32px. 숫자는 늘 흰색, 상태는 띠 색으로: 초록(진행) → 빨강(1시간 안 · 더윈 12 · 형 10/6 "띠 색을 바꾸자") → 회색(끝남) */
+.card-band {
+  position: relative; display: flex; justify-content: space-between; align-items: center; gap: var(--s2);
+  min-height: 32px; padding: 0 var(--s3) 2px;
+  border-radius: var(--r-lg) var(--r-lg) 0 0; background: var(--brand); color: var(--on-brand-2);
+  font-size: var(--fs-12); letter-spacing: var(--track-small); white-space: nowrap; overflow: hidden;
+  transition: background-color var(--dur) var(--ease-out);
+}
+.card-band-l { overflow: hidden; text-overflow: ellipsis; }
+.card-band b { flex: none; font-size: var(--fs-14); font-weight: var(--w-ui); color: var(--on-brand); font-variant-numeric: tabular-nums; }
+.card-band.is-hot { background: var(--ending); color: rgba(255, 255, 255, .82); }
+.card-band.is-done { background: #6B716D; color: #E7E9E7; }
+.card-band.is-done b { font-weight: 400; }
+.card-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255, 255, 255, .18); }
+.card-bar i { display: block; height: 100%; width: var(--p, 0%); background: var(--on-brand); transition: width 1s linear; }
 
-/* 사진 위 알약 — 경매(Bezel "⚡ Auction") · 1시간 안 빨강 · 판매 완료 */
-.card-pill {
+/* 사진 타일 */
+.card-media { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: var(--r-lg); background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); }
+.card.has-band .card-media { border-radius: 0 0 var(--r-lg) var(--r-lg); }
+.card-media img { width: 100%; height: 100%; object-fit: contain; padding: 8%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out); }
+.card:hover .card-media img { transform: scale(1.03); }
+.card.is-sold .card-media img { opacity: .45; }
+
+/* 등급 원(까사 B) — 사진 왼쪽 위 */
+.card-grade {
   position: absolute; top: var(--s3); left: var(--s3); z-index: 2;
-  display: inline-flex; align-items: center; gap: 4px; min-height: 26px; padding: 0 10px 0 8px;
-  border-radius: var(--r-pill); background: var(--green); color: var(--on-green);
-  font-size: var(--fs-12); font-weight: 500; transition: background-color .3s var(--ease);
-}
-.card-pill svg { width: 12px; height: 12px; color: var(--mint); }
-.card-pill.is-hot { background: var(--ending); }
-.card-pill.is-hot svg { color: #FFD5CF; }
-.card-pill.is-done { background: #5D635F; padding-left: 10px; }
-.card-rank {
-  position: absolute; left: var(--s3); bottom: var(--s3); z-index: 2;
-  display: inline-flex; align-items: center; min-height: 22px; padding: 0 8px; border-radius: var(--r-sm);
-  background: rgba(255, 255, 255, .92); color: var(--ink); font-size: var(--fs-12); font-weight: 500;
-  box-shadow: 0 0 0 1px rgba(17, 20, 18, .06);
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--canvas); color: var(--ink); font-size: var(--fs-13); font-weight: var(--w-ui);
+  box-shadow: 0 0 0 1px rgba(17, 20, 18, .08);
 }
 
+/* 북마크 → 폴더 1·2·3(까사 폴더 행을 hover 팝으로) */
+.card-save-wrap { position: absolute; top: var(--s2); right: var(--s2); z-index: 3; display: grid; justify-items: end; gap: 4px; }
 .card-save {
-  position: absolute; top: var(--s2); right: var(--s2); z-index: 3;
   display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--r-pill);
-  background: rgba(255, 255, 255, .86); color: var(--ink);
-  transition: transform .1s var(--ease), background-color .15s var(--ease);
+  background: rgba(255, 255, 255, .88); color: var(--ink);
+  transition: transform var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
 .card-save:hover { background: var(--canvas); }
 .card-save svg { width: 18px; height: 18px; }
 .card-save[aria-pressed="true"] { color: var(--ending); }
-.card-save:active { transform: scale(.9); }
-
-.card-body { display: flex; flex-direction: column; gap: 3px; padding-top: var(--s3); flex: 1; min-width: 0; }
-.card-title { font-size: var(--fs-14); font-weight: 400; line-height: 1.4; color: var(--ink); }
-.card-title a {
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-  min-height: calc(var(--fs-14) * 1.4 * 2);
+.card-save:active { transform: scale(.92); }
+.card-folders { display: flex; gap: 4px; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.card-folders button {
+  width: 28px; height: 28px; border-radius: var(--r-pill); background: rgba(255, 255, 255, .92); color: var(--ink);
+  font-size: var(--fs-12); font-weight: var(--w-ui); box-shadow: 0 0 0 1px rgba(17, 20, 18, .08);
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
-.card-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.card-folders button:hover { background: var(--ink); color: var(--canvas); }
+.card-folders button[aria-pressed="true"] { background: var(--brand); color: var(--on-brand); }
+@media (hover: hover) and (pointer: fine) {
+  .card-save-wrap:hover .card-folders, .card-save-wrap:focus-within .card-folders { opacity: 1; transform: none; pointer-events: auto; }
+}
+
+/* 시세 비교 — hover 에만(까사 '국내시세' → 미국 시세 비교, 더윈 2) */
+.card-compare {
+  position: absolute; right: var(--s3); bottom: var(--s3); z-index: 3;
+  display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 12px;
+  border-radius: var(--r-pill); background: rgba(255, 255, 255, .92); color: var(--ink);
+  font-size: var(--fs-12); font-weight: var(--w-ui); white-space: nowrap;
+  opacity: 0; transform: translateY(4px);
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+}
+.card-compare svg { width: 14px; height: 14px; }
+.card-compare:hover { background: var(--canvas); }
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .card-compare, .card:focus-within .card-compare { opacity: 1; transform: none; }
+}
+@media (hover: none) { .card-compare { display: none; } }
+
+/* 글 3줄 + 배지 */
+/* 트랙을 카드 폭으로 묶고 자식의 자동 최소폭을 0으로 — nowrap 제목이 카드 밖으로 밀고 나가지 않게(10/6 390·768 실측) */
+.card-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; padding: var(--s3) 2px 0; flex: 1; min-width: 0; }
+.card-body > * { min-width: 0; }
+.card-brand { font-size: var(--fs-13); font-weight: var(--w-ui); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-title { font-size: var(--fs-14); font-weight: 400; line-height: 1.4; color: var(--body); }
+.card-title a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: var(--r-lg); }
 .card:hover .card-title a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--line-2); }
-.card-meta { font-size: var(--fs-12); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-price { display: flex; align-items: baseline; gap: var(--s2); margin-top: 6px; min-width: 0; }
+.card-price .price { font-size: var(--fs-20); font-weight: var(--w-ui); letter-spacing: var(--track-h2); color: var(--ink); white-space: nowrap; }
+.card-price .price.ask { font-size: var(--fs-16); font-weight: 400; color: var(--muted); }
+.card-sub { font-size: var(--fs-12); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-left { display: none; }
+.card-status { margin-top: 6px; }
 
-.card-buy { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2); margin-top: var(--s2); }
-.card-buy .price { font-size: var(--fs-16); }
-.card-buy .price.ask { color: var(--muted); font-weight: 400; font-size: var(--fs-14); }
-.card-bid { display: grid; grid-template-columns: 1fr auto; gap: var(--s2); margin-top: var(--s2); }
-.card-bid > div { display: grid; gap: 1px; }
-.card-bid .r { text-align: right; }
-.card-bid .label { font-size: 10px; }
-.card-bid b { font-size: var(--fs-16); font-weight: 500; color: var(--ink); }
-.card-bid b.warn { color: var(--ending); }
-.card-when { font-size: var(--fs-12); color: var(--muted); }
-.card-when .warn { color: var(--ending); }
-
-.card.is-sold .card-media img { opacity: .45; }
-
-/* 초록 띠 위(경매 띠) — Bezel Auctions 카드 */
-.on-dark .card-media { background: #F1F1EE; }
-.on-dark .card-title, .on-dark .card-bid b, .on-dark .card-buy .price { color: var(--on-green); }
-.on-dark .card-meta, .on-dark .card-when, .on-dark .brand-label, .on-dark .card-bid .label { color: var(--on-green-2); }
-.on-dark .card-bid { padding: 10px 12px; margin-top: var(--s3); border-radius: var(--r-md); background: var(--green-2); }
-.on-dark .card-bid b.num { color: var(--mint); }
-.on-dark .card-bid b.warn { color: var(--ending-on-green); }
+/* 초록 띠 위(홈 Live now) — 카드 띠는 한 단 밝은 초록, 급박하면 똑같이 빨강 */
+.on-dark .card-band { background: var(--brand-2); }
+.on-dark .card-band.is-hot { background: var(--ending); }
+.on-dark .card-band.is-done { background: #6B716D; }
+.on-dark .card-media { background: #F1F1EE; box-shadow: none; }
+.on-dark .card-brand, .on-dark .card-price .price { color: var(--on-brand); }
+.on-dark .card-title, .on-dark .card-sub { color: var(--on-brand-2); }
 .on-dark .card:hover .card-title a { text-decoration-color: rgba(255, 255, 255, .4); }
 
 @media (max-width: 1180px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 720px) {
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s5) var(--s3); }
-  .card-media { border-radius: 10px; }
-  .card-pill { top: var(--s2); left: var(--s2); min-height: 22px; font-size: 11px; padding: 0 8px 0 6px; }
-  .card-rank { left: var(--s2); bottom: var(--s2); }
-  .card-save { top: 4px; right: 4px; width: 32px; height: 32px; }
-  .card-title { font-size: 13px; }
-  .card-title a { min-height: calc(13px * 1.4 * 2); }
-  .card-meta { display: none; }
-  .card-buy { flex-direction: column; gap: 0; }
-  .card-bid { grid-template-columns: 1fr; gap: 2px; }
-  .card-bid .r { text-align: left; }
-  .card-when { display: none; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s6) var(--s3); }
+  /* 띠 대신 한 줄 알약(BaT "Bid $137,500 | ⏱ 15:10:43") */
+  .card-band { display: none; }
+  .card.has-band .card-media { border-radius: var(--r-lg); }
+  .card-grade { top: var(--s2); left: var(--s2); width: 26px; height: 26px; font-size: var(--fs-12); }
+  .card-save-wrap { top: 4px; right: 4px; }
+  .card-save { width: 32px; height: 32px; }
+  .card-title { font-size: var(--fs-13); }
+  .card-price { flex-wrap: wrap; gap: 4px var(--s2); }
+  .card-price .price { font-size: var(--fs-16); }
+  .card-sub { display: none; }
+  .card-left {
+    display: inline-flex; align-items: center; gap: 4px; min-height: 22px; padding: 0 8px; border-radius: var(--r-pill);
+    background: var(--brand); color: var(--on-brand); font-size: var(--fs-12); font-weight: var(--w-ui); font-variant-numeric: tabular-nums;
+  }
+  .card-left.warn { background: var(--ending); color: var(--on-brand); }
+  .on-dark .card-left { background: var(--brand-2); }
+  .on-dark .card-left.warn { background: var(--ending); }
 }
 
 /* 등장 뒤에는 마우스 반응을 빠르게 */
-.reveal-on .card[data-reveal].is-in { transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.reveal-on .card[data-reveal].is-in { transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }

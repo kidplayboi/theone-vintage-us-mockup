@@ -1,148 +1,186 @@
-/* 홈 v3 — Bezel 홈 순서 · 구획마다 바탕을 바꿔 구분(흰 / 연한 / 초록) */
+/* 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드 한 구획) → How it works → Ending soon 표
+   구획은 여백으로 구분, 상자 없음. 근거 = v4-lock §5 */
 
-/* ── 히어로: 초록 위 사실 문장 + 실재고 누끼(Bezel) ── */
-.hero { background: var(--green); color: var(--on-green); overflow: hidden; }
-.hero-in { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: var(--s7); align-items: center; min-height: 540px; padding-top: var(--s8); padding-bottom: var(--s8); }
-.hero-copy { display: grid; gap: var(--s4); justify-items: start; }
-.hero-copy .kicker { margin: 0; }
-.hero-copy .display { max-width: 18ch; }
-.hero-copy .lede { max-width: 46ch; color: var(--on-green-2); }
-.hero-actions { display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s2); }
-.hero-facts { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); margin-top: var(--s3); font-size: var(--fs-14); color: var(--on-green-2); }
+/* ── 1 히어로 — 한 문장 + 사실 1줄 + 버튼 2 / 컷아웃 무대(Loupe · Bezel) ── */
+.hero { padding: var(--s8) 0 var(--s7); }
+.hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--s7); align-items: center; }
+.hero-copy { display: grid; gap: var(--s5); justify-items: start; }
+.hero-copy .display { max-width: 17ch; }
+.hero-copy .lede { max-width: 44ch; }
+.hero-actions { display: flex; gap: var(--s2); flex-wrap: wrap; }
+.hero-facts { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); font-size: var(--fs-14); color: var(--muted); }
 .hero-facts li { display: inline-flex; align-items: center; gap: 8px; }
-.hero-facts .dot { background: var(--mint); }
 
-.hero-stage { position: relative; align-self: stretch; min-height: 440px; }
-.hero-pics { position: absolute; inset: 0 0 72px; }
+.hero-stage { position: relative; min-height: 480px; border-radius: var(--r-lg); background: var(--tile); overflow: hidden; }
+.hero-pics { position: absolute; inset: var(--s6) var(--s6) 104px; }
 .hero-pic {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
-  opacity: 0; transform: scale(.97); transition: opacity .8s var(--ease), transform 1.2s var(--ease);
-  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .35));
+  opacity: 0; transform: scale(.98); transition: opacity .7s var(--ease-out), transform 1s var(--ease-out);
+  mix-blend-mode: multiply; filter: drop-shadow(0 24px 24px rgba(17, 20, 18, .14));
 }
 .hero-pic.is-on { opacity: 1; transform: none; }
+/* 꼬리표 — 무대 안 흰 카드. 그 로트로 간다 */
 .hero-tag {
-  position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  position: absolute; left: var(--s4); right: var(--s4); bottom: var(--s4);
   display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: var(--s4);
-  width: min(460px, 100%); padding: 12px 14px 12px 18px;
-  border-radius: var(--r-lg); background: var(--green-2); border: 1px solid var(--line-on-green);
-  transition: background-color .2s var(--ease), border-color .2s var(--ease);
+  padding: 12px 12px 12px 16px;
+  border-radius: calc(var(--r-lg) - 4px); background: var(--canvas); color: var(--ink); box-shadow: var(--shadow-pop);
+  transition: transform var(--dur-fast) var(--ease-out);
 }
-.hero-tag:hover { background: #1E4536; border-color: rgba(255, 255, 255, .24); }
-.hero-tag-name { display: grid; min-width: 0; }
-.hero-tag-name .brand-label { color: var(--on-green-2); }
-.hero-tag-name b { font-weight: 500; color: var(--on-green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hero-tag:hover { transform: translateY(-1px); }
+.hero-tag-name { display: grid; min-width: 0; gap: 1px; }
+.hero-tag-name b { font-weight: var(--w-ui); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: var(--fs-14); }
 .hero-tag-cells { display: flex; gap: var(--s4); }
-.hero-tag-cells > span { display: grid; }
-.hero-tag-cells .label { font-size: 10px; }
-.hero-tag-cells b { font-weight: 500; color: var(--on-green); }
-.hero-tag-cells b[data-ends] { color: var(--mint); }
-.hero-tag-cells b.warn { color: var(--ending-on-green); }
-.hero-tag-go { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--r-pill); background: var(--on-green); color: var(--green); }
+.hero-tag-cells > span { display: grid; gap: 1px; }
+.hero-tag-cells b { font-weight: var(--w-ui); color: var(--ink); font-size: var(--fs-16); }
+.hero-tag-cells b[data-ends] { color: var(--live); }
+.hero-tag-cells b.warn { color: var(--ending); }
+.hero-tag-go { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--r-pill); background: var(--brand); color: var(--on-brand); }
 .hero-tag-go svg { width: 16px; height: 16px; }
-.hero-dots { position: absolute; right: 0; top: 0; display: flex; gap: 6px; }
-.hero-dots button { width: 22px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .25); transition: background-color .2s var(--ease), width .2s var(--ease); }
+.hero-dots { position: absolute; right: var(--s4); top: var(--s4); display: flex; gap: 6px; }
+.hero-dots button { width: 22px; height: 3px; border-radius: 2px; background: var(--line-2); transition: background-color var(--dur) var(--ease-out), width var(--dur) var(--ease-out); }
 .hero-dots button::before { content: ""; display: block; height: 24px; margin-top: -10px; }
-.hero-dots button[aria-pressed="true"] { width: 36px; background: var(--on-green); }
+.hero-dots button[aria-pressed="true"] { width: 36px; background: var(--ink); }
 
-/* ── 카테고리 타일 ── */
+/* ── 2 Live now — 초록 띠(브랜드색 자리 ②). 왼쪽 흰 카드(Phillips) + 카드 3장(까사 구조) ── */
+.live { background: var(--brand); color: var(--on-brand); padding: var(--s8) 0; }
+.live-in { display: grid; grid-template-columns: 296px minmax(0, 1fr); gap: var(--s6); align-items: start; }
+.live-card { display: grid; gap: var(--s3); align-content: start; padding: var(--s5); border-radius: var(--r-lg); background: var(--canvas); color: var(--body); }
+.live-now { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-13); font-weight: var(--w-ui); color: var(--live); }
+.live-now .dot { background: var(--live); }
+/* 흰 카드 안은 흰 바탕 규칙으로 되돌린다(.on-dark 상속 끊기) */
+.live-card .display { color: var(--ink); }
+.live-card .muted, .live-card .label { color: var(--muted); }
+.live-card p.muted { font-size: var(--fs-14); }
+.live-card .num b { color: var(--ink); font-weight: var(--w-ui); }
+.live-next { display: grid; gap: 2px; padding: var(--s3) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.live-next b { font-size: var(--fs-28); font-weight: var(--w-ui); letter-spacing: var(--track-h2); color: var(--live); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.live-next b.warn { color: var(--ending); }
+.live-tz { display: grid; gap: 4px; }
+.live-tz .input { min-height: 38px; font-size: var(--fs-13); }
+.live-card .btn { width: 100%; }
+.live-card .more-link { justify-self: start; color: var(--ink); }
+.live-card .more-link:hover { color: var(--ink); }
+.live-card :focus-visible { outline-color: var(--brand); }
+.rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5); }
+.rail .empty { grid-column: 1 / -1; color: var(--on-brand-2); }
+.rail .empty .display { color: var(--on-brand); }
+
+/* ── 3 Browse — 카테고리 타일 6 + 같은 구획 아래 브랜드 행(결정 71) ── */
 .cat-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s4); }
 .cat-tile { display: grid; gap: 2px; align-content: start; }
-.cat-photo { display: block; aspect-ratio: 1 / 1; margin-bottom: var(--s2); border-radius: var(--r-lg); overflow: hidden; background: var(--tile); }
-.cat-photo img { width: 100%; height: 100%; object-fit: contain; padding: 12%; mix-blend-mode: multiply; transition: transform .5s var(--ease); }
-.cat-tile:hover .cat-photo img { transform: scale(1.05); }
-.cat-name { font-size: var(--fs-16); font-weight: 500; color: var(--ink); }
+.cat-photo { display: block; aspect-ratio: 1 / 1; margin-bottom: var(--s2); border-radius: var(--r-lg); overflow: hidden; background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); }
+.cat-photo img { width: 100%; height: 100%; object-fit: contain; padding: 12%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out); }
+.cat-tile:hover .cat-photo img { transform: scale(1.04); }
+.cat-name { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
 .cat-tile:hover .cat-name { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.cat-n { font-size: var(--fs-12); color: var(--muted); }
-.cat-tile.is-list { align-content: stretch; grid-template-rows: auto 1fr; padding: var(--s4); border-radius: var(--r-lg); border: 1px solid var(--line); }
-.cat-tile.is-list ul { display: grid; align-content: end; }
-.cat-tile.is-list a { display: flex; justify-content: space-between; padding: 7px 0; border-top: 1px solid var(--line); font-size: var(--fs-14); color: var(--ink); }
-.cat-tile.is-list a .num { color: var(--muted); }
-.cat-tile.is-list a:hover span:first-child { text-decoration: underline; text-underline-offset: 3px; }
+.cat-n { font-size: var(--fs-13); color: var(--muted); font-variant-numeric: tabular-nums; }
+/* 여섯째 타일 = 나머지 카테고리 목록(Variety · Tableware · Coin) — 스냅숏에 그 사진이 없어서 글로. 운영 분류는 전부 남긴다 */
+.cat-tile.is-list { display: grid; min-width: 0; }
+.cat-list { display: grid; align-content: center; gap: 2px; min-width: 0; aspect-ratio: 1 / 1; margin-bottom: var(--s2); padding: var(--s4); border-radius: var(--r-lg); background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); }
+.cat-list a { display: flex; justify-content: space-between; gap: var(--s2); min-width: 0; padding: 7px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-14); color: var(--ink); }
+.cat-list a span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cat-list a:last-child { border-bottom: 0; }
+.cat-list a:hover span:first-child { text-decoration: underline; text-underline-offset: 3px; }
+.cat-list .num { color: var(--muted); font-size: var(--fs-13); font-variant-numeric: tabular-nums; }
+/* 브랜드 행 — 워드마크 로고 타일 8(Bezel 'Shop by Brand' · WGACA 디자이너 행). 로고는 잉크색 한 벌로(mask), 타일은 연회색 */
+.brand-row { margin-top: var(--s6); padding-top: var(--s5); border-top: 1px solid var(--line); }
+.brand-row-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); margin-bottom: var(--s4); }
+.brand-row-head .label { font-size: var(--fs-13); color: var(--ink); }
+.brand-logos { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--s3); }
+.brand-logo { display: grid; gap: 6px; justify-items: center; min-width: 0; }
+.brand-mark {
+  display: grid; place-items: center; width: 100%; aspect-ratio: 3 / 2; padding: 0 14%;
+  border-radius: var(--r-lg); background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.brand-mark i {
+  display: block; width: 100%; height: 36%;
+  background: var(--ink);
+  -webkit-mask-position: center; -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat;
+  mask-position: center; mask-size: contain; mask-repeat: no-repeat;
+}
+.brand-text { font-size: var(--fs-14); font-weight: var(--w-ui); letter-spacing: .08em; color: var(--ink); text-align: center; }
+.brand-logo:hover .brand-mark { background: #ECEBE7; }
+.brand-logo .cat-n { font-size: var(--fs-12); }
 
-/* ── 경매 띠(Bezel Auctions) ── */
-.auctions .sec-head { margin-bottom: var(--s6); }
-.auctions .grid, .rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s5); }
-.rail .empty { grid-column: 1 / -1; }
-.rail .empty .display { color: var(--on-green); }
-.how3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5); margin-top: var(--s8); padding-top: var(--s6); border-top: 1px solid var(--line-on-green); }
-.how3 li { display: grid; grid-template-columns: auto 1fr; gap: var(--s3); padding-right: var(--s5); }
-.how3 li + li { padding-left: var(--s5); border-left: 1px solid var(--line-on-green); }
-.how-n { font-size: var(--fs-16); font-weight: 500; color: var(--on-green-2); font-variant-numeric: tabular-nums; }
-.how3 b { display: block; margin-bottom: 6px; font-size: var(--fs-16); font-weight: 500; color: var(--on-green); }
-.how3 p { font-size: var(--fs-14); color: var(--on-green-2); }
+/* ── 4 How it works — 3단계(실제 순서라 번호 허용) + 사실 줄 + 사진 2장(힉스필드 raw_1·raw_2) ── */
+.how-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s7); align-items: start; }
+.how-steps { display: grid; }
+.how-steps li { display: grid; grid-template-columns: 32px 1fr; gap: var(--s4); padding: var(--s4) 0; border-top: 1px solid var(--line); }
+.how-steps li:last-child { border-bottom: 1px solid var(--line); }
+.how-n { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.5; }
+.how-steps b { display: block; margin-bottom: 4px; font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
+.how-steps p { font-size: var(--fs-14); color: var(--body); max-width: 48ch; }
+.how-facts { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); margin-top: var(--s5); }
+.how-more { margin-top: var(--s5); }
+.how-pics { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+.how-pic { display: grid; gap: var(--s2); }
+.how-pic span { display: block; aspect-ratio: 4 / 5; border-radius: var(--r-lg); overflow: hidden; background: var(--tile); }
+.how-pic img { width: 100%; height: 100%; object-fit: cover; outline: 1px solid rgba(0, 0, 0, .1); outline-offset: -1px; }
+.how-pic figcaption { font-size: var(--fs-13); color: var(--muted); }
 
-/* ── 이번 주 로트(Bezel For you 탭) ── */
-.pick-tabs { display: flex; gap: var(--s5); margin-bottom: var(--s5); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
-.pick-tabs::-webkit-scrollbar { display: none; }
-.pick-tab { position: relative; padding: 10px 2px 12px; font-size: var(--fs-16); color: var(--muted); white-space: nowrap; transition: color .15s var(--ease); }
-.pick-tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--green); transform: scaleX(0); transition: transform .2s var(--ease); }
-.pick-tab:hover { color: var(--ink); }
-.pick-tab[aria-selected="true"] { color: var(--ink); }
-.pick-tab[aria-selected="true"]::after { transform: scaleX(1); }
-.picks-more { display: flex; justify-content: center; margin-top: var(--s7); }
-
-/* ── 신뢰 모듈(Bezel) ── */
-.trust-in { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); }
-.trust-card { display: grid; gap: var(--s4); align-content: start; padding: var(--s6); border-radius: var(--r-lg); background: var(--canvas); border: 1px solid var(--line); }
-.trust-card.ask { align-content: space-between; }
-.trust-card.ask > div { display: grid; gap: var(--s4); }
-.ticks { display: flex; flex-wrap: wrap; gap: var(--s2); }
-
-/* ── 브랜드 타일 ── */
-.brand-tiles { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--s3); }
-.brand-tile { display: grid; justify-items: center; gap: 2px; padding: var(--s4) var(--s3) var(--s4); border-radius: var(--r-lg); border: 1px solid var(--line); text-align: center; transition: border-color .15s var(--ease); }
-.brand-tile:hover { border-color: var(--ink); }
-.brand-photo { display: block; width: 72px; height: 72px; margin-bottom: var(--s2); }
-.brand-photo img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
-.brand-name { font-size: var(--fs-14); font-weight: 500; color: var(--ink); }
-
-/* ── 판매 기록(회원) ── */
-.sold-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: var(--s8); align-items: center; }
-.sold-text { display: grid; gap: var(--s4); justify-items: start; }
-.sold-text .display { margin: 0; }
-.sold-table { padding: var(--s5) var(--s6); border-radius: var(--r-lg); background: var(--canvas); border: 1px solid var(--line); }
-.blur { filter: blur(5px); user-select: none; }
-
-/* ── Why(Bezel) ── */
-.why-title { max-width: 22ch; margin-bottom: var(--s7); color: var(--green-ink); }
-.why-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5); }
-.why-card { display: grid; gap: var(--s3); align-content: start; padding: var(--s6); border-radius: var(--r-lg); border: 1px solid var(--line); }
-.why-icon { display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: var(--s6); border-radius: var(--r-pill); background: var(--canvas-2); color: var(--ink); }
-.why-icon svg { width: 22px; height: 22px; }
-.why-card p { color: var(--muted); }
+/* ── 5 Ending soon — 표(BaT "Latest bids"). 카드 반복 없이 긴급함(결정 84) ── */
+.ending-table tr { cursor: pointer; transition: background-color var(--dur-fast) var(--ease-out); }
+.ending-table tr:hover { background: var(--surface); }
+.ending-table td { padding: 10px var(--s3); border-bottom: 1px solid var(--line); vertical-align: middle; font-size: var(--fs-14); color: var(--ink); }
+.ending-table td:first-child { padding-left: 0; }
+.ending-table td:last-child { padding-right: 0; }
+.et-lot { display: flex; align-items: center; gap: var(--s3); min-width: 0; }
+.et-lot img { width: 48px; height: 48px; flex: none; object-fit: contain; border-radius: var(--r-md); background: var(--tile); mix-blend-mode: multiply; padding: 4px; }
+.et-lot span { display: grid; min-width: 0; }
+.et-lot b { font-weight: var(--w-ui); color: var(--ink); font-size: var(--fs-13); }
+.et-lot i { font-style: normal; color: var(--body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.et-bid { text-align: right; white-space: nowrap; font-weight: var(--w-ui); font-variant-numeric: tabular-nums; }
+.et-bid span { display: block; font-size: var(--fs-12); color: var(--muted); font-weight: 400; }
+.et-ends { text-align: right; white-space: nowrap; width: 140px; color: var(--live); font-weight: var(--w-ui); }
+.et-ends .warn { color: var(--ending); }
+.et-ends span { display: block; font-size: var(--fs-12); color: var(--muted); font-weight: 400; }
+.et-go { width: 32px; text-align: right; color: var(--muted); }
+.et-go svg { width: 16px; height: 16px; }
 
 @media (max-width: 1180px) {
+  .live-in { grid-template-columns: 1fr; }
+  .live-card { grid-template-columns: 1fr 1fr; grid-auto-flow: dense; }
+  .live-card .btn, .live-card .more-link { grid-column: 1; }
+  .live-next { grid-column: 2; grid-row: 1 / span 3; border: 0; border-left: 1px solid var(--line); padding: 0 0 0 var(--s5); align-content: start; }
   .cat-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .brand-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .auctions .grid, .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .brand-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 900px) {
-  .hero-in { grid-template-columns: 1fr; min-height: 0; gap: var(--s5); padding-top: var(--s7); padding-bottom: var(--s6); }
-  .hero-stage { min-height: 380px; }
-  .trust-in, .sold-in, .why-grid { grid-template-columns: 1fr; }
-  .sold-in { gap: var(--s5); }
-  .how3 { grid-template-columns: 1fr; gap: 0; }
-  .how3 li, .how3 li + li { padding: var(--s4) 0; border-left: 0; }
-  .how3 li + li { border-top: 1px solid var(--line-on-green); }
+  .hero { padding-top: var(--s7); }
+  .hero-in { grid-template-columns: 1fr; gap: var(--s5); }
+  .hero-stage { min-height: 400px; }
+  .how-in { grid-template-columns: 1fr; gap: var(--s6); }
+  .live-card { grid-template-columns: 1fr; }
+  .live-next { grid-column: auto; grid-row: auto; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: var(--s3) 0; }
+  .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 720px) {
-  .hero-in { padding-top: var(--s6); }
+  .hero { padding: var(--s6) 0 var(--s6); }
   .hero-stage { min-height: 340px; }
-  .hero-pics { bottom: 84px; }
+  .hero-pics { inset: var(--s4) var(--s4) 92px; }
   .hero-tag { grid-template-columns: minmax(0, 1fr) auto; }
   .hero-tag-go { display: none; }
   .hero-tag-cells { gap: var(--s3); }
-  .hero-facts { gap: var(--s2) var(--s4); font-size: var(--fs-12); }
-  .cat-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--s3); }
+  .hero-facts { gap: var(--s2) var(--s4); font-size: var(--fs-13); }
+  .cat-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s4) var(--s3); }
   .cat-name { font-size: var(--fs-14); }
+  .cat-list { padding: var(--s3); }
+  .cat-list a { font-size: var(--fs-13); padding: 5px 0; }
+  .cat-list .num { display: none; } /* 111px 칸에서는 이름만 — 개수는 아래 '5,977 lots' 한 줄로 */
   .rail { display: flex; gap: var(--s3); margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .rail::-webkit-scrollbar { display: none; }
   .rail .card { flex: 0 0 72%; scroll-snap-align: start; }
-  .rail .card .card-meta, .rail .card .card-when { display: block; }
-  .rail .card-bid { grid-template-columns: 1fr auto; }
-  .rail .card-bid .r { text-align: right; }
-  .brand-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .trust-card, .why-card, .sold-table { padding: var(--s5); }
-  .why-icon { margin-bottom: var(--s3); }
-  .picks-more .btn { width: 100%; }
+  .rail .card-band { display: flex; }
+  .rail .card.has-band .card-media { border-radius: 0 0 var(--r-lg) var(--r-lg); }
+  .rail .card-left { display: none; }
+  .rail .card-sub { display: block; }
+  .brand-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
+  .brand-mark { padding: 0 10%; }
+  .brand-logo .cat-n { display: none; }
+  .how-pics { grid-template-columns: 1fr 1fr; }
+  .et-bid span, .et-ends span, .et-go { display: none; }
+  .et-ends { width: auto; }
+  .et-lot img { width: 40px; height: 40px; }
 }

@@ -1,51 +1,60 @@
-/* 디자인 토큰 v3 — 주 레퍼런스 Bezel(형이 모은 captures-all · measure-bezel.json 실측). 근거 = docs/design/refs/2026-10-06-v3-lock.md */
+/* 디자인 토큰 v4 — 색 역할표·서체·모서리·모션의 단일 출처. 근거 = docs/design/refs/2026-10-06-v4-lock.md §3·§4 (결정 68·74·75)
+   옛 이름(--green·--canvas-2·--r-sm…)은 별칭으로 남겨 두어 기존 선택자가 깨지지 않게 한다. 새 코드는 역할 이름을 쓴다. */
 :root {
-  /* 바탕 — 흰 본문 · 구획 · 사진 타일(흰 배경 누끼가 multiply 로 녹는 연회색) */
-  --canvas: #FFFFFF;
-  --canvas-2: #F6F5F2;
-  --tile: #F3F2EF;
+  /* ── 바탕 ── */
+  --canvas: #FFFFFF;        /* 페이지 전부 */
+  --surface: #F6F5F2;       /* 입력 배경 · 표 머리 · 스켈레톤 — 구획 배경으로는 안 쓴다(구획은 여백으로) */
+  --tile: #F3F2EF;          /* 사진 타일(흰 배경 누끼가 multiply 로 녹는 연회색) */
+  --chip: #F0EFEB;          /* 중립 배지·칩 배경 */
 
-  /* 글자 */
-  --ink: #111412;
-  --body: #3F4542;
-  --muted: #69706B;        /* 흰 위 5.0:1 */
-  --line: #E6E5E1;
-  --line-2: #D3D2CD;
+  /* ── 글자 ── */
+  --ink: #111412;           /* 제목 · 가격 · 브랜드 */
+  --body: #3F4542;          /* 본문 · 카드 이름 */
+  --muted: #69706B;         /* 메타 · 라벨 · 플레이스홀더 — 흰 위 4.9:1 */
+  --line: #E6E5E1;          /* hairline 구분 */
+  --line-2: #D3D2CD;        /* 입력 테두리 · hover */
 
-  /* 초록 — Bezel #061A11 · #1A3A32 계열. 막대·히어로·경매 띠·주 버튼에만 */
-  --green: #0C2219;
-  --green-2: #183A2D;      /* 초록 위 면(카드·입력) */
-  --green-ink: #1A3A32;    /* 흰 위 큰 제목 */
-  --green-hover: #173829;
-  --on-green: #FFFFFF;
-  --on-green-2: rgba(255, 255, 255, .68);
-  --line-on-green: rgba(255, 255, 255, .12);
-  --mint: #34D399;         /* 초록 위 카운트다운에만(Bezel) */
+  /* ── 브랜드 초록 — 세 자리에만: ① 마스트헤드 ② 진행 중 경매 띠 ③ 주 CTA(알약). + 포커스 링 · 활성 탭 밑줄 ── */
+  --brand: #0C2219;
+  --brand-2: #183A2D;       /* CTA hover · 초록 위 떠 있는 면 */
+  --on-brand: #FFFFFF;
+  --on-brand-2: #B7D3C4;    /* 초록 위 보조글 — 회색이 아니라 초록을 밝힌 색 */
+  --line-on-brand: rgba(255, 255, 255, .14);
+  --mint: #34D399;          /* 초록 위 카운트다운 숫자 · Live 점에만. 흰 위 글자·배경·버튼 금지(대비 1.9:1) */
 
-  /* 의미색 — 점·글자·작은 배지 */
-  --live: #1E7A4F;
-  --ending: #C0261C;       /* 마감 1시간 전(더윈 12) · 흰 위 5.9:1 */
-  --ending-on-green: #FF8A7A;
-  --reserve: #A15C07;
+  /* ── 의미색 — 글자(fg)와 배경(bg) 쌍. 배지·점·글자에만 ── */
+  --live: #1E7A4F;          /* 진행 중 · 성공 · Reserve met · 낙찰 완료 */
+  --live-bg: #E6F1EA;
+  --ending: #C0261C;        /* 1시간 전 · 입찰 밀림 · 오류 (더윈 12) — 흰 위 5.9:1 */
+  --ending-bg: #FBEAE8;
+  --ending-on-brand: #FF8A7A;
+  --action: #9A6700;        /* 할 일 · 결제 기한 · Reserve not met */
+  --action-bg: #FFF4D6;
+  --selection: #DDEBE3;
 
-  --sans: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-
-  /* 글자 크기 8종 */
-  --fs-11: 11px;
+  /* ── 서체 — Inter 1벌: 디스플레이 300 · 본문 400 · UI 500 (결정 68) ── */
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --fs-12: 12px;
+  --fs-13: 13px;
   --fs-14: 14px;
   --fs-16: 16px;
   --fs-20: 20px;
   --fs-28: 28px;
   --fs-40: 40px;
   --fs-56: 56px;
+  --w-display: 300;
+  --w-body: 400;
+  --w-ui: 500;
+  --track-display: -0.015em;
+  --track-h2: -0.01em;
+  --track-small: 0.01em;
 
-  /* 모서리 — Bezel 실측 50(알약) · 16(타일) · 4(배지) */
+  /* ── 모서리 — 세 값: 알약(버튼·칩) · 12(타일·카드·모달) · 6(입력·배지). 겹치면 바깥 = 안쪽 + 패딩 ── */
   --r-pill: 999px;
-  --r-lg: 14px;
-  --r-md: 8px;
-  --r-sm: 4px;
+  --r-lg: 12px;
+  --r-md: 6px;
 
+  /* ── 간격 4 기반 ── */
   --s1: 4px;
   --s2: 8px;
   --s3: 12px;
@@ -56,16 +65,40 @@
   --s8: 64px;
   --s9: 96px;
 
+  /* ── 모션 — 들어올 땐 ease-out · 나갈 땐 ease-in · transition: all 금지 ── */
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 320ms;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --ease: var(--ease-out);
+
+  /* ── 그림자 — 오버레이(드롭다운·모달·팝)에만. 카드는 배경색으로 ── */
+  --shadow-pop: 0 1px 2px rgba(17, 20, 18, .06), 0 12px 32px rgba(12, 34, 25, .12);
+  --shadow-sheet: 0 24px 80px rgba(12, 34, 25, .28);
+
   --wrap: 1280px;
   --gutter: 32px;
-  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  /* ── 옛 이름 별칭(v3 선택자 호환) ── */
+  --canvas-2: var(--surface);
+  --green: var(--brand);
+  --green-2: var(--brand-2);
+  --green-ink: var(--brand);
+  --green-hover: var(--brand-2);
+  --on-green: var(--on-brand);
+  --on-green-2: var(--on-brand-2);
+  --line-on-green: var(--line-on-brand);
+  --reserve: var(--action);
+  --fs-11: 12px;
+  --r-sm: var(--r-md);
 }
 
 @media (max-width: 720px) {
   :root {
-    --fs-56: 36px;
-    --fs-40: 30px;
-    --fs-28: 23px;
+    --fs-56: 34px;
+    --fs-40: 28px;
+    --fs-28: 22px;
     --gutter: 16px;
     --s9: 64px;
     --s8: 48px;

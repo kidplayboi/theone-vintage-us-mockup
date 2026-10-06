@@ -1,8 +1,8 @@
 // 히어로 무대 v3 — Bezel 히어로의 '초록 위 상품'(ref-bezel-s00). 실재고 누끼 4점이 6초마다 바뀌고,
 // 꼬리표는 그 로트로 간다(보통 클릭 = 상세 창). 움직임 줄이기 설정이면 돌지 않는다
-import { usd, esc, exampleAuction, countdown, lotUrl, brandName } from './data.js?v=9d7fdc12f6';
-import { icon } from './icons.js?v=9d7fdc12f6';
-import * as store from './store.js?v=9d7fdc12f6';
+import { usd, esc, exampleAuction, countdown, lotUrl, brandName } from './data.js?v=f35c47a528';
+import { icon } from './icons.js?v=f35c47a528';
+import * as store from './store.js?v=f35c47a528';
 
 const HOUR = 3600000;
 let timer;
@@ -29,7 +29,7 @@ export function mountHero(stage, slides, { onOpen } = {}) {
       <span class="hero-tag-name"><span class="brand-label">${esc(brandName(lot.brand))}</span><b>${esc(lot.title)}</b></span>
       <span class="hero-tag-cells">
         <span><span class="label">${bidding ? 'Current bid' : 'Price'}</span><b class="num">${usd(bidding ? a.bid : lot.usd)}</b></span>
-        ${bidding ? `<span><span class="label">Ends in</span><b class="num${hot ? ' warn' : ''}" data-ends="${a.ends.getTime()}">${countdown(a.ends)}</b></span>` : ''}
+        ${bidding ? `<span><span class="label">Ends in</span><b class="num${hot ? ' warn' : ''}" data-ends="${a.ends.getTime()}" data-clock>${countdown(a.ends)}</b></span>` : ''}
       </span>
       <span class="hero-tag-go">${icon.arrow}</span>`;
   };

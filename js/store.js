@@ -30,11 +30,12 @@ function warnOnce(err) {
 }
 
 export const DEFAULTS = {
-  settings: { sale: 'B', notes: false, examples: true, state: 'auto', sendFails: false, tz: 'auto', priceMode: 'item' },
+  settings: { sale: 'B', notes: false, examples: true, state: 'auto', sendFails: false, tz: 'auto', priceMode: 'item', payState: 'auto' },
   saved: {},
   folders: ['Shortlist', 'Gifts', 'Later'],
   notes: {},
   offers: [],
+  payments: {}, // pay.html 결제 기록 — { [lot]: { state, at, method, box, cert, total } }
   signedIn: false,
   introSeen: false,
   recent: [],

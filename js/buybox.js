@@ -1,10 +1,10 @@
 // 상세 정보 칸 v2 — 상세 창(모달)과 상세 페이지가 같이 쓴다
 // 순서 = 상태 띠 → 브랜드·제목 → 달러(크게) → 등급표 → 문의 → 신뢰 · 도착일 → 메모 · 시세
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급표 보이게)
-import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=9d7fdc12f6';
-import { icon } from './icons.js?v=9d7fdc12f6';
-import { bandInfo, bandLeft } from './card.js?v=9d7fdc12f6';
-import * as store from './store.js?v=9d7fdc12f6';
+import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=f35c47a528';
+import { icon } from './icons.js?v=f35c47a528';
+import { bandInfo, bandLeft } from './card.js?v=f35c47a528';
+import * as store from './store.js?v=f35c47a528';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 
@@ -106,9 +106,9 @@ function statePanel(lot, state) {
       <p>Your offer was ${usd(amount)}. Accept to hold this price for two days.</p>
       <div class="btn-pair"><button class="btn" type="button" data-fake="Counteroffer accepted">Accept</button><button class="btn ghost" type="button" data-fake="Counteroffer declined">Decline</button></div></div>`,
     accepted: `<div class="panel"><p class="label">Accepted · pay by ${day(2)}</p>
-      <table class="mini-total"><tr><td>Item</td><td class="num">${usd(amount)}</td></tr><tr><td>Duties · fee · shipping</td><td class="num">In your quote</td></tr>
+      <table class="mini-total"><tr><td>Item</td><td class="num">${usd(amount)}</td></tr><tr><td>Duties · fee · shipping</td><td class="num">In your invoice</td></tr>
       <tr class="sum"><td>Total, delivered</td><td class="num">$ —</td></tr></table>
-      <button class="btn block" type="button" data-fake="Payment is not part of this mockup">Pay now</button></div>`,
+      <a class="btn block" href="pay.html?lot=${encodeURIComponent(lot.lot)}&amp;sale=A&amp;offer=${amount}">View invoice and pay</a></div>`,
     sold: `<div class="panel"><p class="label">Sold · ${day(-6)}</p><p>This piece has found its owner. Sign in to see the sold price.</p><a class="btn ghost block" href="#similar">See similar pieces</a></div>`,
     expired: `<div class="panel"><p class="label">No longer available</p><p>This lot is no longer available. Here are similar pieces.</p><a class="btn ghost block" href="#similar">See similar pieces</a></div>`,
   };
@@ -136,6 +136,15 @@ function bidBox(lot, state) {
   if (state === 'leading') line = '<p class="bid-line ok"><span class="dot"></span>You\'re the highest bidder</p>';
   if (state === 'outbid') { bid = a.bid + step; line = `<p class="bid-line warn"><span class="dot ending"></span>You've been outbid — ${usd(bid)} is the new high bid</p>`; }
   if (state === 'extended') line = '<p class="bid-line"><span class="dot reserve"></span>A late bid added 5 minutes</p>';
+  // 낙찰 — 결제는 pay.html(청구서 · 수단 · 상태 타임라인, 결정 78)
+  if (state === 'won') {
+    return `<div class="bid-box"><div class="bid-cells">
+      <div><p class="label">You won</p><p class="price lg">${usd(bid)}</p><p class="t13 muted">${a.bids} bids</p></div>
+      <div><p class="label">Ended</p><p class="bid-when">${day(-1)}</p></div></div>
+      <p class="bid-row"><span><span class="dot"></span> Sold to you</span><span class="muted">Pay by ${day(2)}</span></p></div>
+      <a class="btn block" href="pay.html?lot=${encodeURIComponent(lot.lot)}">View invoice and pay</a>
+      <p class="t13 muted">Hammer price, buyer's fee, duties and shipping in one invoice. Your payment is held until the piece is delivered.</p>`;
+  }
   if (state === 'reserve-not-met' || state === 'sold') {
     return `<div class="bid-box"><div class="bid-cells">
       <div><p class="label">${state === 'sold' ? 'Sold for' : 'Final bid'}</p><p class="price">${state === 'sold' ? 'Sign in' : usd(bid)}</p></div>

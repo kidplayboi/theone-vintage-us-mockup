@@ -1,0 +1,60 @@
+/* 결제 v4 — 낙찰 → 청구서 → 결제 → 검수·포장 → 배송 → 수령 → 완료(결정 78 · v4-lock §7)
+   왼쪽 = 로트 요약 + 상태 타임라인(점 + 글, 규칙 D2) · 오른쪽 = 청구서(더윈 1·8·10·15·16) + 결제 수단(Loupe 모델) */
+.pay { padding-top: var(--s2); padding-bottom: var(--s9); }
+.pay-head { display: grid; gap: var(--s3); padding: var(--s3) 0 var(--s6); }
+.pay-head .display { margin: 0; }
+.pay-in { display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: var(--s8); align-items: start; }
+
+/* 로트 요약 */
+.pay-lot { display: grid; grid-template-columns: 96px 1fr; gap: var(--s4); align-items: center; padding-bottom: var(--s5); border-bottom: 1px solid var(--line); }
+.pay-lot img { width: 96px; height: 96px; object-fit: contain; border-radius: var(--r-md); background: var(--tile); mix-blend-mode: multiply; padding: 6px; }
+.pay-lot b { display: block; font-size: var(--fs-20); font-weight: var(--w-ui); color: var(--ink); letter-spacing: var(--track-h2); }
+.pay-lot p { font-size: var(--fs-14); color: var(--muted); margin-top: 4px; }
+
+/* 타임라인 — 7상태 */
+.tl { display: grid; margin-top: var(--s5); }
+.tl li { position: relative; display: grid; grid-template-columns: 24px 1fr; gap: var(--s3); padding: 0 0 var(--s5); }
+.tl li::before { content: ""; position: absolute; left: 11px; top: 22px; bottom: 0; width: 2px; background: var(--line); }
+.tl li:last-child::before { display: none; }
+.tl-dot { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--canvas); box-shadow: inset 0 0 0 2px var(--line-2); color: var(--canvas); }
+.tl-dot svg { width: 12px; height: 12px; }
+.tl li.is-done .tl-dot { background: var(--live); box-shadow: none; }
+.tl li.is-done::before { background: var(--live); }
+.tl li.is-now .tl-dot { background: var(--canvas); box-shadow: inset 0 0 0 2px var(--brand); }
+.tl li.is-now .tl-dot::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--brand); }
+.tl b { display: block; font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); line-height: 1.4; }
+.tl li:not(.is-done):not(.is-now) b { color: var(--muted); font-weight: 400; }
+.tl p { font-size: var(--fs-14); color: var(--body); margin-top: 2px; max-width: 52ch; }
+.tl .t13 { color: var(--muted); }
+.tl li.is-now p { color: var(--ink); }
+.tl-actions { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
+
+/* 청구서 */
+.invoice { display: grid; gap: var(--s4); padding: var(--s5); border-radius: var(--r-lg); border: 1px solid var(--line-2); }
+.invoice .display { margin: 0; }
+.invoice-due { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s3); font-size: var(--fs-13); color: var(--muted); }
+.invoice-due b { color: var(--action); font-weight: var(--w-ui); }
+.invoice .total { margin: 0; }
+.invoice .total td { padding: 9px 0; }
+.invoice .check { padding: var(--s2) 0; }
+.pay-methods { display: grid; }
+.pay-methods .radio:first-of-type { border-top: 0; }
+.pay-methods .radio[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+.ship-to { display: grid; gap: 2px; padding-top: var(--s3); border-top: 1px solid var(--line); font-size: var(--fs-14); color: var(--body); }
+.ship-to b { font-weight: var(--w-ui); color: var(--ink); }
+.ship-to .text-link { justify-self: start; font-size: var(--fs-13); }
+.invoice .btn { margin-top: var(--s2); }
+.invoice-paid { display: grid; gap: 4px; padding: var(--s4); border-radius: var(--r-md); background: var(--live-bg); color: var(--ink); font-size: var(--fs-14); }
+.invoice-paid b { color: var(--live); font-weight: var(--w-ui); }
+.pay-note { font-size: var(--fs-13); color: var(--muted); }
+
+@media (max-width: 1180px) { .pay-in { grid-template-columns: minmax(0, 1fr) 380px; gap: var(--s6); } }
+@media (max-width: 900px) {
+  .pay-in { grid-template-columns: 1fr; }
+  .invoice { order: -1; }
+}
+@media (max-width: 720px) {
+  .pay-lot { grid-template-columns: 72px 1fr; }
+  .pay-lot img { width: 72px; height: 72px; }
+  .invoice { padding: var(--s4); }
+}

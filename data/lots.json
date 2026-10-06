@@ -1,0 +1,6129 @@
+{
+ "meta": {
+  "snapshotAt": "2026-10-06",
+  "total": 24132,
+  "categories": [
+   {
+    "g": 2,
+    "n": 1054,
+    "name": "Watch"
+   },
+   {
+    "g": 1,
+    "n": 10925,
+    "name": "Bag"
+   },
+   {
+    "g": 3,
+    "n": 1088,
+    "name": "Jewelry"
+   },
+   {
+    "g": 4,
+    "n": 4178,
+    "name": "Clothing"
+   },
+   {
+    "g": 5,
+    "n": 910,
+    "name": "Accessories"
+   },
+   {
+    "g": 6,
+    "n": 25,
+    "name": "Tableware"
+   },
+   {
+    "g": 7,
+    "n": 5950,
+    "name": "Variety"
+   },
+   {
+    "g": 9,
+    "n": 2,
+    "name": "Coin"
+   }
+  ],
+  "rate": 150.3,
+  "graded": 9
+ },
+ "lots": [
+  {
+   "lot": "851-31184",
+   "brand": "Hermès",
+   "genre": "Bag",
+   "title": "Birkin 30",
+   "sub": "Green / Anise Green · Ruthenium hardware · □J stamp",
+   "name": "Hermès Birkin 30 in Green/Anise Green with Ruthenium Metallic parts",
+   "usd": 35449,
+   "jpy": 5331492,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:42:45Z",
+   "line": "Birkin(Bag)",
+   "itemType": "Handbag",
+   "size": "34 □J",
+   "listed": "2025-12-25",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39616",
+   "brand": "Rolex",
+   "genre": "Watch",
+   "title": "GMT-Master II",
+   "sub": "18K Everose gold · Ref. 126715CHNR",
+   "name": "126715CHNR　Rolex GMT-Master II Date 18K Pink Gold Everose 1267",
+   "usd": 51312,
+   "jpy": 7717320,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:38Z",
+   "line": "GMT Master II",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "867-36874",
+   "brand": "Louis Vuitton",
+   "genre": "Bag",
+   "title": "City Steamer PM",
+   "sub": "Alligator",
+   "name": "Alligator City Steamer PM Handbag",
+   "usd": 5162,
+   "jpy": 776346,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:06Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "",
+   "listed": "2026-04-26",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39358",
+   "brand": "Van Cleef & Arpels",
+   "genre": "Jewelry",
+   "title": "Vintage Alhambra Clip-on Earrings",
+   "sub": "24 diamonds · Ref. VCARA44700",
+   "name": "VCARA44700　Van Earring(s) & Arpels Vintage Alhambra Clip-on earring(s) with 24 Diamonds",
+   "usd": 14749,
+   "jpy": 2218212,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:01Z",
+   "line": "",
+   "itemType": "Earrings (piercings)",
+   "size": "JC924820",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-38926",
+   "brand": "Chanel",
+   "genre": "Bag",
+   "title": "Chanel 22 Mini",
+   "sub": "Shiny calfskin · CC logo · Ref. AS3980",
+   "name": "AS3980　Chanel handbag CHANEL 22 Mini coco mark Shiny Calfskin",
+   "usd": 4386,
+   "jpy": 659598,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:42:59Z",
+   "line": "",
+   "itemType": "Handbag",
+   "size": "LL015X28",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-38637",
+   "brand": "Hermès",
+   "genre": "Accessories",
+   "title": "Ancre Multi-Chain Bracelet",
+   "sub": "Sterling silver · Size 15",
+   "name": "Bracelet' Ancre Multi- chain Bracelet, Size 15, Sterling Silver 925",
+   "usd": 13455,
+   "jpy": 2023632,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:04Z",
+   "line": "",
+   "itemType": "Bracelet/bangle (leather-cloth)",
+   "size": "23G274122",
+   "listed": "2026-03-28",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "861-30068",
+   "brand": "Cartier",
+   "genre": "Watch",
+   "title": "Tank Obu LM",
+   "sub": "18K white gold · Diamond bezel · Ref. WB800551",
+   "name": "WB800551　Cartier Tank Obu LM 18K White Gold Diamond Bezel",
+   "usd": 17762,
+   "jpy": 2671380,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:03Z",
+   "line": "",
+   "itemType": "Ladies'",
+   "size": "",
+   "listed": "2026-03-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 11,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39442",
+   "brand": "Hermès",
+   "genre": "Clothing",
+   "title": "Double-Faced Cashmere Coat",
+   "sub": "Women's size 34",
+   "name": "coat double-faced cashmere coat , women's Size 34",
+   "usd": 3351,
+   "jpy": 503934,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:26Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-03-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57874",
+   "brand": "Loewe",
+   "genre": "Bag",
+   "title": "Amazona Anagram",
+   "sub": "Leather · 2-way shoulder bag",
+   "name": "Leather Amazona Anagram 2-way Shoulder Bag",
+   "usd": 1252,
+   "jpy": 188273,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:08Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "AB",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 6,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39525",
+   "brand": "Seiko",
+   "genre": "Watch",
+   "title": "Grand Seiko First Model",
+   "sub": "Cal. 3180 · Ref. J14070E",
+   "name": "J14070E　Seiko Grand Seiko First Model J14070E Cal.3180",
+   "usd": 5973,
+   "jpy": 898317,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:27Z",
+   "line": "Grand Seiko",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57861",
+   "brand": "Prada",
+   "genre": "Bag",
+   "title": "Leather Shoulder Bag",
+   "sub": "Black",
+   "name": "Leather Shoulder Bag Black WS27843",
+   "usd": 1137,
+   "jpy": 171000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:08Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "AB",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39685",
+   "brand": "Hermès",
+   "genre": "Jewelry",
+   "title": "Ancre Enchaînée Necklace GM",
+   "sub": "Sterling silver",
+   "name": "Necklace' Ancre Necklace Enchain e GM SV925 Silver HE",
+   "usd": 3222,
+   "jpy": 484476,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:03Z",
+   "line": "",
+   "itemType": "Necklace/Pendant",
+   "size": "25AG159339",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-26357",
+   "brand": "Christian Dior",
+   "genre": "Bag",
+   "title": "Saddle Vertical Pouch",
+   "sub": "Oblique · Ref. 2ADCA446YKS",
+   "name": "2ADCA446YKS　Christian Dior Shoulder Bag, Oblique Saddle Vertical Pouch",
+   "usd": 893,
+   "jpy": 134232,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:42:55Z",
+   "line": "",
+   "itemType": "Handbag",
+   "size": "",
+   "listed": "2026-03-24",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "842-40910",
+   "brand": "Louis Vuitton",
+   "genre": "Accessories",
+   "title": "Organizer de Poche",
+   "sub": "Monogram Taurillon · Ref. M69044",
+   "name": "M69044　Louis Vuitton card case Monogram Taurillon Organizer de Poche",
+   "usd": 619,
+   "jpy": 93000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:25Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2025-10-26",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 4,
+   "photoTotal": 4,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39771",
+   "brand": "Rolex",
+   "genre": "Watch",
+   "title": "Datejust 36",
+   "sub": "Random serial · Ref. 126234G",
+   "name": "126234G　Rolex Datejust 36 Random Serial number Roulette 126234G",
+   "usd": 18420,
+   "jpy": 2770320,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:41Z",
+   "line": "Datejust",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39368",
+   "brand": "Hermès",
+   "genre": "Clothing",
+   "title": "Short-Sleeve Bolero",
+   "sub": "Cashmere · Women's size 34",
+   "name": "Bolero Short Sleeve Bolero Cashmere Women's Size 34 HER",
+   "usd": 1604,
+   "jpy": 241204,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:26Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-03-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57950",
+   "brand": "Bottega Veneta",
+   "genre": "Bag",
+   "title": "Intrecciato Body Bag",
+   "sub": "Rubber",
+   "name": "Intrecciato Rubber Body Bag",
+   "usd": 793,
+   "jpy": 119182,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:11Z",
+   "line": "",
+   "itemType": "Waist Bag",
+   "size": "B",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "860-28013",
+   "brand": "Cartier",
+   "genre": "Watch",
+   "title": "Santos-Dumont LM",
+   "sub": "Ref. W2SA0037",
+   "name": "W2SA0037　Cartier Santos-Dumont LM W2SA0037 Cartier Watch",
+   "usd": 6579,
+   "jpy": 989400,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:01Z",
+   "line": "Santos(Watch)",
+   "itemType": "Ladies'",
+   "size": "",
+   "listed": "2026-03-03",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57892",
+   "brand": "Celine",
+   "genre": "Bag",
+   "title": "Macadam Denim Shoulder Bag",
+   "sub": "Navy",
+   "name": "Macadam Denim Shoulder Bag, Navy, WS274",
+   "usd": 793,
+   "jpy": 119182,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:09Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "A",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39545",
+   "brand": "Christian Dior",
+   "genre": "Jewelry",
+   "title": "Skull Ring",
+   "sub": "Diamond",
+   "name": "ring Tet de Mole Skull Diamond K1",
+   "usd": 2445,
+   "jpy": 367728,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:42:58Z",
+   "line": "",
+   "itemType": "Ring",
+   "size": "C7484",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-38440",
+   "brand": "Hermès",
+   "genre": "Bag",
+   "title": "Birkin 25 Shadow",
+   "sub": "Sanguine · Silver hardware · U stamp",
+   "name": "Birkin 25 Shadow Sanguine/Silver Metallic parts U Engraved H",
+   "usd": 27040,
+   "jpy": 4066722,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:42:58Z",
+   "line": "Birkin(Bag)",
+   "itemType": "Handbag",
+   "size": "U ST 101 GN",
+   "listed": "2026-03-28",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-26423",
+   "brand": "Gucci",
+   "genre": "Accessories",
+   "title": "GG Marmont Key Case",
+   "sub": "Ref. 837747",
+   "name": "837747　Gucci Key Case GG Marmont Double G 837747 GUCCI Chevro",
+   "usd": 322,
+   "jpy": 48410,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:37Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-03-24",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39218",
+   "brand": "Seiko",
+   "genre": "Watch",
+   "title": "Prospex 1968 Diver's Reissue",
+   "sub": "Mechanical · 55th anniversary · Ref. SBEX011",
+   "name": "SBEX011　Seiko Prospex 1968 Mechanical Divers Reissue Design 55th Anniversary",
+   "usd": 4230,
+   "jpy": 636126,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:30Z",
+   "line": "",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39497",
+   "brand": "Hermès",
+   "genre": "Clothing",
+   "title": "Lagoon Sandals",
+   "sub": "Chaîne d'Ancre motif · Women's size 37",
+   "name": "Lagoon Sandals with Chaine d'Ancre motif, women's Size 37",
+   "usd": 764,
+   "jpy": 114774,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-10-13T04:09:53Z",
+   "line": "",
+   "itemType": "Shoes",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2026-10-13",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 7,
+   "edited": true,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-38937",
+   "brand": "Chanel",
+   "genre": "Bag",
+   "title": "Chain Shoulder",
+   "sub": "Ref. AP0945 · Chanel 19 Matelassé · coco mark Rams",
+   "name": "AP0945　Chanel chain Shoulder Bag, Chanel 19 Matelassé  , coco mark Rams",
+   "usd": 1734,
+   "jpy": 260662,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:00Z",
+   "line": "Matelasse(Bag)",
+   "itemType": "Shoulder bag",
+   "size": "29985194",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39680",
+   "brand": "Rolex",
+   "genre": "Watch",
+   "title": "Datejust SS/K18PG V-serial",
+   "sub": "Ref. 116231G",
+   "name": "116231G　Rolex Datejust SS/K18PG V-serial 116231G ROLEX",
+   "usd": 13815,
+   "jpy": 2077740,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:41Z",
+   "line": "Datejust",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57876",
+   "brand": "Loewe",
+   "genre": "Bag",
+   "title": "Hammock Small Leather 2-way Shoulder",
+   "sub": "",
+   "name": "Hammock Small Leather 2-way Shoulder Bag",
+   "usd": 981,
+   "jpy": 147510,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:08Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "AB",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57124",
+   "brand": "Van Cleef & Arpels",
+   "genre": "Jewelry",
+   "title": "Au750",
+   "sub": "",
+   "name": "Van Cleef & Arpels Au750",
+   "usd": 4870,
+   "jpy": 732364,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:01:25Z",
+   "line": "",
+   "itemType": "Necklace/Pendant",
+   "size": "A",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 7,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57921",
+   "brand": "Prada",
+   "genre": "Bag",
+   "title": "Leather 2-way Tote Bag Beige WS27472",
+   "sub": "",
+   "name": "Leather 2-way Tote Bag Beige WS27472",
+   "usd": 793,
+   "jpy": 119182,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:10Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "AB",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39766",
+   "brand": "Hermès",
+   "genre": "Accessories",
+   "title": "Bracelet Boucles Sellier Inflexible GM SV925 Silver",
+   "sub": "",
+   "name": "Bracelet Boucles Sellier Inflexible GM SV925 Silver",
+   "usd": 3415,
+   "jpy": 513616,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:05Z",
+   "line": "",
+   "itemType": "Bracelet/bangle (leather-cloth)",
+   "size": "25S168022",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39601",
+   "brand": "Cartier",
+   "genre": "Watch",
+   "title": "Panth re 2-Row SM Watch",
+   "sub": "Ref. W25029B6",
+   "name": "W25029B6　Cartier Panth re 2-Row SM W25029B6 Cartier Watch",
+   "usd": 6250,
+   "jpy": 939930,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:02Z",
+   "line": "Panther(Watch)",
+   "itemType": "Ladies'",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-30928",
+   "brand": "Nike",
+   "genre": "Clothing",
+   "title": "Down Jacket Premier League Liverpool FC 2021 Season Model",
+   "sub": "",
+   "name": "Down Jacket Premier League Liverpool FC 2021 Season Model",
+   "usd": 106,
+   "jpy": 15840,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:55Z",
+   "line": "",
+   "itemType": "Jacket",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "868-57951",
+   "brand": "Bottega Veneta",
+   "genre": "Bag",
+   "title": "Intrecciato Leather Shoulder Shoulder",
+   "sub": "",
+   "name": "Intrecciato Leather Shoulder Shoulder",
+   "usd": 506,
+   "jpy": 76000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:11Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "B",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39314",
+   "brand": "Seiko",
+   "genre": "Watch",
+   "title": "Prospex Save The Ocean Limited Edition 1965",
+   "sub": "Ref. SBDX053",
+   "name": "SBDX053　Seiko Prospex Save The Ocean Limited Edition 1965",
+   "usd": 2487,
+   "jpy": 373935,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:30Z",
+   "line": "",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "869-26949",
+   "brand": "Celine",
+   "genre": "Bag",
+   "title": "Shoulder Shoulder Bag Camera Bag PVC/Leather 19152",
+   "sub": "Ref. 191522",
+   "name": "191522　Celine Shoulder Shoulder Bag Camera Bag PVC/Leather 19152",
+   "usd": 764,
+   "jpy": 114774,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:13Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "",
+   "listed": "2026-05-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39683",
+   "brand": "Hermès",
+   "genre": "Jewelry",
+   "title": "Necklace Bookle Sellier Inflexible SV925 Silver Size",
+   "sub": "",
+   "name": "Necklace Bookle Sellier Inflexible SV925 Silver Size",
+   "usd": 3027,
+   "jpy": 455242,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:03Z",
+   "line": "",
+   "itemType": "Necklace/Pendant",
+   "size": "24S419225",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39839",
+   "brand": "Hermès",
+   "genre": "Bag",
+   "title": "Bolide 31 Verso",
+   "sub": "Rose Sakura/Nata · Silver hardware",
+   "name": "Bolide 31 Verso handbag, Rose Sakura/Nata/Silver Metallic parts",
+   "usd": 6987,
+   "jpy": 1050732,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:07Z",
+   "line": "Bolide(Bag)",
+   "itemType": "Handbag",
+   "size": "Z HA 493 AC",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "851-31439",
+   "brand": "Louis Vuitton",
+   "genre": "Accessories",
+   "title": "Monogram card case Pocket Organizer",
+   "sub": "Ref. M60502",
+   "name": "M60502　Louis Vuitton Monogram card case Pocket Organizer M60502",
+   "usd": 425,
+   "jpy": 63800,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:25Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2025-12-25",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 4,
+   "photoTotal": 4,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "867-36798",
+   "brand": "Rolex",
+   "genre": "Watch",
+   "title": "Datejust 26 K18WG F-serial",
+   "sub": "Ref. 179174NR",
+   "name": "179174NR　Rolex Datejust 26 K18WG F-serial 179174NR ROLEX",
+   "usd": 7960,
+   "jpy": 1197174,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:41Z",
+   "line": "Datejust",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-26",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-29168",
+   "brand": "Adidas",
+   "genre": "Clothing",
+   "title": "Excellent condition TERREX mountain parka",
+   "sub": "clima proof K",
+   "name": "Excellent condition adidas TERREX mountain parka, clima proof K",
+   "usd": 64,
+   "jpy": 9570,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:55Z",
+   "line": "",
+   "itemType": "Hoodie",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 5,
+   "photoTotal": 5,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "863-38469",
+   "brand": "Chanel",
+   "genre": "Bag",
+   "title": "Chain Shoulder",
+   "sub": "Matelassé coco mark Satin CHANEL",
+   "name": "chain Shoulder Bag, Matelassé  coco mark Satin CHANEL",
+   "usd": 1475,
+   "jpy": 221746,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:42:59Z",
+   "line": "Matelasse(Bag)",
+   "itemType": "Shoulder bag",
+   "size": "303432",
+   "listed": "2026-03-28",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39448",
+   "brand": "Cartier",
+   "genre": "Watch",
+   "title": "Tank Must SM Watch Silver",
+   "sub": "Ref. WSTA0051",
+   "name": "WSTA0051　Cartier Tank Must SM WSTA0051 Cartier Watch Silver",
+   "usd": 3671,
+   "jpy": 552027,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:03Z",
+   "line": "",
+   "itemType": "Ladies'",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57927",
+   "brand": "Loewe",
+   "genre": "Bag",
+   "title": "Amazona 28 Anagram Handbag Black WS274",
+   "sub": "",
+   "name": "Amazona 28 Anagram Handbag Black WS274",
+   "usd": 736,
+   "jpy": 110546,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:10Z",
+   "line": "",
+   "itemType": "Handbag",
+   "size": "AB",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39763",
+   "brand": "Hermès",
+   "genre": "Jewelry",
+   "title": "Clou de H double round ring",
+   "sub": "ring · SV925 silver",
+   "name": "ring , Hermes Clou de H double round ring , SV925 silver",
+   "usd": 1216,
+   "jpy": 182830,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:04Z",
+   "line": "",
+   "itemType": "Ring",
+   "size": "24AG375347",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57905",
+   "brand": "Bottega Veneta",
+   "genre": "Bag",
+   "title": "Intrecciato Shoulder",
+   "sub": "",
+   "name": "Intrecciato Shoulder Bag",
+   "usd": 506,
+   "jpy": 76000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:09Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "AB",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-38821",
+   "brand": "Hermès",
+   "genre": "Accessories",
+   "title": "Bracelet Gourmet Bracelet GM Size SH SV925 Silver H",
+   "sub": "",
+   "name": "Bracelet Gourmet Bracelet GM Size SH SV925 Silver H",
+   "usd": 2445,
+   "jpy": 367728,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:05Z",
+   "line": "",
+   "itemType": "Bracelet/bangle (leather-cloth)",
+   "size": "22S018062",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "867-36799",
+   "brand": "Seiko",
+   "genre": "Watch",
+   "title": "Grand Heritage Collection",
+   "sub": "Ref. SBGX261",
+   "name": "SBGX261　Seiko Grand Seiko Heritage Collection SBGX261 SEIKO",
+   "usd": 2092,
+   "jpy": 314571,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:27Z",
+   "line": "Grand Seiko",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-26",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-30718",
+   "brand": "Nike",
+   "genre": "Clothing",
+   "title": "Low-Cut Sneakers AIR MAX 90 CW6208-111 Men's",
+   "sub": "",
+   "name": "Low-Cut Sneakers AIR MAX 90 CW6208-111 Men's",
+   "usd": 27,
+   "jpy": 3960,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:55Z",
+   "line": "",
+   "itemType": "Shoes",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "861-30581",
+   "brand": "Celine",
+   "genre": "Bag",
+   "title": "Shoulder Bag Mini Triangle logo Leather 10I193DM",
+   "sub": "Ref. 10I193DMO",
+   "name": "10I193DMO　Celine Shoulder Bag Mini Triangle logo Leather 10I193DM",
+   "usd": 516,
+   "jpy": 77550,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:42:55Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "",
+   "listed": "2026-03-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39685",
+   "brand": "Rolex",
+   "genre": "Watch",
+   "title": "Datejust F-series Women's Watch",
+   "sub": "Ref. 79174",
+   "name": "79174　Rolex Datejust F-series 79174 ROLEX Women's Watch",
+   "usd": 6302,
+   "jpy": 947787,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:41Z",
+   "line": "Datejust",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-28763",
+   "brand": "Hermès",
+   "genre": "Bag",
+   "title": "Round Zipper Long Wallet",
+   "sub": "Crocodile Alligator Lisse · Silver",
+   "name": "Round Zipper Long Wallet, Crocodile Alligator Lisse, Silver",
+   "usd": 1128,
+   "jpy": 169620,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:56Z",
+   "line": "",
+   "itemType": "Wallet",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "863-38623",
+   "brand": "Hermès",
+   "genre": "Jewelry",
+   "title": "Clou de H double ring",
+   "sub": "ring · SV925 silver.",
+   "name": "ring , Hermes Clou de H double ring , SV925 silver.",
+   "usd": 1216,
+   "jpy": 182830,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:01Z",
+   "line": "",
+   "itemType": "Ring",
+   "size": "24AG270129",
+   "listed": "2026-03-28",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57961",
+   "brand": "Loewe",
+   "genre": "Bag",
+   "title": "Anagram Leather Grey- Brown Tote Bag Grey W",
+   "sub": "",
+   "name": "Anagram Leather Grey- Brown Tote Bag Grey W",
+   "usd": 506,
+   "jpy": 76000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:11Z",
+   "line": "",
+   "itemType": "Tote bag",
+   "size": "B",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-38629",
+   "brand": "Hermès",
+   "genre": "Accessories",
+   "title": "Bracelet' Ancre TGM Bracelet",
+   "sub": "9 links · SV925 Silver",
+   "name": "Bracelet' Ancre TGM Bracelet, 9 links, SV925 Silver",
+   "usd": 2057,
+   "jpy": 309354,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:04Z",
+   "line": "",
+   "itemType": "Bracelet/bangle (leather-cloth)",
+   "size": "24AG171677",
+   "listed": "2026-03-28",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39716",
+   "brand": "Cartier",
+   "genre": "Watch",
+   "title": "Must Tank MM SV925 Vintage",
+   "sub": "Ref. 2416",
+   "name": "2416　Cartier Must Tank MM 2416 SV925 Vintage Cartier",
+   "usd": 2355,
+   "jpy": 354147,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:03Z",
+   "line": "",
+   "itemType": "Ladies'",
+   "size": "",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-29755",
+   "brand": "Adidas",
+   "genre": "Clothing",
+   "title": "Low-Cut Sneakers Open EQT Racing 91 W BA",
+   "sub": "",
+   "name": "Low-Cut Sneakers Open EQT Racing 91 W BA",
+   "usd": 20,
+   "jpy": 3000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-21T03:11:56Z",
+   "line": "",
+   "itemType": "Shoes",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-01-21",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "868-57894",
+   "brand": "Bottega Veneta",
+   "genre": "Bag",
+   "title": "Intrecciato Shoulder",
+   "sub": "",
+   "name": "Intrecciato Shoulder Bag",
+   "usd": 448,
+   "jpy": 67364,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:09Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "B",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39515",
+   "brand": "Seiko",
+   "genre": "Watch",
+   "title": "Grand Hi-Beat Wristwatch",
+   "sub": "Ref. 5645-7010",
+   "name": "5645-7010　Seiko Grand Seiko Hi-Beat 5645-7010 SEIKO Wristwatch",
+   "usd": 1559,
+   "jpy": 234449,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:27Z",
+   "line": "Grand Seiko",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 11,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57962",
+   "brand": "Loewe",
+   "genre": "Bag",
+   "title": "Logo 2-way tote",
+   "sub": "gold · WS2705",
+   "name": "logo 2-way tote bag, gold, WS2705",
+   "usd": 419,
+   "jpy": 62873,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:11Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "B",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39687",
+   "brand": "Hermès",
+   "genre": "Jewelry",
+   "title": "Ring Bookle Sellier Inflexible SV925 Silver Ring",
+   "sub": "",
+   "name": "ring Bookle Sellier Inflexible SV925 Silver Ring",
+   "usd": 1152,
+   "jpy": 173148,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:03Z",
+   "line": "",
+   "itemType": "Ring",
+   "size": "25AB133405",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "868-57955",
+   "brand": "Loewe",
+   "genre": "Bag",
+   "title": "Leather Shoulder Bag Gold WS26663",
+   "sub": "",
+   "name": "Leather Shoulder Bag Gold WS26663",
+   "usd": 391,
+   "jpy": 58728,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:11Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "AB",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39646",
+   "brand": "Hermès",
+   "genre": "Accessories",
+   "title": "Bracelet Gourmet TPM Bracelet",
+   "sub": "SV925 Silver · Size XS",
+   "name": "Bracelet Gourmet TPM Bracelet, SV925 Silver, Size XS",
+   "usd": 1863,
+   "jpy": 280120,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:05Z",
+   "line": "",
+   "itemType": "Bracelet/bangle (leather-cloth)",
+   "size": "23S379782",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-39675",
+   "brand": "Rolex",
+   "genre": "Watch",
+   "title": "Air-King D-serial wristwatch",
+   "sub": "Ref. 14000M · pink.",
+   "name": "14000M　Rolex Air-King D-serial 14000M ROLEX wristwatch, pink.",
+   "usd": 5776,
+   "jpy": 868635,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:39Z",
+   "line": "Air King",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 11,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-30713",
+   "brand": "Nike",
+   "genre": "Clothing",
+   "title": "Low-Cut Sneakers AIR MAX 90 CT1028-103 Men's",
+   "sub": "",
+   "name": "Low-Cut Sneakers AIR MAX 90 CT1028-103 Men's",
+   "usd": 24,
+   "jpy": 3520,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:55Z",
+   "line": "",
+   "itemType": "Shoes",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "867-01055",
+   "brand": "Yves Saint Laurent",
+   "genre": "Bag",
+   "title": "Cassandra Shoulder Bag",
+   "sub": "",
+   "name": "YSL Cassandra Shoulder Bag",
+   "usd": 74,
+   "jpy": 11000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-10-28T10:07:32Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2026-10-28",
+   "grade": {
+    "overall": "C",
+    "exterior": "2+",
+    "interior": "3"
+   },
+   "notes": [
+    "Shoulder Rubbing and Dirty (M)",
+    "Outside Rubbing& Dirty (M)",
+    "Metallic parts Scratch& Plating peeling (M)",
+    "The Inside bracket is Defect",
+    "Inside Rubbing and Dirty (M)"
+   ],
+   "photos": 6,
+   "photoTotal": 6,
+   "edited": true,
+   "dims": [
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "778-22751",
+   "brand": "Cartier",
+   "genre": "Watch",
+   "title": "Must21 (Watches) - Men's & Boys'",
+   "sub": "",
+   "name": "Must21 (Watches) - Men's & Boys'",
+   "usd": 998,
+   "jpy": 149980,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-22T07:08:38Z",
+   "line": "Mast 21(Watch)",
+   "itemType": "Men's",
+   "size": "Guarantee card, extra pieces, storage box, instruction",
+   "listed": "2024-07-17",
+   "until": "2027-01-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-26375",
+   "brand": "Celine",
+   "genre": "Bag",
+   "title": "Clutch Bag Pouch Patent Leather Bag Safe and Secure",
+   "sub": "",
+   "name": "Clutch Bag Pouch Patent Leather CELINE Bag Safe and Secure",
+   "usd": 167,
+   "jpy": 25098,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:42:55Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "",
+   "listed": "2026-03-24",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "866-39556",
+   "brand": "Hermès",
+   "genre": "Jewelry",
+   "title": "Earring(s) Libris Hoop Earring(s)",
+   "sub": "SV925 Silver · K18PG",
+   "name": "Earring(s) Libris Hoop Earring(s), SV925 Silver, K18PG",
+   "usd": 828,
+   "jpy": 124456,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-28T03:43:00Z",
+   "line": "",
+   "itemType": "Earrings (piercings)",
+   "size": "19C147109",
+   "listed": "2026-04-19",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 11,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-29498",
+   "brand": "Bottega Veneta",
+   "genre": "Bag",
+   "title": "5-Key Case Intrecciato - Men's & Women's",
+   "sub": "",
+   "name": "5-Key Case Intrecciato - Men's & Women's",
+   "usd": 20,
+   "jpy": 3000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-21T03:11:55Z",
+   "line": "",
+   "itemType": "Key case",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-01-21",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "865-38929",
+   "brand": "Hermès",
+   "genre": "Accessories",
+   "title": "Bracelet de Chien Bracelet",
+   "sub": "Red Sunset Aluminum · Size S",
+   "name": "Bracelet de Chien Bracelet, Red Sunset Aluminum, Size S",
+   "usd": 419,
+   "jpy": 62980,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:04Z",
+   "line": "",
+   "itemType": "Bracelet/bangle (leather-cloth)",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "865-38798",
+   "brand": "Seiko",
+   "genre": "Watch",
+   "title": "King 44KS 2nd Model",
+   "sub": "Ref. 442000 · Early Production Model · Vintage 442",
+   "name": "442000　Seiko King Seiko 44KS 2nd Model, Early Production Model, Vintage 442",
+   "usd": 1316,
+   "jpy": 197880,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:25:30Z",
+   "line": "",
+   "itemType": "Men's",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 11,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-29184",
+   "brand": "Adidas",
+   "genre": "Clothing",
+   "title": "Running shoes BB7340 women's size 24.0",
+   "sub": "",
+   "name": "running shoes BB7340 women's size 24.0",
+   "usd": 20,
+   "jpy": 3000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-21T03:11:55Z",
+   "line": "",
+   "itemType": "Shoes",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-01-21",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "868-27744",
+   "brand": "Gucci",
+   "genre": "Bag",
+   "title": "Sylvie Bee Star Handbag",
+   "sub": "White leather · Ref. 470270",
+   "name": "470270　Gucci Sylvie Sherry Line Bee Star White Leather Handbag",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-10-30T12:16:14Z",
+   "line": "",
+   "itemType": "Handbag",
+   "size": "",
+   "listed": "2026-04-29",
+   "until": "2026-10-30",
+   "grade": {
+    "overall": "C",
+    "exterior": "2",
+    "interior": "2+"
+   },
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": true,
+   "dims": [
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ]
+   ]
+  },
+  {
+   "lot": "875-32057",
+   "brand": "Casio",
+   "genre": "Watch",
+   "title": "With G-SHOCK Solar Watch GW-B5600 Men's Watch",
+   "sub": "",
+   "name": "with CASIO G-SHOCK Solar Watch GW-B5600 Men's Watch",
+   "usd": 77,
+   "jpy": 11440,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:48Z",
+   "line": "",
+   "itemType": "Unisex",
+   "size": "It doesn't work",
+   "listed": "2026-06-24",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "867-24157",
+   "brand": "Louis Vuitton",
+   "genre": "Bag",
+   "title": "Pochette Document",
+   "sub": "Monogram · Old model · Ref. M53456",
+   "name": "M53456　Louis Vuitton Pochette Document Monogram Old Model Clutch Bag Second Bag",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-14T16:03:12Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "IC chip or Serial number cannot be confirmed",
+   "listed": "2026-04-21",
+   "until": "2027-04-02",
+   "grade": {
+    "overall": "C",
+    "exterior": "2",
+    "interior": "3"
+   },
+   "notes": [
+    "Outside Faded & Dirty (M)",
+    "Outside Aftermarket repair with",
+    "Metallic parts Plating peeling (L)",
+    "Inside Heavy Stain (L)",
+    "Inside Faded (L) Dirty (M)",
+    "Inside Pen mark (M)"
+   ],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": true,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "867-24158",
+   "brand": "Chanel",
+   "genre": "Jewelry",
+   "title": "Coco mark gold ring",
+   "sub": "Brooch · triple ring · vintage.",
+   "name": "Brooch , coco mark gold ring, triple ring, vintage.",
+   "usd": 280,
+   "jpy": 42000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:32:32Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "813-27377",
+   "brand": "Christian Dior",
+   "genre": "Bag",
+   "title": "Trotter Mini Boston",
+   "sub": "",
+   "name": "Trotter Mini Boston Bag",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-15T06:38:22Z",
+   "line": "Trotter(Bag)",
+   "itemType": "Handbag",
+   "size": "Padlock, key",
+   "listed": "2025-03-26",
+   "until": "2026-11-15",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 7,
+   "edited": false,
+   "dims": [
+    [
+     566,
+     999
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     623,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "863-26339",
+   "brand": "Gucci",
+   "genre": "Accessories",
+   "title": "6-Key Case",
+   "sub": "Ref. 138093 · Guccissima Leather · 138093 GUCCI Key Case",
+   "name": "138093　Gucci 6-Key Case , Guccissima Leather, 138093 GUCCI Key Case",
+   "usd": 147,
+   "jpy": 22090,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:24:37Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-03-24",
+   "until": "2027-04-01",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 12,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "875-32040",
+   "brand": "Casio",
+   "genre": "Watch",
+   "title": "G-SHOCK Quartz Watch DW-8800 Men's Watch",
+   "sub": "",
+   "name": "G-SHOCK Quartz Watch DW-8800 Men's Watch",
+   "usd": 44,
+   "jpy": 6600,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:48Z",
+   "line": "",
+   "itemType": "Unisex",
+   "size": "",
+   "listed": "2026-06-24",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "867-37059",
+   "brand": "Hermès",
+   "genre": "Clothing",
+   "title": "Twilly Scarf Garde Robe Po",
+   "sub": "",
+   "name": "Twilly Scarf Garde Robe Po",
+   "usd": 225,
+   "jpy": 33840,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:26Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-26",
+   "until": "2027-03-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "867-24167",
+   "brand": "Gucci",
+   "genre": "Bag",
+   "title": "Sylvie Sherry Line Red Leather 2-way Handbag Shoulder",
+   "sub": "Ref. 470270",
+   "name": "470270　Gucci Sylvie Sherry Line Red Leather 2-way Handbag Shoulder Bag",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:32:08Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "875-32072",
+   "brand": "Casio",
+   "genre": "Watch",
+   "title": "BABY-G Quartz Watch BGD-565US Women's",
+   "sub": "",
+   "name": "BABY-G Quartz Watch BGD-565US Women's",
+   "usd": 34,
+   "jpy": 5060,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:48Z",
+   "line": "",
+   "itemType": "Unisex",
+   "size": "",
+   "listed": "2026-06-24",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "867-24149",
+   "brand": "Louis Vuitton",
+   "genre": "Bag",
+   "title": "Tie Pin",
+   "sub": "Ref. M65042 · Pinscravate Champs- lys es · Silver",
+   "name": "M65042　Louis Vuitton Tie Pin, Pinscravate Champs- lys es, Silver, LV logo",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:33:25Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "776-32887",
+   "brand": "Christian Dior",
+   "genre": "Jewelry",
+   "title": "Dior Gold & Black Rhinestone - 3-Piece Set (Interchangeable)",
+   "sub": "",
+   "name": "Dior Gold & Black Rhinestone - 3-Piece Set (Interchangeable)",
+   "usd": 167,
+   "jpy": 24980,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-22T07:10:37Z",
+   "line": "",
+   "itemType": "Earrings (clip-on)",
+   "size": "B+~C+",
+   "listed": "2024-07-06",
+   "until": "2027-01-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 6,
+   "edited": false,
+   "dims": [
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "867-24152",
+   "brand": "Prada",
+   "genre": "Bag",
+   "title": "Tessuto Nylon Shoulder",
+   "sub": "Ref. M45264 · Black with Triangle logo",
+   "name": "M45264　Prada Tessuto Nylon Shoulder Bag , Black with Triangle logo",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-14T16:03:37Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "863-30953",
+   "brand": "Louis Vuitton",
+   "genre": "Accessories",
+   "title": "Keychain Keyring Portefeuille Epi Z M63",
+   "sub": "",
+   "name": "Keychain Keyring Portefeuille Epi Z M63",
+   "usd": 26,
+   "jpy": 3850,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:55Z",
+   "line": "",
+   "itemType": "Cellphone Straps /Keychain",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 6,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "875-32292",
+   "brand": "Casio",
+   "genre": "Watch",
+   "title": "G-SHOCK Solar Watch GW-8900A Men's",
+   "sub": "",
+   "name": "G-SHOCK Solar Watch GW-8900A Men's Casio",
+   "usd": 29,
+   "jpy": 4290,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:47Z",
+   "line": "",
+   "itemType": "Unisex",
+   "size": "",
+   "listed": "2026-06-24",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 7,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "863-31107",
+   "brand": "Nike",
+   "genre": "Clothing",
+   "title": "Low-Cut Sneakers W TODOS BQ3201-100 Women's",
+   "sub": "",
+   "name": "Low-Cut Sneakers W TODOS BQ3201-100 Women's",
+   "usd": 20,
+   "jpy": 3000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-21T03:11:56Z",
+   "line": "",
+   "itemType": "Shoes",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-01-21",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "716-23545",
+   "brand": "Christian Dior",
+   "genre": "Bag",
+   "title": "Rasta (Bags) and Wallets",
+   "sub": "",
+   "name": "Rasta (Bags) and Wallets",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-22T07:13:14Z",
+   "line": "Rasta(Bag)",
+   "itemType": "Wallet",
+   "size": "",
+   "listed": "2023-04-27",
+   "until": "2027-01-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     562,
+     1000
+    ],
+    [
+     1000,
+     562
+    ],
+    [
+     562,
+     1000
+    ],
+    [
+     1000,
+     562
+    ],
+    [
+     1000,
+     562
+    ],
+    [
+     1000,
+     562
+    ]
+   ]
+  },
+  {
+   "lot": "875-32285",
+   "brand": "Casio",
+   "genre": "Watch",
+   "title": "Wave Ceptor Solar Watch Pink LWQ-120 Ladies",
+   "sub": "",
+   "name": "Wave Ceptor Solar Watch Pink LWQ-120 Ladies",
+   "usd": 24,
+   "jpy": 3520,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:47Z",
+   "line": "",
+   "itemType": "Unisex",
+   "size": "",
+   "listed": "2026-06-24",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 7,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "867-24150",
+   "brand": "Gucci",
+   "genre": "Bag",
+   "title": "GG Canvas Shoulder Bag Cross Bag Brown 1142",
+   "sub": "Ref. 114273",
+   "name": "114273　Gucci GG Canvas Shoulder Bag Cross Bag Brown 1142",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-14T16:03:49Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "867-24126",
+   "brand": "Chanel",
+   "genre": "Jewelry",
+   "title": "Coco mark Gold Cross",
+   "sub": "Brooch · Vintage · 94P",
+   "name": "Brooch , coco mark Gold Cross, Vintage, 94P",
+   "usd": 180,
+   "jpy": 27000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:35:43Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "867-24148",
+   "brand": "Louis Vuitton",
+   "genre": "Bag",
+   "title": "Rivoli MM Damier 2-way Handbag /Shoulder Bag N",
+   "sub": "Ref. N41150",
+   "name": "N41150　Louis Vuitton Rivoli MM Damier 2-way Handbag /Shoulder Bag N",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:33:41Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "819-43952",
+   "brand": "Gucci",
+   "genre": "Accessories",
+   "title": "739868 520981 Travel tag",
+   "sub": "",
+   "name": "739868 520981 Travel tag",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-12-01T05:07:31Z",
+   "line": "",
+   "itemType": "Cellphone Straps /Keychain",
+   "size": "",
+   "listed": "2025-05-11",
+   "until": "2026-12-01",
+   "grade": {
+    "overall": "A"
+   },
+   "notes": [
+    "Scratch (S)"
+   ],
+   "photos": 4,
+   "photoTotal": 4,
+   "edited": false,
+   "dims": [
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "875-32232",
+   "brand": "Casio",
+   "genre": "Watch",
+   "title": "BABY-G Quartz Watch BG-169G Women's Watch",
+   "sub": "",
+   "name": "BABY-G Quartz Watch BG-169G Women's Watch",
+   "usd": 24,
+   "jpy": 3520,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:47Z",
+   "line": "",
+   "itemType": "Unisex",
+   "size": "",
+   "listed": "2026-06-24",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 7,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "865-39335",
+   "brand": "Hermès",
+   "genre": "Clothing",
+   "title": "Twilly Scarf",
+   "sub": "Hermes Sport · Silk",
+   "name": "Twilly Scarf, Hermes Sport, Silk",
+   "usd": 174,
+   "jpy": 26038,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:26Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-03-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "864-32506",
+   "brand": "Chanel",
+   "genre": "Bag",
+   "title": "Matelassé",
+   "sub": "Shoulder bag",
+   "name": "Matelassé  (Bag) - Shoulder Bag",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-12-01T05:07:31Z",
+   "line": "Matelasse(Bag)",
+   "itemType": "Shoulder bag",
+   "size": "Shoulder chain (Approx.) 102cm With sticker, Series 18",
+   "listed": "2026-04-03",
+   "until": "2026-12-01",
+   "grade": {
+    "overall": "C",
+    "exterior": "3",
+    "interior": "2"
+   },
+   "notes": [
+    "Shoulder Peeling (M)",
+    "Peeling Outside (L)",
+    "Outside fittings Plating peeling (M)",
+    "Inside Covered Peeling (M)",
+    "Medium Inside Dirty (M)"
+   ],
+   "photos": 6,
+   "photoTotal": 6,
+   "edited": true,
+   "dims": [
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "867-24140",
+   "brand": "Prada",
+   "genre": "Bag",
+   "title": "Bucket Hat",
+   "sub": "Nylon · Triangle logo · Black and White",
+   "name": "Bucket Hat, Nylon, Triangle logo , Black and White, Polka Dot Hat",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:34:05Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "716-23249",
+   "brand": "Christian Dior",
+   "genre": "Jewelry",
+   "title": "Floral Necklace",
+   "sub": "",
+   "name": "Floral Necklace",
+   "usd": 167,
+   "jpy": 24980,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-22T07:14:00Z",
+   "line": "",
+   "itemType": "Necklace/Pendant",
+   "size": "Storage box",
+   "listed": "2023-04-27",
+   "until": "2027-01-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 6,
+   "edited": false,
+   "dims": [
+    [
+     562,
+     1000
+    ],
+    [
+     562,
+     1000
+    ],
+    [
+     562,
+     1000
+    ],
+    [
+     562,
+     1000
+    ],
+    [
+     562,
+     1000
+    ],
+    [
+     783,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "867-24147",
+   "brand": "Gucci",
+   "genre": "Bag",
+   "title": "GG Supreme Sherry Line Leather Coating Canvas Brown",
+   "sub": "",
+   "name": "GG Supreme Sherry Line Leather Coating Canvas Brown",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-14T16:04:26Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-01-14",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "853-34836",
+   "brand": "Louis Vuitton",
+   "genre": "Accessories",
+   "title": "Cat Keychain M01475 Unused",
+   "sub": "Stored Item",
+   "name": "Cat Keychain M01475 Unused, Stored Item",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-22T07:01:48Z",
+   "line": "Monogram(Accessories)",
+   "itemType": "Cellphone Straps /Keychain",
+   "size": "storage bag",
+   "listed": "2026-01-17",
+   "until": "2027-01-22",
+   "grade": null,
+   "notes": [],
+   "photos": 5,
+   "photoTotal": 5,
+   "edited": false,
+   "dims": [
+    [
+     931,
+     1000
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "863-30693",
+   "brand": "Nike",
+   "genre": "Clothing",
+   "title": "Blazer MID 616827-995 Mid-cut sneakers for women",
+   "sub": "",
+   "name": "Blazer MID 616827-995 Mid-cut sneakers for women",
+   "usd": 20,
+   "jpy": 3000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-21T03:11:59Z",
+   "line": "",
+   "itemType": "Shoes",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-01-21",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "839-31537",
+   "brand": "Hermès",
+   "genre": "Bag",
+   "title": "Pocket book",
+   "sub": "",
+   "name": "pocket book",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-01T04:11:46Z",
+   "line": "",
+   "itemType": "Notebook cover/card case",
+   "size": "□G Engraved",
+   "listed": "2025-10-02",
+   "until": "2027-03-01",
+   "grade": {
+    "overall": "C",
+    "exterior": "2",
+    "interior": "2+"
+   },
+   "notes": [
+    "Outside Rubbing, Dirty, and Peeling (M)",
+    "Inside Rubbing and Dirty (M)"
+   ],
+   "photos": 4,
+   "photoTotal": 4,
+   "edited": false,
+   "dims": [
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "867-24138",
+   "brand": "Louis Vuitton",
+   "genre": "Bag",
+   "title": "Run Away Line Black LV logo Heel Secret Shoes",
+   "sub": "Ref. M12670",
+   "name": "M12670　Louis Vuitton Run Away Line Black LV logo Heel Secret Shoes",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:34:26Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "866-24360",
+   "brand": "Chanel",
+   "genre": "Jewelry",
+   "title": "Clip-on Earrings",
+   "sub": "Icon series · Precious metal",
+   "name": "Icon Series (Precious Metals) - Clip-on earring(s)",
+   "usd": 140,
+   "jpy": 21000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-10-15T05:17:36Z",
+   "line": "Icon series(jewelry)",
+   "itemType": "Earrings (clip-on)",
+   "size": "One side is No plate and has Aftermarket and Dent to the",
+   "listed": "2026-04-14",
+   "until": "2026-10-15",
+   "grade": null,
+   "notes": [],
+   "photos": 4,
+   "photoTotal": 4,
+   "edited": true,
+   "dims": [
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ]
+   ]
+  },
+  {
+   "lot": "862-32831",
+   "brand": "Chanel",
+   "genre": "Bag",
+   "title": "Coco mark Short Boots",
+   "sub": "Ref. G31208 · Matelassé Black · 23.0cm",
+   "name": "G31208　Chanel coco mark Short Boots, Matelassé  Black , 23.0cm",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:44:20Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-03-20",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "778-35317",
+   "brand": "Gucci",
+   "genre": "Accessories",
+   "title": "Sunglasses",
+   "sub": "",
+   "name": "sunglasses",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-22T07:07:56Z",
+   "line": "GG canvas(Accessories)",
+   "itemType": "Sunglasses/Glasses",
+   "size": "Storage Box Cross and Other",
+   "listed": "2024-07-21",
+   "until": "2027-01-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 6,
+   "edited": false,
+   "dims": [
+    [
+     750,
+     1000
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "865-39330",
+   "brand": "Hermès",
+   "genre": "Clothing",
+   "title": "Twilly Scarf",
+   "sub": "Ex-Libris",
+   "name": "Twilly Scarf, Ex-Libris",
+   "usd": 174,
+   "jpy": 26038,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-22T08:23:26Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-12",
+   "until": "2027-03-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 7,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "867-24139",
+   "brand": "Prada",
+   "genre": "Bag",
+   "title": "Tessuto Nylon Shoulder",
+   "sub": "Sacoche · Black with Triangle logo",
+   "name": "Tessuto Nylon Shoulder Bag, Sacoche , Black with Triangle logo",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-14T16:05:12Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "867-24142",
+   "brand": "Gucci",
+   "genre": "Bag",
+   "title": "GG Supreme Leather Coating Canvas Navy Mini Boston",
+   "sub": "",
+   "name": "GG Supreme Leather Coating Canvas Navy Mini Boston Bag",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-14T16:04:47Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "716-23250",
+   "brand": "Christian Dior",
+   "genre": "Jewelry",
+   "title": "Necklace/Pendant logo Rhinestone",
+   "sub": "",
+   "name": "Necklace/Pendant logo Rhinestone",
+   "usd": 133,
+   "jpy": 19980,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-22T07:13:53Z",
+   "line": "",
+   "itemType": "Necklace/Pendant",
+   "size": "",
+   "listed": "2023-04-27",
+   "until": "2027-01-22",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 6,
+   "edited": false,
+   "dims": [
+    [
+     562,
+     1000
+    ],
+    [
+     1000,
+     562
+    ],
+    [
+     562,
+     1000
+    ],
+    [
+     1000,
+     562
+    ],
+    [
+     562,
+     1000
+    ],
+    [
+     1000,
+     562
+    ]
+   ]
+  },
+  {
+   "lot": "833-33515",
+   "brand": "Hermès",
+   "genre": "Bag",
+   "title": "Bolide 35",
+   "sub": "Handbag",
+   "name": "Bolide (bag) - Handbag 35",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-12-01T05:07:31Z",
+   "line": "Bolide(Bag)",
+   "itemType": "Handbag",
+   "size": "Engraving unclear",
+   "listed": "2025-08-23",
+   "until": "2026-12-01",
+   "grade": {
+    "overall": "C",
+    "exterior": "2",
+    "interior": "2"
+   },
+   "notes": [
+    "Handle Painting (M)",
+    "edge of handle ( (M)",
+    "Outside Rubbing& Dirty (M)",
+    "Outside Painting& Wrinkles (M)",
+    "Outside Scratch& Peeling (M)",
+    "Outside zipper Plating peeling (M)",
+    "Inside Rubbing and Dirty (M)",
+    "(L) Inside Scratch , (M) Peeling"
+   ],
+   "photos": 6,
+   "photoTotal": 8,
+   "edited": true,
+   "dims": [
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "839-31514",
+   "brand": "Louis Vuitton",
+   "genre": "Accessories",
+   "title": "Illustr",
+   "sub": "",
+   "name": "Illustr",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-01T04:10:02Z",
+   "line": "Monogram(Accessories)",
+   "itemType": "Cellphone Straps /Keychain",
+   "size": "",
+   "listed": "2025-10-02",
+   "until": "2027-03-01",
+   "grade": {
+    "overall": "B"
+   },
+   "notes": [
+    "(S) rubbing",
+    "Metallic parts Scratch (M)"
+   ],
+   "photos": 3,
+   "photoTotal": 3,
+   "edited": false,
+   "dims": [
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ],
+    [
+     999,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "863-30692",
+   "brand": "Nike",
+   "genre": "Clothing",
+   "title": "High-top sneakers 616825-995 Men's SIZE 27.0",
+   "sub": "",
+   "name": "high-top sneakers 616825-995 Men's SIZE 27.0",
+   "usd": 20,
+   "jpy": 3000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-21T03:11:56Z",
+   "line": "",
+   "itemType": "Shoes",
+   "size": "",
+   "listed": "2026-03-25",
+   "until": "2027-01-21",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "867-24128",
+   "brand": "Louis Vuitton",
+   "genre": "Bag",
+   "title": "Monogram Eclipse chain Bracelet",
+   "sub": "Ref. M62592 · Silver · M62592",
+   "name": "M62592　Louis Vuitton Monogram Eclipse chain Bracelet , Silver, M62592",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:35:27Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 5,
+   "photoTotal": 5,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "862-32826",
+   "brand": "Chanel",
+   "genre": "Bag",
+   "title": "Sneakers with coco mark",
+   "sub": "Ref. G35346 · Black and white · size 21.5cm",
+   "name": "G35346　Chanel sneakers with coco mark, Black and white, size 21.5cm",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:44:57Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-03-20",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "865-41749",
+   "brand": "Chanel",
+   "genre": "Jewelry",
+   "title": "Vintage Classic (Precious Metal) Clip-on earring(s)",
+   "sub": "",
+   "name": "Vintage Classic (Precious Metal) Clip-on earring(s)",
+   "usd": 120,
+   "jpy": 18000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-01T10:12:26Z",
+   "line": "Vintage Classic(jewelry)",
+   "itemType": "Earrings (clip-on)",
+   "size": "Color stone have Aftermarket and Dent.",
+   "listed": "2026-04-13",
+   "until": "2027-03-01",
+   "grade": null,
+   "notes": [],
+   "photos": 5,
+   "photoTotal": 5,
+   "edited": false,
+   "dims": [
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ]
+   ]
+  },
+  {
+   "lot": "868-57917",
+   "brand": "Prada",
+   "genre": "Bag",
+   "title": "Leather Shoulder",
+   "sub": "Black · WS27477",
+   "name": "leather Shoulder bag , Black , WS27477",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-11-11T02:02:10Z",
+   "line": "",
+   "itemType": "Shoulder bag",
+   "size": "BC",
+   "listed": "2026-05-10",
+   "until": "2026-11-11",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 11,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "777-27453",
+   "brand": "Louis Vuitton",
+   "genre": "Accessories",
+   "title": "Micro charm Petite Mal M01567",
+   "sub": "",
+   "name": "Micro charm Petite Mal M01567",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-22T07:09:52Z",
+   "line": "Monogram(Accessories)",
+   "itemType": "Cellphone Straps /Keychain",
+   "size": "storage bag",
+   "listed": "2024-07-12",
+   "until": "2027-01-22",
+   "grade": null,
+   "notes": [],
+   "photos": 3,
+   "photoTotal": 3,
+   "edited": false,
+   "dims": [
+    [
+     750,
+     1000
+    ],
+    [
+     750,
+     1000
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "868-53857",
+   "brand": "Adidas",
+   "genre": "Clothing",
+   "title": "IENA Low-Cut Sneakers SUPERCOURT FX1031",
+   "sub": "",
+   "name": "IENA Low-Cut Sneakers SUPERCOURT FX1031",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-03-09T04:49:53Z",
+   "line": "",
+   "itemType": "Shoes",
+   "size": "",
+   "listed": "2026-05-09",
+   "until": "2027-03-09",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 9,
+   "edited": false,
+   "dims": [
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ],
+    [
+     862,
+     999
+    ]
+   ]
+  },
+  {
+   "lot": "867-24136",
+   "brand": "Gucci",
+   "genre": "Bag",
+   "title": "Sylvie Sherry Line White Python",
+   "sub": "Ref. 431665",
+   "name": "431665　Gucci Sylvie Sherry Line White Python 431665",
+   "usd": 0,
+   "jpy": 0,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:34:43Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-21",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 6,
+   "photoTotal": 10,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  },
+  {
+   "lot": "873-04348",
+   "brand": "Christian Dior",
+   "genre": "Jewelry",
+   "title": "Logo Necklace",
+   "sub": "Silver · 38 cm",
+   "name": "logo Silver Precious Metal Necklace Necklace, Total length (Approx.). 38cm",
+   "usd": 74,
+   "jpy": 11000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2026-12-17T15:37:22Z",
+   "line": "",
+   "itemType": "Necklace/Pendant",
+   "size": "",
+   "listed": "2026-06-09",
+   "until": "2026-10-29",
+   "grade": {
+    "overall": "B"
+   },
+   "notes": [
+    "Scratch and Dent present"
+   ],
+   "photos": 3,
+   "photoTotal": 3,
+   "edited": true,
+   "dims": [
+    [
+     707,
+     1000
+    ],
+    [
+     707,
+     1000
+    ],
+    [
+     707,
+     1000
+    ]
+   ]
+  },
+  {
+   "lot": "864-39965",
+   "brand": "Chanel",
+   "genre": "Jewelry",
+   "title": "Clip-on earring(s)",
+   "sub": "coco mark round Circle gold · early vintage.",
+   "name": "Clip-on earring(s), coco mark round Circle gold, early vintage.",
+   "usd": 60,
+   "jpy": 9000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:39:16Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-06",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 4,
+   "photoTotal": 4,
+   "edited": false,
+   "dims": [
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ],
+    [
+     914,
+     686
+    ]
+   ]
+  },
+  {
+   "lot": "873-42862",
+   "brand": "Christian Dior",
+   "genre": "Jewelry",
+   "title": "Necklace /Pendant with Chain (Approx.) 43cm long",
+   "sub": "",
+   "name": "Necklace /Pendant with Chain (Approx.) 43cm long",
+   "usd": 70,
+   "jpy": 10500,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-01-09T09:09:39Z",
+   "line": "",
+   "itemType": "Necklace/Pendant",
+   "size": "Scratch and Dent present.",
+   "listed": "2026-06-15",
+   "until": "2027-01-09",
+   "grade": null,
+   "notes": [],
+   "photos": 3,
+   "photoTotal": 3,
+   "edited": false,
+   "dims": [
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ],
+    [
+     640,
+     480
+    ]
+   ]
+  },
+  {
+   "lot": "864-39990",
+   "brand": "Chanel",
+   "genre": "Jewelry",
+   "title": "Clip-on earring(s) coco mark Gold Earring",
+   "sub": "Early Vintage · Single Earring",
+   "name": "Clip-on earring(s) coco mark Gold Earring, Early Vintage, Single Earring",
+   "usd": 54,
+   "jpy": 8000,
+   "kind": "MALL",
+   "ship": "JP",
+   "ends": "2027-02-11T15:36:31Z",
+   "line": "",
+   "itemType": "Others",
+   "size": "",
+   "listed": "2026-04-06",
+   "until": "2027-03-27",
+   "grade": null,
+   "notes": [],
+   "photos": 5,
+   "photoTotal": 5,
+   "edited": false,
+   "dims": [
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ],
+    [
+     1000,
+     750
+    ]
+   ]
+  }
+ ]
+}

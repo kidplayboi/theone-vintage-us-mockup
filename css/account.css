@@ -1,0 +1,56 @@
+/* 계정 — My offers(31쪽) · Saved(11쪽) */
+.account { padding-top: var(--s6); padding-bottom: var(--s8); }
+.account-head { display: grid; gap: var(--s2); padding: var(--s5) 0 var(--s6); }
+
+/* 상태 네 칸 — 할 일 있는 칸이 첫 자리 */
+.o-cells { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--white); border: 1px solid var(--line); }
+.o-cell { display: grid; gap: var(--s3); padding: var(--s5); text-align: left; border-left: 3px solid transparent; transition: background-color .15s var(--ease); }
+.o-cell + .o-cell { box-shadow: inset 1px 0 0 var(--line); }
+.o-cell:hover { background: #FBFAF7; }
+.o-cell[aria-pressed="true"] { background: var(--sand); }
+.o-cell.is-alert { border-left-color: var(--ending); }
+.o-cell.is-alert .label { color: var(--ending); }
+.o-count { font: 500 var(--fs-30)/1 var(--sans); }
+
+.o-table-wrap { margin-top: var(--s6); background: var(--white); border: 1px solid var(--line); padding: var(--s4) var(--s5); overflow-x: auto; }
+.o-table { min-width: 720px; }
+.o-table td { font-size: var(--fs-15); }
+.o-lot { display: flex; align-items: center; gap: var(--s3); }
+.o-lot img { width: 56px; height: 56px; object-fit: contain; background: #EFEBE4; mix-blend-mode: multiply; flex: none; }
+.o-lot span { display: grid; gap: 2px; }
+.o-lot b { font-weight: 500; }
+.o-lot:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.notes-on tr.is-example td:first-child { box-shadow: inset 3px 0 0 var(--gold); padding-left: var(--s3); }
+
+/* 상태 배지 — 표에서는 토큰 모서리 배지, 진한 글자, 색 네 가지 이하(이쁨 16) */
+.badge {
+  display: inline-block; padding: 5px 8px; border-radius: var(--r);
+  font: 400 var(--fs-11)/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; white-space: nowrap;
+}
+.badge.alert { background: #FBE9E7; color: var(--ending); }
+.badge.quiet { background: #EEECE7; color: #4A4A52; }
+.badge.navy { background: var(--navy); color: var(--white); }
+.badge.ok { background: #E4F3EA; color: var(--live-text); }
+.o-empty { display: grid; justify-items: center; gap: var(--s3); padding: var(--s7) var(--s4); text-align: center; }
+
+/* Saved */
+.folders { align-items: center; margin-bottom: var(--s5); }
+.rename { display: flex; gap: var(--s2); }
+.rename .input { min-height: 36px; width: 200px; font-size: var(--fs-13); }
+.example-line { margin-bottom: var(--s4); }
+.saved-item { display: flex; flex-direction: column; gap: var(--s2); }
+.saved-item .card { flex: 1; }
+.saved-note { display: grid; gap: 2px; padding: var(--s3); background: var(--sand); font-size: var(--fs-13); }
+.saved-note .label { color: var(--gray-on-sand); }
+
+@media (max-width: 860px) {
+  .o-cells { grid-template-columns: 1fr 1fr; }
+  .o-cell:nth-child(3) { box-shadow: none; }
+  .o-cell:nth-child(n + 3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 720px) {
+  .account { padding-top: var(--s3); }
+  .o-cell { padding: var(--s4); }
+  .o-count { font-size: var(--fs-20); }
+  .o-table-wrap { padding: var(--s2) var(--s3); margin-left: calc(var(--gutter) * -1); margin-right: calc(var(--gutter) * -1); border-left: 0; border-right: 0; }
+}

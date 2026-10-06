@@ -1,0 +1,64 @@
+/* 디자인 토큰 — 기획안 35쪽 + 대비 실측 보정(docs/design/refs/2026-10-06-us-mockup.md) */
+:root {
+  --paper: #F6F4EF;
+  --white: #FFFFFF;
+  --ink: #15151A;
+  --gray: #6A6A73;
+  --gray-on-ink: #A9A6A0;
+  --navy: #123A5E;
+  --navy-hover: #0E2F4D;
+  --gold: #8A6A36;
+  --rank: #4A2E22;
+  --line: #DDD9CF;
+  --line-on-ink: #34343B;
+
+  --live: #1F8A4C;
+  --live-text: #187843;
+  --ending: #B42318;
+  --reserve: #B54708;
+
+  /* 2차 — 색으로 구역을 나눈다(결정 40~43). 값은 인트로 영상에서 뽑은 색: 살롱 #1E140F · 가죽 #704C3E · 황동 #8C765C */
+  --espresso: #1C1410;      /* 어두운 띠 — Bezel 진행 중 경매 띠 자리 */
+  --cream: #F3EDE3;         /* 어두운 띠 위 글자 15.6:1 */
+  --stone: #B3A79A;         /* 어두운 띠 위 보조 글자 7.7:1 */
+  --brass: #C2A36B;         /* 어두운 띠 위 라벨 7.6:1 */
+  --ending-on-dark: #F08A7E;
+  --sand: #ECE4D6;          /* 밝은 띠 — Rebag 베이지 면 자리 */
+  --sand-deep: #E2D6C1;
+  --gray-on-sand: #5F5F68;  /* 5.0:1 */
+  --signal: #2BD45B;        /* 'New' 라벨 면 — Loupe NO RESERVE 초록, 글자는 잉크 9.3:1 */
+
+  --display: 'Bodoni Moda', 'Didot', Georgia, serif;
+  --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --fs-56: 56px;
+  --fs-30: 30px;
+  --fs-20: 20px;
+  --fs-16: 16px;
+  --fs-15: 15px;
+  --fs-13: 13px;
+  --fs-11: 11px;
+
+  --r: 2px;
+
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+  --s8: 72px;
+
+  --wrap: 1248px;
+  --gutter: 24px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --fs-56: 40px;
+    --gutter: 16px;
+  }
+}

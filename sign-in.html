@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Sign in — TheOne Vintage</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2315151A'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23C9A96E'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=JetBrains+Mono:wght@400&family=Jost:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="css/tokens.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/base.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/chrome.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/pages.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/review.css?v=ffe41d4f8e">
+</head>
+<body>
+<div id="review"></div>
+<header id="top"></header>
+<main class="auth-page">
+  <figure class="auth-img"><img src="assets/editorial/gold_chain.jpg" alt="Gold curb chain on black velvet" width="1800" height="1013"></figure>
+  <form class="auth-form" novalidate data-signin data-note="가입할 이유 하나 = 판매가는 회원에게만(21쪽 · Loupe·까사·KREAM 공통). 시안이라 실제 로그인은 없다 — 누르면 로그인 상태로 바뀐다." data-ref="21쪽">
+    <p class="label">Account</p>
+    <h1 class="display d56">Sign in</h1>
+    <p class="muted">See sold prices and keep your offers and saved lots in one place.</p>
+    <label class="field"><span>Email</span><input class="input" type="email" name="email" autocomplete="email" required></label>
+    <label class="field"><span>Password</span><input class="input" type="password" name="password" autocomplete="current-password" required minlength="8"></label>
+    <p class="field-error" data-auth-error role="alert"></p>
+    <button class="btn block" type="submit">Sign in</button>
+    <p class="t13 muted">New here? Signing in creates your account. Requests are open to anyone — no account needed.</p>
+  </form>
+</main>
+<footer id="foot"></footer>
+<script type="module">
+  import { startPage } from './js/page.js?v=ffe41d4f8e';
+  import * as store from './js/store.js?v=ffe41d4f8e';
+  startPage({ page: 'signin' });
+  const form = document.querySelector('[data-signin]');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const err = form.querySelector('[data-auth-error]');
+    const email = form.email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Please enter a valid email address.'; form.email.focus(); return; }
+    if (form.password.value.length < 8) { err.textContent = 'Your password needs at least 8 characters.'; form.password.focus(); return; }
+    err.textContent = '';
+    store.set('signedIn', true);
+    // 돌아갈 곳은 이 사이트 안의 .html 만(외부로 튀는 리다이렉트 차단)
+    const next = new URLSearchParams(location.search).get('next') || '';
+    location.href = /^[a-z-]+\.html([?#][\w=&%.#-]*)?$/i.test(next) ? next : 'index.html';
+  });
+</script>
+</body>
+</html>

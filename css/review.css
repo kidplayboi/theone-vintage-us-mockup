@@ -1,0 +1,49 @@
+/* 시안 도구 — 제품 밖. 한국어라 Pretendard(결정 39) */
+.review {
+  position: relative; z-index: 60;
+  background: #0C0C0F; color: #E9E7E2;
+  font: 400 12px/1.4 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  letter-spacing: 0;
+}
+.review-in {
+  display: flex; align-items: center; gap: 10px;
+  min-height: 40px; padding: 6px var(--gutter);
+  overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+}
+.review-in::-webkit-scrollbar { display: none; }
+.rv-title { display: flex; gap: 8px; align-items: baseline; margin-right: auto; }
+.rv-title b { font-weight: 600; color: #fff; }
+.rv-title span { color: #9C9A94; }
+.rv-group { display: inline-flex; align-items: center; gap: 4px; color: #9C9A94; }
+.rv-group span { margin-right: 2px; }
+.rv-group button, .rv-btn, .rv-group select {
+  min-height: 28px; padding: 0 10px;
+  border: 1px solid #3A3A42; border-radius: 2px;
+  background: transparent; color: #E9E7E2; font: inherit;
+  display: inline-flex; align-items: center;
+}
+.rv-group select { padding-right: 6px; }
+.rv-group select option { color: #15151A; }
+.rv-group button:hover, .rv-btn:hover { border-color: #8E8C86; }
+.rv-group button[aria-pressed="true"], .rv-btn[aria-pressed="true"] { background: #E9E7E2; color: #0C0C0F; border-color: #E9E7E2; }
+
+/* 메모 핀 */
+.note-host { position: relative; }
+body.notes-on [data-note] { outline: 1px dashed rgba(138, 106, 54, .7); outline-offset: 3px; }
+.note-pin {
+  position: absolute; top: -11px; left: -11px; z-index: 35;
+  display: grid; place-items: center; width: 22px; height: 22px;
+  border-radius: 2px; background: var(--gold); color: #fff;
+  font: 600 11px/1 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  box-shadow: 0 2px 6px rgba(21, 21, 26, .25);
+}
+.note-pin:hover { background: var(--rank); }
+.note-pop {
+  position: absolute; z-index: 200;
+  padding: 12px 14px; background: #fff; color: var(--ink);
+  border: 1px solid var(--ink); border-radius: 2px;
+  font: 400 13px/1.6 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  word-break: keep-all;
+  box-shadow: 0 12px 32px rgba(21, 21, 26, .18);
+}
+.note-ref { display: block; margin-top: 6px; color: var(--gray); font-size: 12px; }

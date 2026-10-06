@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>상태 모음 — TheOne Vintage 시안</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2315151A'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23C9A96E'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=JetBrains+Mono:wght@400&family=Jost:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="css/tokens.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/base.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/chrome.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/card.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/pages.css?v=ffe41d4f8e">
+<link rel="stylesheet" href="css/review.css?v=ffe41d4f8e">
+</head>
+<body>
+<div id="review"></div>
+<header id="top"></header>
+<main class="states wrap">
+  <h1>상태 모음 <span class="muted" style="font-weight:400">· 시안 도구</span></h1>
+  <p class="desc">상품 하나가 거치는 상태와 그때 화면에 보이는 것을 한곳에 모았다(기획안 24·29쪽). 카드는 실재고에 상태만 입힌 예시이고, 아래 표의 링크를 누르면 그 상태의 상세 페이지가 열린다. 주소로 연 상태는 그 화면에서만 적용되고 저장되지 않는다.</p>
+
+  <h2>카드 — 24쪽 네 가지 상태 + 가격 미공개 · 입찰</h2>
+  <div class="state-grid" data-card-states></div>
+
+  <h2>상세 오른쪽 칸 · 이메일 — 29쪽</h2>
+  <table class="state-table">
+    <thead><tr><th>상태</th><th>카드 라벨</th><th>상세 오른쪽 칸</th><th>손님에게 가는 이메일</th><th>보기</th></tr></thead>
+    <tbody data-state-rows></tbody>
+  </table>
+</main>
+<footer id="foot"></footer>
+<script type="module">
+  import { startPage } from './js/page.js?v=ffe41d4f8e';
+  import { cardHTML, bindCards, startTicker } from './js/card.js?v=ffe41d4f8e';
+  import { openQuick } from './js/quickview.js?v=ffe41d4f8e';
+  import { exampleAuction } from './js/data.js?v=ffe41d4f8e';
+
+  const data = await startPage({ page: 'states' });
+  if (data) {
+    const L = data.lots;
+    const byId = id => L.find(x => x.lot === id) || L[0];
+    const soon = [...L].filter(x => x.usd && x.until).sort((a, b) => a.until.localeCompare(b.until))[0];
+    const noPrice = L.find(x => !x.usd);
+    const graded = L.find(x => x.grade && x.usd) || L[0];
+    const cards = [
+      [L[0], 'A', 'auto', '<b>기본</b> — 달러 먼저, 판매 조건 라벨 한 줄, 엔화는 맨 아래 작게. 마우스를 올리면 테두리가 진해지고 빠른 보기가 뜬다.'],
+      [soon, 'A', 'auto', '<b>판매 기한 임박</b> — 기한 30일 안이면 라벨이 날짜로, 7일 안이면 붉은 글씨.'],
+      [L[1], 'A', 'sold', '<b>판매 완료</b> — 바로 지우지 않고 7일 남긴다. 판매가는 로그인 손님에게만(제안값).'],
+      [noPrice, 'A', 'auto', '<b>가격 미공개</b> — 원천 가격이 0인 상품. 지금 사이트는 ¥0으로 찍힌다(결정 28).'],
+      [graded, 'A', 'auto', '<b>등급 있음</b> — 등급 배지는 사진 왼쪽 위 한 자리.'],
+      [L[1], 'B', 'auto', '<b>입찰(B)</b> — BID · ENDS IN. 1시간 안이면 붉은 글씨. 값은 예시.'],
+      [L.find(x => x.usd && exampleAuction(x).reserve === 'none') || L[6], 'B', 'auto', '<b>입찰 · 최소가 없음</b> — 초록 라벨은 사실일 때만(결정 43). 값은 예시.'],
+    ];
+    const grid = document.querySelector('[data-card-states]');
+    grid.innerHTML = cards.map(([lot, sale, state, cap]) => `<div>${cardHTML(lot, { sale, state })}<p class="state-cap">${cap}</p></div>`).join('');
+    bindCards(grid, L, { onQuick: openQuick });
+    startTicker();
+
+    const id = L[0].lot;
+    const link = (sale, state) => `<a href="lot.html?id=${id}&sale=${sale}&state=${state}">열기</a>`;
+    const rows = [
+      ['<b>A 정가와 가격 제안</b>', '', '', '', ''],
+      ['판매 중', 'Price $X · Offers OK', 'Request this lot / Make an offer', '—', link('A', 'available')],
+      ['제안 보냄', 'Your offer $X', "We'll reply by …  · 제안 취소 링크", 'We received your offer', link('A', 'offer-sent')],
+      ['역제안', 'Counter $X', 'Accept / Decline · 응답 기한', 'We have a counteroffer for you', link('A', 'counter')],
+      ['수락됨', 'Accepted — pay by …', '확정 총액 표 + Pay now', 'Your offer was accepted — total $X,XXX', link('A', 'accepted')],
+      ['판매 완료', 'Sold · Sep 30', '판매가(회원만) + 비슷한 상품', 'A lot you saved has sold', link('A', 'sold')],
+      ['기한 지남', '목록에서 자동으로 빠짐', 'No longer available + 비슷한 상품', '—', link('A', 'expired')],
+      ['<b>B 입찰로 바꿀 때</b>', '', '', '', ''],
+      ['최고가 입찰 중', "Bid $X · You're leading", "초록 점 + You're the highest bidder", '—', link('B', 'leading')],
+      ['상회 입찰됨', 'Outbid · $X', '붉은 문장 + 금액 버튼 바로', "You've been outbid", link('B', 'outbid')],
+      ['연장 중', 'Extended · 04:59', 'A late bid added 5 minutes', '—', link('B', 'extended')],
+      ['최소가 미달 종료', 'Ended · Reserve not met', 'Make an offer to the seller', "The reserve wasn't met — you can still make an offer", link('B', 'reserve-not-met')],
+    ];
+    document.querySelector('[data-state-rows]').innerHTML = rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('');
+  }
+</script>
+</body>
+</html>

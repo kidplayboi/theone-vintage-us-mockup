@@ -1,10 +1,10 @@
 // 상세 정보 칸 v2 — 상세 창(모달)과 상세 페이지가 같이 쓴다
 // 순서 = 상태 띠 → 브랜드·제목 → 달러(크게) → 등급표 → 문의 → 신뢰 · 도착일 → 메모 · 시세
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급표 보이게)
-import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=175355a533';
-import { icon } from './icons.js?v=175355a533';
-import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=175355a533';
-import * as store from './store.js?v=175355a533';
+import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=bc7d5dbcff';
+import { icon } from './icons.js?v=bc7d5dbcff';
+import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=bc7d5dbcff';
+import * as store from './store.js?v=bc7d5dbcff';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 

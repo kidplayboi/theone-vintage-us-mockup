@@ -1,13 +1,13 @@
 // 목록 페이지 v3 — 운영 사이트 분류 전부(형 10/6 "없애면 안 댐"): 판매 방식 탭 4 · 카테고리 9(개수) · 브랜드 40(개수) ·
 // 정렬 · 페이지당 20/50/100 · 검색 · 시간대 · 쪽 번호 · Premium/Express/Classic. 탭 모양은 Bezel 경매 목록(Live 327 / Ending soon 108)
-import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=175355a533';
-import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=175355a533';
-import { mountReview, paintNotes } from './review.js?v=175355a533';
-import { cardHTML, bindCards, startTicker } from './card.js?v=175355a533';
-import { icon } from './icons.js?v=175355a533';
-import { openLot } from './lotmodal.js?v=175355a533';
-import { initMotion, revealOnScroll } from './motion.js?v=175355a533';
-import * as store from './store.js?v=175355a533';
+import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=bc7d5dbcff';
+import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=bc7d5dbcff';
+import { mountReview, paintNotes } from './review.js?v=bc7d5dbcff';
+import { cardHTML, bindCards, startTicker } from './card.js?v=bc7d5dbcff';
+import { icon } from './icons.js?v=bc7d5dbcff';
+import { openLot } from './lotmodal.js?v=bc7d5dbcff';
+import { initMotion, revealOnScroll } from './motion.js?v=bc7d5dbcff';
+import * as store from './store.js?v=bc7d5dbcff';
 
 const KINDS = [['', 'All lots'], ['RT', 'Live bid'], ['LOW', 'Time limit'], ['MALL', 'Mall']];
 // 고른 판매 방식이 뭔지 한 줄로(처음 온 미국 손님용). 두 색: 초록 = 경매(Live bid · Time limit), 슬레이트 = 고정가(Mall) — 결정 95
@@ -70,9 +70,26 @@ async function main() {
   });
 }
 
+// 모바일 'Filters' 버튼 — 켜진 필터 수 + 요약(결정 113). 데스크톱에선 CSS 가 버튼을 숨기고 줄을 다 펼친다
+let filtersOpen = false;
+function renderFiltersBar() {
+  const active = [];
+  if (ui.brand) active.push(brandName(ui.brand));
+  if (ui.cat) active.push(CAT_LABEL[ui.cat]);
+  if (ui.price) active.push((PRICES.find(p => p[0] === ui.price) || [])[1]);
+  if (ui.grade) active.push((GRADES_F.find(g => g[0] === ui.grade) || [])[1]);
+  if (ui.q) active.push(`“${ui.q}”`);
+  $('[data-filters-count]').textContent = active.length ? String(active.length) : '';
+  $('[data-filters-summary]').textContent = active.length ? active.join(' · ') : 'Brand, category, price, condition';
+  const btn = $('[data-filters-toggle]');
+  btn.setAttribute('aria-expanded', String(filtersOpen));
+  $('[data-filters-more]').classList.toggle('is-open', filtersOpen);
+}
+
 function render() {
   renderHead();
   $('[data-filters]').hidden = ui.sale !== 'premium'; // Express · Classic 은 재고 0 — 필터 대신 설명 빈 상태
+  renderFiltersBar();
   renderKinds();
   renderCats();
   renderBrands();
@@ -285,6 +302,7 @@ function bindControls() {
     else if (cat) Object.assign(ui, { cat: cat.dataset.cat, page: 1 });
     else if (brand) Object.assign(ui, { brand: brand.dataset.brandChip, page: 1 });
     else if (e.target.closest('[data-brands-toggle]')) { brandsOpen = !brandsOpen; renderBrands(); paintNotes(); return; }
+    else if (e.target.closest('[data-filters-toggle]')) { filtersOpen = !filtersOpen; renderFiltersBar(); return; }
     else if (page && !page.disabled) { ui.page = Number(page.dataset.page); renderGrid(); paintNotes(); revealOnScroll(); top(); return; }
     else if (e.target.closest('[data-reset]')) {
       Object.assign(ui, { sale: 'premium', kind: '', cat: '', brand: '', q: '', price: '', grade: '', page: 1 });

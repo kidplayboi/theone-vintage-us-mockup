@@ -10,13 +10,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
-<link rel="stylesheet" href="css/tokens.css?v=175355a533">
-<link rel="stylesheet" href="css/base.css?v=175355a533">
-<link rel="stylesheet" href="css/chrome.css?v=175355a533">
-<link rel="stylesheet" href="css/card.css?v=175355a533">
-<link rel="stylesheet" href="css/lot.css?v=175355a533">
-<link rel="stylesheet" href="css/shop.css?v=175355a533">
-<link rel="stylesheet" href="css/review.css?v=175355a533">
+<link rel="stylesheet" href="css/tokens.css?v=bc7d5dbcff">
+<link rel="stylesheet" href="css/base.css?v=bc7d5dbcff">
+<link rel="stylesheet" href="css/chrome.css?v=bc7d5dbcff">
+<link rel="stylesheet" href="css/card.css?v=bc7d5dbcff">
+<link rel="stylesheet" href="css/lot.css?v=bc7d5dbcff">
+<link rel="stylesheet" href="css/shop.css?v=bc7d5dbcff">
+<link rel="stylesheet" href="css/review.css?v=bc7d5dbcff">
 </head>
 <body class="has-tabs page-shop">
 <div id="review"></div>
@@ -43,6 +43,12 @@
       <div class="kind-tabs" role="tablist" aria-label="Sale type" data-kinds data-note="운영 사이트 판매 방식 탭 All lots / Live bid / Time limit / Mall 그대로, 숫자는 운영 API. 모양 = 한 덩어리 세그먼트 + 아이콘(망치 실시간 · 시계 블라인드 · 가격표 고정가), 색 두 가지(경매 초록 · 고정가 파랑) — 형 10/6 '똑같은 알약이라 구분 안 됨 · 영어 몰라도 쓱 보고 알게'. 같은 색이 카드 띠 · 배지 · 상세 점에 그대로." data-ref="결정 63·95·99"></div>
     </div>
     <p class="kind-help" data-kind-help></p>
+    <!-- 모바일만: 브랜드·카테고리·도구는 'Filters' 버튼 뒤로(결정 113) — 세 줄 + 도구가 카드를 700px 아래로 밀었다(10/6 390 실측) -->
+    <div class="filters-bar" data-filters-bar>
+      <button class="chip chip-more" type="button" data-filters-toggle aria-expanded="false" aria-controls="filters-more">Filters<span class="n" data-filters-count></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <span class="t13 muted" data-filters-summary></span>
+    </div>
+    <div class="filters-more" id="filters-more" data-filters-more>
     <div class="filter-row filter-row-brands">
       <span class="filter-label">Brand</span>
       <div class="chips-wrap">
@@ -69,6 +75,7 @@
       </select></label>
     </div>
     </div>
+    </div>
 
     <div class="grid" data-grid aria-live="polite"></div>
     <nav class="pagination" aria-label="Pages" data-pages></nav>
@@ -77,6 +84,6 @@
 
 <footer id="foot"></footer>
 <div id="tabs"></div>
-<script type="module" src="js/shop.js?v=175355a533"></script>
+<script type="module" src="js/shop.js?v=bc7d5dbcff"></script>
 </body>
 </html>

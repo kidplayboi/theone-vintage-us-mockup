@@ -190,3 +190,10 @@
   .stat, .trust li { padding: var(--s3) var(--s4); }
   .stat b { font-size: var(--fs-20); }
 }
+
+/* 눈 편한 글(결정 108) — 글머리 행간 1.6, 문단 폭 36~44ch, 칸 안 간격 넓게 */
+.problem { gap: var(--s4); }
+.problem li, .bridge-card li { line-height: 1.6; padding: 6px 0; }
+.audience p, .service p { max-width: 38ch; }
+.steps p { max-width: 30ch; }
+.problem-note { margin-top: var(--s6); }

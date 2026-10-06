@@ -98,10 +98,11 @@
 /* 글 3줄 + 배지 */
 /* 트랙을 카드 폭으로 묶고 자식의 자동 최소폭을 0으로 — nowrap 제목이 카드 밖으로 밀고 나가지 않게(10/6 390·768 실측) */
 /* align-content: start — 레일·격자에서 카드 높이를 맞출 때 남는 높이가 행에 분배돼 배지가 142px 로 늘어나던 결함(10/6 실측) */
-.card-body { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 2px; padding: var(--s3) 2px 0; flex: 1; min-width: 0; }
+.card-body { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 3px; padding: var(--s3) 2px 0; flex: 1; min-width: 0; }
 .card-body > * { min-width: 0; }
-.card-brand { font-size: var(--fs-13); font-weight: var(--w-ui); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.card-title { font-size: var(--fs-14); font-weight: 400; line-height: 1.4; color: var(--body); }
+/* 글줄 위계(결정 108 · Bezel 카드 실측: 브랜드는 작은 회색, 이름이 본문, 가격이 주인공) — 세 줄이 같은 굵기로 겹치지 않게 */
+.card-brand { font-size: var(--fs-12); font-weight: 400; color: var(--muted); letter-spacing: var(--track-small); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-title { font-size: var(--fs-14); font-weight: 400; line-height: 1.4; color: var(--ink); }
 .card-title a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: var(--r-lg); }
 .card:hover .card-title a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--line-2); }
@@ -110,7 +111,7 @@
 .card-price .price.ask { font-size: var(--fs-16); font-weight: 400; color: var(--muted); }
 .card-sub { font-size: var(--fs-12); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card-left { display: none; }
-.card-status { margin-top: 6px; }
+.card-status { margin-top: 8px; }
 
 /* 초록 띠 위(홈 Live now) — 카드 띠는 한 단 밝은 초록(여기는 Live bid 만 온다) */
 .on-dark .card-band { background: var(--brand-2); }

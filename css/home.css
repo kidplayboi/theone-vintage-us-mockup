@@ -123,7 +123,7 @@
 /* ── 4 How it works — 3단계(실제 순서라 번호 허용) + 사실 줄 + 사진 2장(힉스필드 raw_1·raw_2) ── */
 .how-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s7); align-items: start; }
 .how-steps { display: grid; }
-.how-steps li { display: grid; grid-template-columns: 32px 1fr; gap: var(--s4); padding: var(--s4) 0; border-top: 1px solid var(--line); }
+.how-steps li { display: grid; grid-template-columns: 32px 1fr; gap: var(--s4); padding: var(--s5) 0; border-top: 1px solid var(--line); }
 .how-steps li:last-child { border-bottom: 1px solid var(--line); }
 .how-n { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.5; }
 .how-steps b { display: block; margin-bottom: 4px; font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }

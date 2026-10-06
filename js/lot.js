@@ -1,14 +1,14 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=8eadc4b56a';
-import { mountChrome, bindNewsletter } from './chrome.js?v=8eadc4b56a';
-import { mountReview, paintNotes } from './review.js?v=8eadc4b56a';
-import { cardHTML, bindCards, startTicker } from './card.js?v=8eadc4b56a';
-import { openLot } from './lotmodal.js?v=8eadc4b56a';
-import { galleryHTML, mountGallery } from './gallery.js?v=8eadc4b56a';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=8eadc4b56a';
-import { bindBuy } from './lotactions.js?v=8eadc4b56a';
-import { initMotion, revealOnScroll } from './motion.js?v=8eadc4b56a';
-import * as store from './store.js?v=8eadc4b56a';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=055cf487dd';
+import { mountChrome, bindNewsletter } from './chrome.js?v=055cf487dd';
+import { mountReview, paintNotes } from './review.js?v=055cf487dd';
+import { cardHTML, bindCards, startTicker } from './card.js?v=055cf487dd';
+import { openLot } from './lotmodal.js?v=055cf487dd';
+import { galleryHTML, mountGallery } from './gallery.js?v=055cf487dd';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=055cf487dd';
+import { bindBuy } from './lotactions.js?v=055cf487dd';
+import { initMotion, revealOnScroll } from './motion.js?v=055cf487dd';
+import * as store from './store.js?v=055cf487dd';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -84,10 +84,10 @@ function renderCondition() {
     <div class="sec-head"><h2 class="display d30">Condition</h2><a class="more-link" href="how-we-grade.html">How we grade</a></div>
     <div class="score" data-reveal data-note="Loupe 스코어카드 + Fashionphile 다섯 칸 척도. 현재 사이트에서 배경과 대비 1.11:1로 안 보이던 등급을 가장 크게. 등급 뜻은 현재 How it works 정의(결정 30)." data-ref="26쪽">
       <p class="label">TheOne scorecard</p>
-      <div class="score-cells">
+      <div class="score-cells${g ? '' : ' is-two'}">
         <div><p class="label">Overall</p><p class="score-big">${g ? big(g.overall) : '—'}</p><p class="t13 muted">${g ? gradeName(g.overall) : 'Not graded'}</p></div>
-        <div><p class="label">Exterior</p><p class="score-big">${big(g && g.exterior)}</p><p class="t13 muted">${g && g.exterior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>
-        <div><p class="label">Interior</p><p class="score-big">${big(g && g.interior)}</p><p class="t13 muted">${g && g.interior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>
+        ${g ? `<div><p class="label">Exterior</p><p class="score-big">${big(g.exterior)}</p><p class="t13 muted">${g.exterior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>
+        <div><p class="label">Interior</p><p class="score-big">${big(g.interior)}</p><p class="t13 muted">${g.interior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>` : ''}
         <div><p class="label">Status</p><p class="score-status">Authenticated<br>in Tokyo</p></div>
       </div>
       ${g ? `<ol class="scale" aria-label="Overall rank on our five-step scale">${scale}</ol>` : `

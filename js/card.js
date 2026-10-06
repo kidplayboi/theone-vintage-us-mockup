@@ -1,10 +1,10 @@
 // 로트 카드 v4 — 까사 정보 구조의 정돈판(결정 72 · v4-lock §6)
 // 띠(마감 · 카운트다운 · 남은 시간 막대) → 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 배지 1
 // 1시간 안이면 띠 글이 "Ending soon" 으로 바뀌고 숫자가 빨강(더윈 12). 카드 어디를 눌러도 상세 창(더윈 4). 모바일은 띠 대신 가격 줄의 알약(BaT · 결정 79)
-import { usd, jpy, cardImg, photo, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName, bidStep } from './data.js?v=8eadc4b56a';
-import { icon } from './icons.js?v=8eadc4b56a';
-import * as store from './store.js?v=8eadc4b56a';
-import { toast } from './chrome.js?v=8eadc4b56a';
+import { usd, jpy, cardImg, photo, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName, bidStep } from './data.js?v=055cf487dd';
+import { icon } from './icons.js?v=055cf487dd';
+import * as store from './store.js?v=055cf487dd';
+import { toast } from './chrome.js?v=055cf487dd';
 
 const HOUR = 3600000;
 const DAY = 86400000;
@@ -95,7 +95,7 @@ export function cardHTML(lot, { sale = 'A', state = 'auto', note = '', kind = ''
   if (sale === 'B' && !sold) {
     const a = exampleAuction(lot);
     price = `<b class="price">${usd(a.bid)}</b>`;
-    sub = `≈ ${jpy(lot.jpy)} · ${a.bids} bids`; // 엔화를 가격 아래에(의뢰처 10/6 · 더윈 5)
+    sub = `≈ ${jpy(lot.jpy)}`; // 엔화를 가격 아래에(의뢰처 10/6 · 더윈 5). 입찰 수는 카드에서 빼고 상세·표에만(결정 108 · Bezel 카드 = 가격 한 줄)
   } else if (lot.usd) {
     price = `<b class="price">${usd(lot.usd)}</b>`;
     sub = sold ? `Sold ${esc(b.date)}` : `≈ ${jpy(lot.jpy)}`;

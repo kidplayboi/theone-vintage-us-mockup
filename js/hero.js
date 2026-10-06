@@ -1,8 +1,8 @@
 // 히어로 무대 v3 — Bezel 히어로의 '초록 위 상품'(ref-bezel-s00). 실재고 누끼 4점이 6초마다 바뀌고,
 // 꼬리표는 그 로트로 간다(보통 클릭 = 상세 창). 움직임 줄이기 설정이면 돌지 않는다
-import { usd, esc, exampleAuction, countdown, lotUrl, brandName } from './data.js?v=8eadc4b56a';
-import { icon } from './icons.js?v=8eadc4b56a';
-import * as store from './store.js?v=8eadc4b56a';
+import { usd, esc, exampleAuction, countdown, lotUrl, brandName } from './data.js?v=055cf487dd';
+import { icon } from './icons.js?v=055cf487dd';
+import * as store from './store.js?v=055cf487dd';
 
 const HOUR = 3600000;
 let timer;

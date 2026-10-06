@@ -208,3 +208,6 @@ dialog.lot-window { width: min(1180px, calc(100vw - 32px)); }
 .price-gate p { font-size: var(--fs-14); color: var(--body); }
 .price-gate b { color: var(--ink); font-weight: var(--w-ui); }
 .price-gate .btn-pair { display: flex; flex-wrap: wrap; gap: var(--s2); }
+
+/* 미등급 로트 — 외관·내부 칸을 숨기고 두 칸만(대시 네 칸이 빈 느낌을 만든다 · 결정 108) */
+.score-cells.is-two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 560px; }

@@ -1,14 +1,14 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES } from './data.js?v=886fdf05f2';
-import { mountChrome, bindNewsletter } from './chrome.js?v=886fdf05f2';
-import { mountReview, paintNotes } from './review.js?v=886fdf05f2';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=886fdf05f2';
-import { openLot } from './lotmodal.js?v=886fdf05f2';
-import { mountHero } from './hero.js?v=886fdf05f2';
-import { initMotion, revealOnScroll } from './motion.js?v=886fdf05f2';
-import { icon } from './icons.js?v=886fdf05f2';
-import * as store from './store.js?v=886fdf05f2';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES } from './data.js?v=71e7d9c546';
+import { mountChrome, bindNewsletter } from './chrome.js?v=71e7d9c546';
+import { mountReview, paintNotes } from './review.js?v=71e7d9c546';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=71e7d9c546';
+import { openLot } from './lotmodal.js?v=71e7d9c546';
+import { mountHero } from './hero.js?v=71e7d9c546';
+import { initMotion, revealOnScroll } from './motion.js?v=71e7d9c546';
+import { icon } from './icons.js?v=71e7d9c546';
+import * as store from './store.js?v=71e7d9c546';
 
 const HOUR = 3600000;
 // 히어로 = 배경을 지운 실재고 4점(assets/hero)
@@ -48,6 +48,8 @@ async function main() {
   renderBrowse();
   render();
   bindCards($('[data-live-rail]'), data.lots, { onOpen: openLot });
+  bindCards($('[data-new-rail]'), data.lots, { onOpen: openLot });
+  bindRail();
   bindEnding();
   // 시간대 — 운영 사이트 'Your local time' 그대로(기본 = 기기). 고르면 띠 · 표 · 상세가 그 시간대로(결정 87)
   $('[data-tz]').addEventListener('change', e => store.setSetting('tz', e.target.value));
@@ -61,9 +63,31 @@ async function main() {
 function render() {
   renderHeroCta();
   renderLive();
+  renderNew();
   renderEnding();
   paintNotes();
   revealOnScroll();
+}
+
+// New this week — 등록일 최신 8점(결정 104). 판매 방식은 검토 막대 설정대로
+function renderNew() {
+  const lots = [...data.lots].filter(x => x.usd).sort((a, b) => b.listed.localeCompare(a.listed)).slice(0, 8);
+  $('[data-new-rail]').innerHTML = lots.map(lot => cardHTML(lot, { sale: store.setting('sale') })).join('');
+}
+
+function bindRail() {
+  const rail = $('[data-new-rail]');
+  const step = () => Math.max(280, rail.clientWidth * 0.8);
+  $('[data-rail-prev]').addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
+  $('[data-rail-next]').addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
+  const sync = () => {
+    $('[data-rail-prev]').disabled = rail.scrollLeft <= 2;
+    $('[data-rail-next]').disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+  };
+  rail.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('resize', sync);
+  new MutationObserver(sync).observe(rail, { childList: true });
+  sync();
 }
 
 // 히어로 버튼 — 입찰(B)이면 경매 띠로, 정가(A)면 목록으로

@@ -1,10 +1,10 @@
 // 로트 카드 v4 — 까사 정보 구조의 정돈판(결정 72 · v4-lock §6)
 // 띠(마감 · 카운트다운 · 남은 시간 막대) → 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 배지 1
 // 1시간 안이면 띠 글이 "Ending soon" 으로 바뀌고 숫자가 빨강(더윈 12). 카드 어디를 눌러도 상세 창(더윈 4). 모바일은 띠 대신 가격 줄의 알약(BaT · 결정 79)
-import { usd, jpy, cardImg, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName } from './data.js?v=886fdf05f2';
-import { icon } from './icons.js?v=886fdf05f2';
-import * as store from './store.js?v=886fdf05f2';
-import { toast } from './chrome.js?v=886fdf05f2';
+import { usd, jpy, cardImg, photo, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName, bidStep } from './data.js?v=71e7d9c546';
+import { icon } from './icons.js?v=71e7d9c546';
+import * as store from './store.js?v=71e7d9c546';
+import { toast } from './chrome.js?v=71e7d9c546';
 
 const HOUR = 3600000;
 const DAY = 86400000;
@@ -111,7 +111,9 @@ export function cardHTML(lot, { sale = 'A', state = 'auto', note = '', kind = ''
     ${band}
     <div class="card-media">
       <img src="${cardImg(lot)}" alt="" width="600" height="600" loading="lazy" decoding="async">
+      ${lot.photoTotal > 1 ? `<img class="card-alt" src="${photo(lot, 1)}" alt="" width="600" height="600" loading="lazy" decoding="async">` : ''}
       ${rank ? `<span class="card-grade" title="Rank ${esc(rank)} · ${esc(gradeName(rank))}" aria-label="Rank ${esc(rank)}, ${esc(gradeName(rank))}">${esc(rank)}</span>` : ''}
+      ${sale === 'B' && !sold ? `<button class="card-bid" type="button" data-quick-bid="${exampleAuction(lot).bid + bidStep(exampleAuction(lot).bid)}">${icon.gavel}Bid ${usd(exampleAuction(lot).bid + bidStep(exampleAuction(lot).bid))}</button>` : ''}
       <div class="card-save-wrap">
         <button class="card-save" type="button" data-save aria-pressed="${saved}" aria-label="${saved ? 'Remove from saved' : 'Save'}: ${esc(lot.title)}">${saved ? icon.heartOn : icon.heart}</button>
         <div class="card-folders" role="group" aria-label="Save to a folder">
@@ -149,6 +151,15 @@ export function bindCards(root, lots, { onOpen } = {}) {
       return;
     }
     if (e.target.closest('[data-compare]')) return; // 시세 비교는 상세 페이지의 그 자리로 그대로 간다
+    // 빠른 입찰(결정 103 · Bezel 경매 카드) — 로그인이면 다음 호가로 바로, 아니면 상세 창(Register to bid)
+    const quick = e.target.closest('[data-quick-bid]');
+    if (quick) {
+      e.preventDefault();
+      if (!store.get('signedIn')) { if (onOpen) onOpen(lot); return; }
+      store.setSetting('state', 'leading');
+      toast(`Max bid of ${usd(Number(quick.dataset.quickBid))} placed on ${lot.title} — you're the highest bidder`);
+      return;
+    }
     // 보통 클릭 = 상세 창. 새 탭(⌘/Ctrl/Shift/가운데 버튼)은 전체 페이지로 그대로 간다
     const link = e.target.closest('[data-open]');
     if (link && onOpen && !(e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) {

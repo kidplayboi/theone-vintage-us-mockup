@@ -1,14 +1,14 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=886fdf05f2';
-import { mountChrome, bindNewsletter } from './chrome.js?v=886fdf05f2';
-import { mountReview, paintNotes } from './review.js?v=886fdf05f2';
-import { cardHTML, bindCards, startTicker } from './card.js?v=886fdf05f2';
-import { openLot } from './lotmodal.js?v=886fdf05f2';
-import { galleryHTML, mountGallery } from './gallery.js?v=886fdf05f2';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=886fdf05f2';
-import { bindBuy } from './lotactions.js?v=886fdf05f2';
-import { initMotion, revealOnScroll } from './motion.js?v=886fdf05f2';
-import * as store from './store.js?v=886fdf05f2';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=71e7d9c546';
+import { mountChrome, bindNewsletter } from './chrome.js?v=71e7d9c546';
+import { mountReview, paintNotes } from './review.js?v=71e7d9c546';
+import { cardHTML, bindCards, startTicker } from './card.js?v=71e7d9c546';
+import { openLot } from './lotmodal.js?v=71e7d9c546';
+import { galleryHTML, mountGallery } from './gallery.js?v=71e7d9c546';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=71e7d9c546';
+import { bindBuy } from './lotactions.js?v=71e7d9c546';
+import { initMotion, revealOnScroll } from './motion.js?v=71e7d9c546';
+import * as store from './store.js?v=71e7d9c546';
 
 const $ = sel => document.querySelector(sel);
 let data;

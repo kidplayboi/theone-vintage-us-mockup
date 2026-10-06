@@ -11,7 +11,8 @@
 .hero-facts { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); font-size: var(--fs-14); color: var(--muted); }
 .hero-facts li { display: inline-flex; align-items: center; gap: 8px; }
 
-.hero-stage { position: relative; min-height: 480px; border-radius: var(--r-lg); background: var(--tile); overflow: hidden; }
+/* 무대 — 바닥 쪽이 살짝 어두운 연회색(국소 그라데이션 · 규칙 C13 허용 범위)로 상품이 서 있는 느낌(결정 104) */
+.hero-stage { position: relative; min-height: 480px; border-radius: var(--r-lg); background: radial-gradient(120% 70% at 50% 100%, #E6E7E2 0%, var(--tile) 60%); overflow: hidden; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); }
 .hero-pics { position: absolute; inset: var(--s6) var(--s6) 104px; }
 .hero-pic {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
@@ -70,7 +71,8 @@
 /* ── 3 Browse — 카테고리 타일 6 + 같은 구획 아래 브랜드 행(결정 71) ── */
 .cat-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s4); }
 .cat-tile { display: grid; gap: 2px; align-content: start; }
-.cat-photo { display: block; aspect-ratio: 1 / 1; margin-bottom: var(--s2); border-radius: var(--r-lg); overflow: hidden; background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); }
+.cat-photo { display: block; aspect-ratio: 1 / 1; margin-bottom: var(--s2); border-radius: var(--r-lg); overflow: hidden; background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out); }
+.cat-tile:hover .cat-photo { transform: translateY(-2px); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06), 0 8px 20px -12px rgba(17, 20, 18, .25); }
 .cat-photo img { width: 100%; height: 100%; object-fit: contain; padding: 12%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out); }
 .cat-tile:hover .cat-photo img { transform: scale(1.04); }
 .cat-name { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
@@ -105,6 +107,18 @@
 .brand-logo:hover .brand-mark { background: #ECEBE7; }
 .brand-logo .cat-n { font-size: var(--fs-12); }
 
+/* ── 3.5 New this week — 가로 레일(결정 104 · Bezel 'New arrivals' · 1stDibs 'New & Notable'). 카드 280px, 스냅, 화살표 ── */
+.new-rail-wrap { position: relative; }
+.new-rail { display: flex; gap: var(--s4); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+.new-rail::-webkit-scrollbar { display: none; }
+.new-rail .card { flex: 0 0 280px; scroll-snap-align: start; }
+.rail-nav { display: flex; gap: var(--s2); }
+.rail-nav button { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--r-pill); border: 1px solid var(--line-2); color: var(--ink); transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out); }
+.rail-nav button:hover { border-color: var(--ink); }
+.rail-nav button[disabled] { opacity: .35; cursor: default; }
+.rail-nav svg { width: 16px; height: 16px; }
+.sec-head .sec-head-r { display: flex; align-items: center; gap: var(--s4); }
+
 /* ── 4 How it works — 3단계(실제 순서라 번호 허용) + 사실 줄 + 사진 2장(힉스필드 raw_1·raw_2) ── */
 .how-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s7); align-items: start; }
 .how-steps { display: grid; }
@@ -124,6 +138,8 @@
 /* ── 5 Ending soon — 표(BaT "Latest bids"). 카드 반복 없이 긴급함(결정 84) ── */
 .ending-table tr { cursor: pointer; transition: background-color var(--dur-fast) var(--ease-out); }
 .ending-table tr:hover { background: var(--surface); }
+.ending-table .et-go svg { transition: transform var(--dur) var(--ease-out); }
+.ending-table tr:hover .et-go svg { transform: translateX(3px); color: var(--ink); }
 .ending-table td { padding: 10px var(--s3); border-bottom: 1px solid var(--line); vertical-align: middle; font-size: var(--fs-14); color: var(--ink); }
 .ending-table td:first-child { padding-left: 0; }
 .ending-table td:last-child { padding-right: 0; }
@@ -179,6 +195,13 @@
   .rail .card-sub { display: block; }
   .brand-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
   .brand-mark { padding: 0 10%; }
+  .new-rail { margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; gap: var(--s3); }
+  .new-rail .card { flex-basis: 72%; }
+  .new-rail .card-band { display: flex; }
+  .new-rail .card.has-band .card-media { border-radius: 0 0 var(--r-lg) var(--r-lg); }
+  .new-rail .card-left { display: none; }
+  .new-rail .card-sub { display: block; }
+  .rail-nav { display: none; }
   .brand-logo .cat-n { display: none; }
   .how-pics { grid-template-columns: 1fr 1fr; }
   .et-bid span, .et-ends span, .et-go { display: none; }

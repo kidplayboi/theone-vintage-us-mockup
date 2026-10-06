@@ -1,13 +1,13 @@
 // 목록 페이지 v3 — 운영 사이트 분류 전부(형 10/6 "없애면 안 댐"): 판매 방식 탭 4 · 카테고리 9(개수) · 브랜드 40(개수) ·
 // 정렬 · 페이지당 20/50/100 · 검색 · 시간대 · 쪽 번호 · Premium/Express/Classic. 탭 모양은 Bezel 경매 목록(Live 327 / Ending soon 108)
-import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=886fdf05f2';
-import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=886fdf05f2';
-import { mountReview, paintNotes } from './review.js?v=886fdf05f2';
-import { cardHTML, bindCards, startTicker } from './card.js?v=886fdf05f2';
-import { icon } from './icons.js?v=886fdf05f2';
-import { openLot } from './lotmodal.js?v=886fdf05f2';
-import { initMotion, revealOnScroll } from './motion.js?v=886fdf05f2';
-import * as store from './store.js?v=886fdf05f2';
+import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=71e7d9c546';
+import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=71e7d9c546';
+import { mountReview, paintNotes } from './review.js?v=71e7d9c546';
+import { cardHTML, bindCards, startTicker } from './card.js?v=71e7d9c546';
+import { icon } from './icons.js?v=71e7d9c546';
+import { openLot } from './lotmodal.js?v=71e7d9c546';
+import { initMotion, revealOnScroll } from './motion.js?v=71e7d9c546';
+import * as store from './store.js?v=71e7d9c546';
 
 const KINDS = [['', 'All lots'], ['RT', 'Live bid'], ['LOW', 'Time limit'], ['MALL', 'Mall']];
 // 고른 판매 방식이 뭔지 한 줄로(처음 온 미국 손님용). 두 색: 초록 = 경매(Live bid · Time limit), 슬레이트 = 고정가(Mall) — 결정 95
@@ -22,6 +22,10 @@ const SALES = { premium: 'Premium Auction', express: 'Express', classic: 'Classi
 // 운영 정렬 4종 + 마감 임박(경매 목록 Bezel 'Ending soon' — 운영에 없는 추가, 형 확정 10/6 유지 · 결정 91)
 const SORTS = [['featured', 'Featured'], ['new', 'Newest'], ['ending', 'Ending soon'], ['low', 'Price: low to high'], ['high', 'Price: high to low']];
 const CAT_LABEL = Object.fromEntries(CATEGORIES);
+// 가격대 · 상태 필터(결정 102) — 운영 사이트에 없는 추가(형 10/6 "부족한 것 채워"). 입찰(B)에선 현재가 기준
+const PRICES = [['', 'Any price'], ['u1', 'Under $1,000'], ['1-5', '$1,000 – $5,000'], ['5-20', '$5,000 – $20,000'], ['20+', '$20,000 and up']];
+const GRADES_F = [['', 'Any condition'], ['S', 'Rank S · Unused'], ['A', 'Rank A · Excellent'], ['B', 'Rank B · Very good'], ['C', 'Rank C · Good'], ['D', 'Rank D · Fair'], ['none', 'Not graded']];
+const inPrice = (v, key) => !key || (key === 'u1' ? v < 1000 : key === '1-5' ? v >= 1000 && v < 5000 : key === '5-20' ? v >= 5000 && v < 20000 : v >= 20000);
 
 const params = new URLSearchParams(location.search);
 const ui = {
@@ -30,6 +34,8 @@ const ui = {
   cat: CAT_LABEL[params.get('cat')] ? params.get('cat') : '',
   brand: params.get('brand') || '',
   sort: SORTS.some(s => s[0] === params.get('sort')) ? params.get('sort') : 'featured',
+  price: PRICES.some(p => p[0] === params.get('price')) ? params.get('price') : '',
+  grade: GRADES_F.some(g => g[0] === params.get('grade')) ? params.get('grade') : '',
   per: 20, page: 1, q: params.get('q') || '',
 };
 let data;
@@ -142,8 +148,11 @@ function renderBrands() {
   const pickedInRest = rest.find(b => b.name === ui.brand);
   $('[data-brands]').innerHTML = `<button class="chip" type="button" data-brand-chip="" aria-pressed="${!ui.brand}">All brands <span class="n">${all.length}</span></button>`
     + top.map(chip).join('')
-    + (pickedInRest && !brandsOpen ? chip(pickedInRest) : '')
-    + `<button class="chip chip-more" type="button" data-brands-toggle aria-expanded="${brandsOpen}">${brandsOpen ? 'Fewer brands' : `More brands`}${icon.down}</button>`;
+    + (pickedInRest && !brandsOpen ? chip(pickedInRest) : '');
+  // 'More brands' 는 스크롤 줄 밖에 고정(결정 101) — 줄이 넘쳐도 늘 보인다
+  const toggle = $('[data-brands-toggle]');
+  toggle.setAttribute('aria-expanded', String(brandsOpen));
+  toggle.firstChild.textContent = brandsOpen ? 'Fewer brands' : `More brands`;
   const panel = $('[data-brands-all]');
   panel.hidden = !brandsOpen;
   panel.innerHTML = rest.map(chip).join('');
@@ -156,12 +165,16 @@ function kindOf(lot) {
 function filtered() {
   if (ui.sale !== 'premium') return [];
   const q = ui.q.trim().toLowerCase();
+  const bidding = store.setting('sale') === 'B';
+  const priceOf = x => (bidding ? exampleAuction(x).bid : x.usd);
+  const gradeOf = x => (x.grade && x.grade.overall) || 'none';
   let list = data.lots.filter(x =>
     (!ui.kind || kindOf(x) === ui.kind) &&
     (!ui.cat || x.genre === ui.cat) &&
     (!ui.brand || brandMatch(x, ui.brand)) &&
+    (!ui.price || (priceOf(x) && inPrice(priceOf(x), ui.price))) &&
+    (!ui.grade || gradeOf(x) === ui.grade) &&
     (!q || `${x.brand} ${x.title} ${x.sub} ${x.lot}`.toLowerCase().includes(q)));
-  const bidding = store.setting('sale') === 'B';
   if (ui.sort === 'high') list = [...list].sort((a, b) => b.usd - a.usd);
   if (ui.sort === 'low') list = [...list].sort((a, b) => (a.usd || Infinity) - (b.usd || Infinity));
   if (ui.sort === 'new') list = [...list].sort((a, b) => b.listed.localeCompare(a.listed));
@@ -176,7 +189,7 @@ function filtered() {
 // 운영 사이트 전체 숫자(이 시안 데이터는 그중 일부)
 function liveCount() {
   if (ui.sale !== 'premium') return 0;
-  if (ui.q) return null;
+  if (ui.q || ui.price || ui.grade) return null; // 운영 API 에 없는 축이면 이 미리보기의 수만
   const k = kindCounts();
   if (ui.kind && !k[ui.kind]) return 0;
   if (ui.cat) return (data.meta.categories.find(c => c.name === ui.cat) || { n: 0 }).n;
@@ -234,6 +247,8 @@ function renderPages(pages, count) {
 }
 
 function fillSelects() {
+  $('[data-price]').innerHTML = PRICES.map(([v, label]) => `<option value="${v}" ${v === ui.price ? 'selected' : ''}>${label}</option>`).join('');
+  $('[data-grade]').innerHTML = GRADES_F.map(([v, label]) => `<option value="${v}" ${v === ui.grade ? 'selected' : ''}>${label}</option>`).join('');
   $('[data-sort]').innerHTML = SORTS.map(([v, label]) => `<option value="${v}" ${v === ui.sort ? 'selected' : ''}>${label}</option>`).join('');
   const tz = store.setting('tz');
   $('[data-tz]').innerHTML = TIMEZONES.map(([v, label]) => `<option value="${v}" ${v === tz ? 'selected' : ''}>${label}</option>`).join('');
@@ -247,6 +262,8 @@ function syncUrl() {
   if (ui.cat) p.set('cat', ui.cat);
   if (ui.brand) p.set('brand', ui.brand);
   if (ui.q) p.set('q', ui.q);
+  if (ui.price) p.set('price', ui.price);
+  if (ui.grade) p.set('grade', ui.grade);
   if (ui.sort !== 'featured') p.set('sort', ui.sort);
   history.replaceState(null, '', `${location.pathname}${p.toString() ? '?' + p : ''}`);
   // 카테고리 줄의 현재 위치 표시도 같이
@@ -270,8 +287,10 @@ function bindControls() {
     else if (e.target.closest('[data-brands-toggle]')) { brandsOpen = !brandsOpen; renderBrands(); paintNotes(); return; }
     else if (page && !page.disabled) { ui.page = Number(page.dataset.page); renderGrid(); paintNotes(); revealOnScroll(); top(); return; }
     else if (e.target.closest('[data-reset]')) {
-      Object.assign(ui, { sale: 'premium', kind: '', cat: '', brand: '', q: '', page: 1 });
+      Object.assign(ui, { sale: 'premium', kind: '', cat: '', brand: '', q: '', price: '', grade: '', page: 1 });
       $('[data-q]').value = '';
+      $('[data-price]').value = '';
+      $('[data-grade]').value = '';
       const siteQ = document.getElementById('site-q');
       if (siteQ) siteQ.value = '';
     } else return;
@@ -279,6 +298,8 @@ function bindControls() {
     render();
   });
   $('[data-sort]').addEventListener('change', e => { ui.sort = e.target.value; ui.page = 1; syncUrl(); render(); });
+  $('[data-price]').addEventListener('change', e => { ui.price = e.target.value; ui.page = 1; syncUrl(); render(); });
+  $('[data-grade]').addEventListener('change', e => { ui.grade = e.target.value; ui.page = 1; syncUrl(); render(); });
   $('[data-per]').addEventListener('change', e => { ui.per = Number(e.target.value); ui.page = 1; render(); });
   $('[data-tz]').addEventListener('change', e => store.setSetting('tz', e.target.value));
   let t;

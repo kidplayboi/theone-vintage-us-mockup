@@ -281,3 +281,10 @@ dialog.sheet[open] { animation: sheet-in var(--dur-slow) var(--ease-out); }
   * { transition-property: color, background-color, border-color, opacity, box-shadow, text-decoration-color !important; transition-duration: var(--dur-fast) !important; }
   .reveal-on [data-reveal] { opacity: 1; transform: none; }
 }
+
+/* 사진 자리표시(결정 110) — 생성 전까지 의도된 빈 자리: 비율 고정 · 타일색 · 아주 옅은 빗금 · 왼쪽 아래 캡션. 실사진이 오면 <img> 로 교체 */
+.ph { position: relative; display: block; width: 100%; max-width: 100%; aspect-ratio: var(--ar, 3 / 2); margin: 0; border-radius: var(--r-lg); overflow: hidden;
+  background: var(--tile) repeating-linear-gradient(135deg, transparent 0 22px, rgba(17, 20, 18, .025) 22px 23px); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .05); }
+.ph-cap { position: absolute; left: var(--s3); bottom: var(--s3); display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px; border-radius: var(--r-md); background: rgba(255, 255, 255, .86); color: var(--muted); font-size: var(--fs-12); letter-spacing: var(--track-small); }
+.ph-cap::before { content: ""; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--muted); }
+.ph.ph-wide { --ar: 21 / 9; }

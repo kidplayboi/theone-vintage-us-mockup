@@ -1,10 +1,10 @@
 // 상세 정보 칸 v2 — 상세 창(모달)과 상세 페이지가 같이 쓴다
 // 순서 = 상태 띠 → 브랜드·제목 → 달러(크게) → 등급표 → 문의 → 신뢰 · 도착일 → 메모 · 시세
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급표 보이게)
-import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=055cf487dd';
-import { icon } from './icons.js?v=055cf487dd';
-import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=055cf487dd';
-import * as store from './store.js?v=055cf487dd';
+import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=175355a533';
+import { icon } from './icons.js?v=175355a533';
+import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=175355a533';
+import * as store from './store.js?v=175355a533';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 
@@ -228,11 +228,16 @@ function tools(lot) {
     </div>`;
 }
 
+// 입찰 모드에서도 질문은 계정 없이(FAQ "Not to ask" 약속 · 결정 111) — 상세 창 안에서 바로. 더 많은 사진·치수·총액을 묻는다
+function askB(lot) {
+  return `<div class="info-actions one" data-actions data-note="FAQ 가 '질문은 계정 없이' 라고 약속하는데 입찰 모드 상세엔 묻는 버튼이 없었다(10/6 점검). 정가 모드와 같은 문의 폼을 입찰 칸 아래에(결정 111)." data-ref="결정 111"><button class="btn ghost" type="button" data-inquire="inquiry">Ask about this lot</button></div>${inquiryForm(lot, 'inquiry')}`;
+}
+
 export function buyHTML(lot) {
   const state = lotState(lot);
   const sale = store.setting('sale');
   const body = sale === 'B'
-    ? `${bidBox(lot, state)}${gradeTable(lot)}`
+    ? `${bidBox(lot, state)}${gradeTable(lot)}${askB(lot)}`
     : `${priceBlock(lot)}${gradeTable(lot)}${actions(lot, state)}`;
   return `${head(lot, sale, state)}<div class="info-body">${body}${assurance()}</div>${tools(lot)}`;
 }

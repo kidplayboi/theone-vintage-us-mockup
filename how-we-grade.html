@@ -10,12 +10,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="css/tokens.css?v=055cf487dd">
-<link rel="stylesheet" href="css/base.css?v=055cf487dd">
-<link rel="stylesheet" href="css/chrome.css?v=055cf487dd">
-<link rel="stylesheet" href="css/lot.css?v=055cf487dd">
-<link rel="stylesheet" href="css/pages.css?v=055cf487dd">
-<link rel="stylesheet" href="css/review.css?v=055cf487dd">
+<link rel="stylesheet" href="css/tokens.css?v=175355a533">
+<link rel="stylesheet" href="css/base.css?v=175355a533">
+<link rel="stylesheet" href="css/chrome.css?v=175355a533">
+<link rel="stylesheet" href="css/lot.css?v=175355a533">
+<link rel="stylesheet" href="css/pages.css?v=175355a533">
+<link rel="stylesheet" href="css/review.css?v=175355a533">
 </head>
 <body class="has-tabs page-grade">
 <div id="review"></div>
@@ -23,10 +23,13 @@
 
 <main class="grade-page">
   <div class="wrap">
-    <div class="grade-head" data-note="Rank와 1+·2+의 뜻을 한곳에(결정 16). 정의는 현재 사이트 How it works §05 그대로(결정 30). 예시 스코어카드는 실재고 등급 상품." data-ref="26·30쪽">
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>How we grade</span></nav>
-      <h1 class="display d-display">Condition, in plain language</h1>
-      <p class="t20 muted">Every graded lot carries an overall rank, and most carry separate exterior and interior scores. Each lot page lists the marks found at auction in the auction house's own words, with photos so you can judge for yourself.</p>
+    <div class="grade-head" data-note="Rank와 1+·2+의 뜻을 한곳에(결정 16). 정의는 현재 사이트 How it works §05 그대로(결정 30). 예시 스코어카드는 실재고 등급 상품. 오른쪽 사진 자리 = 등급 책상 컷(v5-images.md #3 · 결정 110)." data-ref="26·30쪽 · 결정 110">
+      <div class="grade-head-text">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>How we grade</span></nav>
+        <h1 class="display d-display">Condition, in plain language</h1>
+        <p class="t20 muted">Every graded lot carries an overall rank, and most carry separate exterior and interior scores. Each lot page lists the marks found at auction in the auction house's own words, with photos so you can judge for yourself.</p>
+      </div>
+      <figure class="ph" data-ph="grading-desk" style="--ar: 4 / 5"><figcaption class="ph-cap">Photo · writing the condition notes</figcaption></figure>
     </div>
 
     <section class="score-demo" aria-label="Example scorecard">
@@ -81,7 +84,7 @@
 <footer id="foot"></footer>
 <div id="tabs"></div>
 <script type="module">
-  import { startPage } from './js/page.js?v=055cf487dd';
+  import { startPage } from './js/page.js?v=175355a533';
   startPage({ page: 'grade' });
 </script>
 </body>

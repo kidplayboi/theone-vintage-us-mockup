@@ -1,14 +1,14 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES } from './data.js?v=3f060f88fb';
-import { mountChrome, bindNewsletter } from './chrome.js?v=3f060f88fb';
-import { mountReview, paintNotes } from './review.js?v=3f060f88fb';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=3f060f88fb';
-import { openLot } from './lotmodal.js?v=3f060f88fb';
-import { mountHero } from './hero.js?v=3f060f88fb';
-import { initMotion, revealOnScroll } from './motion.js?v=3f060f88fb';
-import { icon } from './icons.js?v=3f060f88fb';
-import * as store from './store.js?v=3f060f88fb';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES } from './data.js?v=8fb20ff5e5';
+import { mountChrome, bindNewsletter } from './chrome.js?v=8fb20ff5e5';
+import { mountReview, paintNotes } from './review.js?v=8fb20ff5e5';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=8fb20ff5e5';
+import { openLot } from './lotmodal.js?v=8fb20ff5e5';
+import { mountHero } from './hero.js?v=8fb20ff5e5';
+import { initMotion, revealOnScroll } from './motion.js?v=8fb20ff5e5';
+import { icon } from './icons.js?v=8fb20ff5e5';
+import * as store from './store.js?v=8fb20ff5e5';
 
 const HOUR = 3600000;
 // 히어로 = 배경을 지운 실재고 4점(assets/hero)
@@ -100,7 +100,7 @@ function renderLive() {
     next.removeAttribute('data-ends');
     next.classList.remove('warn');
     rail.innerHTML = `<div class="empty"><p class="display d2">No live auctions right now</p>
-      <p class="muted">New auctions open every week. Lots you can buy today are in the shop.</p><a class="btn light" href="shop.html">Browse all lots</a></div>`;
+      <p class="muted">New auctions open every week. Lots you can buy today are in the shop.</p><a class="btn" href="shop.html">Browse all lots</a></div>`;
     return;
   }
   const first = endsOf(lots[0]);

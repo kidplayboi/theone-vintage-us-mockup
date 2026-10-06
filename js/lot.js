@@ -1,14 +1,14 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=3f060f88fb';
-import { mountChrome, bindNewsletter } from './chrome.js?v=3f060f88fb';
-import { mountReview, paintNotes } from './review.js?v=3f060f88fb';
-import { cardHTML, bindCards, startTicker } from './card.js?v=3f060f88fb';
-import { openLot } from './lotmodal.js?v=3f060f88fb';
-import { galleryHTML, mountGallery } from './gallery.js?v=3f060f88fb';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=3f060f88fb';
-import { bindBuy } from './lotactions.js?v=3f060f88fb';
-import { initMotion, revealOnScroll } from './motion.js?v=3f060f88fb';
-import * as store from './store.js?v=3f060f88fb';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=8fb20ff5e5';
+import { mountChrome, bindNewsletter } from './chrome.js?v=8fb20ff5e5';
+import { mountReview, paintNotes } from './review.js?v=8fb20ff5e5';
+import { cardHTML, bindCards, startTicker } from './card.js?v=8fb20ff5e5';
+import { openLot } from './lotmodal.js?v=8fb20ff5e5';
+import { galleryHTML, mountGallery } from './gallery.js?v=8fb20ff5e5';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=8fb20ff5e5';
+import { bindBuy } from './lotactions.js?v=8fb20ff5e5';
+import { initMotion, revealOnScroll } from './motion.js?v=8fb20ff5e5';
+import * as store from './store.js?v=8fb20ff5e5';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -100,25 +100,32 @@ function renderCondition() {
 // 총액을 항목별로(더윈 1·6·10 · 기획안 27쪽) — 숫자는 EXAMPLE_RATES 한 곳(형 실값 오면 그 파일만 교체 · 결정 89)
 function renderPrice() {
   const e = lot.usd ? estimate(lot) : null; // 상자·감정서는 선택 — 총액에서 빼고 줄에 '선택 시'로(청구서와 같은 값)
-  const cell = v => (e ? `<td class="num">${usd(v)}</td>` : '<td class="num muted">In your quote</td>');
-  const q = encodeURIComponent(`${lot.brand} ${lot.title}`); // 외부 검색은 브랜드를 붙여야 정확하다
   const signedIn = store.get('signedIn');
+  const gate = !signedIn; // 항목별 총액은 회원만(형 10/6 · 결정 97) — 상품가는 공개, 나머지 줄은 흐리고 가입 CTA
+  const blur = '<td class="num"><span class="blur">$0,000</span></td>';
+  const cell = v => (gate ? blur : (e ? `<td class="num">${usd(v)}</td>` : '<td class="num muted">In your quote</td>'));
+  const opt = v => (gate ? blur : `<td class="num muted">+${usd(v)} if selected</td>`);
+  const q = encodeURIComponent(`${lot.brand} ${lot.title}`); // 외부 검색은 브랜드를 붙여야 정확하다
+  const next = encodeURIComponent(`${location.pathname.split('/').pop()}${location.search}#price`);
   $('[data-price]').innerHTML = `
     <div class="sec-head"><h2 class="display d30">What you'll pay, line by line</h2></div>
-    <div class="price-grid" data-reveal data-note="더윈 1: 관세는 재질별로 다르고, DHL 외곽·대형 추가금까지 전부 체크해 총액. 더윈 10: 낙찰가·관세·수수료·배송비·감정서. 숫자는 EXAMPLE_RATES 한 곳에서 — 형이 실값을 주면 그 파일만 바꾸고 'example rates' 문구가 사라진다(결정 89)." data-ref="더윈 1·6·10 · 결정 88·89">
-      <div class="price-card">
-        <p class="label">Your US-delivered total${RATES_LABEL}</p>
+    <div class="price-grid" data-reveal data-note="더윈 1: 관세는 재질별로 다르고, DHL 외곽·대형 추가금까지 전부 체크해 총액. 더윈 10: 낙찰가·관세·수수료·배송비·감정서. 숫자는 EXAMPLE_RATES 한 곳에서(결정 89). 로그아웃이면 상품가만 보이고 나머지 줄은 흐림 + 가입 CTA(형 10/6 · 결정 97) — 판매가 회원 전용(결정 62)과 같은 결." data-ref="더윈 1·6·10 · 결정 88·89·97">
+      <div class="price-card${gate ? ' is-locked' : ''}">
+        <p class="label">Your US-delivered total${gate ? '' : RATES_LABEL}</p>
         <table class="total">
           <tr><td>Item price</td><td class="num">${lot.usd ? usd(lot.usd) : 'On request'}</td></tr>
           <tr><td>Import duties<span>Rate depends on material — leather, canvas, precious metal</span></td>${cell(e ? e.duty : 0)}</tr>
-          <tr><td>Buyer's fee<span>${Math.round(EXAMPLE_RATES.fee * 100)}% of the item price</span></td>${cell(e ? e.fee : 0)}</tr>
+          <tr><td>Buyer's fee<span>${gate ? 'Shown with an account' : `${Math.round(EXAMPLE_RATES.fee * 100)}% of the item price`}</span></td>${cell(e ? e.fee : 0)}</tr>
           <tr><td>Express shipping to the US<span>DHL Express · remote-area and oversize surcharges included</span></td>${cell(e ? e.ship : 0)}</tr>
-          <tr><td>Rigid box to keep the shape<span>Optional · recommended for structured bags</span></td><td class="num muted">+${usd(EXAMPLE_RATES.box)} if selected</td></tr>
+          <tr><td>Rigid box to keep the shape<span>Optional · recommended for structured bags</span></td>${opt(EXAMPLE_RATES.box)}</tr>
           <tr><td>Inspection in Tokyo</td><td class="num">Included</td></tr>
-          <tr><td>Certificate of authenticity<span>Optional</span></td><td class="num muted">+${usd(EXAMPLE_RATES.cert)} if selected</td></tr>
-          <tr class="sum"><td>Total, delivered</td><td class="num">${e ? usd(e.total) : '$ —'}</td></tr>
+          <tr><td>Certificate of authenticity<span>Optional</span></td>${opt(EXAMPLE_RATES.cert)}</tr>
+          <tr class="sum"><td>Total, delivered</td>${gate ? blur : `<td class="num">${e ? usd(e.total) : '$ —'}</td>`}</tr>
         </table>
-        <p class="t13 muted">We confirm this total before you pay. Nothing is charged when you inquire, and nothing on arrival.</p>
+        ${gate ? `<div class="price-gate">
+          <p><b>See your delivered total, line by line.</b> Duties, our fee and shipping to your door — free with an account, no card needed.</p>
+          <div class="btn-pair"><a class="btn" href="sign-in.html?mode=create&amp;next=${next}">Create a free account</a><a class="btn ghost" href="sign-in.html?next=${next}">Log in</a></div>
+        </div>` : '<p class="t13 muted">We confirm this total before you pay. Nothing is charged when you inquire, and nothing on arrival.</p>'}
       </div>
       <div class="price-card">
         <p class="label">Recent results</p>

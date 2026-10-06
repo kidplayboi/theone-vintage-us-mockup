@@ -1,10 +1,10 @@
 // 로트 카드 v4 — 까사 정보 구조의 정돈판(결정 72 · v4-lock §6)
 // 띠(마감 · 카운트다운 · 남은 시간 막대) → 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 배지 1
 // 1시간 안이면 띠 글이 "Ending soon" 으로 바뀌고 숫자가 빨강(더윈 12). 카드 어디를 눌러도 상세 창(더윈 4). 모바일은 띠 대신 가격 줄의 알약(BaT · 결정 79)
-import { usd, jpy, cardImg, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName } from './data.js?v=3f060f88fb';
-import { icon } from './icons.js?v=3f060f88fb';
-import * as store from './store.js?v=3f060f88fb';
-import { toast } from './chrome.js?v=3f060f88fb';
+import { usd, jpy, cardImg, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName } from './data.js?v=8fb20ff5e5';
+import { icon } from './icons.js?v=8fb20ff5e5';
+import * as store from './store.js?v=8fb20ff5e5';
+import { toast } from './chrome.js?v=8fb20ff5e5';
 
 const HOUR = 3600000;
 const DAY = 86400000;

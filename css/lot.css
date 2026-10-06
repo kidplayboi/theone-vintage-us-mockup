@@ -201,3 +201,10 @@ dialog.lot-window { width: min(1180px, calc(100vw - 32px)); }
   .sticky-cell { padding-left: 0; border-left: 0; }
   .sticky-in .btn { flex: 1; }
 }
+
+/* 항목별 총액 로그인 게이트(결정 97 · 형 10/6) — 상품가만 보이고 나머지 줄은 흐림, 아래에 가입 CTA */
+.price-card.is-locked .total .sum td { border-top-color: var(--line-2); }
+.price-gate { display: grid; gap: var(--s3); margin-top: var(--s4); padding: var(--s4); border-radius: var(--r-md); background: var(--surface); }
+.price-gate p { font-size: var(--fs-14); color: var(--body); }
+.price-gate b { color: var(--ink); font-weight: var(--w-ui); }
+.price-gate .btn-pair { display: flex; flex-wrap: wrap; gap: var(--s2); }

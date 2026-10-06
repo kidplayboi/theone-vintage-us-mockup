@@ -7,30 +7,42 @@
 .tz-pick { display: grid; gap: 4px; justify-items: end; }
 .tz-pick .input { width: 240px; min-height: 38px; font-size: var(--fs-13); }
 
-/* 판매 방식 탭 — 두 색(결정 95): 경매(Live bid · Time limit) 초록, 고정가(Mall) 슬레이트. 글자색 = 묶음색, 고른 것은 묶음색으로 채움 */
-.kind-tabs { display: flex; flex-wrap: wrap; gap: var(--s2); padding-top: var(--s2); overflow-x: auto; scrollbar-width: none; }
+/* 필터 위계(결정 99 · 형 10/6 "똑같은 알약이라 구분 안 됨"): 줄마다 왼쪽 이름 + 모양이 다른 세 줄
+   1 판매 방식 = 한 덩어리 세그먼트(아이콘 + 두 색) · 2 카테고리 = 테두리 없는 연한 칩 · 3 도구 = 보이는 라벨 달린 입력 */
+.filter-row { display: flex; align-items: center; gap: var(--s4); margin-top: var(--s3); }
+.filter-row + .filter-row { margin-top: var(--s4); }
+.filter-label { flex: none; width: 72px; font-size: var(--fs-12); font-weight: var(--w-ui); color: var(--muted); }
+
+.kind-tabs { display: inline-flex; gap: 2px; padding: 3px; border-radius: var(--r-pill); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); overflow-x: auto; scrollbar-width: none; max-width: 100%; }
 .kind-tabs::-webkit-scrollbar { display: none; }
 .kind-tab {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px;
-  border: 1px solid var(--line-2); border-radius: var(--r-pill); background: var(--canvas);
+  display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 16px;
+  border-radius: var(--r-pill); background: transparent;
   font-size: var(--fs-14); font-weight: var(--w-ui); color: var(--ink); white-space: nowrap;
-  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
-.kind-tab .dot { width: 8px; height: 8px; }
+.kind-tab svg { width: 16px; height: 16px; flex: none; }
 .kind-tab .num { font-size: var(--fs-13); font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
 .kind-tab[data-kind="RT"], .kind-tab[data-kind="LOW"] { color: var(--kind-live); }
 .kind-tab[data-kind="MALL"] { color: var(--kind-mall); }
-.kind-tab:hover { border-color: currentColor; }
-.kind-tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-brand); }
-.kind-tab[aria-selected="true"][data-kind="RT"], .kind-tab[aria-selected="true"][data-kind="LOW"] { background: var(--kind-live-band); border-color: var(--kind-live-band); }
-.kind-tab[aria-selected="true"][data-kind="MALL"] { background: var(--kind-mall-band); border-color: var(--kind-mall-band); }
+.kind-tab:hover { background: var(--canvas); }
+.kind-tab[aria-selected="true"] { background: var(--ink); color: var(--on-brand); }
+.kind-tab[aria-selected="true"][data-kind="RT"], .kind-tab[aria-selected="true"][data-kind="LOW"] { background: var(--kind-live-band); }
+.kind-tab[aria-selected="true"][data-kind="MALL"] { background: var(--kind-mall-band); }
 .kind-tab[aria-selected="true"] .num { color: rgba(255, 255, 255, .72); }
-.kind-tab[aria-selected="true"] .dot { background: #FFFFFF; }
-.kind-help { margin-top: var(--s3); font-size: var(--fs-13); color: var(--muted); min-height: 20px; }
+.kind-help { margin: var(--s2) 0 0 calc(72px + var(--s4)); font-size: var(--fs-13); color: var(--muted); min-height: 20px; }
 
-.chips { display: flex; flex-wrap: wrap; gap: var(--s2); padding: var(--s5) 0 var(--s3); }
+/* 카테고리 — 세그먼트와 모양이 다르게: 테두리 없이 연한 면, 고른 것은 잉크색(판매 방식의 초록·파랑과도 다름) */
+.chips { display: flex; flex-wrap: wrap; gap: var(--s2); padding: 0; min-width: 0; }
+.chips .chip { min-height: 34px; padding: 0 12px; border-color: transparent; background: var(--chip); font-size: var(--fs-13); }
+.chips .chip:hover { background: #E8E7E2; border-color: transparent; }
+.chips .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-brand); }
+.chips .chip[aria-pressed="true"] .n { color: rgba(255, 255, 255, .72); }
 
-.toolbar { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 150px; gap: var(--s2); padding-bottom: var(--s6); }
+/* 도구 줄 — 보이는 라벨 */
+.toolbar { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 150px; gap: var(--s3); margin-top: var(--s5); padding-bottom: var(--s6); }
+.tb { display: grid; gap: 6px; min-width: 0; }
+.tb-label { font-size: var(--fs-12); font-weight: var(--w-ui); color: var(--muted); }
 .toolbar .search { position: relative; display: block; }
 .toolbar .search svg { position: absolute; left: 12px; top: 50%; width: 16px; height: 16px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
 .toolbar .search .input { padding-left: 36px; font-size: var(--fs-14); }
@@ -49,10 +61,14 @@
   .tz-pick { justify-items: start; }
   .tz-pick .input { width: 100%; }
   .toolbar { grid-template-columns: 1fr 1fr; }
-  .toolbar .search { grid-column: 1 / -1; }
+  .toolbar .tb-search { grid-column: 1 / -1; }
 }
 @media (max-width: 720px) {
-  .kind-tabs { flex-wrap: nowrap; margin: 0 calc(var(--gutter) * -1); padding-left: var(--gutter); padding-right: var(--gutter); }
+  .filter-row { flex-direction: column; align-items: stretch; gap: var(--s2); }
+  .filter-label { width: auto; }
+  .kind-help { margin-left: 0; }
+  .kind-tabs { display: flex; }
+  .kind-tab { flex: 1 0 auto; justify-content: center; padding: 0 12px; }
   .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 calc(var(--gutter) * -1); padding-left: var(--gutter); padding-right: var(--gutter); }
   .chips::-webkit-scrollbar { display: none; }
   .toolbar { padding-bottom: var(--s5); }

@@ -47,3 +47,9 @@ body.notes-on [data-note] { outline: 1px dashed rgba(184, 138, 46, .8); outline-
   box-shadow: 0 12px 32px rgba(21, 21, 26, .18);
 }
 .note-ref { display: block; margin-top: 6px; color: #69706B; font-size: 12px; }
+
+/* 좁은 폭 — 제목 글이 세로로 깨지지 않게(10/6 390 캡처). 부제는 숨기고 '시안'만 */
+@media (max-width: 720px) {
+  .rv-title { white-space: nowrap; flex: none; }
+  .rv-title span { display: none; }
+}

@@ -26,4 +26,7 @@ export const icon = {
   globe: svg('<circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.5 2.5 2.5 13.5 0 16M12 4c-2.5 2.5-2.5 13.5 0 16"/>'),
   tag: svg('<path d="M4 4h7l9 9-7 7-9-9z"/><circle cx="8.5" cy="8.5" r="1.3"/>'),
   external: svg('<path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/>'),
+  // 판매 방식 아이콘(결정 99) — 글을 못 읽어도 모양으로: 망치 = 실시간 입찰 · 시계 = 블라인드 입찰(기한) · 가격표 = 고정가
+  gavel: svg('<path d="M4 20l7-7M9 6l6 6M7 8l4-4 6 6-4 4zM14 15l2-2 4 4-2 2z"/>'),
+  clock: svg('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'),
 };

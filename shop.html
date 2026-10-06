@@ -10,13 +10,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
-<link rel="stylesheet" href="css/tokens.css?v=3f060f88fb">
-<link rel="stylesheet" href="css/base.css?v=3f060f88fb">
-<link rel="stylesheet" href="css/chrome.css?v=3f060f88fb">
-<link rel="stylesheet" href="css/card.css?v=3f060f88fb">
-<link rel="stylesheet" href="css/lot.css?v=3f060f88fb">
-<link rel="stylesheet" href="css/shop.css?v=3f060f88fb">
-<link rel="stylesheet" href="css/review.css?v=3f060f88fb">
+<link rel="stylesheet" href="css/tokens.css?v=8fb20ff5e5">
+<link rel="stylesheet" href="css/base.css?v=8fb20ff5e5">
+<link rel="stylesheet" href="css/chrome.css?v=8fb20ff5e5">
+<link rel="stylesheet" href="css/card.css?v=8fb20ff5e5">
+<link rel="stylesheet" href="css/lot.css?v=8fb20ff5e5">
+<link rel="stylesheet" href="css/shop.css?v=8fb20ff5e5">
+<link rel="stylesheet" href="css/review.css?v=8fb20ff5e5">
 </head>
 <body class="has-tabs page-shop">
 <div id="review"></div>
@@ -36,23 +36,27 @@
       </div>
     </div>
 
-    <div class="kind-tabs" role="tablist" aria-label="Sale type" data-kinds data-note="운영 사이트 판매 방식 탭 All lots / Live bid / Time limit / Mall 그대로, 숫자는 운영 API. 색은 두 가지만(형 10/6 "색 너무 많으면 못 알아먹음") — 경매(Live bid 실시간 + Time limit 블라인드) 초록 · 고정가(Mall) 슬레이트. 운영 사이트는 넷을 남색·빨강·주황으로 가른다. 같은 색이 카드 띠 · 배지 · 상세 점에 그대로. 입찰(B) 시안에서는 전 재고를 Live bid 로 보고 센다." data-ref="결정 63·95"></div>
+    <!-- 필터 위계(결정 99): 1줄 판매 방식 = 세그먼트(아이콘 + 두 색) · 2줄 카테고리 = 조용한 칩 · 3줄 도구 = 보이는 라벨. 줄마다 왼쪽에 이름 -->
+    <div class="filter-row">
+      <span class="filter-label">Sale type</span>
+      <div class="kind-tabs" role="tablist" aria-label="Sale type" data-kinds data-note="운영 사이트 판매 방식 탭 All lots / Live bid / Time limit / Mall 그대로, 숫자는 운영 API. 모양 = 한 덩어리 세그먼트 + 아이콘(망치 실시간 · 시계 블라인드 · 가격표 고정가), 색 두 가지(경매 초록 · 고정가 파랑) — 형 10/6 '똑같은 알약이라 구분 안 됨 · 영어 몰라도 쓱 보고 알게'. 같은 색이 카드 띠 · 배지 · 상세 점에 그대로." data-ref="결정 63·95·99"></div>
+    </div>
     <p class="kind-help" data-kind-help></p>
-    <div class="chips" data-cats aria-label="Category" data-note="운영 사이트 카테고리 칩 9개 + 개수 그대로." data-ref="운영 사이트 10/6"></div>
-    <div class="toolbar">
-      <label class="search"><span class="visually-hidden">Search within results</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>
-        <input class="input" type="search" placeholder="Search item, brand or lot number" data-q></label>
-      <label class="visually-hidden" for="brand">Brand</label>
-      <select class="input" id="brand" data-brand></select>
-      <label class="visually-hidden" for="sort">Sort</label>
-      <select class="input" id="sort" data-sort data-note="운영 정렬 4종(Featured · Newest · 가격 낮은/높은 순)에 'Ending soon' 하나를 더했다 — 운영에 없는 추가(경매 참여 유도용). 형 확정 10/6: 유지(결정 91)." data-ref="결정 63·91"></select>
-      <label class="visually-hidden" for="per">Lots per page</label>
-      <select class="input" id="per" data-per>
+    <div class="filter-row">
+      <span class="filter-label">Category</span>
+      <div class="chips" data-cats aria-label="Category" data-note="운영 사이트 카테고리 칩 9개 + 개수 그대로. 세그먼트와 헷갈리지 않게 테두리 없는 연한 칩, 고른 것은 잉크색(결정 99)." data-ref="운영 사이트 10/6 · 결정 99"></div>
+    </div>
+    <div class="toolbar" data-note="도구 네 개에 보이는 라벨(Search · Brand · Sort by · Show) — 같은 모양 입력 넷이 라벨 없이 나란히면 뭐가 뭔지 못 읽는다(형 10/6)." data-ref="결정 99">
+      <label class="tb tb-search"><span class="tb-label">Search</span>
+        <span class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>
+        <input class="input" type="search" placeholder="Item, brand or lot number" data-q></span></label>
+      <label class="tb"><span class="tb-label">Brand</span><select class="input" id="brand" data-brand></select></label>
+      <label class="tb"><span class="tb-label">Sort by</span><select class="input" id="sort" data-sort data-note="운영 정렬 4종(Featured · Newest · 가격 낮은/높은 순)에 'Ending soon' 하나를 더했다 — 운영에 없는 추가(경매 참여 유도용). 형 확정 10/6: 유지(결정 91)." data-ref="결정 63·91"></select></label>
+      <label class="tb"><span class="tb-label">Show</span><select class="input" id="per" data-per>
         <option value="20">20 per page</option>
         <option value="50">50 per page</option>
         <option value="100">100 per page</option>
-      </select>
+      </select></label>
     </div>
 
     <div class="grid" data-grid aria-live="polite"></div>
@@ -62,6 +66,6 @@
 
 <footer id="foot"></footer>
 <div id="tabs"></div>
-<script type="module" src="js/shop.js?v=3f060f88fb"></script>
+<script type="module" src="js/shop.js?v=8fb20ff5e5"></script>
 </body>
 </html>

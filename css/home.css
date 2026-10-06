@@ -12,8 +12,9 @@
 .hero-facts li { display: inline-flex; align-items: center; gap: 8px; }
 
 /* 무대 — 바닥 쪽이 살짝 어두운 연회색(국소 그라데이션 · 규칙 C13 허용 범위)로 상품이 서 있는 느낌(결정 104) */
-.hero-stage { position: relative; min-height: 480px; border-radius: var(--r-lg); background: radial-gradient(120% 70% at 50% 100%, #E6E7E2 0%, var(--tile) 60%); overflow: hidden; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); }
-.hero-pics { position: absolute; inset: var(--s6) var(--s6) 104px; }
+/* 상품이 무대를 채운다(결정 114): 안쪽 여백 32 → 20, 높이 480 → 520. Bezel 히어로는 사진이 오른쪽 절반을 다 쓰고 가장자리를 넘친다 — 우리는 넘치진 않되 작게 떠 있지 않게 */
+.hero-stage { position: relative; min-height: 520px; border-radius: var(--r-lg); background: radial-gradient(120% 70% at 50% 100%, #E6E7E2 0%, var(--tile) 60%); overflow: hidden; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); }
+.hero-pics { position: absolute; inset: 20px 20px 100px; }
 .hero-pic {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
   opacity: 0; transform: scale(.98); transition: opacity .7s var(--ease-out), transform 1s var(--ease-out);
@@ -74,7 +75,7 @@
 .cat-tile { display: grid; gap: 2px; align-content: start; }
 .cat-photo { display: block; aspect-ratio: 1 / 1; margin-bottom: var(--s2); border-radius: var(--r-lg); overflow: hidden; background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out); }
 .cat-tile:hover .cat-photo { transform: translateY(-2px); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06), 0 8px 20px -12px rgba(17, 20, 18, .25); }
-.cat-photo img { width: 100%; height: 100%; object-fit: contain; padding: 12%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out); }
+.cat-photo img { width: 100%; height: 100%; object-fit: contain; padding: 8%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out); }
 .cat-tile:hover .cat-photo img { transform: scale(1.04); }
 .cat-name { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
 .cat-tile:hover .cat-name { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
@@ -87,24 +88,12 @@
 .cat-list a:last-child { border-bottom: 0; }
 .cat-list a:hover span:first-child { text-decoration: underline; text-underline-offset: 3px; }
 .cat-list .num { color: var(--muted); font-size: var(--fs-13); font-variant-numeric: tabular-nums; }
-/* 브랜드 행 — 워드마크 로고 타일 8(Bezel 'Shop by Brand' · WGACA 디자이너 행). 로고는 잉크색 한 벌로(mask), 타일은 연회색 */
+/* 브랜드 행 — 워드마크 로고 타일 8(Bezel 'Shop by Brand' · WGACA 디자이너 행). 타일 자체(.brand-mark)는 base.css — 상세 브랜드 띠와 공용 */
 .brand-row { margin-top: var(--s6); padding-top: var(--s5); border-top: 1px solid var(--line); }
 .brand-row-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); margin-bottom: var(--s4); }
 .brand-row-head .label { font-size: var(--fs-13); color: var(--ink); }
 .brand-logos { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--s3); }
 .brand-logo { display: grid; gap: 6px; justify-items: center; min-width: 0; }
-.brand-mark {
-  display: grid; place-items: center; width: 100%; aspect-ratio: 3 / 2; padding: 0 14%;
-  border-radius: var(--r-lg); background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04);
-  transition: background-color var(--dur-fast) var(--ease-out);
-}
-.brand-mark i {
-  display: block; width: 100%; height: 36%;
-  background: var(--ink);
-  -webkit-mask-position: center; -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat;
-  mask-position: center; mask-size: contain; mask-repeat: no-repeat;
-}
-.brand-text { font-size: var(--fs-14); font-weight: var(--w-ui); letter-spacing: .08em; color: var(--ink); text-align: center; }
 .brand-logo:hover .brand-mark { background: #ECEBE7; }
 .brand-logo .cat-n { font-size: var(--fs-12); }
 

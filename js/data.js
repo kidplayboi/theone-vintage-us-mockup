@@ -3,7 +3,7 @@ let cache;
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=bc7d5dbcff').then(r => {
+    cache = fetch('data/lots.json?v=3da9e83b46').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     });
@@ -80,6 +80,24 @@ export function exampleAuction(lot) {
     bid: lot.usd || 1000 + (s % 40) * 50,
   };
 }
+
+// 입찰 기록(예시) — 현재가에서 호가 단위로 내려가며 최근 입찰부터. 입찰자는 익명 꼬리표, 시각은 '분/시간 전'(Loupe Bid History · Bezel View bids · 결정 118)
+export function exampleBids(lot) {
+  const a = exampleAuction(lot);
+  const s = seed(lot);
+  const rows = [];
+  let amount = a.bid;
+  let ago = 2 + (s % 9);
+  for (let i = 0; i < Math.min(a.bids, 8); i++) {
+    rows.push({ who: `b···${(s * 7 + i * 13) % 90 + 10}`, amount, ago: ago < 60 ? `${ago}m ago` : `${Math.round(ago / 60)}h ago` });
+    amount -= bidStep(amount);
+    ago += 7 + ((s + i * 11) % 50);
+  }
+  return { rows, earlier: Math.max(0, a.bids - rows.length), total: a.bids };
+}
+
+// 브랜드 워드마크 파일(assets/brands/*.svg · 위키미디어 공용 PD 글자 로고 · 상표권은 각 회사) — 홈 브랜드 행과 상세 브랜드 띠가 같이 쓴다
+export const BRAND_LOGOS = { HERMES: 'hermes', 'LOUIS VUITTON': 'louis-vuitton', CHANEL: 'chanel', ROLEX: 'rolex', Cartier: 'cartier', 'Christian Dior': 'dior', 'Van Cleef&Arpels': 'van-cleef-arpels', Gucci: 'gucci' };
 
 export function bidStep(amount) {
   if (amount < 1000) return 25;

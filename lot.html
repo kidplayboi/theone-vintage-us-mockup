@@ -10,12 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
-<link rel="stylesheet" href="css/tokens.css?v=bc7d5dbcff">
-<link rel="stylesheet" href="css/base.css?v=bc7d5dbcff">
-<link rel="stylesheet" href="css/chrome.css?v=bc7d5dbcff">
-<link rel="stylesheet" href="css/card.css?v=bc7d5dbcff">
-<link rel="stylesheet" href="css/lot.css?v=bc7d5dbcff">
-<link rel="stylesheet" href="css/review.css?v=bc7d5dbcff">
+<link rel="stylesheet" href="css/tokens.css?v=3da9e83b46">
+<link rel="stylesheet" href="css/base.css?v=3da9e83b46">
+<link rel="stylesheet" href="css/chrome.css?v=3da9e83b46">
+<link rel="stylesheet" href="css/card.css?v=3da9e83b46">
+<link rel="stylesheet" href="css/lot.css?v=3da9e83b46">
+<link rel="stylesheet" href="css/review.css?v=3da9e83b46">
 </head>
 <body class="page-lot">
 <div id="review"></div>
@@ -28,15 +28,18 @@
       <section class="gallery" aria-label="Photos" data-gallery></section>
       <aside class="buy info" aria-label="About this lot" data-buy data-note="오른쪽 칸 순서 = 정품 → 상품 → 가격 → 상태 → 버튼(Fashionphile·KREAM·Loupe 세 곳 공통). 판매 방식 A/B와 상태 10가지는 위 검토 막대에서 바꿔 볼 수 있다." data-ref="25·29쪽"></aside>
     </div>
+    <!-- 아래 구획 순서(10/6 레퍼런스 대조 · v4-lock §12): 물건(About · Condition) → 돈(Price) → 사람(Ask) → 더 보기(Similar · Brand). Loupe = Introduction → Scorecard → Details → Condition → Perspective, Bezel = Condition → Details → 컨시어지 → Similar → Brand -->
+    <section class="lot-sec" id="about" data-about aria-label="About this piece"></section>
     <section class="lot-sec" id="condition" data-condition aria-label="Condition"></section>
     <section class="lot-sec" id="price" data-price aria-label="Price and market"></section>
-    <section class="lot-sec" id="details" data-details aria-label="Details"></section>
+    <section class="lot-sec lot-sec-ask" id="ask" data-ask aria-label="Ask about this lot"></section>
     <section class="lot-sec" id="similar" data-similar aria-label="Similar pieces"></section>
+    <section class="lot-sec lot-sec-brand" id="brand" data-brand aria-label="More from this brand"></section>
   </div>
 </main>
 
 <div class="sticky-bar" data-sticky data-note="스크롤해도 따라오는 구매 바. 데스크톱은 오른쪽 칸이 화면 밖으로 나가면 위에, 모바일은 늘 아래(엄지 닿는 곳)." data-ref="28쪽"></div>
 <footer id="foot"></footer>
-<script type="module" src="js/lot.js?v=bc7d5dbcff"></script>
+<script type="module" src="js/lot.js?v=3da9e83b46"></script>
 </body>
 </html>

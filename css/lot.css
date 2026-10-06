@@ -8,7 +8,7 @@
 .g-track { display: flex; }
 .g-slide { flex: 0 0 100%; min-width: 0; aspect-ratio: 1 / 1; scroll-snap-align: start; background: var(--tile); }
 .g-slide a { display: grid; place-items: center; width: 100%; height: 100%; cursor: zoom-in; }
-.g-slide img { width: 100%; height: 100%; object-fit: contain; padding: 4%; mix-blend-mode: multiply; }
+.g-slide img { width: 100%; height: 100%; object-fit: contain; padding: 2%; mix-blend-mode: multiply; } /* 4 → 2%(결정 114) — Loupe 상세 사진은 프레임을 채운다 */
 .is-embla .g-viewport { overflow: hidden; scroll-snap-type: none; cursor: grab; }
 .g-zoom { position: absolute; top: var(--s3); right: var(--s3); background: rgba(255, 255, 255, .9); }
 .pager { position: absolute; right: var(--s3); bottom: var(--s3); display: flex; align-items: center; gap: 2px; padding: 2px; border-radius: var(--r-pill); background: rgba(255, 255, 255, .9); }
@@ -18,7 +18,7 @@
 .g-caption .num { color: var(--ink); font-weight: var(--w-ui); }
 .g-thumbs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s2); }
 .g-thumb { aspect-ratio: 1 / 1; border-radius: var(--r-md); overflow: hidden; background: var(--tile); box-shadow: inset 0 0 0 1px transparent; transition: box-shadow var(--dur-fast) var(--ease-out); }
-.g-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 6%; mix-blend-mode: multiply; }
+.g-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 4%; mix-blend-mode: multiply; }
 .g-thumb:hover { box-shadow: inset 0 0 0 1px var(--line-2); }
 .g-thumb[aria-current="true"] { box-shadow: inset 0 0 0 2px var(--ink); }
 
@@ -211,3 +211,72 @@ dialog.lot-window { width: min(1180px, calc(100vw - 32px)); }
 
 /* 미등급 로트 — 외관·내부 칸을 숨기고 두 칸만(대시 네 칸이 빈 느낌을 만든다 · 결정 108) */
 .score-cells.is-two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 560px; }
+
+/* ── 10/6 레퍼런스 대조로 채운 구획(v4-lock §12 · 결정 115~120) ── */
+/* About this piece — 카탈로그 인용 한 줄(Loupe Introduction 자리) + 2열 사양표(Loupe THE DETAILS) */
+.catalogue { max-width: 64ch; margin: 0 0 var(--s6); padding: 0 0 0 var(--s5); border-left: 2px solid var(--line-2); }
+.catalogue p { font-size: var(--fs-20); font-weight: var(--w-display); line-height: 1.45; color: var(--ink); text-wrap: pretty; }
+.catalogue footer { margin-top: var(--s2); }
+.specs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--s7); align-items: start; }
+.specs-2col .specs { width: 100%; }
+.specs-2col .specs tr:first-child th, .specs-2col .specs tr:first-child td { border-top: 1px solid var(--line-2); }
+
+/* 출고 전 검수 체크리스트(결정 117) — 스코어카드 아래 hairline, 2열 */
+.checks { margin-top: var(--s6); padding-top: var(--s5); border-top: 1px solid var(--line); }
+.checks ul { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4) var(--s6); margin-top: var(--s3); }
+.checks li { display: flex; gap: var(--s3); align-items: flex-start; }
+.checks li > span { display: grid; gap: 2px; }
+.checks li svg { flex: none; width: 18px; height: 18px; margin-top: 2px; color: var(--live); }
+.checks b { font-size: var(--fs-14); font-weight: var(--w-ui); color: var(--ink); }
+.checks li > span > span { font-size: var(--fs-13); color: var(--body); line-height: 1.5; }
+
+/* 도쿄 팀에 묻기(결정 119) — Bezel 컨시어지 카드 구조(제목에 모델명 · 한 문장 · 버튼 · 사진). 상자 대신 hairline 위아래 */
+.lot-sec-ask { padding: var(--s7) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.ask-block { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: var(--s7); align-items: center; }
+.ask-photo { max-width: 300px; }
+.ask-copy { display: grid; gap: var(--s4); justify-items: start; }
+.ask-copy .display { max-width: 22ch; text-wrap: balance; }
+.ask-copy .lede { max-width: 56ch; }
+.ask-copy .btn-pair { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.ask-copy .btn-pair .btn { flex: none; }
+
+/* 브랜드 띠(결정 120) — Bezel 브랜드 카드에서 소개 글을 뺀 것: 로고 · 로트 수 · 링크 한 줄 */
+.lot-sec-brand { margin-top: var(--s8); }
+.brand-strip { display: flex; align-items: center; gap: var(--s5); padding: var(--s5) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--ink); }
+.brand-strip .brand-mark { width: 160px; flex: none; padding: 0 18px; } /* % 패딩은 띠 전체 폭 기준으로 풀려 160px 타일의 내용 폭이 0 이 됐다(10/6 실측 i.width=0) — 고정값 */
+.brand-strip-text { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.brand-strip-text b { font-size: var(--fs-20); font-weight: var(--w-ui); }
+.brand-strip-text .muted { font-size: var(--fs-14); }
+.brand-strip:hover .brand-mark { background: #ECEBE7; }
+.brand-strip:hover .more-link { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.brand-strip:hover .more-link svg { transform: translateX(2px); }
+
+/* 입찰 기록(결정 118) — 접이식. 상호작용 컨테이너라 hairline 테두리 1겹 */
+.bid-history { border: 1px solid var(--line); border-radius: var(--r-md); }
+.bid-history summary { display: flex; align-items: center; gap: var(--s2); min-height: 40px; padding: 0 var(--s3); list-style: none; cursor: pointer; font-size: var(--fs-13); color: var(--ink); }
+.bid-history summary::-webkit-details-marker { display: none; }
+.bid-history summary > span:first-child { font-weight: var(--w-ui); }
+.bid-history summary .num { margin-left: auto; }
+.bid-history summary svg { width: 16px; height: 16px; color: var(--muted); transition: transform var(--dur-fast) var(--ease-out); }
+.bid-history[open] summary svg { transform: rotate(180deg); }
+.bid-history ol { border-top: 1px solid var(--line); }
+.bid-history li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: var(--s3); padding: 7px var(--s3); font-size: var(--fs-13); color: var(--ink); border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.bid-history li:last-child { border-bottom: 0; }
+.bid-history li .num:first-child { font-weight: var(--w-ui); }
+.bid-history > p { padding: 6px var(--s3) 8px; border-top: 1px solid var(--line); }
+
+@media (max-width: 900px) {
+  .specs-2col { grid-template-columns: 1fr; }
+  .specs-2col .specs + .specs tr:first-child th, .specs-2col .specs + .specs tr:first-child td { border-top: 0; }
+  .ask-block { grid-template-columns: 1fr; gap: var(--s5); }
+  .ask-photo { max-width: 240px; --ar: 4 / 5; }
+}
+@media (max-width: 720px) {
+  .catalogue p { font-size: var(--fs-16); }
+  #about .sec-head > .muted { display: none; } /* 제목 옆 이름 반복은 폰에서 잘린다 — 제목만 */
+  .checks ul { grid-template-columns: 1fr; }
+  .lot-sec-ask { padding: var(--s6) 0; }
+  .brand-strip { flex-wrap: wrap; gap: var(--s3) var(--s4); }
+  .brand-strip .brand-mark { width: 120px; padding: 0 14px; }
+  .brand-strip .more-link { width: 100%; }
+}

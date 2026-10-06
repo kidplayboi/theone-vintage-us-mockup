@@ -1,8 +1,8 @@
 // 상세 정보 칸의 동작 — 창 안 문의·제안(더윈 4) · 관심 폴더 · 공유 · 내 메모 · 입찰(B)
 // 서버가 없으니 결과는 이 브라우저 저장소에만 남는다
-import { usd, bidStep, exampleAuction, fullName, lotUrl } from './data.js?v=bc7d5dbcff';
-import * as store from './store.js?v=bc7d5dbcff';
-import { toast } from './chrome.js?v=bc7d5dbcff';
+import { usd, bidStep, exampleAuction, fullName, lotUrl } from './data.js?v=3da9e83b46';
+import * as store from './store.js?v=3da9e83b46';
+import { toast } from './chrome.js?v=3da9e83b46';
 
 // signal — 상세 창처럼 여닫는 곳은 닫을 때 감시를 끊는다(문서 클릭 감시가 쌓이지 않게)
 export function bindBuy(box, lot, rerender, { signal } = {}) {

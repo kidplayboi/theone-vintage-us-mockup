@@ -1,14 +1,15 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, shortDate, fullName } from './data.js?v=bc7d5dbcff';
-import { mountChrome, bindNewsletter } from './chrome.js?v=bc7d5dbcff';
-import { mountReview, paintNotes } from './review.js?v=bc7d5dbcff';
-import { cardHTML, bindCards, startTicker } from './card.js?v=bc7d5dbcff';
-import { openLot } from './lotmodal.js?v=bc7d5dbcff';
-import { galleryHTML, mountGallery } from './gallery.js?v=bc7d5dbcff';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=bc7d5dbcff';
-import { bindBuy } from './lotactions.js?v=bc7d5dbcff';
-import { initMotion, revealOnScroll } from './motion.js?v=bc7d5dbcff';
-import * as store from './store.js?v=bc7d5dbcff';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=3da9e83b46';
+import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=3da9e83b46';
+import { mountChrome, bindNewsletter } from './chrome.js?v=3da9e83b46';
+import { mountReview, paintNotes } from './review.js?v=3da9e83b46';
+import { cardHTML, bindCards, startTicker } from './card.js?v=3da9e83b46';
+import { openLot } from './lotmodal.js?v=3da9e83b46';
+import { galleryHTML, mountGallery } from './gallery.js?v=3da9e83b46';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=3da9e83b46';
+import { bindBuy } from './lotactions.js?v=3da9e83b46';
+import { initMotion, revealOnScroll } from './motion.js?v=3da9e83b46';
+import * as store from './store.js?v=3da9e83b46';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -49,15 +50,20 @@ async function main() {
   const buy = $('[data-buy]');
   bindBuy(buy, lot, renderBuy);
   renderBuy();
+  $('[data-about]').innerHTML = aboutHTML(lot);
   renderCondition();
   renderPrice();
-  renderDetails();
+  $('[data-ask]').innerHTML = askHTML(lot);
   renderSimilar();
+  $('[data-brand]').innerHTML = brandHTML(lot, data.meta);
   mountSticky();
   startTicker();
   initMotion();
   $('[data-condition]').addEventListener('click', e => {
     if (e.target.closest('[data-ask-photos]')) askInBox('Could you send detailed photos of the corners, handles and interior?');
+  });
+  $('[data-ask]').addEventListener('click', e => {
+    if (e.target.closest('[data-ask-lot]')) askInBox('');
   });
   window.addEventListener('store:change', e => {
     if (e.detail.key === 'settings' || e.detail.key === 'offers') { renderBuy(); renderPrice(); renderSticky(); mountReview({ page: 'lot' }); }
@@ -94,7 +100,8 @@ function renderCondition() {
         <div class="ungraded"><p>The source did not publish a condition grade for this lot. Ask us and we'll send detailed photos before you commit.</p>
         <button class="btn ghost small" type="button" data-ask-photos>Ask for photos</button></div>`}
       ${marks}
-    </div>`;
+    </div>
+    ${checksHTML()}`;
 }
 
 // 총액을 항목별로(더윈 1·6·10 · 기획안 27쪽) — 숫자는 EXAMPLE_RATES 한 곳(형 실값 오면 그 파일만 교체 · 결정 89)
@@ -151,17 +158,7 @@ function askInBox(message) {
   if (form && message) form.message.value = message;
 }
 
-function renderDetails() {
-  const rows = [
-    ['Lot number', lot.lot], ['Category', lot.genre], ['Item type', lot.itemType], ['Line', lot.line],
-    ['Size / details', lot.size], ['Listed', lot.listed], ['Available until', lot.until ? shortDate(lot.until, true) : ''],
-    ['Ships from', 'Tokyo, Japan'], ['Photos', `${lot.photoTotal} on file`],
-  ].filter(([, v]) => v);
-  $('[data-details]').innerHTML = `
-    <div class="sec-head"><h2 class="display d30">Details</h2></div>
-    <table class="specs" data-reveal>${rows.map(([k, v]) => `<tr><th>${k}</th><td>${esc(v)}</td></tr>`).join('')}</table>`;
-}
-
+// 사양표는 "About this piece" 로 옮겼다(lotsections.js · 결정 115) — 카탈로그 한 줄 + 2열 표
 function renderSimilar() {
   const list = similar(data.lots, lot, 4);
   const host = $('[data-similar]');

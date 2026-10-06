@@ -1,11 +1,11 @@
 // Saved — 관심 목록 폴더 세 개, 손님이 이름을 붙인다(11쪽 1번). 내 메모는 카드 아래에(11쪽 3번)
-import { esc } from './data.js?v=bc7d5dbcff';
-import { startPage } from './page.js?v=bc7d5dbcff';
-import { paintNotes } from './review.js?v=bc7d5dbcff';
-import { cardHTML, bindCards } from './card.js?v=bc7d5dbcff';
-import { openLot } from './lotmodal.js?v=bc7d5dbcff';
-import { revealOnScroll } from './motion.js?v=bc7d5dbcff';
-import * as store from './store.js?v=bc7d5dbcff';
+import { esc } from './data.js?v=3da9e83b46';
+import { startPage } from './page.js?v=3da9e83b46';
+import { paintNotes } from './review.js?v=3da9e83b46';
+import { cardHTML, bindCards } from './card.js?v=3da9e83b46';
+import { openLot } from './lotmodal.js?v=3da9e83b46';
+import { revealOnScroll } from './motion.js?v=3da9e83b46';
+import * as store from './store.js?v=3da9e83b46';
 
 let data;
 let folder = 'all';

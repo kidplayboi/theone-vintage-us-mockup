@@ -1,14 +1,14 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES } from './data.js?v=bc7d5dbcff';
-import { mountChrome, bindNewsletter } from './chrome.js?v=bc7d5dbcff';
-import { mountReview, paintNotes } from './review.js?v=bc7d5dbcff';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=bc7d5dbcff';
-import { openLot } from './lotmodal.js?v=bc7d5dbcff';
-import { mountHero } from './hero.js?v=bc7d5dbcff';
-import { initMotion, revealOnScroll } from './motion.js?v=bc7d5dbcff';
-import { icon } from './icons.js?v=bc7d5dbcff';
-import * as store from './store.js?v=bc7d5dbcff';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=3da9e83b46';
+import { mountChrome, bindNewsletter } from './chrome.js?v=3da9e83b46';
+import { mountReview, paintNotes } from './review.js?v=3da9e83b46';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=3da9e83b46';
+import { openLot } from './lotmodal.js?v=3da9e83b46';
+import { mountHero } from './hero.js?v=3da9e83b46';
+import { initMotion, revealOnScroll } from './motion.js?v=3da9e83b46';
+import { icon } from './icons.js?v=3da9e83b46';
+import * as store from './store.js?v=3da9e83b46';
 
 const HOUR = 3600000;
 // 히어로 = 배경을 지운 실재고 4점(assets/hero)
@@ -17,9 +17,8 @@ const HERO = ['863-38440', '865-39616', '861-30068', '866-39839'];
 const CAT_TILES = [['Bag', 'Bags', '851-31184'], ['Watch', 'Watches', '865-39616'], ['Jewelry', 'Jewelry', '865-39358'], ['Clothing', 'Clothing', ''], ['Accessories', 'Accessories', '863-38637']];
 const CAT_REST = [['Variety', 'Variety'], ['Tableware', 'Tableware'], ['Coin', 'Coin']];
 // 브랜드 행 — 40개 중 명품 하우스 8(큐레이션 · 형이 바꿀 수 있음). 이름·개수는 운영 API 그대로
-// 로고 = 위키미디어 공용의 워드마크 SVG(각 상표권자 소유 · 시안 참고용). 파일 없는 브랜드는 글자로(형 10/6 "브랜드별 로고")
+// 로고 = 위키미디어 공용의 워드마크 SVG(각 상표권자 소유 · 시안 참고용 · 파일 맵 = data.js BRAND_LOGOS). 파일 없는 브랜드는 글자로(형 10/6 "브랜드별 로고")
 const BRAND_ROW = ['HERMES', 'LOUIS VUITTON', 'CHANEL', 'ROLEX', 'Cartier', 'Christian Dior', 'Van Cleef&Arpels', 'Gucci'];
-const BRAND_LOGOS = { HERMES: 'hermes', 'LOUIS VUITTON': 'louis-vuitton', CHANEL: 'chanel', ROLEX: 'rolex', Cartier: 'cartier', 'Christian Dior': 'dior', 'Van Cleef&Arpels': 'van-cleef-arpels', Gucci: 'gucci' };
 
 let data;
 const $ = sel => document.querySelector(sel);

@@ -1,10 +1,10 @@
 // 상세 정보 칸 v2 — 상세 창(모달)과 상세 페이지가 같이 쓴다
 // 순서 = 상태 띠 → 브랜드·제목 → 달러(크게) → 등급표 → 문의 → 신뢰 · 도착일 → 메모 · 시세
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급표 보이게)
-import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=bc7d5dbcff';
-import { icon } from './icons.js?v=bc7d5dbcff';
-import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=bc7d5dbcff';
-import * as store from './store.js?v=bc7d5dbcff';
+import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, exampleBids, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=3da9e83b46';
+import { icon } from './icons.js?v=3da9e83b46';
+import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=3da9e83b46';
+import * as store from './store.js?v=3da9e83b46';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 
@@ -131,6 +131,17 @@ function actions(lot, state) {
     ${inquiryForm(lot, 'inquiry')}${inquiryForm(lot, 'offer')}`;
 }
 
+// 입찰 기록 — 접었다 펴는 목록(Loupe "Bid History (15)" · Bezel "View bids · 19 bids" · 결정 118). 입찰자는 익명 꼬리표, 숫자는 예시
+function bidHistory(lot, state) {
+  const h = exampleBids(lot);
+  const extra = state === 'outbid' ? 1 : 0;
+  return `<details class="bid-history" data-note="경매 상세의 관례 — Loupe 'Bid History (15)' · Bezel 'View bids'. 현재가만 있고 기록이 없으면 경매처럼 안 읽힌다(10/6 대조). 입찰자는 익명 꼬리표(Catawiki·BaT 식), 금액은 호가 단위로 내려간다. 예시값(결정 118)." data-ref="Loupe 로트 · Bezel 상세 · 결정 118">
+    <summary><span>Bid history</span><span class="muted num">${h.total + extra} bids</span>${icon.down}</summary>
+    <ol>${h.rows.map((r, i) => `<li><span class="num">${usd(r.amount)}</span><span class="muted">${esc(r.who)}${i === 0 ? ' · leading' : ''}</span><span class="muted num">${esc(r.ago)}</span></li>`).join('')}</ol>
+    ${h.earlier ? `<p class="t13 muted">and ${h.earlier} earlier bid${h.earlier > 1 ? 's' : ''}</p>` : ''}
+  </details>`;
+}
+
 // 입찰(B) — 마감·입찰 수·리저브는 예시값
 function bidBox(lot, state) {
   const a = exampleAuction(lot);
@@ -168,6 +179,7 @@ function bidBox(lot, state) {
       </div>
       <p class="bid-row"><span><span class="dot ${reserve[0]}"></span> ${reserve[1]}</span><span class="muted">Extended bidding</span></p>
     </div>
+    ${bidHistory(lot, state)}
     ${line}
     ${store.get('signedIn') ? '' : `<div class="bid-gate" data-note="로그아웃이면 입찰 칸 = 'Register to bid'(Loupe 상세 · Bezel 'SIGN UP'). 현재가는 숨기지 않는다. 문의는 계정 없이도 된다(운영 사이트 FAQ)." data-ref="결정 58">
       <a class="btn block" href="sign-in.html?mode=create&amp;next=${encodeURIComponent('lot.html?id=' + lot.lot)}">Register to bid</a>

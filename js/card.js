@@ -1,14 +1,16 @@
 // 로트 카드 v4 — 까사 정보 구조의 정돈판(결정 72 · v4-lock §6)
 // 띠(마감 · 카운트다운 · 남은 시간 막대) → 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 배지 1
 // 1시간 안이면 띠 글이 "Ending soon" 으로 바뀌고 숫자가 빨강(더윈 12). 카드 어디를 눌러도 상세 창(더윈 4). 모바일은 띠 대신 가격 줄의 알약(BaT · 결정 79)
-import { usd, jpy, cardImg, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName } from './data.js?v=1db980d128';
-import { icon } from './icons.js?v=1db980d128';
-import * as store from './store.js?v=1db980d128';
-import { toast } from './chrome.js?v=1db980d128';
+import { usd, jpy, cardImg, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName } from './data.js?v=5d4a7c1308';
+import { icon } from './icons.js?v=5d4a7c1308';
+import * as store from './store.js?v=5d4a7c1308';
+import { toast } from './chrome.js?v=5d4a7c1308';
 
 const HOUR = 3600000;
 const DAY = 86400000;
 const WINDOW = 72 * HOUR; // 예시 경매 한 회차 길이 — 띠의 진행막대 비율에만 쓴다
+// 판매 방식 → 색 클래스(결정 93 · 운영 코드 RT/LOW/MALL 그대로). 띠·배지·점·목록 탭이 같은 이름을 쓴다
+export const KIND_CLASS = { RT: 'live', LOW: 'time', MALL: 'mall' };
 
 // 남은 시간 문구 — 하루 넘으면 "3 days left", 하루 안이면 시:분:초
 export function remain(ends) {
@@ -28,18 +30,19 @@ export function progress(ends, start) {
   return Math.round(Math.min(100, Math.max(3, (1 - left / total) * 100)));
 }
 
-// 판매 방식 · 기한 — 상세 창·상세 페이지·카드가 같이 쓴다
-export function bandInfo(lot, sale, state) {
+// 판매 방식 · 기한 — 상세 창·상세 페이지·카드가 같이 쓴다. kindOverride 는 상태 모음(시안 도구)에서 세 종류를 나란히 보일 때만
+export function bandInfo(lot, sale, state, kindOverride = '') {
   const tz = store.setting('tz');
-  if (state === 'sold') return { tone: 'done', kind: 'Sold', date: shortDate(new Date(Date.now() - 6 * DAY)), time: '', right: '' };
+  if (state === 'sold') return { tone: 'done', kind: 'Sold', code: 'SOLD', date: shortDate(new Date(Date.now() - 6 * DAY)), time: '', right: '' };
   if (sale === 'B') {
     const a = exampleAuction(lot);
-    return { tone: a.ends - Date.now() < HOUR ? 'hot' : '', kind: 'Live bid', ...localParts(a.ends, tz), right: remain(a.ends), ends: a.ends };
+    return { tone: a.ends - Date.now() < HOUR ? 'hot' : '', kind: 'Live bid', code: 'RT', ...localParts(a.ends, tz), right: remain(a.ends), ends: a.ends };
   }
-  const kind = KIND[lot.kind] || 'Mall';
-  if (!lot.ends) return { tone: '', kind, date: 'Buy it now', time: '', right: 'One piece' };
+  const code = KIND[kindOverride] ? kindOverride : (KIND[lot.kind] ? lot.kind : 'MALL');
+  const kind = KIND[code];
+  if (!lot.ends) return { tone: '', kind, code, date: 'Buy it now', time: '', right: 'In stock' };
   const ends = new Date(lot.ends);
-  return { tone: ends - Date.now() < HOUR ? 'hot' : '', kind, ...localParts(ends, tz), right: remain(ends), ends, start: lot.listed ? new Date(`${lot.listed}T12:00:00`) : null };
+  return { tone: ends - Date.now() < HOUR ? 'hot' : '', kind, code, ...localParts(ends, tz), right: remain(ends), ends, start: lot.listed ? new Date(`${lot.listed}T12:00:00`) : null };
 }
 
 // 판매 방식 · 날짜 · 시각(좁은 화면은 시각을 뺀다) — 상세 정보 띠용
@@ -47,39 +50,43 @@ export function bandLeft(b) {
   return `<span class="bk">${esc(b.kind)}</span>${b.date ? `<span class="bd"> · ${esc(b.date)}</span>` : ''}${b.time ? `<span class="bt"> · ${esc(b.time)}</span>` : ''}`;
 }
 
-// 카드 머리 띠 — 마감(현지 시각) · 카운트다운 · 진행막대. 입찰(B)과 기한 있는 로트에만. Mall(정가 상시)은 띠 없음
+// 카드 머리 띠 — 색 = 판매 방식(결정 93). Live bid/Time limit = 마감(현지 시각) · 카운트다운 · 진행막대, Mall = "Buy it now · In stock"
+// 1시간 안이면 카운트다운이 빨간 알약(warn)로 바뀌고 왼쪽 글이 "Ending soon"(결정 94 · 더윈 12)
 function bandHTML(b, sale) {
   if (b.tone === 'done') return `<div class="card-band is-done"><span class="card-band-l">Ended · ${esc(b.date)}</span><b>Sold</b></div>`;
-  if (!b.ends) return '';
+  const cls = `card-band kind-${KIND_CLASS[b.code] || 'live'}`;
+  if (!b.ends) return `<div class="${cls}"><span class="card-band-l">${esc(b.kind)} · buy it now</span><b>${esc(b.right)}</b></div>`;
   const hot = b.tone === 'hot';
-  const left = sale === 'B' ? `Ends ${esc(b.date)} · ${esc(b.time)}` : `${esc(b.kind)} · until ${esc(b.date)}`;
-  return `<div class="card-band${hot ? ' is-hot' : ''}">
+  // 왼쪽 글은 종류의 말투로: 입찰 = "Ends …"(마감) · Time limit = "until …"(기한) · Mall = "buy it now · until …"(상시, 올라와 있는 동안)
+  const left = b.code === 'RT' ? `Ends ${esc(b.date)} · ${esc(b.time)}`
+    : b.code === 'LOW' ? `${esc(b.kind)} · until ${esc(b.date)} · ${esc(b.time)}`
+    : `${esc(b.kind)} · buy it now · until ${esc(b.date)}`;
+  // Mall 은 시계(00:00:00)가 아니라 "144 days left" 꼴 — 경매처럼 보이지 않게(data-clock 없음)
+  const clock = b.code === 'MALL' && !hot ? '' : 'data-clock';
+  return `<div class="${cls}${hot ? ' is-hot' : ''}">
       <span class="card-band-l" data-band-left="${left}">${hot ? 'Ending soon' : left}</span>
-      <b data-ends="${b.ends.getTime()}" data-clock data-start="${b.start ? b.start.getTime() : ''}">${countdown(b.ends)}</b>
+      <b class="${hot ? 'warn' : ''}" data-ends="${b.ends.getTime()}" ${clock} data-start="${b.start ? b.start.getTime() : ''}">${clock ? countdown(b.ends) : remain(b.ends)}</b>
       <span class="card-bar" aria-hidden="true"><i style="--p:${progress(b.ends, b.start)}%"></i></span>
     </div>`;
 }
 
-// 상태 배지 1개 — 목록의 상태는 배지(규칙 D2). 입찰: Ending soon > 리저브 상태. 정가: 혼합 목록에서 종류만(Mall 은 없음)
-function statusBadge(lot, b, sale, state) {
+// 상태 배지 1개 — 목록의 상태는 배지(규칙 D2). 입찰(B): 리저브 상태(긴급은 띠 숫자가 맡음). 정가(A): 판매 방식 배지(색 = 종류, 결정 93)
+function statusBadge(lot, b, sale) {
   if (b.tone === 'done') return '<span class="badge">Sold</span>';
   if (sale === 'B') {
-    if (b.tone === 'hot') return '<span class="badge ending">Ending soon</span>';
     const a = exampleAuction(lot);
     return { nearly: '<span class="badge action">Reserve nearly met</span>', met: '<span class="badge live">Reserve met</span>',
       not: '<span class="badge">Reserve not met</span>', none: '<span class="badge live">No reserve</span>' }[a.reserve];
   }
-  if (b.tone === 'hot') return '<span class="badge ending">Ending soon</span>';
-  if (b.kind !== 'Mall') return `<span class="badge">${esc(b.kind)}</span>`;
-  return state === 'auto' && !lot.grade ? '<span class="badge">Not graded</span>' : '';
+  return `<span class="badge ${KIND_CLASS[b.code] || ''}">${esc(b.kind)}</span>`;
 }
 
-export function cardHTML(lot, { sale = 'A', state = 'auto', note = '' } = {}) {
+export function cardHTML(lot, { sale = 'A', state = 'auto', note = '', kind = '' } = {}) {
   const savedAt = store.get('saved')[lot.lot];
   const saved = savedAt !== undefined;
   const folders = store.get('folders');
   const rank = lot.grade && lot.grade.overall;
-  const b = bandInfo(lot, sale, state);
+  const b = bandInfo(lot, sale, state, kind);
   const sold = b.tone === 'done';
   const hot = b.tone === 'hot';
   const band = bandHTML(b, sale);
@@ -97,7 +104,8 @@ export function cardHTML(lot, { sale = 'A', state = 'auto', note = '' } = {}) {
     sub = '';
   }
   // 모바일 알약 — BaT "Bid $137,500 | ⏱ 15:10:43". 띠가 숨는 폭에서만 보인다(card.css)
-  const left = b.ends && !sold ? `<span class="card-left${hot ? ' warn' : ''}" data-ends="${b.ends.getTime()}" data-clock>${countdown(b.ends)}</span>` : '';
+  const pillClock = b.code !== 'MALL' || hot; // Mall 은 띠와 같이 "144 days left" 꼴
+  const left = b.ends && !sold ? `<span class="card-left kind-${KIND_CLASS[b.code] || 'live'}${hot ? ' warn' : ''}" data-ends="${b.ends.getTime()}" ${pillClock ? 'data-clock' : ''}>${pillClock ? countdown(b.ends) : remain(b.ends)}</span>` : '';
   return `
   <article class="card${band ? ' has-band' : ''}${sold ? ' is-sold' : ''}" data-reveal data-lot="${esc(lot.lot)}" ${note ? `data-note="${esc(note)}"` : ''}>
     ${band}
@@ -116,7 +124,7 @@ export function cardHTML(lot, { sale = 'A', state = 'auto', note = '' } = {}) {
       <p class="card-brand">${esc(brandName(lot.brand))}</p>
       <h3 class="card-title"><a href="${lotUrl(lot)}" data-open>${esc(lot.title)}</a></h3>
       <p class="card-price">${price}${sub ? `<span class="card-sub">${sub}</span>` : ''}${left}</p>
-      <p class="card-status">${statusBadge(lot, b, sale, state)}</p>
+      <p class="card-status">${statusBadge(lot, b, sale)}</p>
     </div>
   </article>`;
 }

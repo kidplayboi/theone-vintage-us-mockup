@@ -7,16 +7,28 @@
 .tz-pick { display: grid; gap: 4px; justify-items: end; }
 .tz-pick .input { width: 240px; min-height: 38px; font-size: var(--fs-13); }
 
-/* 판매 방식 탭(Bezel: Live 327 · Ending soon 108) */
-.kind-tabs { display: flex; gap: var(--s6); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+/* 판매 방식 탭 — 운영 사이트처럼 넷이 색으로 갈린다(의뢰처 요청 · 결정 93). 글자색 = 종류색, 고른 것은 종류색으로 채움 */
+.kind-tabs { display: flex; flex-wrap: wrap; gap: var(--s2); padding-top: var(--s2); overflow-x: auto; scrollbar-width: none; }
 .kind-tabs::-webkit-scrollbar { display: none; }
-.kind-tab { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 12px 0 14px; font-size: var(--fs-16); color: var(--muted); white-space: nowrap; transition: color var(--dur-fast) var(--ease-out); }
-.kind-tab .num { font-size: var(--fs-14); color: var(--muted); font-variant-numeric: tabular-nums; }
-.kind-tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--brand); transform: scaleX(0); transition: transform var(--dur) var(--ease-out); }
-.kind-tab:hover { color: var(--ink); }
-.kind-tab[aria-selected="true"] { color: var(--ink); font-weight: var(--w-ui); }
-.kind-tab[aria-selected="true"] .num { color: var(--ink); font-weight: 400; }
-.kind-tab[aria-selected="true"]::after { transform: scaleX(1); }
+.kind-tab {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px;
+  border: 1px solid var(--line-2); border-radius: var(--r-pill); background: var(--canvas);
+  font-size: var(--fs-14); font-weight: var(--w-ui); color: var(--ink); white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.kind-tab .dot { width: 8px; height: 8px; }
+.kind-tab .num { font-size: var(--fs-13); font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
+.kind-tab[data-kind="RT"] { color: var(--kind-live); }
+.kind-tab[data-kind="LOW"] { color: var(--kind-time); }
+.kind-tab[data-kind="MALL"] { color: var(--kind-mall); }
+.kind-tab:hover { border-color: currentColor; }
+.kind-tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-brand); }
+.kind-tab[aria-selected="true"][data-kind="RT"] { background: var(--kind-live-band); border-color: var(--kind-live-band); }
+.kind-tab[aria-selected="true"][data-kind="LOW"] { background: var(--kind-time-band); border-color: var(--kind-time-band); }
+.kind-tab[aria-selected="true"][data-kind="MALL"] { background: var(--kind-mall-band); border-color: var(--kind-mall-band); }
+.kind-tab[aria-selected="true"] .num { color: rgba(255, 255, 255, .72); }
+.kind-tab[aria-selected="true"] .dot { background: #FFFFFF; }
+.kind-help { margin-top: var(--s3); font-size: var(--fs-13); color: var(--muted); min-height: 20px; }
 
 .chips { display: flex; flex-wrap: wrap; gap: var(--s2); padding: var(--s5) 0 var(--s3); }
 
@@ -42,7 +54,7 @@
   .toolbar .search { grid-column: 1 / -1; }
 }
 @media (max-width: 720px) {
-  .kind-tabs { gap: var(--s5); }
+  .kind-tabs { flex-wrap: nowrap; margin: 0 calc(var(--gutter) * -1); padding-left: var(--gutter); padding-right: var(--gutter); }
   .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 calc(var(--gutter) * -1); padding-left: var(--gutter); padding-right: var(--gutter); }
   .chips::-webkit-scrollbar { display: none; }
   .toolbar { padding-bottom: var(--s5); }

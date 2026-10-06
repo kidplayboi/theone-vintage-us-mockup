@@ -1,14 +1,21 @@
 // 목록 페이지 v3 — 운영 사이트 분류 전부(형 10/6 "없애면 안 댐"): 판매 방식 탭 4 · 카테고리 9(개수) · 브랜드 40(개수) ·
 // 정렬 · 페이지당 20/50/100 · 검색 · 시간대 · 쪽 번호 · Premium/Express/Classic. 탭 모양은 Bezel 경매 목록(Live 327 / Ending soon 108)
-import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=1db980d128';
-import { mountChrome, bindNewsletter, CATEGORIES } from './chrome.js?v=1db980d128';
-import { mountReview, paintNotes } from './review.js?v=1db980d128';
-import { cardHTML, bindCards, startTicker } from './card.js?v=1db980d128';
-import { openLot } from './lotmodal.js?v=1db980d128';
-import { initMotion, revealOnScroll } from './motion.js?v=1db980d128';
-import * as store from './store.js?v=1db980d128';
+import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=5d4a7c1308';
+import { mountChrome, bindNewsletter, CATEGORIES } from './chrome.js?v=5d4a7c1308';
+import { mountReview, paintNotes } from './review.js?v=5d4a7c1308';
+import { cardHTML, bindCards, startTicker, KIND_CLASS } from './card.js?v=5d4a7c1308';
+import { openLot } from './lotmodal.js?v=5d4a7c1308';
+import { initMotion, revealOnScroll } from './motion.js?v=5d4a7c1308';
+import * as store from './store.js?v=5d4a7c1308';
 
 const KINDS = [['', 'All lots'], ['RT', 'Live bid'], ['LOW', 'Time limit'], ['MALL', 'Mall']];
+// 고른 판매 방식이 뭔지 한 줄로(처음 온 미국 손님용). 문장은 운영 사이트 설명을 줄인 것
+const KIND_HELP = {
+  '': 'Everything we can buy this week — live auctions, timed sales and shop stock. Colors mark the sale type.',
+  RT: 'Live bid — auction lots. Bid until the timer ends; a late bid adds time, so the lot goes to the highest bidder.',
+  LOW: 'Time limit — fixed price, available only until the date on the lot.',
+  MALL: 'Mall — fixed price, in stock now. Buy any time, no bidding.',
+};
 const SALES = { premium: 'Premium Auction', express: 'Express', classic: 'Classic' };
 // 운영 정렬 4종 + 마감 임박(경매 목록 Bezel 'Ending soon' — 운영에 없는 추가, 형 확정 10/6 유지 · 결정 91)
 const SORTS = [['featured', 'Featured'], ['new', 'Newest'], ['ending', 'Ending soon'], ['low', 'Price: low to high'], ['high', 'Price: high to low']];
@@ -92,8 +99,9 @@ function kindCounts() {
 function renderKinds() {
   const k = kindCounts();
   $('[data-kinds]').innerHTML = KINDS.map(([code, name]) => `
-    <button type="button" role="tab" class="kind-tab" data-kind="${code}" aria-selected="${ui.kind === code}">
-      ${code === 'RT' ? '<span class="dot"></span>' : ''}${name}<span class="num">${(k[code] ?? 0).toLocaleString('en-US')}</span></button>`).join('');
+    <button type="button" role="tab" class="kind-tab" data-kind="${code}" aria-selected="${ui.kind === code}" title="${KIND_HELP[code]}">
+      ${code ? `<span class="dot ${KIND_CLASS[code] === 'live' ? '' : KIND_CLASS[code]}"></span>` : ''}${name}<span class="num">${(k[code] ?? 0).toLocaleString('en-US')}</span></button>`).join('');
+  $('[data-kind-help]').textContent = KIND_HELP[ui.kind];
 }
 
 function renderCats() {

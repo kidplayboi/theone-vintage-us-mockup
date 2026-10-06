@@ -5,21 +5,26 @@
 
 .card { position: relative; display: flex; flex-direction: column; min-width: 0; }
 
-/* 띠 — 카드 머리 32px. 숫자는 늘 흰색, 상태는 띠 색으로: 초록(진행) → 빨강(1시간 안 · 더윈 12 · 형 10/6 "띠 색을 바꾸자") → 회색(끝남) */
+/* 띠 — 카드 머리 32px. 띠 색 = 판매 방식(결정 93: Live bid 초록 · Time limit 오렌지 · Mall 슬레이트 · 끝남 회색).
+   긴급함은 숫자가 맡는다(결정 94 · 형 10/6 "종료임박은 숫자로"): 1시간 안이면 카운트다운이 빨간 알약, 왼쪽 글은 "Ending soon" */
 .card-band {
   position: relative; display: flex; justify-content: space-between; align-items: center; gap: var(--s2);
   min-height: 32px; padding: 0 var(--s3) 2px;
-  border-radius: var(--r-lg) var(--r-lg) 0 0; background: var(--brand); color: var(--on-brand-2);
+  border-radius: var(--r-lg) var(--r-lg) 0 0; background: var(--kind-live-band); color: var(--on-brand-2);
   font-size: var(--fs-12); letter-spacing: var(--track-small); white-space: nowrap; overflow: hidden;
   transition: background-color var(--dur) var(--ease-out);
 }
+.card-band.kind-time { background: var(--kind-time-band); color: #F6D9C6; }
+.card-band.kind-mall { background: var(--kind-mall-band); color: #C8D6E8; }
 .card-band-l { overflow: hidden; text-overflow: ellipsis; }
-.card-band b { flex: none; font-size: var(--fs-14); font-weight: var(--w-ui); color: var(--on-brand); font-variant-numeric: tabular-nums; }
-.card-band.is-hot { background: var(--ending); color: rgba(255, 255, 255, .82); }
+.card-band b { flex: none; font-size: var(--fs-14); font-weight: var(--w-ui); color: var(--on-brand); font-variant-numeric: tabular-nums; line-height: 20px; border-radius: 4px; transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
+.card-band b.warn { background: var(--ending); color: #FFFFFF; padding: 0 7px; margin-right: -4px; }
+.card-band.is-hot { color: #FFFFFF; }
 .card-band.is-done { background: #6B716D; color: #E7E9E7; }
 .card-band.is-done b { font-weight: 400; }
 .card-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255, 255, 255, .18); }
 .card-bar i { display: block; height: 100%; width: var(--p, 0%); background: var(--on-brand); transition: width 1s linear; }
+.card-band.is-hot .card-bar i { background: var(--ending-on-brand); }
 
 /* 사진 타일 */
 .card-media { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: var(--r-lg); background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); }
@@ -91,9 +96,8 @@
 .card-left { display: none; }
 .card-status { margin-top: 6px; }
 
-/* 초록 띠 위(홈 Live now) — 카드 띠는 한 단 밝은 초록, 급박하면 똑같이 빨강 */
+/* 초록 띠 위(홈 Live now) — 카드 띠는 한 단 밝은 초록(여기는 Live bid 만 온다) */
 .on-dark .card-band { background: var(--brand-2); }
-.on-dark .card-band.is-hot { background: var(--ending); }
 .on-dark .card-band.is-done { background: #6B716D; }
 .on-dark .card-media { background: #F1F1EE; box-shadow: none; }
 .on-dark .card-brand, .on-dark .card-price .price { color: var(--on-brand); }
@@ -117,6 +121,8 @@
     display: inline-flex; align-items: center; gap: 4px; min-height: 22px; padding: 0 8px; border-radius: var(--r-pill);
     background: var(--brand); color: var(--on-brand); font-size: var(--fs-12); font-weight: var(--w-ui); font-variant-numeric: tabular-nums;
   }
+  .card-left.kind-time { background: var(--kind-time-band); }
+  .card-left.kind-mall { background: var(--kind-mall-band); }
   .card-left.warn { background: var(--ending); color: var(--on-brand); }
   .on-dark .card-left { background: var(--brand-2); }
   .on-dark .card-left.warn { background: var(--ending); }

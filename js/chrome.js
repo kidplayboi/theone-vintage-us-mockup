@@ -1,8 +1,8 @@
 // 제품 공통 틀 v4 — 초록 마스트헤드(워드마크·검색·판매 방식·계정) · 흰 카테고리 줄(카테고리 8 + Brands ▾) · 브랜드 펼침 · 서랍 · 흰 푸터 · 모바일 아래 탭
 // 검은 facts 띠는 뺐다(결정 69). 근거: Bezel 마스트헤드(ref-bezel-s00) · 1stDibs/Rebag/WGACA/Fashionphile 카테고리 줄 안의 Designers 항목(결정 71)
-import { icon } from './icons.js?v=1db980d128';
-import * as store from './store.js?v=1db980d128';
-import { brandName } from './data.js?v=1db980d128';
+import { icon } from './icons.js?v=5d4a7c1308';
+import * as store from './store.js?v=5d4a7c1308';
+import { brandName } from './data.js?v=5d4a7c1308';
 
 // 운영 사이트 상단 메뉴 그대로(Premium Auction · Express · Classic · How It Works)
 const SALES = [

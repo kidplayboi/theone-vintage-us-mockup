@@ -10,13 +10,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
-<link rel="stylesheet" href="css/tokens.css?v=1db980d128">
-<link rel="stylesheet" href="css/base.css?v=1db980d128">
-<link rel="stylesheet" href="css/chrome.css?v=1db980d128">
-<link rel="stylesheet" href="css/card.css?v=1db980d128">
-<link rel="stylesheet" href="css/lot.css?v=1db980d128">
-<link rel="stylesheet" href="css/pages.css?v=1db980d128">
-<link rel="stylesheet" href="css/review.css?v=1db980d128">
+<link rel="stylesheet" href="css/tokens.css?v=5d4a7c1308">
+<link rel="stylesheet" href="css/base.css?v=5d4a7c1308">
+<link rel="stylesheet" href="css/chrome.css?v=5d4a7c1308">
+<link rel="stylesheet" href="css/card.css?v=5d4a7c1308">
+<link rel="stylesheet" href="css/lot.css?v=5d4a7c1308">
+<link rel="stylesheet" href="css/pages.css?v=5d4a7c1308">
+<link rel="stylesheet" href="css/review.css?v=5d4a7c1308">
 </head>
 <body>
 <div id="review"></div>
@@ -24,6 +24,10 @@
 <main class="states wrap">
   <h1>상태 모음 <span class="muted" style="font-weight:400">· 시안 도구</span></h1>
   <p class="desc">상품 하나가 거치는 상태와 그때 화면에 보이는 것을 한곳에 모았다(기획안 24·29쪽). 카드는 실재고에 상태만 입힌 예시이고, 아래 표의 링크를 누르면 그 상태의 상세 페이지가 열린다. 주소로 연 상태는 그 화면에서만 적용되고 저장되지 않는다.</p>
+
+  <h2>판매 방식 3색 — 의뢰처 요청(10/6 · 결정 93·94)</h2>
+  <p class="desc">운영 사이트는 All lots / Live bid / Time limit / Mall 넷을 색으로 가른다(남색·빨강·주황). 우리 팔레트로는 Live bid 초록 · Time limit 오렌지 · Mall 슬레이트. 같은 색이 목록 탭 · 카드 띠 · 배지 · 상세 점에 그대로 간다. 지금 운영 재고는 Mall 24,128 · Live bid 0 · Time limit 0 이라 아래 Live bid·Time limit 카드는 같은 실재고에 종류만 입힌 예시. 종료 임박은 띠가 아니라 숫자가 빨간 알약이 된다.</p>
+  <div class="state-grid" data-kind-states></div>
 
   <h2>카드 — 24쪽 네 가지 상태 + 가격 미공개 · 입찰</h2>
   <div class="state-grid" data-card-states></div>
@@ -36,10 +40,10 @@
 </main>
 <footer id="foot"></footer>
 <script type="module">
-  import { startPage } from './js/page.js?v=1db980d128';
-  import { cardHTML, bindCards, startTicker } from './js/card.js?v=1db980d128';
-  import { openLot } from './js/lotmodal.js?v=1db980d128';
-  import { exampleAuction } from './js/data.js?v=1db980d128';
+  import { startPage } from './js/page.js?v=5d4a7c1308';
+  import { cardHTML, bindCards, startTicker } from './js/card.js?v=5d4a7c1308';
+  import { openLot } from './js/lotmodal.js?v=5d4a7c1308';
+  import { exampleAuction } from './js/data.js?v=5d4a7c1308';
 
   const data = await startPage({ page: 'states' });
   if (data) {
@@ -50,15 +54,25 @@
     const graded = L.find(x => x.grade && x.usd) || L[0];
     const hot = [...L].filter(x => x.usd).sort((a, b) => exampleAuction(a).ends - exampleAuction(b).ends)[0];
     const cards = [
-      [L[0], 'A', 'auto', '<b>정가(A) 기본</b> — 띠 없음(Mall 상시 판매). 브랜드 · 이름 · 달러 크게 + 엔화 작게. 카드 어디를 눌러도 상세 창.'],
-      [soon, 'A', 'auto', '<b>기한 있는 판매(A)</b> — 머리 띠에 종류 · 기한 · 남은 시간 · 진행막대. 1시간 안이면 "Ending soon" + 빨강(더윈 12).'],
+      [L[0], 'A', 'auto', '<b>정가(A) · Mall</b> — 슬레이트 띠 "Mall · buy it now / In stock" + 슬레이트 배지(판매 방식 색, 결정 93). 브랜드 · 이름 · 달러 크게 + 엔화 작게. 카드 어디를 눌러도 상세 창.'],
+      [soon, 'A', 'auto', '<b>정가(A) · Time limit</b> — 오렌지 띠에 종류 · 기한 · 카운트다운 · 진행막대, 오렌지 배지. 1시간 안이면 숫자가 빨간 알약 + "Ending soon"(결정 94 · 더윈 12). Live bid 는 초록 띠.'],
       [L[1], 'A', 'sold', '<b>판매 완료</b> — 회색 띠 "Ended · 날짜 / Sold", 사진은 흐리게. 판매가는 로그인 손님에게만.'],
       [noPrice, 'A', 'auto', '<b>가격 미공개</b> — 원천 가격이 0인 상품. "Price on request"(결정 28).'],
       [graded, 'A', 'auto', '<b>등급 있음</b> — 사진 왼쪽 위 흰 원 안에 등급 글자(까사 등급 배지). 없으면 "Not graded" 배지.'],
       [L[1], 'B', 'auto', '<b>입찰(B)</b> — 띠: 마감 현지 시각 + 민트 카운트다운 + 막대. 아래: 현재가 · 입찰 수 · 리저브 배지. 북마크에 마우스를 올리면 폴더 1·2·3. 값은 예시.'],
-      [hot, 'B', 'auto', '<b>입찰 · 마감 임박</b> — 띠 글이 "Ending soon", 숫자와 막대가 빨강, 배지도 Ending soon. 값은 예시.'],
+      [hot, 'B', 'auto', '<b>입찰 · 마감 임박</b> — 띠는 초록 그대로, 카운트다운이 빨간 알약으로 바뀌고 왼쪽 글이 "Ending soon"(긴급은 숫자로 · 결정 94). 값은 예시.'],
       [L.find(x => x.usd && exampleAuction(x).reserve === 'none') || L[6], 'B', 'auto', '<b>입찰 · 최소가 없음</b> — "No reserve" 배지는 사실일 때만(결정 43). 값은 예시.'],
     ];
+    // 판매 방식 3색 — 종류만 입힌 예시(kind 강제). 네 번째는 1시간 안 마감 = 숫자 빨간 알약
+    const kinds = [
+      [L[3], 'RT', '<b>Live bid</b> — 초록 띠 "Ends 날짜 · 시각" + 카운트다운 · 초록 배지. 목록 탭을 고르면 같은 초록으로 채워진다.'],
+      [L[5], 'LOW', '<b>Time limit</b> — 오렌지 띠 "Time limit · until 날짜 · 시각" + 카운트다운 · 오렌지 배지.'],
+      [L[7], 'MALL', '<b>Mall</b> — 슬레이트 띠 "Mall · buy it now · until 날짜" + "N days left"(시계 아님) · 슬레이트 배지.'],
+      [hot, 'RT', '<b>종료 임박(어느 종류든)</b> — 띠 색은 그대로, 카운트다운이 빨간 알약 + "Ending soon". 긴급은 숫자로(결정 94).'],
+    ];
+    const kgrid = document.querySelector('[data-kind-states]');
+    kgrid.innerHTML = kinds.map(([lot, kind, cap], i) => `<div>${cardHTML(lot, { sale: i === 3 ? 'B' : 'A', kind })}<p class="state-cap">${cap}</p></div>`).join('');
+    bindCards(kgrid, L, { onOpen: openLot });
     const grid = document.querySelector('[data-card-states]');
     grid.innerHTML = cards.map(([lot, sale, state, cap]) => `<div>${cardHTML(lot, { sale, state })}<p class="state-cap">${cap}</p></div>`).join('');
     bindCards(grid, L, { onOpen: openLot });

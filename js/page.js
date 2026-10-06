@@ -1,8 +1,8 @@
 // 정적 페이지 공통 시작 — 틀 · 검토 막대 · 메모 · 움직임
-import { loadData } from './data.js?v=1db980d128';
-import { mountChrome, bindNewsletter } from './chrome.js?v=1db980d128';
-import { mountReview, paintNotes } from './review.js?v=1db980d128';
-import { initMotion } from './motion.js?v=1db980d128';
+import { loadData } from './data.js?v=5d4a7c1308';
+import { mountChrome, bindNewsletter } from './chrome.js?v=5d4a7c1308';
+import { mountReview, paintNotes } from './review.js?v=5d4a7c1308';
+import { initMotion } from './motion.js?v=5d4a7c1308';
 
 export async function startPage({ page = '', nav = '' } = {}) {
   let data = null;

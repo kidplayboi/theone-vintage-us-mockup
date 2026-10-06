@@ -1,12 +1,12 @@
 // 목록 페이지 v3 — 운영 사이트 분류 전부(형 10/6 "없애면 안 댐"): 판매 방식 탭 4 · 카테고리 9(개수) · 브랜드 40(개수) ·
 // 정렬 · 페이지당 20/50/100 · 검색 · 시간대 · 쪽 번호 · Premium/Express/Classic. 탭 모양은 Bezel 경매 목록(Live 327 / Ending soon 108)
-import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=9f1e5de50c';
-import { mountChrome, bindNewsletter, CATEGORIES } from './chrome.js?v=9f1e5de50c';
-import { mountReview, paintNotes } from './review.js?v=9f1e5de50c';
-import { cardHTML, bindCards, startTicker, KIND_CLASS } from './card.js?v=9f1e5de50c';
-import { openLot } from './lotmodal.js?v=9f1e5de50c';
-import { initMotion, revealOnScroll } from './motion.js?v=9f1e5de50c';
-import * as store from './store.js?v=9f1e5de50c';
+import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=3f060f88fb';
+import { mountChrome, bindNewsletter, CATEGORIES } from './chrome.js?v=3f060f88fb';
+import { mountReview, paintNotes } from './review.js?v=3f060f88fb';
+import { cardHTML, bindCards, startTicker, KIND_CLASS } from './card.js?v=3f060f88fb';
+import { openLot } from './lotmodal.js?v=3f060f88fb';
+import { initMotion, revealOnScroll } from './motion.js?v=3f060f88fb';
+import * as store from './store.js?v=3f060f88fb';
 
 const KINDS = [['', 'All lots'], ['RT', 'Live bid'], ['LOW', 'Time limit'], ['MALL', 'Mall']];
 // 고른 판매 방식이 뭔지 한 줄로(처음 온 미국 손님용). 두 색: 초록 = 경매(Live bid · Time limit), 슬레이트 = 고정가(Mall) — 결정 95

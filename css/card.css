@@ -14,7 +14,7 @@
   font-size: var(--fs-12); letter-spacing: var(--track-small); white-space: nowrap; overflow: hidden;
   transition: background-color var(--dur) var(--ease-out);
 }
-.card-band.kind-mall { background: var(--kind-mall-band); color: #C8D6E8; }
+.card-band.kind-mall { background: var(--kind-mall-band); color: #EAF0FD; }
 .card-band-l { overflow: hidden; text-overflow: ellipsis; }
 .card-band b { flex: none; font-size: var(--fs-14); font-weight: var(--w-ui); color: var(--on-brand); font-variant-numeric: tabular-nums; line-height: 20px; border-radius: 4px; transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
 .card-band b.warn { background: var(--ending); color: #FFFFFF; padding: 0 7px; margin-right: -4px; }

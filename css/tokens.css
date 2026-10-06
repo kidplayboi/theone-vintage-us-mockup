@@ -96,7 +96,7 @@
   /* 판매 방식 색 — 두 색만(형 10/6 · 결정 95): 경매(Live bid + Time limit 블라인드 입찰) = 브랜드 초록 · 고정가(Mall) = 슬레이트.
      운영 사이트는 넷을 남색/빨강/주황으로 가르지만 색이 많으면 손님이 못 읽는다. 빨강은 긴급(종료 임박)·오류 전용 */
   --kind-live: var(--live);        --kind-live-bg: var(--live-bg);   --kind-live-band: var(--brand);
-  --kind-mall: #2F4A6E;            --kind-mall-bg: #E8EEF6;          --kind-mall-band: #2A3F5C;
+  --kind-mall: #1D4ED8;            --kind-mall-bg: #E7EFFC;          --kind-mall-band: #2563EB;   /* 10/6 형: 슬레이트가 칙칙해 진초록과 안 갈림 → 선명한 파랑(흰 글 5.2:1) */
 }
 
 @media (max-width: 720px) {

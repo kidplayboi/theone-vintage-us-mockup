@@ -91,8 +91,8 @@
 
 @media (max-width: 900px) {
   .shop-head { flex-direction: column; align-items: stretch; }
-  .tz-pick { justify-items: start; }
-  .tz-pick .input { width: 100%; }
+  .tz-pick { display: flex; align-items: center; gap: var(--s3); justify-items: start; } /* 폰·태블릿: 라벨 + 셀렉트 한 줄(10/7 검사: 시간대 칸이 Featured 위를 차지) */
+  .tz-pick .input { width: auto; flex: 1; min-height: 36px; }
   .toolbar { grid-template-columns: 1fr 1fr; }
   .toolbar .tb-search { grid-column: 1 / -1; }
   .filter-row .chips-wrap { grid-template-columns: minmax(0, 1fr) auto; }

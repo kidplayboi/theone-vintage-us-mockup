@@ -1,13 +1,13 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=526e3301da';
-import { mountChrome, bindNewsletter } from './chrome.js?v=526e3301da';
-import { mountReview, paintNotes } from './review.js?v=526e3301da';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=526e3301da';
-import { openLot } from './lotmodal.js?v=526e3301da';
-import { initMotion, revealOnScroll } from './motion.js?v=526e3301da';
-import { icon } from './icons.js?v=526e3301da';
-import * as store from './store.js?v=526e3301da';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=cd632a7b68';
+import { mountChrome, bindNewsletter } from './chrome.js?v=cd632a7b68';
+import { mountReview, paintNotes } from './review.js?v=cd632a7b68';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=cd632a7b68';
+import { openLot } from './lotmodal.js?v=cd632a7b68';
+import { initMotion, revealOnScroll } from './motion.js?v=cd632a7b68';
+import { icon } from './icons.js?v=cd632a7b68';
+import * as store from './store.js?v=cd632a7b68';
 
 const HOUR = 3600000;
 // 히어로는 풀블리드 사진 한 장(index.html · 결정 124) — 누끼 무대(hero.js · assets/hero)는 10/7 삭제
@@ -66,7 +66,9 @@ function render() {
 
 // New this week — 등록일 최신 8점(결정 104). 판매 방식은 검토 막대 설정대로
 function renderNew() {
-  const lots = [...data.lots].filter(x => x.usd).sort((a, b) => b.listed.localeCompare(a.listed)).slice(0, 8);
+  // 최신 8점이되 브랜드당 2점까지(결정 131 · 10/7 실측: 최신 8점 중 6점이 Casio 디지털 시계 — 한 줄이 같은 얼굴). 순서는 등록일 그대로
+  // $300 이상만(10/7: 최신순 그대로면 $24~77 카시오와 'Wholesale' 자리표시 사진의 $74 목걸이가 홈 진열대에 올라왔다 — 진열은 Live now 와 같은 기준)
+  const lots = diversify([...data.lots].filter(x => x.usd >= 300).sort((a, b) => b.listed.localeCompare(a.listed)), 8, 2);
   // 더 보기는 레일 마지막 타일로(결정 129 · Loupe 마지막 타일 안 링크) — 섹션 머리의 → 링크는 뺐다
   $('[data-new-rail]').innerHTML = lots.map(lot => cardHTML(lot, { sale: store.setting('sale') })).join('')
     + `<a class="rail-more" href="shop.html?sort=new"><span>All new lots</span>${icon.arrow}</a>`;
@@ -92,6 +94,14 @@ function renderHeroCta() {
   const primary = $('[data-hero-primary]');
   primary.firstChild.textContent = `${bidding() ? 'Browse live auctions' : 'Shop all lots'} `; // 글 노드만 — 뒤의 화살표 svg 는 그대로(결정 128)
   primary.setAttribute('href', bidding() ? '#live' : 'shop.html');
+}
+
+// 정렬된 목록에서 브랜드당 perBrand 점까지 n 점 — 모자라면 나머지로 채운다(순서 유지 · 지어내는 것 없음)
+function diversify(sorted, n, perBrand) {
+  const count = {}; const picked = [];
+  for (const lot of sorted) { if ((count[lot.brand] || 0) < perBrand) { picked.push(lot); count[lot.brand] = (count[lot.brand] || 0) + 1; if (picked.length === n) return picked; } }
+  for (const lot of sorted) { if (!picked.includes(lot)) { picked.push(lot); if (picked.length === n) break; } }
+  return picked;
 }
 
 // 진행 중 로트 — 입찰(B)은 전 재고가 Live bid(마감 빠른 순, 진열이라 $1,000 이상). 정가(A)는 운영 데이터의 Live bid 종류만
@@ -128,7 +138,8 @@ function renderLive() {
   const tz = store.setting('tz');
   const p = localParts(first, tz);
   $('[data-live-when]').textContent = ` (${p.date} · ${p.time})`;
-  rail.innerHTML = lots.slice(0, 4).map(lot => cardHTML(lot, { sale: store.setting('sale') })).join(''); // 흰 머리 카드가 빠져 네 장(결정 129)
+  // 네 장(결정 129) · 브랜드당 1점(결정 131 · 10/7 실측: 넷 중 셋이 Rolex) — 마감 순서는 그대로, 겹치는 브랜드만 건너뛴다
+  rail.innerHTML = diversify(lots, 4, 1).map(lot => cardHTML(lot, { sale: store.setting('sale') })).join('');
 }
 
 // Browse — 카테고리 타일 6 + 같은 구획 아래 브랜드 행(결정 71)

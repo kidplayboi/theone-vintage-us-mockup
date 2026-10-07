@@ -3,12 +3,41 @@ let cache;
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=526e3301da').then(r => {
+    cache = fetch('data/lots.json?v=cd632a7b68').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
+    }).then(d => {
+      // 제목 정리(결정 131) — 원천 카탈로그 표기를 사람이 읽는 꼴로. 원문은 rawTitle 에 남긴다(About 인용은 lot.name 원문 그대로)
+      d.lots.forEach(l => { l.rawTitle = l.title; l.title = cleanTitle(l.title); });
+      return d;
     });
   }
   return cache;
+}
+
+// 제목 정리 규칙(결정 131 · 10/7 스냅숏 125개 중 29개가 원문 그대로 — "Shoulder Shoulder Bag Camera Bag PVC/Leather 19152" · "AIR MAX 90 CW6208-111 Men's" · "Tote Bag Grey W")
+// 지어내지 않는다, 지우기만 한다: ① 같은 낱말 연속 ② 앞머리 상태 문구 ③ 꼬리의 SKU 코드(글자+숫자 5자 이상) ④ 꼬리의 외자·Size·성별 표기 ⑤ "Grey- Brown" 식 끊긴 하이픈 ⑥ 전각 공백
+export function cleanTitle(raw) {
+  let t = String(raw || '').replace(/　/g, ' ').replace(/\s+/g, ' ').trim();
+  t = t.replace(/^(?:excellent|very good|good|unused|new)\s+condition\s+/i, '');
+  t = t.replace(/^with\s+/i, '');                                                // "With G-SHOCK …" — 원천이 잘라 붙인 접속사
+  t = t.replace(/\s*\((?:approx\.?|approximately)\)\s*/gi, ' ');                 // "(Approx.)"
+  t = t.replace(/\s+\/\s*/g, '/');                                               // "Necklace /Pendant" → "Necklace/Pendant"
+  t = t.replace(/\b(\w+)\s+\1\b/gi, '$1');                                      // Shoulder Shoulder → Shoulder
+  t = t.replace(/(\w)-\s+(\w)/g, '$1-$2');                                       // Grey- Brown → Grey-Brown
+  for (let i = 0; i < 3; i++) {                                                  // 꼬리에서 최대 3토큰
+    const before = t;
+    // 성별 문구는 통째로: "Men's Watch" · "- Men's & Women's" · "Unisex"(앞에 이미 Watch/Case 가 있다)
+    t = t.replace(/\s*-?\s*(?:men's|women's|ladies'|mens|womens|unisex)(?:\s*&\s*(?:men's|women's|ladies'))?(?:\s+watch)?$/i, '');
+    t = t.replace(/\s+(?:[A-Z]|Size)$/i, '');                                     // 외자 · Size(사이즈 약어 GM/PM/MM 은 이름의 일부라 남긴다 — "City Steamer PM")
+    // SKU 꼬리만: 글자 1~3 + 숫자 3자리 이상(+ -숫자)(CW6208-111 · M53456 · WS27472) · 숫자+글자+숫자(10I193DM). 모델명 GW-B5600 · DW-8800 · BGD-565US 는 남긴다(시계는 모델 코드가 이름)
+    t = t.replace(/\s+(?:[A-Za-z]{1,3}\d{3,}(?:-\d{2,})?|\d+[A-Za-z]\d+[A-Za-z]*)$/, '');
+    t = t.replace(/\s+(\d{4,})$/, (m, n) => (n.length === 4 && +n >= 1900 && +n <= 2030 ? m : '')); // 숫자만: 5자리 이상(19152 · 1142 는 4자리라 남는다…) 또는 연도가 아닌 4자리
+    t = t.replace(/\s*[-–&/]\s*$/, '');                                            // 끊긴 꼬리 "Men's &" · "Handbag -"
+    if (t === before) break;
+  }
+  t = t.replace(/\s+/g, ' ').trim();
+  return t.split(' ').length >= 2 ? t : String(raw || '').trim();               // 너무 깎여 한 낱말만 남으면 원문
 }
 
 export const usd = n => '$' + Math.round(n).toLocaleString('en-US');

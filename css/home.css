@@ -12,40 +12,37 @@
 /* 제목 = 디스플레이 세리프(결정 125 · 홈 히어로 한 자리만): Cormorant Garamond 400 · 66px · 행간 1.02 · 자간 0. Loupe 는 Romano 세리프 디스플레이 + Söhne 본문 — 같은 '세리프 헤드라인 + 그로테스크 본문' 짝 */
 .hero-copy .display.hero-title { font-family: var(--serif); font-weight: 400; color: #FFFFFF; max-width: 20ch; font-size: clamp(40px, 4.6vw, 66px); line-height: 1.02; letter-spacing: 0; text-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
 .hero-copy .lede { color: rgba(255, 255, 255, .82); max-width: 48ch; font-size: var(--fs-16); }
-.hero-cta { flex: none; min-height: 48px; padding: 0 26px; box-shadow: 0 8px 24px -12px rgba(0, 0, 0, .5); }
+.hero-cta { flex: none; min-height: 48px; padding: 0 22px 0 26px; } /* 그림자 없음(결정 76) */
 .hero-photo :focus-visible { outline-color: #FFFFFF; }
 
-/* ── 2 Live now — 초록 띠(브랜드색 자리 ②). 왼쪽 흰 카드(Phillips) + 카드 3장(까사 구조) ── */
-/* 바탕은 연한 회녹(결정 98 · 형 10/6 "진초록 + 흰 바탕이 붙어 눈 아픔") — 초록은 머리띠 · CTA · 카드 띠에만 */
-/* 클래스는 .live-sec — .live 는 배지(.badge.live)·점(.dot)과 이름이 겹쳐 초록 배지가 142px 로 늘어났다(10/6 실측) */
-.live-sec { background: #EEF2EF; color: var(--body); padding: var(--s8) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.live-in { display: grid; grid-template-columns: 296px minmax(0, 1fr); gap: var(--s6); align-items: start; }
-.live-card { display: grid; gap: var(--s3); align-content: start; padding: var(--s5); border-radius: var(--r-lg); background: var(--canvas); color: var(--body); box-shadow: inset 0 0 0 1px var(--line); }
+/* ── 2 Live now — 연한 회녹 바탕(결정 98) 위 가운데 큰 세리프 제목 한 번(결정 129 · Loupe 'THE LATEST' 135px + 날짜 한 줄) + 카드 4장 ──
+   홈에서 유일하게 큰 글(최대 112px) = '기억에 남는 한 가지'. 흰 머리 카드(결정 70)와 Register 버튼은 뺐다 — 상자 1개 · 버튼 1개 줄임.
+   클래스는 .live-sec — .live 는 배지(.badge.live)·점(.dot)과 이름이 겹친다(10/6 실측) */
+.live-sec { background: #EEF2EF; color: var(--body); padding: var(--s8) 0 var(--s8); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.live-head { display: grid; justify-items: center; gap: var(--s3); margin-bottom: var(--s7); text-align: center; }
 .live-now { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-13); font-weight: var(--w-ui); color: var(--live); }
 .live-now .dot { background: var(--live); }
-/* 흰 카드 안은 흰 바탕 규칙으로 되돌린다(.on-dark 상속 끊기) */
-.live-card .display { color: var(--ink); }
-.live-card .muted, .live-card .label { color: var(--muted); }
-.live-card p.muted { font-size: var(--fs-14); }
-.live-card .num b { color: var(--ink); font-weight: var(--w-ui); }
-.live-next { display: grid; gap: 2px; padding: var(--s3) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.live-next b { font-size: var(--fs-28); font-weight: var(--w-ui); letter-spacing: var(--track-h2); color: var(--live); font-variant-numeric: tabular-nums; line-height: 1.1; }
-.live-next b.warn { color: var(--ending); }
-.live-tz { display: grid; gap: 4px; }
-.live-tz .input { min-height: 38px; font-size: var(--fs-13); }
-.live-card .btn { width: 100%; }
-.live-card .more-link { justify-self: start; color: var(--ink); }
-.live-card .more-link:hover { color: var(--ink); }
-.live-card :focus-visible { outline-color: var(--brand); }
-.rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5); }
+.live-display { font-family: var(--serif); font-size: clamp(56px, 8vw, 112px); line-height: .95; letter-spacing: -0.015em; font-weight: var(--w-serif); color: var(--ink); }
+.live-sub { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 6px; font-size: var(--fs-14); color: var(--body); }
+.live-sub b { color: var(--live); font-weight: var(--w-ui); font-variant-numeric: tabular-nums; }
+.live-sub b.warn { color: var(--ending); }
+.live-when { color: var(--muted); }
+/* 시간대 선택 — 글줄 안의 밑줄 셀렉트(상자 없이) */
+.tz-inline { margin-left: 6px; padding: 0 18px 0 0; border: 0; border-bottom: 1px solid var(--line-2); background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2369706B' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right 2px center; appearance: none; font-size: var(--fs-14); color: var(--muted); cursor: pointer; }
+.tz-inline:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s5); }
 .rail .empty { grid-column: 1 / -1; color: var(--body); }
 .rail .empty .display { color: var(--ink); }
+/* 더 보기 = 레일 마지막 타일(결정 129 · Loupe) */
+.rail-more { flex: 0 0 200px; display: grid; place-content: center; justify-items: center; gap: var(--s2); aspect-ratio: 1 / 1; border-radius: var(--r-lg); border: 1px solid var(--line-2); color: var(--ink); font-size: var(--fs-14); transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out); }
+.rail-more:hover { border-color: var(--ink); background: var(--surface); }
+.rail-more svg { width: 18px; height: 18px; }
 
 /* ── 3 Browse — 카테고리 타일 6 + 같은 구획 아래 브랜드 행(결정 71) ── */
 .cat-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s4); }
 .cat-tile { display: grid; gap: 2px; align-content: start; }
 .cat-photo { display: block; aspect-ratio: 1 / 1; margin-bottom: var(--s2); border-radius: var(--r-lg); overflow: hidden; background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out); }
-.cat-tile:hover .cat-photo { transform: translateY(-2px); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06), 0 8px 20px -12px rgba(17, 20, 18, .25); }
+.cat-tile:hover .cat-photo { transform: translateY(-2px); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); } /* 그림자는 오버레이에만(결정 76) */
 .cat-photo img { width: 100%; height: 100%; object-fit: contain; padding: 8%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out); }
 .cat-tile:hover .cat-photo img { transform: scale(1.04); }
 .cat-name { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
@@ -59,13 +56,14 @@
 .cat-list a:last-child { border-bottom: 0; }
 .cat-list a:hover span:first-child { text-decoration: underline; text-underline-offset: 3px; }
 .cat-list .num { color: var(--muted); font-size: var(--fs-13); font-variant-numeric: tabular-nums; }
-/* 브랜드 행 — 워드마크 로고 타일 8(Bezel 'Shop by Brand' · WGACA 디자이너 행). 타일 자체(.brand-mark)는 base.css — 상세 브랜드 띠와 공용 */
+/* 브랜드 행 — 흰 바탕 워드마크 8(결정 129 · §13 H3 · Bezel 'Shop by Brand' 흰 바탕 로고). 회색 타일을 걷어내고 칸 사이 hairline 만 */
 .brand-row { margin-top: var(--s6); padding-top: var(--s5); border-top: 1px solid var(--line); }
-.brand-row-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); margin-bottom: var(--s4); }
-.brand-row-head .label { font-size: var(--fs-13); color: var(--ink); }
-.brand-logos { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--s3); }
-.brand-logo { display: grid; gap: 6px; justify-items: center; min-width: 0; }
-.brand-logo:hover .brand-mark { background: #ECEBE7; }
+.brand-row-label { font-size: var(--fs-13); color: var(--ink); margin-bottom: var(--s4); }
+.brand-logos { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); }
+.brand-logo { display: grid; gap: 8px; justify-items: center; min-width: 0; padding: var(--s2) var(--s3); border-left: 1px solid var(--line); }
+.brand-logo:first-child { border-left: 0; }
+.brand-logo:hover .brand-mark i { background: var(--brand); }
+.brand-logo:hover .cat-n { color: var(--ink); }
 .brand-logo .cat-n { font-size: var(--fs-12); }
 
 /* ── 3.5 New this week — 가로 레일(결정 104 · Bezel 'New arrivals' · 1stDibs 'New & Notable'). 카드 280px, 스냅, 화살표 ── */
@@ -78,7 +76,7 @@
 
 /* ── 4 How it works — 3단계(실제 순서라 번호 허용) + 사실 줄 + 사진 2장(힉스필드 raw_1·raw_2) ── */
 .how-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s7); align-items: start; }
-.how-steps { display: grid; }
+.how-steps { display: grid; margin-top: var(--s5); } /* 제목과 첫 선 사이 0px 이었다(10/7 검사 B1 · g 꼬리가 선에 닿음) */
 .how-steps li { display: grid; grid-template-columns: 32px 1fr; gap: var(--s4); padding: var(--s5) 0; border-top: 1px solid var(--line); }
 .how-steps li:last-child { border-bottom: 1px solid var(--line); }
 .how-n { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.5; }
@@ -114,20 +112,16 @@
 .et-go svg { width: 16px; height: 16px; }
 
 @media (max-width: 1180px) {
-  .live-in { grid-template-columns: 1fr; }
-  .live-card { grid-template-columns: 1fr 1fr; grid-auto-flow: dense; }
-  .live-card .btn, .live-card .more-link { grid-column: 1; }
-  .live-next { grid-column: 2; grid-row: 1 / span 3; border: 0; border-left: 1px solid var(--line); padding: 0 0 0 var(--s5); align-content: start; }
+  .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cat-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .brand-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .brand-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: var(--s4); }
+  .brand-logo:nth-child(5) { border-left: 0; }
 }
 @media (max-width: 900px) {
   .hero-in { flex-direction: column; align-items: flex-start; gap: var(--s5); min-height: 440px; padding-top: var(--s7); padding-bottom: var(--s6); justify-content: flex-end; }
   .hero-bg { object-position: 62% 50%; } /* 좁은 폭은 잠금 금속 대신 가죽 결 위에 글이 놓이게(10/7 390 실측: 제목이 금 잠금과 겹쳐 덜 읽혔다) */
   .how-in { grid-template-columns: 1fr; gap: var(--s6); }
-  .live-card { grid-template-columns: 1fr; }
-  .live-next { grid-column: auto; grid-row: auto; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: var(--s3) 0; }
-  .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .live-head { margin-bottom: var(--s6); }
 }
 @media (max-width: 720px) {
   .hero-in { min-height: 400px; }
@@ -144,8 +138,11 @@
   .rail::-webkit-scrollbar { display: none; }
   .rail .card { flex: 0 0 72%; scroll-snap-align: start; }
   .rail .card-sub { display: block; }
-  .brand-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
-  .brand-mark { padding: 0 10%; }
+  .brand-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .brand-logo { padding: var(--s2) var(--s2); }
+  .brand-mark { padding: 0 8%; }
+  .live-display { font-size: 48px; }
+  .live-sub { font-size: var(--fs-13); }
   .new-rail { margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; gap: var(--s3); }
   .new-rail .card { flex-basis: 72%; }
   .new-rail .card-sub { display: block; }

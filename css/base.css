@@ -252,6 +252,8 @@ dialog.sheet[open] { animation: sheet-in var(--dur-slow) var(--ease-out); }
 .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s6); }
 .sec-head .display { margin: 0; }
 .sec-head .muted { font-size: var(--fs-14); }
+/* 더 보기는 구획 끝에(결정 129) — 머리의 → 링크 반복(홈 6개)이 템플릿 느낌을 만들었다. Loupe 0 · Fashionphile 0 */
+.sec-foot { display: flex; margin-top: var(--s5); }
 
 /* 가로 레일 화살표 둘 — 홈 New this week · 목록 Featured 띠 공용(결정 104·123) */
 .rail-nav { display: flex; gap: var(--s2); }
@@ -305,14 +307,14 @@ dialog.sheet[open] { animation: sheet-in var(--dur-slow) var(--ease-out); }
 .ph.has-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 /* 브랜드 워드마크 타일 — 홈 브랜드 행 · 상세 브랜드 띠 공용. 로고는 잉크색 한 벌(mask), 타일은 연회색. mask url 은 인라인으로(CSS 변수 url 은 CSS 파일 기준으로 풀려 404 · 10/6 실측) */
+/* 10/7 결정 129: 타일 배경·링 제거 — 흰 바탕 위 워드마크만(Bezel Shop by Brand). 회색 상자 8개가 카테고리 타일 밑에 붙어 '상자 14개 두 줄'이 됐다 */
 .brand-mark {
   display: grid; place-items: center; width: 100%; aspect-ratio: 3 / 2; padding: 0 14%;
-  border-radius: var(--r-lg); background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04);
-  transition: background-color var(--dur-fast) var(--ease-out);
+  border-radius: var(--r-lg); background: transparent;
 }
 .brand-mark i {
   display: block; width: 100%; height: 36%;
-  background: var(--ink);
+  background: var(--ink); transition: background-color var(--dur-fast) var(--ease-out);
   -webkit-mask-position: center; -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat;
   mask-position: center; mask-size: contain; mask-repeat: no-repeat;
 }

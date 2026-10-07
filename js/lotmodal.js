@@ -1,11 +1,11 @@
 // 상세 창 — 가방을 누르면 목록을 떠나지 않고 이 창에서 보고 문의한다(더윈 4 · 까사 상세 모달 · 기획안 11쪽)
-import { lotUrl } from './data.js?v=69b55b1641';
-import { icon } from './icons.js?v=69b55b1641';
-import { galleryHTML, mountGallery } from './gallery.js?v=69b55b1641';
-import { buyHTML, lotState } from './buybox.js?v=69b55b1641';
-import { bindBuy } from './lotactions.js?v=69b55b1641';
-import { paintNotes } from './review.js?v=69b55b1641';
-import * as store from './store.js?v=69b55b1641';
+import { lotUrl } from './data.js?v=526e3301da';
+import { icon } from './icons.js?v=526e3301da';
+import { galleryHTML, mountGallery } from './gallery.js?v=526e3301da';
+import { buyHTML, lotState } from './buybox.js?v=526e3301da';
+import { bindBuy } from './lotactions.js?v=526e3301da';
+import { paintNotes } from './review.js?v=526e3301da';
+import * as store from './store.js?v=526e3301da';
 
 let dialog;
 let current = null;

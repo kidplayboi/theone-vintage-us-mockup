@@ -3,13 +3,13 @@
 정본 순서: **이 파일 → README 변경 로그 → `docs/design/refs/2026-10-06-v4-lock.md`(결정 68~120 · §12 레퍼런스 대조) → git log**. 진행 상황을 메모리에 두지 않는다.
 
 ## 지금 상태 (2026-10-07 새벽)
-- 라이브 https://kidplayboi.github.io/theone-vintage-us-mockup/ = **이 커밋(10/7 서체 체계 v6 · 결정 128: 편집 제목 Cormorant 500 / 데이터 글 Inter · 히어로 CTA 화살표)**. 직전 180f59c = 형 피드백 4건(125~127). 꼬리표는 `git log -1` 의 stamp 값. 직전 = 78ebc58 히어로 풀블리드(124) · 6ef4913 목록 Bezel 형식 + 카드 띠 제거(122·123) · 4c1ce07 사진 8/8(121).
+- 라이브 https://kidplayboi.github.io/theone-vintage-us-mockup/ = **이 커밋(10/7 배치 AI 티 10건 · 결정 129: 홈 큰 제목 1회 · 링크 끝으로 · 카드 4줄 · 브랜드 흰 바탕 · 카테고리 줄 히어로 아래 · 락 위반 정리)**. 직전 3b6a052 서체 v6(128) · 180f59c 피드백 4건(125~127). 꼬리표는 `git log -1` 의 stamp 값. 직전 = 78ebc58 히어로 풀블리드(124) · 6ef4913 목록 Bezel 형식 + 카드 띠 제거(122·123) · 4c1ce07 사진 8/8(121).
 - 10/7 슬라이스 둘: ① 레퍼런스 대조 보드(v4-lock §13 · https://claude.ai/artifact/VHB7bzJEVtuQqGm7z26djf) → 사진 자리표시 8/8 실사진(힉스필 MCP · 15컷 → 9컷 · 원본 `Downloads/theone-gen-raw-2026-10-07`) ② 목록 = Featured 띠 + 접힌 Filters + 카드 메타 줄(`js/featured.js` 신규 · `js/card.js` v5).
 - 검증 끝: 로컬 7페이지×폭(shop 1440/768/390 · home 1440/390 · lot · saved · states) 404 0 · 콘솔 0 · 넘침 0 · 메타 줄 넘침 0 · 첫 화면 글자색 목록 11 → 5 · 홈 10 → 5.
 
 ## 다음 (형 방향 10/7 확정 — v4-lock §13 끝 "형 방향")
 1. ✅ 목록 Bezel 형식 + 카드 띠 제거(결정 122·123). 남은 것: Featured 띠 실제 운영 선정 기준(의뢰처) · 390 에서 tz 선택이 Featured 위에 놓이는 순서 재고.
-2. **홈 다듬기**(§13 H1~H3): ✅ 히어로 = 풀블리드 사진(결정 124 · `hero-clasp.jpg` · 대안 `hero-movement` · `hero-loupe` · 밝은 2컷 `hero-bag` · `hero-watch` 도 assets 에 있음). 남은 것: 사진 띠 1~2(auction-wide · tokyo-office-wide 재사용) · 브랜드 타일 8 → 흰 바탕 워드마크 줄 · 카테고리 타일 재검토.
+2. **홈 다듬기**(§13 H1~H3): ✅ 히어로 풀블리드(124) · ✅ 브랜드 흰 바탕 · 큰 제목 1회 · 카테고리 줄 아래로(129). 남은 것: 사진 띠 1~2(auction-wide · tokyo-office-wide 재사용) · 검사관 S1~S4 형 판단(모노 대문자 라벨 · 대문자 제목 · 도쿄타워 사진 재생성).
 3. **How it works 리듬**(§13 W1): Loupe 식 "사진 + 번호 + 4줄" 한 리듬 · 글 7,084 → 약 3,500 · 칸 13 → 통합 · 비율 2종(풀블리드 21:9 + 본문 3:2/4:5).
 - 형 10/7 밤 요구 수위: "다른 사이트보다 잘나면 잘나야지 부족한 건 없어야 함 · 전체 비주얼 → UX/UI 전부 디테일" — 매 슬라이스 끝에 §13 방식 수치 재측정 + 깃헙 오픈소스(Dawn · Vercel Commerce · v4-rules 85파일) 구조 대조를 근거로 남긴다.
 4. **글자색 스윕**(§13 C1): 한 화면 9~11 → 3.

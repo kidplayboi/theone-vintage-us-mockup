@@ -11,13 +11,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
-<link rel="stylesheet" href="css/tokens.css?v=69b55b1641">
-<link rel="stylesheet" href="css/base.css?v=69b55b1641">
-<link rel="stylesheet" href="css/chrome.css?v=69b55b1641">
-<link rel="stylesheet" href="css/card.css?v=69b55b1641">
-<link rel="stylesheet" href="css/lot.css?v=69b55b1641">
-<link rel="stylesheet" href="css/home.css?v=69b55b1641">
-<link rel="stylesheet" href="css/review.css?v=69b55b1641">
+<link rel="stylesheet" href="css/tokens.css?v=526e3301da">
+<link rel="stylesheet" href="css/base.css?v=526e3301da">
+<link rel="stylesheet" href="css/chrome.css?v=526e3301da">
+<link rel="stylesheet" href="css/card.css?v=526e3301da">
+<link rel="stylesheet" href="css/lot.css?v=526e3301da">
+<link rel="stylesheet" href="css/home.css?v=526e3301da">
+<link rel="stylesheet" href="css/review.css?v=526e3301da">
 </head>
 <body class="has-tabs page-home">
 <div id="review"></div>
@@ -36,35 +36,28 @@
     </div>
   </section>
 
-  <!-- 2 Live now — 연한 회녹 바탕(결정 98). 왼쪽 흰 카드(Phillips) + 카드 3장(까사 구조 · 결정 72). 초록은 카드 띠와 CTA 에만 -->
+  <!-- 카테고리 줄은 홈에서만 히어로 아래로(결정 129 · Bezel 흰 탭 줄이 히어로 아래 · Loupe 사진 y=0). chrome.js 가 .catbar 를 여기로 옮긴다 -->
+  <div id="catbar-slot"></div>
+
+  <!-- 2 Live now — 연한 회녹 바탕(결정 98). 가운데 큰 세리프 제목 한 번 + 한 줄 요약 + 카드 4장(결정 129 · Loupe 'THE LATEST' 135px + 날짜). 흰 머리 카드(결정 70)는 뺐다 -->
   <section class="live-sec" id="live" aria-labelledby="live-title">
-    <div class="wrap live-in">
-      <div class="live-card" data-note="Phillips 경매 머리 카드('Live Auction · PHOTOGRAPHS · New York 8 October · Browse | Register to bid')를 왼쪽 흰 카드로. 바탕은 진초록 대신 연한 회녹 — 흰 바탕과 붙었을 때 눈이 아프다는 형 피드백(10/6 · 결정 98). 숫자는 운영 전체 재고, 다음 마감 카운트다운은 예시 경매(실재고 입찰 0)." data-ref="v4-lock §2 · 결정 70·98">
+    <div class="wrap">
+      <div class="live-head" data-note="홈에서 딱 한 번 아주 큰 제목(결정 129 · 10/7 검사: 히어로 다음 가장 큰 글이 34px 뿐 · Loupe 'THE LATEST' 135px 가운데 + 날짜 한 줄 · Fashionphile 'The Archive' 100px). 이게 홈의 '기억에 남는 한 가지'. 흰 머리 카드(Phillips · 결정 70)와 Register 버튼은 뺐다 — 카드 수 줄이고 버튼은 히어로 하나로. 숫자는 운영 전체 재고, 카운트다운은 예시 경매." data-ref="Loupe 홈 · 결정 129">
         <p class="live-now"><span class="dot"></span>Live now</p>
-        <h2 class="display d2" id="live-title">Premium Auction</h2>
-        <p class="muted"><span class="num" data-live-count>24,132</span> lots · bids in US dollars · a late bid adds time</p>
-        <div class="live-next">
-          <span class="label">Next lot closes in</span>
-          <b data-live-next data-clock>—</b>
-          <span class="t13 muted" data-live-when></span>
-        </div>
-        <label class="live-tz" data-note="미국은 주마다 시간대가 다르다(형 10/6). 마감 시각은 기기 시간대가 기본이고, 운영 사이트 'Your local time' 선택(미국 7개 · 도쿄 · UTC)을 홈에도 둔다. 고르면 카드 띠 · 표 · 상세가 전부 그 시간대로." data-ref="운영 사이트 10/6 · 결정 87">
-          <span class="label">Your local time</span>
-          <select class="input" data-tz></select>
-        </label>
-        <a class="btn" href="sign-in.html?mode=create&amp;next=index.html%23live" data-live-cta>Register to bid</a>
-        <a class="more-link" href="shop.html?sort=ending">All live lots <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <h2 class="display live-display" id="live-title">Premium Auction</h2>
+        <p class="live-sub"><span class="num" data-live-count>24,132</span> lots · next lot closes in <b class="num" data-live-next data-clock>—</b><span class="live-when" data-live-when></span>
+          <label class="live-tz" data-note="미국은 주마다 시간대가 다르다(형 10/6). 운영 사이트 'Your local time' 선택(미국 7개 · 도쿄 · UTC) — 고르면 카드 · 표 · 상세가 전부 그 시간대로(결정 87)." data-ref="결정 87"><span class="visually-hidden">Your local time</span><select class="tz-inline" data-tz></select></label></p>
       </div>
-      <div class="rail" data-live-rail data-note="카드 v4 = 까사 정보 구조의 정돈판(결정 72): 머리 띠(마감 현지 시각 · 카운트다운 · 진행막대) → 사진 타일(등급 원 · 북마크 hover → 폴더 1·2·3 · hover '시세 비교') → 브랜드 · 이름 · 현재가 · 상태 배지. 1시간 안이면 띠 글 'Ending soon' + 빨강(더윈 12). 390폭에서는 띠 대신 가격 줄의 BaT식 알약(결정 79)." data-ref="v4-lock §6"></div>
+      <div class="rail" data-live-rail data-note="카드 v5(결정 122): 사진 타일(등급 원 · 하트 · 리저브 꼬리표 · hover 빠른 입찰·시세) → 브랜드 · 이름 · 가격 · 메타 1줄. 네 장." data-ref="결정 122·129"></div>
+      <p class="sec-foot"><a class="more-link" href="shop.html?sort=ending">All live lots <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
     </div>
   </section>
 
   <!-- 3 Browse — 카테고리 타일 6 + 같은 구획 아래 브랜드 행(결정 71) -->
   <section class="sec browse" id="browse" aria-labelledby="browse-title">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head" data-note="섹션 머리는 제목만(결정 129 · 10/7 검사: '제목 왼쪽 + → 링크 오른쪽' 묶음이 홈에 6번 반복 = 템플릿 느낌 · Loupe 0 · Fashionphile 0). 더 보기는 구획 끝에." data-ref="결정 129">
         <h2 class="display d2" id="browse-title">Browse by category</h2>
-        <a class="more-link" href="shop.html">All <span class="num" data-total>24,132</span> lots <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="cat-tiles" data-cat-tiles data-note="카테고리 타일 6 — 사진은 실재고, 숫자는 운영 사이트 카테고리 개수. 누르면 목록 페이지의 같은 카테고리로. Tableware(25)·Coin(2)은 위 카테고리 줄과 목록에." data-ref="결정 53·70"></div>
       <div class="brand-row" data-brand-row data-note="'Shop by brand' 구획을 없애고 브랜드를 카테고리와 한 자리에(형 10/6 · 1stDibs·Fashionphile·Rebag·WGACA 네 곳 모두 카테고리 행 안에 Designers 항목). 칩 8개는 큐레이션(형이 바꿀 수 있음), 40개 전체는 위 'Brands ▾' 패널." data-ref="결정 71"></div>
@@ -77,7 +70,6 @@
       <div class="sec-head">
         <h2 class="display d2" id="new-title">New this week</h2>
         <div class="sec-head-r">
-          <a class="more-link" href="shop.html?sort=new">All new lots <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <div class="rail-nav" data-rail-nav>
             <button type="button" aria-label="Previous" data-rail-prev><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
             <button type="button" aria-label="Next" data-rail-next><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
@@ -119,17 +111,17 @@
     <div class="wrap">
       <div class="sec-head">
         <h2 class="display d2" id="ending-title">Ending soon</h2>
-        <a class="more-link" href="shop.html?sort=ending">All lots by closing time <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <table class="ending-table" data-note="BaT 'Latest bids (1,227 auctions now live)' 표. 홈 다섯째 구획은 카드가 아니라 표 — 같은 카드가 두 번 반복되면 어지럽다(결정 84). 행을 누르면 상세 창." data-ref="결정 84">
         <tbody data-ending-rows></tbody>
       </table>
+      <p class="sec-foot"><a class="more-link" href="shop.html?sort=ending">All lots by closing time <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
     </div>
   </section>
 </main>
 
 <footer id="foot"></footer>
 <div id="tabs"></div>
-<script type="module" src="js/home.js?v=69b55b1641"></script>
+<script type="module" src="js/home.js?v=526e3301da"></script>
 </body>
 </html>

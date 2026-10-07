@@ -1,13 +1,13 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=69b55b1641';
-import { mountChrome, bindNewsletter } from './chrome.js?v=69b55b1641';
-import { mountReview, paintNotes } from './review.js?v=69b55b1641';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=69b55b1641';
-import { openLot } from './lotmodal.js?v=69b55b1641';
-import { initMotion, revealOnScroll } from './motion.js?v=69b55b1641';
-import { icon } from './icons.js?v=69b55b1641';
-import * as store from './store.js?v=69b55b1641';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=526e3301da';
+import { mountChrome, bindNewsletter } from './chrome.js?v=526e3301da';
+import { mountReview, paintNotes } from './review.js?v=526e3301da';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=526e3301da';
+import { openLot } from './lotmodal.js?v=526e3301da';
+import { initMotion, revealOnScroll } from './motion.js?v=526e3301da';
+import { icon } from './icons.js?v=526e3301da';
+import * as store from './store.js?v=526e3301da';
 
 const HOUR = 3600000;
 // 히어로는 풀블리드 사진 한 장(index.html · 결정 124) — 누끼 무대(hero.js · assets/hero)는 10/7 삭제
@@ -67,7 +67,9 @@ function render() {
 // New this week — 등록일 최신 8점(결정 104). 판매 방식은 검토 막대 설정대로
 function renderNew() {
   const lots = [...data.lots].filter(x => x.usd).sort((a, b) => b.listed.localeCompare(a.listed)).slice(0, 8);
-  $('[data-new-rail]').innerHTML = lots.map(lot => cardHTML(lot, { sale: store.setting('sale') })).join('');
+  // 더 보기는 레일 마지막 타일로(결정 129 · Loupe 마지막 타일 안 링크) — 섹션 머리의 → 링크는 뺐다
+  $('[data-new-rail]').innerHTML = lots.map(lot => cardHTML(lot, { sale: store.setting('sale') })).join('')
+    + `<a class="rail-more" href="shop.html?sort=new"><span>All new lots</span>${icon.arrow}</a>`;
 }
 
 function bindRail() {
@@ -107,17 +109,14 @@ function renderLive() {
   $('[data-live-count]').textContent = count.toLocaleString('en-US');
   const next = $('[data-live-next]');
   const rail = $('[data-live-rail]');
-  const signedIn = store.get('signedIn');
   const tzSel = $('[data-tz]');
   const tzNow = store.setting('tz');
   tzSel.innerHTML = TIMEZONES.map(([v, label]) => `<option value="${v}" ${v === tzNow ? 'selected' : ''}>${label}</option>`).join('');
-  const cta = $('[data-live-cta]');
-  cta.textContent = signedIn ? 'Place a bid' : 'Register to bid';
-  cta.setAttribute('href', signedIn ? 'shop.html?sort=ending' : 'sign-in.html?mode=create&next=index.html%23live');
   if (!lots.length) {
     next.textContent = '—';
     next.removeAttribute('data-ends');
     next.classList.remove('warn');
+    $('[data-live-when]').textContent = '';
     rail.innerHTML = `<div class="empty"><p class="display d2">No live auctions right now</p>
       <p class="muted">New auctions open every week. Lots you can buy today are in the shop.</p><a class="btn" href="shop.html">Browse all lots</a></div>`;
     return;
@@ -128,8 +127,8 @@ function renderLive() {
   next.classList.toggle('warn', first - Date.now() < HOUR);
   const tz = store.setting('tz');
   const p = localParts(first, tz);
-  $('[data-live-when]').textContent = `${p.date} · ${p.time}`;
-  rail.innerHTML = lots.slice(0, 3).map(lot => cardHTML(lot, { sale: store.setting('sale') })).join('');
+  $('[data-live-when]').textContent = ` (${p.date} · ${p.time})`;
+  rail.innerHTML = lots.slice(0, 4).map(lot => cardHTML(lot, { sale: store.setting('sale') })).join(''); // 흰 머리 카드가 빠져 네 장(결정 129)
 }
 
 // Browse — 카테고리 타일 6 + 같은 구획 아래 브랜드 행(결정 71)
@@ -146,7 +145,8 @@ function renderBrowse() {
       <span class="cat-name">More categories</span><span class="cat-n">${CAT_REST.reduce((s, [g]) => s + (counts[g] || 0), 0).toLocaleString('en-US')} lots</span>
     </div>`;
   const top = BRAND_ROW.map(n => data.meta.brands.find(b => b.name === n)).filter(Boolean);
-  $('[data-brand-row]').innerHTML = `<div class="brand-row-head"><span class="label">Brands</span><a class="more-link" href="shop.html">All ${data.meta.brands.length} brands ${icon.arrow}</a></div>
+  // 브랜드 줄 = 흰 바탕 워드마크(결정 129 · §13 H3 · Bezel 'Shop by Brand' 흰 바탕) — 회색 타일 8개가 카테고리 타일 6개 바로 밑에 붙어 상자 14개 두 줄이었다
+  $('[data-brand-row]').innerHTML = `<p class="label brand-row-label">Brands</p>
     <div class="brand-logos">${top.map(b => {
       const logo = BRAND_LOGOS[b.name];
       // mask-image 는 인라인으로 — CSS 변수 안의 url() 은 CSS 파일 기준(/css/…)으로 풀려 404 가 났다(10/6 실측)
@@ -154,7 +154,8 @@ function renderBrowse() {
         ? `<span class="brand-mark" role="img" aria-label="${esc(brandName(b.name))}"><i style="-webkit-mask-image:url(assets/brands/${logo}.svg);mask-image:url(assets/brands/${logo}.svg)"></i></span>`
         : `<span class="brand-mark brand-text">${esc(brandName(b.name))}</span>`;
       return `<a class="brand-logo" href="shop.html?brand=${encodeURIComponent(b.name)}" data-reveal>${mark}<span class="cat-n">${b.n.toLocaleString('en-US')} lots</span></a>`;
-    }).join('')}</div>`;
+    }).join('')}</div>
+    <p class="sec-foot"><a class="more-link" href="shop.html">All ${data.meta.brands.length} brands ${icon.arrow}</a></p>`;
 }
 
 // Ending soon — BaT "Latest bids" 식 표 8행(결정 84). 카드 반복 없이 마감 순서만

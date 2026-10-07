@@ -37,8 +37,9 @@
 .mast-link { font-size: var(--fs-14); color: var(--on-brand); white-space: nowrap; }
 .mast-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-/* 흰 카테고리 줄 — 카테고리 8 + Brands ▾ 한 줄(결정 71) */
+/* 흰 카테고리 줄 — 카테고리 8 + Brands ▾ 한 줄(결정 71). 홈에선 chrome.js 가 #catbar-slot(히어로 아래)으로 옮긴다(결정 129) */
 .catbar { position: relative; background: var(--canvas); border-bottom: 1px solid var(--line); }
+#catbar-slot .catbar { z-index: 25; } /* 아래 구획 위로 브랜드 펼침이 뜨게 */
 .catbar-in { display: flex; align-items: center; justify-content: space-between; gap: var(--s5); min-height: 48px; }
 .cat-row, .cat-aside { display: flex; align-items: center; gap: var(--s5); }
 .cat-row a, .cat-aside a, .cat-mega {

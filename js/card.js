@@ -2,10 +2,10 @@
 // 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 빠른 입찰 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 메타 1줄(판매 방식 점 + 마감 ← → 남은 시간)
 // 머리 띠(결정 72·93~95)는 뺐다 — 한 화면에 진초록 띠 20개가 격자를 표처럼 보이게 했다(10/7 대조 보드). 띠가 주던 정보는 메타 줄에 그대로:
 // 판매 방식은 점 색(경매 초록 · Mall 파랑), 마감 현지 시각은 글, 남은 시간은 오른쪽 숫자. 1시간 안이면 숫자가 빨간 알약(결정 94 유지 · 더윈 12). 카드 어디를 눌러도 상세 창(더윈 4)
-import { usd, jpy, cardImg, photo, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName, bidStep } from './data.js?v=69b55b1641';
-import { icon } from './icons.js?v=69b55b1641';
-import * as store from './store.js?v=69b55b1641';
-import { toast } from './chrome.js?v=69b55b1641';
+import { usd, jpy, cardImg, photo, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName, bidStep } from './data.js?v=526e3301da';
+import { icon } from './icons.js?v=526e3301da';
+import * as store from './store.js?v=526e3301da';
+import { toast } from './chrome.js?v=526e3301da';
 
 const HOUR = 3600000;
 const DAY = 86400000;
@@ -55,17 +55,18 @@ function metaHTML(b) {
   // Mall 은 시계(00:00:00)가 아니라 "144 days left" 꼴 — 경매처럼 보이지 않게(data-clock 없음)
   const clock = b.code === 'MALL' && !hot ? '' : 'data-clock';
   return `<p class="card-meta">
-      <span class="card-kind kind-${cls}"><i class="dot${cls === 'mall' ? ' mall' : ''}"></i><span class="card-when" data-when="${left}">${hot ? 'Ending soon' : left}</span>${b.time && b.code !== 'MALL' ? `<span class="card-time"> · ${esc(b.time)}</span>` : ''}</span>
+      <span class="card-kind kind-${cls}"><i class="dot${cls === 'mall' ? ' mall' : ''}"></i><span class="card-when" data-when="${left}">${hot ? 'Ending soon' : left}</span></span>
       <b class="card-ends${hot ? ' warn' : ''}" data-ends="${b.ends.getTime()}" ${clock}>${clock ? countdown(b.ends) : remain(b.ends)}</b>
     </p>`;
 }
 
-// 리저브 한 줄 — 입찰(B)에서 손님이 알아야 할 둘만(No reserve · Reserve nearly met). 'met' · 'not met' 은 상세에서(Bezel 카드 = "No reserve" 하나)
-function reserveNote(lot, b, sale) {
+// 리저브 꼬리표 — 사진 왼쪽 아래 흰 알약(Bezel 카드 "No reserve" 꼬리표 · 결정 129). 입찰(B)에서 손님이 알아야 할 둘만(No reserve · Reserve nearly met).
+// 글줄에서 빼서 카드 글은 4줄(브랜드 · 이름 · 가격 · 메타)로(10/7 검사: 5줄 + 메타 잘림 15건). 마우스를 올리면 빠른 입찰 버튼이 그 자리라 꼬리표는 숨는다
+function reserveTag(lot, b, sale) {
   if (sale !== 'B' || b.tone === 'done') return '';
   const r = exampleAuction(lot).reserve;
-  if (r === 'none') return '<p class="card-note">No reserve</p>';
-  if (r === 'nearly') return '<p class="card-note">Reserve nearly met</p>';
+  if (r === 'none') return '<span class="card-tag">No reserve</span>';
+  if (r === 'nearly') return '<span class="card-tag">Reserve nearly met</span>';
   return '';
 }
 
@@ -103,13 +104,13 @@ export function cardHTML(lot, { sale = 'A', state = 'auto', note = '', kind = ''
         </div>
       </div>
       <a class="card-compare" href="${lotUrl(lot)}#price" data-compare>${icon.compare}Compare prices</a>
+      ${reserveTag(lot, b, sale)}
     </div>
     <div class="card-body">
       <p class="card-brand">${esc(brandName(lot.brand))}</p>
       <h3 class="card-title"><a href="${lotUrl(lot)}" data-open>${esc(lot.title)}</a></h3>
       <p class="card-price">${price}${sub ? `<span class="card-sub">${sub}</span>` : ''}</p>
       ${metaHTML(b)}
-      ${reserveNote(lot, b, sale)}
     </div>
   </article>`;
 }

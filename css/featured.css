@@ -12,9 +12,10 @@
   box-shadow: inset 0 0 0 1px var(--line);
   transition: box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
-.feat:hover { box-shadow: inset 0 0 0 1px var(--line-2), 0 16px 32px -24px rgba(12, 34, 25, .35); transform: translateY(-1px); }
-.feat-media { position: relative; display: block; aspect-ratio: 1 / 1; background: var(--tile); }
-.feat-media img { width: 100%; height: 100%; object-fit: contain; padding: 4%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out); }
+.feat:hover { box-shadow: inset 0 0 0 1px var(--line-2); transform: translateY(-1px); } /* 그림자는 오버레이에만(결정 76) */
+/* 사진 칸은 카드 높이를 꽉 채운다(10/7 검사 B2: 1:1 고정이라 카드보다 21px 짧아 아래 흰 띠) */
+.feat-media { position: relative; display: block; align-self: stretch; min-height: 176px; background: var(--tile); }
+.feat-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 6%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out); }
 .feat:hover .feat-media img { transform: scale(1.03); }
 .feat-body { display: grid; align-content: space-between; gap: var(--s3); min-width: 0; padding: var(--s4); }
 .feat-name { display: grid; gap: 2px; min-width: 0; }
@@ -24,7 +25,7 @@
 .feat-cells { display: grid; gap: 6px; }
 .feat-cell { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s2); padding: 8px 10px; border-radius: var(--r-md); background: var(--surface); min-width: 0; }
 .feat-cell b { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.feat-cell .feat-ends { color: var(--live); border-radius: 4px; transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
+.feat-cell .feat-ends { color: var(--live); border-radius: var(--r-md); transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
 .feat-cell .feat-ends.warn { background: var(--ending); color: #FFFFFF; padding: 1px 7px; }
 
 @media (max-width: 1180px) {

@@ -1,15 +1,15 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=69b55b1641';
-import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=69b55b1641';
-import { mountChrome, bindNewsletter } from './chrome.js?v=69b55b1641';
-import { mountReview, paintNotes } from './review.js?v=69b55b1641';
-import { cardHTML, bindCards, startTicker } from './card.js?v=69b55b1641';
-import { openLot } from './lotmodal.js?v=69b55b1641';
-import { galleryHTML, mountGallery } from './gallery.js?v=69b55b1641';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=69b55b1641';
-import { bindBuy } from './lotactions.js?v=69b55b1641';
-import { initMotion, revealOnScroll } from './motion.js?v=69b55b1641';
-import * as store from './store.js?v=69b55b1641';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=526e3301da';
+import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=526e3301da';
+import { mountChrome, bindNewsletter } from './chrome.js?v=526e3301da';
+import { mountReview, paintNotes } from './review.js?v=526e3301da';
+import { cardHTML, bindCards, startTicker } from './card.js?v=526e3301da';
+import { openLot } from './lotmodal.js?v=526e3301da';
+import { galleryHTML, mountGallery } from './gallery.js?v=526e3301da';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=526e3301da';
+import { bindBuy } from './lotactions.js?v=526e3301da';
+import { initMotion, revealOnScroll } from './motion.js?v=526e3301da';
+import * as store from './store.js?v=526e3301da';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -135,7 +135,7 @@ function renderPrice() {
         </table>
         ${gate ? `<div class="price-gate">
           <p><b>See your delivered total, line by line.</b> Duties, our fee and shipping to your door — free with an account, no card needed.</p>
-          <div class="btn-pair"><a class="btn" href="sign-in.html?mode=create&amp;next=${next}">Create a free account</a><a class="btn ghost" href="sign-in.html?next=${next}">Log in</a></div>
+          <div class="btn-pair"><a class="btn" href="sign-in.html?mode=create&amp;next=${next}">Create a free account</a><a class="text-link t13" href="sign-in.html?next=${next}">Already have one? Log in</a></div>
         </div>` : '<p class="t13 muted">We confirm this total before you pay. Nothing is charged when you inquire, and nothing on arrival.</p>'}
       </div>
       <div class="price-card">

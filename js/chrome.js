@@ -1,8 +1,8 @@
 // 제품 공통 틀 v4 — 초록 마스트헤드(워드마크·검색·판매 방식·계정) · 흰 카테고리 줄(카테고리 8 + Brands ▾) · 브랜드 펼침 · 서랍 · 흰 푸터 · 모바일 아래 탭
 // 검은 facts 띠는 뺐다(결정 69). 근거: Bezel 마스트헤드(ref-bezel-s00) · 1stDibs/Rebag/WGACA/Fashionphile 카테고리 줄 안의 Designers 항목(결정 71)
-import { icon } from './icons.js?v=69b55b1641';
-import * as store from './store.js?v=69b55b1641';
-import { brandName } from './data.js?v=69b55b1641';
+import { icon } from './icons.js?v=526e3301da';
+import * as store from './store.js?v=526e3301da';
+import { brandName } from './data.js?v=526e3301da';
 
 // 운영 사이트 상단 메뉴 그대로(Premium Auction · Express · Classic · How It Works) — 셋은 운영사의 판매 프로그램. Express·Classic 은 지금 재고 0.
 // 네 번째 칸 = 마우스 올리면 뜨는 설명(형 10/6 "이거 뭐임?") — 정확한 정의는 의뢰처 확인 항목
@@ -30,6 +30,9 @@ export function mountChrome({ page = '', cat = '', data = null } = {}) {
   const top = document.getElementById('top');
   top.className = 'site-top';
   top.innerHTML = headerHTML(page, cat, data);
+  // 홈만 카테고리 줄을 히어로 아래로(결정 129 · Bezel 흰 탭 줄이 히어로 아래 y=557 · Loupe 사진 y=0) — 사진 위 띠 2겹 → 1겹
+  const slot = document.getElementById('catbar-slot');
+  if (slot) slot.appendChild(top.querySelector('.catbar'));
   document.getElementById('foot').innerHTML = footerHTML();
   const tabs = document.getElementById('tabs');
   if (tabs) tabs.innerHTML = tabsHTML(page === 'pay' ? 'offers' : page);
@@ -150,8 +153,8 @@ function bindHeader(top) {
   });
 
   // 브랜드 펼침 — 눌러서 열고, 바깥 클릭·Esc 로 닫는다
-  const megaBtn = top.querySelector('[data-mega]');
-  const mega = top.querySelector('[data-mega-panel]');
+  const megaBtn = document.querySelector('[data-mega]'); // 홈에선 카테고리 줄이 #catbar-slot 으로 옮겨져 있다
+  const mega = document.querySelector('[data-mega-panel]');
   if (megaBtn && mega) {
     const set = open => { mega.hidden = !open; megaBtn.setAttribute('aria-expanded', String(open)); };
     megaBtn.addEventListener('click', e => { e.stopPropagation(); set(mega.hidden); });

@@ -272,7 +272,8 @@ dialog.lot-window { width: min(1180px, calc(100vw - 32px)); }
 .brand-strip-text { display: grid; gap: 2px; flex: 1; min-width: 0; }
 .brand-strip-text b { font-size: var(--fs-20); font-weight: var(--w-ui); }
 .brand-strip-text .muted { font-size: var(--fs-14); }
-.brand-strip:hover .brand-mark { background: #ECEBE7; }
+.brand-strip:hover .brand-mark i { background: var(--brand); }
+.ask-copy .btn-pair { align-items: center; }
 .brand-strip:hover .more-link { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .brand-strip:hover .more-link svg { transform: translateX(2px); }
 

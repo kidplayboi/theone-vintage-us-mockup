@@ -45,8 +45,9 @@
 .grade-table b { font-weight: var(--w-ui); }
 .rank-chip {
   display: inline-grid; place-items: center; min-width: 32px; height: 32px; padding: 0 6px;
-  border-radius: var(--r-md); background: var(--brand); color: var(--on-brand); font-size: var(--fs-16); font-weight: var(--w-ui);
+  border-radius: var(--r-md); background: var(--ink); color: var(--canvas); font-size: var(--fs-16); font-weight: var(--w-ui); /* 진초록은 세 자리만(결정 74) → 잉크색 */
 }
+.hero-actions { align-items: center; }
 
 .faq { margin-top: var(--s6); border-top: 1px solid var(--line-2); }
 .faq details { border-bottom: 1px solid var(--line-2); }

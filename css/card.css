@@ -97,26 +97,26 @@
 .card-price .price.ask { font-size: var(--fs-16); font-weight: 400; color: var(--muted); }
 .card-sub { font-size: var(--fs-12); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* 메타 줄(결정 122) — 왼쪽 점(종류 색) + "Live bid · Ends Oct 10 · 1:45 PM", 오른쪽 남은 시간. 1시간 안 = 빨간 알약 숫자(결정 94) · 글자색은 회색 하나 + 잉크 숫자 */
-.card-meta { display: flex; justify-content: space-between; align-items: center; gap: var(--s2); margin-top: 6px; min-width: 0; font-size: var(--fs-12); color: var(--muted); line-height: 1.4; }
+/* 메타 줄(결정 122·129) — 왼쪽 점(종류 색) + "Live bid · Ends Oct 10", 오른쪽 남은 시간. 1시간 안 = 빨간 알약 숫자(결정 94)
+   글자색은 본문색(회색 아님 · 10/7 검사: 목록 글의 56% 가 회색) · 시각은 뺐다(상세·Ending 표에 있음 · 잘림 15건 → 0) */
+.card-meta { display: flex; justify-content: space-between; align-items: center; gap: var(--s2); margin-top: 6px; min-width: 0; font-size: var(--fs-12); color: var(--body); line-height: 1.4; }
 .card-kind { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
 .card-kind .dot { flex: none; width: 6px; height: 6px; }
 .card-kind.is-done .dot { background: var(--line-2); }
-.card-when, .card-time { white-space: nowrap; }
-.card-when { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-.card-time { flex: none; }
-.card-ends { flex: none; font-weight: var(--w-ui); color: var(--ink); font-variant-numeric: tabular-nums; border-radius: 4px; transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
+.card-when { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-ends { flex: none; font-weight: var(--w-ui); color: var(--ink); font-variant-numeric: tabular-nums; border-radius: var(--r-md); transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
 .card-ends.warn { background: var(--ending); color: #FFFFFF; padding: 1px 7px; }
-.card-note { margin-top: 2px; font-size: var(--fs-12); color: var(--muted); }
+/* 리저브 꼬리표 — 사진 왼쪽 아래 흰 알약(Bezel "No reserve"). hover 땐 빠른 입찰 버튼 자리라 숨긴다 */
+.card-tag { position: absolute; left: var(--s3); bottom: var(--s3); z-index: 2; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: var(--r-pill); background: rgba(255, 255, 255, .92); color: var(--ink); font-size: var(--fs-12); font-weight: var(--w-ui); box-shadow: 0 0 0 1px rgba(17, 20, 18, .06); transition: opacity var(--dur-fast) var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .card:hover .card-tag { opacity: 0; } }
 
 /* 어두운 바탕 위(지금은 홈 Live now 가 연한 회녹이라 거의 안 쓰인다 · 상태 모음용) */
 .on-dark .card-media { background: #F1F1EE; box-shadow: none; }
 .on-dark .card-brand, .on-dark .card-price .price, .on-dark .card-ends { color: var(--on-brand); }
-.on-dark .card-title, .on-dark .card-sub, .on-dark .card-meta, .on-dark .card-note { color: var(--on-brand-2); }
+.on-dark .card-title, .on-dark .card-sub, .on-dark .card-meta { color: var(--on-brand-2); }
 .on-dark .card:hover .card-title a { text-decoration-color: rgba(255, 255, 255, .4); }
 
 @media (max-width: 1180px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 1180px) and (min-width: 721px) { .card-time { display: none; } }
 @media (max-width: 720px) {
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s6) var(--s3); }
   .card-grade { top: var(--s2); left: var(--s2); width: 26px; height: 26px; font-size: var(--fs-12); }
@@ -126,7 +126,7 @@
   .card-price { flex-wrap: wrap; gap: 4px var(--s2); }
   .card-price .price { font-size: var(--fs-16); }
   .card-sub { display: none; }
-  .card-time { display: none; } /* 170px 칸 — 종류 · 날짜 · 남은 시간만 */
+  .card-tag { left: var(--s2); bottom: var(--s2); min-height: 24px; font-size: 11px; }
 }
 
 /* 등장 뒤에는 마우스 반응을 빠르게 */

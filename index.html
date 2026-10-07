@@ -11,36 +11,28 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
-<link rel="stylesheet" href="css/tokens.css?v=aa557cef18">
-<link rel="stylesheet" href="css/base.css?v=aa557cef18">
-<link rel="stylesheet" href="css/chrome.css?v=aa557cef18">
-<link rel="stylesheet" href="css/card.css?v=aa557cef18">
-<link rel="stylesheet" href="css/lot.css?v=aa557cef18">
-<link rel="stylesheet" href="css/home.css?v=aa557cef18">
-<link rel="stylesheet" href="css/review.css?v=aa557cef18">
+<link rel="stylesheet" href="css/tokens.css?v=23f64a84d6">
+<link rel="stylesheet" href="css/base.css?v=23f64a84d6">
+<link rel="stylesheet" href="css/chrome.css?v=23f64a84d6">
+<link rel="stylesheet" href="css/card.css?v=23f64a84d6">
+<link rel="stylesheet" href="css/lot.css?v=23f64a84d6">
+<link rel="stylesheet" href="css/home.css?v=23f64a84d6">
+<link rel="stylesheet" href="css/review.css?v=23f64a84d6">
 </head>
 <body class="has-tabs page-home">
 <div id="review"></div>
 <header id="top"></header>
 
 <main>
-  <!-- 1 히어로 — 한 문장 + 사실 1줄 + 버튼 2 / 컷아웃 무대(Loupe · Bezel · 결정 69) -->
-  <section class="hero" aria-labelledby="hero-title" data-hero>
+  <!-- 1 히어로 v5 — 풀블리드 사진 + 한 문장 + 버튼 1(Loupe This 홈 · 형 10/7 "이런 게 존나 이쁘다" · 결정 124). 누끼 무대(결정 55·82 · hero.js)는 뺐다 -->
+  <section class="hero hero-photo" aria-labelledby="hero-title" data-hero data-note="Loupe This 첫 화면 구조 그대로: 어두운 매크로 사진이 화면 폭을 다 쓰고, 왼쪽 아래 한 문장, 오른쪽 아래 흰 알약 버튼 하나. 사진 = 생성 컷(hero-clasp.jpg · 녹색 가죽 + 금 잠금 + 흰 장갑 = 가방 1위 카테고리 · 브랜드 초록 · 우리 검수). 대안 = hero-movement.jpg(무브먼트) · hero-loupe.jpg(루페) — 파일명 한 줄 교체. 어두운 연출은 락 Media 규칙의 예외(형 지정)." data-ref="Loupe This 홈 · 결정 124">
+    <img class="hero-bg" src="assets/editorial/gen/hero-clasp.jpg" alt="" width="2200" height="943" fetchpriority="high" decoding="async">
     <div class="wrap hero-in">
-      <div class="hero-copy" data-note="첫 문장 = 숫자 + 하는 일(Bezel 'Shop 34,998 luxury watches, authenticated in-house.' · Loupe 한 문장 + 버튼 1). 3초 안에 '일본 딜러 경매 물건을 달러로 사고 미국으로 받는 곳'이 읽히게. 눈썹 라벨과 검은 facts 띠는 뺐다(결정 69·73) — 사실은 아래 체크 1줄로." data-ref="v4-lock §2 · 결정 69">
-        <h1 class="display d-display" id="hero-title">Bid on <span class="num" data-total>24,132</span> luxury pieces from Japan's dealer auctions.</h1>
-        <p class="lede">Hermès, Rolex, Chanel and more — inspected in Tokyo, priced in dollars, and delivered to your door with duties prepaid.</p>
-        <div class="hero-actions">
-          <a class="btn" href="#live" data-hero-primary>Browse live auctions</a>
-          <a class="btn ghost" href="how-it-works.html">How it works</a>
-        </div>
-        <ul class="hero-facts">
-          <li class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Inspected in Tokyo</li>
-          <li class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Graded S to D</li>
-          <li class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Duties prepaid · 6–10 days</li>
-        </ul>
+      <div class="hero-copy">
+        <h1 class="display d-display" id="hero-title">Bid on <span class="num" data-total>24,132</span> luxury pieces from Japan's dealer-only auctions.</h1>
+        <p class="lede">Inspected in Tokyo, priced in dollars, delivered to your door with duties prepaid.</p>
       </div>
-      <div class="hero-stage" data-hero-stage data-note="Bezel 히어로의 '초록 위 상품'을 흰 바탕 연회색 타일로. 실재고 4점을 배경만 지워 올렸다(사진 원본 = 운영 사이트 상품 사진). 6초마다 바뀌는 크로스페이드가 이 사이트의 유일한 연출 모션(결정 82). 아래 흰 꼬리표는 그 로트 상세로 간다." data-ref="결정 55·82"></div>
+      <a class="btn light hero-cta" href="#live" data-hero-primary>Browse live auctions</a>
     </div>
   </section>
 
@@ -138,6 +130,6 @@
 
 <footer id="foot"></footer>
 <div id="tabs"></div>
-<script type="module" src="js/home.js?v=aa557cef18"></script>
+<script type="module" src="js/home.js?v=23f64a84d6"></script>
 </body>
 </html>

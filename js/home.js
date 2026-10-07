@@ -1,18 +1,16 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=aa557cef18';
-import { mountChrome, bindNewsletter } from './chrome.js?v=aa557cef18';
-import { mountReview, paintNotes } from './review.js?v=aa557cef18';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=aa557cef18';
-import { openLot } from './lotmodal.js?v=aa557cef18';
-import { mountHero } from './hero.js?v=aa557cef18';
-import { initMotion, revealOnScroll } from './motion.js?v=aa557cef18';
-import { icon } from './icons.js?v=aa557cef18';
-import * as store from './store.js?v=aa557cef18';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=23f64a84d6';
+import { mountChrome, bindNewsletter } from './chrome.js?v=23f64a84d6';
+import { mountReview, paintNotes } from './review.js?v=23f64a84d6';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=23f64a84d6';
+import { openLot } from './lotmodal.js?v=23f64a84d6';
+import { initMotion, revealOnScroll } from './motion.js?v=23f64a84d6';
+import { icon } from './icons.js?v=23f64a84d6';
+import * as store from './store.js?v=23f64a84d6';
 
 const HOUR = 3600000;
-// 히어로 = 배경을 지운 실재고 4점(assets/hero)
-const HERO = ['863-38440', '865-39616', '861-30068', '866-39839'];
+// 히어로는 풀블리드 사진 한 장(index.html · 결정 124) — 누끼 무대(hero.js · assets/hero)는 10/7 삭제
 // 카테고리 타일 5 + 목록 타일 1 — 사진은 그 카테고리 대표 실재고. 스냅숏에 사진이 없는 셋(Variety · Tableware · Coin)은 여섯째 타일에 글로
 const CAT_TILES = [['Bag', 'Bags', '851-31184'], ['Watch', 'Watches', '865-39616'], ['Jewelry', 'Jewelry', '865-39358'], ['Clothing', 'Clothing', ''], ['Accessories', 'Accessories', '863-38637']];
 const CAT_REST = [['Variety', 'Variety'], ['Tableware', 'Tableware'], ['Coin', 'Coin']];
@@ -42,8 +40,6 @@ async function main() {
     return;
   }
   document.querySelectorAll('[data-total]').forEach(el => { el.textContent = data.meta.total.toLocaleString('en-US'); });
-  const slides = HERO.map(id => data.lots.find(x => x.lot === id)).filter(Boolean).map(lot => ({ lot, img: `assets/hero/${lot.lot}.webp` }));
-  mountHero($('[data-hero-stage]'), slides, { onOpen: openLot });
   renderBrowse();
   render();
   bindCards($('[data-live-rail]'), data.lots, { onOpen: openLot });

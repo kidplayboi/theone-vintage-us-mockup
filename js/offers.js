@@ -1,11 +1,11 @@
 // My page v4 — 까사 마이페이지 네 칸(더윈 9): 할 일 / 진행 중 / 결과 확정 / 완료. 할 일 있는 칸만 amber(결정 77)
 // 낙찰·수락 행은 펼치면 정산표(더윈 10), 결제는 pay.html(결정 78). 입찰(B)과 정가·제안(A)은 칸 이름과 예시 행만 다르다
-import { usd, esc, cardImg, lotUrl, shortDate, fullName, exampleAuction, bidStep, localParts } from './data.js?v=c8a4122705';
-import { startPage } from './page.js?v=c8a4122705';
-import { paintNotes } from './review.js?v=c8a4122705';
-import { toast } from './chrome.js?v=c8a4122705';
-import { estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=c8a4122705';
-import * as store from './store.js?v=c8a4122705';
+import { usd, esc, cardImg, lotUrl, shortDate, fullName, exampleAuction, bidStep, localParts } from './data.js?v=69b55b1641';
+import { startPage } from './page.js?v=69b55b1641';
+import { paintNotes } from './review.js?v=69b55b1641';
+import { toast } from './chrome.js?v=69b55b1641';
+import { estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=69b55b1641';
+import * as store from './store.js?v=69b55b1641';
 
 const CELLS = {
   B: {

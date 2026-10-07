@@ -44,7 +44,13 @@
   --fs-28: 28px;
   --fs-40: 40px;
   --fs-56: 56px;
-  --w-display: 300;
+  /* 편집 제목 세리프 크기(결정 128) — Cormorant 는 x-높이가 작아 Inter 보다 ~15% 크게 잡아야 같은 무게로 보인다 */
+  --fs-h-page: 64px;    /* 페이지 머리 h1(.d-display) · Inter 56 자리 */
+  --fs-h1: 46px;        /* 큰 섹션 제목(.d1) · Inter 40 자리 */
+  --fs-h2: 34px;        /* 섹션 제목(.d2) · Inter 28 자리 */
+  --fs-h2s: 32px;       /* 상세 구획 제목(.d30) */
+  --w-display: 400;     /* Inter 숫자 디스플레이(스코어 · 통계) — 300 은 가늘어 템플릿 느낌(10/7 대조 · Bezel 디스플레이 400) */
+  --w-serif: 500;
   --w-body: 400;
   --w-ui: 500;
   --track-display: -0.015em;
@@ -106,6 +112,10 @@
     --fs-56: 34px;
     --fs-40: 28px;
     --fs-28: 22px;
+    --fs-h-page: 40px;
+    --fs-h1: 34px;
+    --fs-h2: 28px;
+    --fs-h2s: 26px;
     --gutter: 16px;
     --s9: 64px;
     --s8: 48px;

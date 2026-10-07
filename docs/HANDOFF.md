@@ -3,7 +3,7 @@
 정본 순서: **이 파일 → README 변경 로그 → `docs/design/refs/2026-10-06-v4-lock.md`(결정 68~120 · §12 레퍼런스 대조) → git log**. 진행 상황을 메모리에 두지 않는다.
 
 ## 지금 상태 (2026-10-07 새벽)
-- 라이브 https://kidplayboi.github.io/theone-vintage-us-mockup/ = **이 커밋(10/7 형 피드백 4건 · 결정 125~127: 히어로 세리프 한 문장 · 상세 칸 접이식 행 · About/Condition 밀도 · 상세 창 Full lot page 버튼)**. 꼬리표는 `git log -1` 의 stamp 값. 직전 = 78ebc58 히어로 풀블리드(124) · 6ef4913 목록 Bezel 형식 + 카드 띠 제거(122·123) · 4c1ce07 사진 8/8(121).
+- 라이브 https://kidplayboi.github.io/theone-vintage-us-mockup/ = **이 커밋(10/7 서체 체계 v6 · 결정 128: 편집 제목 Cormorant 500 / 데이터 글 Inter · 히어로 CTA 화살표)**. 직전 180f59c = 형 피드백 4건(125~127). 꼬리표는 `git log -1` 의 stamp 값. 직전 = 78ebc58 히어로 풀블리드(124) · 6ef4913 목록 Bezel 형식 + 카드 띠 제거(122·123) · 4c1ce07 사진 8/8(121).
 - 10/7 슬라이스 둘: ① 레퍼런스 대조 보드(v4-lock §13 · https://claude.ai/artifact/VHB7bzJEVtuQqGm7z26djf) → 사진 자리표시 8/8 실사진(힉스필 MCP · 15컷 → 9컷 · 원본 `Downloads/theone-gen-raw-2026-10-07`) ② 목록 = Featured 띠 + 접힌 Filters + 카드 메타 줄(`js/featured.js` 신규 · `js/card.js` v5).
 - 검증 끝: 로컬 7페이지×폭(shop 1440/768/390 · home 1440/390 · lot · saved · states) 404 0 · 콘솔 0 · 넘침 0 · 메타 줄 넘침 0 · 첫 화면 글자색 목록 11 → 5 · 홈 10 → 5.
 

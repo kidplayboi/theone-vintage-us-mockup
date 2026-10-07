@@ -1,12 +1,12 @@
 // 실재고 스냅숏(data/lots.json) 읽기와 화면용 표기 도우미
-import * as store from './store.js?v=82afc97f2e';
+import * as store from './store.js?v=37cc061e97';
 
 let cache;
 let RATE = 0; // meta.rate — 엔화가 없는 로트의 '≈ ¥' 환산에(결정 135 · 지어내는 값 아님 · 사이트가 쓰는 환율 그대로)
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=82afc97f2e').then(r => {
+    cache = fetch('data/lots.json?v=37cc061e97').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     }).then(d => {

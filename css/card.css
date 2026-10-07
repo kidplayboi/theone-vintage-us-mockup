@@ -35,11 +35,11 @@
 .card.is-sold .card-media img { opacity: .45; }
 
 /* 등급 — 브랜드 줄 오른쪽 글자 'B · Very good'(결정 138 · 형 10/7 "1번 위치" · Fashionphile 'Condition: Very Good' 13px 글줄). 사진 위 원(까사 B)은 뺐다 — 사진 위 겹침은 저장 하트 + 리저브 꼬리표 둘만 */
-/* 등급 = 크기 위계(형 10/7 "등급 글자를 키우고 부연은 작게 · 위아래로"): 글 영역 오른쪽에 큰 글자 28(폰 22) + 아래 작은 이름 12. 색·상자 없음 — 크기가 위계다 */
+/* 등급 = 세리프 큰 글자 + 작은 이름(형 10/7 "더 고급지게" → 시안 A · 5단계 점은 "짜친다"로 뺌): 글자는 제목 서체(Cormorant · 토큰 --fs-h2 34/28) · 이름 12. 색·상자·척도 없음 */
 .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s3); }
 .card-id { min-width: 0; flex: 1 1 auto; }
-.card-grade { flex: none; display: grid; justify-items: end; gap: 2px; margin: 0; text-align: right; }
-.card-grade b { font-size: var(--fs-28); font-weight: 400; line-height: 1; letter-spacing: -0.01em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.card-grade { flex: none; display: grid; justify-items: end; gap: 3px; margin: 0; text-align: right; }
+.card-grade b { font-family: var(--serif); font-size: var(--fs-h2); font-weight: var(--w-serif); line-height: .85; letter-spacing: 0; color: var(--ink); }
 .card-grade span { font-size: var(--fs-12); line-height: 1.2; color: var(--muted); white-space: nowrap; }
 
 /* 북마크 → 폴더 1·2·3(까사 폴더 행을 hover 팝으로) */

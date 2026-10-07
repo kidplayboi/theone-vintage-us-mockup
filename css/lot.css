@@ -148,7 +148,7 @@ dialog.lot-window { width: min(1180px, calc(100vw - 32px)); }
 .score-cells { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: var(--s4); }
 .score-cells > div { display: grid; gap: 6px; align-content: start; padding: var(--s4) var(--s5) 0 0; }
 .score-cells > div + div { padding-left: var(--s5); border-left: 1px solid var(--line); }
-.score-big { font-size: var(--fs-56); font-weight: var(--w-display); line-height: 1; letter-spacing: var(--track-display); color: var(--ink); }
+.score-big { font-size: var(--fs-56); font-weight: var(--w-display); line-height: 1; letter-spacing: var(--track-display); color: var(--ink); font-family: var(--serif); font-weight: var(--w-serif); /* 카드 등급 글자와 같은 서체(결정 138 C) */ }
 .score-big sup { font-size: .45em; color: var(--muted); vertical-align: .9em; margin-left: 2px; }
 .score-status { font-size: var(--fs-20); font-weight: var(--w-ui); line-height: 1.25; color: var(--ink); }
 .scale { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: var(--s6); }

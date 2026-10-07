@@ -1,8 +1,8 @@
 // 제품 공통 틀 v4 — 초록 마스트헤드(워드마크·검색·판매 방식·계정) · 흰 카테고리 줄(카테고리 8 + Brands ▾) · 브랜드 펼침 · 서랍 · 흰 푸터 · 모바일 아래 탭
 // 검은 facts 띠는 뺐다(결정 69). 근거: Bezel 마스트헤드(ref-bezel-s00) · 1stDibs/Rebag/WGACA/Fashionphile 카테고리 줄 안의 Designers 항목(결정 71)
-import { icon } from './icons.js?v=95803b7f7b';
-import * as store from './store.js?v=95803b7f7b';
-import { brandName } from './data.js?v=95803b7f7b';
+import { icon } from './icons.js?v=8d2ae80617';
+import * as store from './store.js?v=8d2ae80617';
+import { brandName } from './data.js?v=8d2ae80617';
 
 // 운영 사이트 상단 메뉴 그대로(Premium Auction · Express · Classic · How It Works) — 셋은 운영사의 판매 프로그램. Express·Classic 은 지금 재고 0.
 // 네 번째 칸 = 마우스 올리면 뜨는 설명(형 10/6 "이거 뭐임?") — 정확한 정의는 의뢰처 확인 항목
@@ -39,6 +39,9 @@ export function mountChrome({ page = '', cat = '', data = null } = {}) {
   bindHeader(top);
   bindHideOnScroll(top);
   paintAccount();
+  // #앵커로 들어온 경우: 브라우저는 헤더·검토 막대가 아직 없을 때 먼저 스크롤해 둔다(라이브 10/7: #pay 가 258px 위로 지나감) → 머리 장착 뒤와 폰트 로드 뒤에 한 번씩 다시 맞춘다(scroll-margin 적용)
+  const retarget = () => { const id = decodeURIComponent(location.hash.slice(1)); const el = id && document.getElementById(id); if (el) el.scrollIntoView({ block: 'start' }); };
+  if (location.hash) { requestAnimationFrame(retarget); if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(retarget)); }
   window.addEventListener('store:change', e => {
     if (['saved', 'signedIn', '*'].includes(e.detail.key)) paintAccount();
   });

@@ -4,7 +4,7 @@ let RATE = 0; // meta.rate — 엔화가 없는 로트의 '≈ ¥' 환산에(결
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=95803b7f7b').then(r => {
+    cache = fetch('data/lots.json?v=8d2ae80617').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     }).then(d => {

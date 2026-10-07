@@ -2,10 +2,10 @@
 // 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 빠른 입찰 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 메타 1줄(판매 방식 점 + 마감 ← → 남은 시간)
 // 머리 띠(결정 72·93~95)는 뺐다 — 한 화면에 진초록 띠 20개가 격자를 표처럼 보이게 했다(10/7 대조 보드). 띠가 주던 정보는 메타 줄에 그대로:
 // 판매 방식은 점 + 종류 글의 색(경매 초록 · Mall 파랑 · 결정 133), 마감 현지 시각은 글, 남은 시간은 오른쪽 숫자. 비회원은 가격 흐림(결정 134). 1시간 안이면 숫자가 빨간 알약(결정 94 유지 · 더윈 12). 카드 어디를 눌러도 상세 창(더윈 4)
-import { usd, jpy, yenFor, cardImg, photo, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName, bidStep } from './data.js?v=95803b7f7b';
-import { icon } from './icons.js?v=95803b7f7b';
-import * as store from './store.js?v=95803b7f7b';
-import { toast } from './chrome.js?v=95803b7f7b';
+import { usd, jpy, yenFor, cardImg, photo, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName, bidStep } from './data.js?v=8d2ae80617';
+import { icon } from './icons.js?v=8d2ae80617';
+import * as store from './store.js?v=8d2ae80617';
+import { toast } from './chrome.js?v=8d2ae80617';
 
 const HOUR = 3600000;
 const DAY = 86400000;

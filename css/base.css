@@ -248,6 +248,13 @@ dialog.sheet[open] { animation: sheet-in var(--dur-slow) var(--ease-out); }
 .sec-head .display { margin: 0; }
 .sec-head .muted { font-size: var(--fs-14); }
 
+/* 가로 레일 화살표 둘 — 홈 New this week · 목록 Featured 띠 공용(결정 104·123) */
+.rail-nav { display: flex; gap: var(--s2); }
+.rail-nav button { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--r-pill); border: 1px solid var(--line-2); color: var(--ink); transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out); }
+.rail-nav button:hover { border-color: var(--ink); }
+.rail-nav button[disabled] { opacity: .35; cursor: default; }
+.rail-nav svg { width: 16px; height: 16px; }
+
 /* 회원 잠금 줄 */
 .lock-band {
   display: flex; justify-content: space-between; align-items: center; gap: var(--s4);

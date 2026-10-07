@@ -10,19 +10,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
-<link rel="stylesheet" href="css/tokens.css?v=d257100269">
-<link rel="stylesheet" href="css/base.css?v=d257100269">
-<link rel="stylesheet" href="css/chrome.css?v=d257100269">
-<link rel="stylesheet" href="css/card.css?v=d257100269">
-<link rel="stylesheet" href="css/lot.css?v=d257100269">
-<link rel="stylesheet" href="css/shop.css?v=d257100269">
-<link rel="stylesheet" href="css/review.css?v=d257100269">
+<link rel="stylesheet" href="css/tokens.css?v=aa557cef18">
+<link rel="stylesheet" href="css/base.css?v=aa557cef18">
+<link rel="stylesheet" href="css/chrome.css?v=aa557cef18">
+<link rel="stylesheet" href="css/card.css?v=aa557cef18">
+<link rel="stylesheet" href="css/lot.css?v=aa557cef18">
+<link rel="stylesheet" href="css/shop.css?v=aa557cef18">
+<link rel="stylesheet" href="css/featured.css?v=aa557cef18">
+<link rel="stylesheet" href="css/review.css?v=aa557cef18">
 </head>
 <body class="has-tabs page-shop">
 <div id="review"></div>
 <header id="top"></header>
 
 <main class="shop">
+  <!-- 목록 v5 = Bezel 경매 목록 형식(형 10/7 "Bezel shop 형식 따와서" · 결정 123): 제목 → Featured 띠(큰 사진 + 현재가 + 마감) → 판매 방식 탭 1줄 + Filters 버튼 + 정렬 → 카드.
+       운영 분류는 전부 그대로(브랜드 40 · 카테고리 9 · 가격 · 상태 · 검색 · 페이지당) — 없앤 게 아니라 Filters 버튼 뒤로 접었다(10/7 대조: 필터 4줄 450px 가 상품을 y=600 아래로 밀었다 · Bezel 180) -->
   <div class="wrap" data-shop-top>
     <nav class="crumbs" aria-label="Breadcrumb" data-crumbs></nav>
     <div class="shop-head">
@@ -35,46 +38,48 @@
         <select class="input" id="tz" data-tz></select>
       </div>
     </div>
+  </div>
 
-    <!-- 필터 위계(결정 99·100): 1줄 판매 방식 = 세그먼트(아이콘 + 두 색) · 2줄 카테고리 = 아이콘 칩(경매 주력 셋 앞에) · 3줄 브랜드 칩(주요 8 + 펼치기) · 4줄 도구 = 보이는 라벨 -->
+  <section class="featured" aria-label="Featured lots" data-featured hidden></section>
+
+  <div class="wrap">
     <div data-filters>
-    <div class="filter-row">
-      <span class="filter-label">Sale type</span>
-      <div class="kind-tabs" role="tablist" aria-label="Sale type" data-kinds data-note="운영 사이트 판매 방식 탭 All lots / Live bid / Time limit / Mall 그대로, 숫자는 운영 API. 모양 = 한 덩어리 세그먼트 + 아이콘(망치 실시간 · 시계 블라인드 · 가격표 고정가), 색 두 가지(경매 초록 · 고정가 파랑) — 형 10/6 '똑같은 알약이라 구분 안 됨 · 영어 몰라도 쓱 보고 알게'. 같은 색이 카드 띠 · 배지 · 상세 점에 그대로." data-ref="결정 63·95·99"></div>
-    </div>
-    <p class="kind-help" data-kind-help></p>
-    <!-- 모바일만: 브랜드·카테고리·도구는 'Filters' 버튼 뒤로(결정 113) — 세 줄 + 도구가 카드를 700px 아래로 밀었다(10/6 390 실측) -->
-    <div class="filters-bar" data-filters-bar>
-      <button class="chip chip-more" type="button" data-filters-toggle aria-expanded="false" aria-controls="filters-more">Filters<span class="n" data-filters-count></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-      <span class="t13 muted" data-filters-summary></span>
-    </div>
-    <div class="filters-more" id="filters-more" data-filters-more>
-    <div class="filter-row filter-row-brands">
-      <span class="filter-label">Brand</span>
-      <div class="chips-wrap">
-        <div class="chips" data-brands aria-label="Brand" data-note="브랜드를 드롭다운 대신 칩으로 고른다(형 10/6 · 결정 100). 주요 8개(홈과 같은 큐레이션) + 'More brands'를 누르면 운영 API 40개 전부. 개수는 운영 API 그대로." data-ref="결정 100"></div>
-        <button class="chip chip-more" type="button" data-brands-toggle aria-expanded="false">More brands<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="chips chips-all" data-brands-all hidden></div>
+      <div class="filter-row">
+        <span class="filter-label">Sale type</span>
+        <div class="kind-tabs" role="tablist" aria-label="Sale type" data-kinds data-note="운영 사이트 판매 방식 탭 All lots / Live bid / Time limit / Mall 그대로, 숫자는 운영 API. 모양 = 한 덩어리 세그먼트 + 아이콘(망치 실시간 · 시계 블라인드 · 가격표 고정가), 색 두 가지(경매 초록 · 고정가 파랑) — 형 10/6 '똑같은 알약이라 구분 안 됨 · 영어 몰라도 쓱 보고 알게'. 같은 색이 카드 메타 점 · 배지 · 상세 점에 그대로. 색 설명문은 뺐다(설명이 필요한 색 = 못 읽히는 색 · 10/7)." data-ref="결정 63·95·99·123"></div>
       </div>
-    </div>
-    <div class="filter-row">
-      <span class="filter-label">Category</span>
-      <div class="chips" data-cats aria-label="Category" data-note="운영 사이트 카테고리 9개 + 개수 그대로, 칩마다 아이콘. 경매에서 가장 많이 사는 셋(Bags · Watches · Jewelry)을 앞에 모으고 선으로 구분(형 10/6 · 결정 100). 세그먼트와 헷갈리지 않게 테두리 없는 연한 칩, 고른 것은 잉크색." data-ref="운영 사이트 10/6 · 결정 99·100"></div>
-    </div>
-    <div class="toolbar" data-note="도구에 보이는 라벨(Search · Sort by · Show) — 같은 모양 입력이 라벨 없이 나란히면 뭐가 뭔지 못 읽는다(형 10/6)." data-ref="결정 99">
-      <label class="tb tb-search"><span class="tb-label">Search</span>
-        <span class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>
-        <input class="input" type="search" placeholder="Item, brand or lot number" data-q></span></label>
-      <label class="tb"><span class="tb-label">Price</span><select class="input" id="price" data-price data-note="가격대 필터 — Bezel·Fashionphile 공통(결정 102). 입찰(B)에선 현재가 기준. 운영 사이트에 없는 추가(형 10/6 '부족한 것 채워')." data-ref="결정 102"></select></label>
-      <label class="tb"><span class="tb-label">Condition</span><select class="input" id="grade" data-grade data-note="등급 필터 S~D · Not graded — 스코어카드가 우리 차별점인데 목록에서 못 걸렀다(결정 102). 스냅숏엔 등급 있는 로트가 9개뿐." data-ref="결정 102"></select></label>
-      <label class="tb"><span class="tb-label">Sort by</span><select class="input" id="sort" data-sort data-note="운영 정렬 4종(Featured · Newest · 가격 낮은/높은 순)에 'Ending soon' 하나를 더했다 — 운영에 없는 추가(경매 참여 유도용). 형 확정 10/6: 유지(결정 91)." data-ref="결정 63·91"></select></label>
-      <label class="tb"><span class="tb-label">Show</span><select class="input" id="per" data-per>
-        <option value="20">20 per page</option>
-        <option value="50">50 per page</option>
-        <option value="100">100 per page</option>
-      </select></label>
-    </div>
-    </div>
+      <!-- Filters 버튼(모든 폭 · 결정 123 · Bezel 'Filter' 알약 하나): 켜진 필터 수 + 요약 한 줄 · 오른쪽에 정렬. 브랜드 · 카테고리 · 검색 · 가격 · 상태 · 페이지당은 아래 패널 -->
+      <div class="filters-bar" data-filters-bar>
+        <button class="chip chip-more" type="button" data-filters-toggle aria-expanded="false" aria-controls="filters-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters<span class="n" data-filters-count></span></button>
+        <span class="t13 muted filters-summary" data-filters-summary></span>
+        <label class="tb tb-sort"><span class="tb-label">Sort by</span><select class="input" id="sort" data-sort data-note="운영 정렬 4종(Featured · Newest · 가격 낮은/높은 순)에 'Ending soon' 하나를 더했다 — 운영에 없는 추가(경매 참여 유도용). 형 확정 10/6: 유지(결정 91)." data-ref="결정 63·91"></select></label>
+      </div>
+      <div class="filters-more" id="filters-more" data-filters-more>
+        <div class="filter-row filter-row-brands">
+          <span class="filter-label">Brand</span>
+          <div class="chips-wrap">
+            <div class="chips" data-brands aria-label="Brand" data-note="브랜드를 드롭다운 대신 칩으로 고른다(형 10/6 · 결정 100). 주요 8개(홈과 같은 큐레이션) + 'More brands'를 누르면 운영 API 40개 전부. 개수는 운영 API 그대로." data-ref="결정 100"></div>
+            <button class="chip chip-more" type="button" data-brands-toggle aria-expanded="false">More brands<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="chips chips-all" data-brands-all hidden></div>
+          </div>
+        </div>
+        <div class="filter-row">
+          <span class="filter-label">Category</span>
+          <div class="chips" data-cats aria-label="Category" data-note="운영 사이트 카테고리 9개 + 개수 그대로, 칩마다 아이콘. 경매에서 가장 많이 사는 셋(Bags · Watches · Jewelry)을 앞에 모으고 선으로 구분(형 10/6 · 결정 100). 세그먼트와 헷갈리지 않게 테두리 없는 연한 칩, 고른 것은 잉크색." data-ref="운영 사이트 10/6 · 결정 99·100"></div>
+        </div>
+        <div class="toolbar" data-note="도구에 보이는 라벨(Search · Price · Condition · Show) — 같은 모양 입력이 라벨 없이 나란히면 뭐가 뭔지 못 읽는다(형 10/6). 정렬은 위 Filters 줄에." data-ref="결정 99">
+          <label class="tb tb-search"><span class="tb-label">Search</span>
+            <span class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>
+            <input class="input" type="search" placeholder="Item, brand or lot number" data-q></span></label>
+          <label class="tb"><span class="tb-label">Price</span><select class="input" id="price" data-price data-note="가격대 필터 — Bezel·Fashionphile 공통(결정 102). 입찰(B)에선 현재가 기준. 운영 사이트에 없는 추가(형 10/6 '부족한 것 채워')." data-ref="결정 102"></select></label>
+          <label class="tb"><span class="tb-label">Condition</span><select class="input" id="grade" data-grade data-note="등급 필터 S~D · Not graded — 스코어카드가 우리 차별점인데 목록에서 못 걸렀다(결정 102). 스냅숏엔 등급 있는 로트가 9개뿐." data-ref="결정 102"></select></label>
+          <label class="tb"><span class="tb-label">Show</span><select class="input" id="per" data-per>
+            <option value="20">20 per page</option>
+            <option value="50">50 per page</option>
+            <option value="100">100 per page</option>
+          </select></label>
+        </div>
+      </div>
     </div>
 
     <div class="grid" data-grid aria-live="polite"></div>
@@ -84,6 +89,6 @@
 
 <footer id="foot"></footer>
 <div id="tabs"></div>
-<script type="module" src="js/shop.js?v=d257100269"></script>
+<script type="module" src="js/shop.js?v=aa557cef18"></script>
 </body>
 </html>

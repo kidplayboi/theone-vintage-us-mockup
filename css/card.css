@@ -1,42 +1,23 @@
-/* 로트 카드 v4 — 까사 정보 구조의 정돈판(결정 72 · v4-lock §6)
-   띠(마감 · 카운트다운 · 남은 시간 막대) → 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 배지 1
-   테두리 없음 — 사진 타일의 배경색이 카드의 전부(규칙 A5·A7). 모바일은 띠 대신 가격 줄의 카운트다운 알약(BaT · 결정 79) */
+/* 로트 카드 v5 — 사진이 카드의 전부(결정 122 · v4-lock §13 L2)
+   사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 빠른 입찰 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 메타 1줄
+   머리 띠(결정 72·93~95)는 뺐다 — 10/7 대조 보드: Bezel·Fashionphile·1stDibs 카드엔 띠가 없고 우리 격자는 진초록 띠 20개로 표처럼 읽혔다.
+   테두리 없음 — 사진 타일의 배경색이 카드의 전부(규칙 A5·A7) */
 .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s7) var(--s5); }
 
 .card { position: relative; display: flex; flex-direction: column; min-width: 0; }
 
-/* 띠 — 카드 머리 32px. 띠 색 = 판매 방식 두 색(결정 95: 경매 Live bid·Time limit 초록 · 고정가 Mall 슬레이트 · 끝남 회색).
-   긴급함은 숫자가 맡는다(결정 94 · 형 10/6 "종료임박은 숫자로"): 1시간 안이면 카운트다운이 빨간 알약, 왼쪽 글은 "Ending soon" */
-.card-band {
-  position: relative; display: flex; justify-content: space-between; align-items: center; gap: var(--s2);
-  min-height: 32px; padding: 0 var(--s3) 2px;
-  border-radius: var(--r-lg) var(--r-lg) 0 0; background: var(--kind-live-band); color: var(--on-brand-2);
-  font-size: var(--fs-12); letter-spacing: var(--track-small); white-space: nowrap; overflow: hidden;
-  transition: background-color var(--dur) var(--ease-out);
-}
-.card-band.kind-mall { background: var(--kind-mall-band); color: #EAF0FD; }
-.card-band-l { overflow: hidden; text-overflow: ellipsis; }
-.card-band b { flex: none; font-size: var(--fs-14); font-weight: var(--w-ui); color: var(--on-brand); font-variant-numeric: tabular-nums; line-height: 20px; border-radius: 4px; transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
-.card-band b.warn { background: var(--ending); color: #FFFFFF; padding: 0 7px; margin-right: -4px; }
-.card-band.is-hot { color: #FFFFFF; }
-.card-band.is-done { background: #6B716D; color: #E7E9E7; }
-.card-band.is-done b { font-weight: 400; }
-.card-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255, 255, 255, .18); }
-.card-bar i { display: block; height: 100%; width: var(--p, 0%); background: var(--on-brand); transition: width 1s linear; }
-.card-band.is-hot .card-bar i { background: var(--ending-on-brand); }
-
 /* 사진 타일 */
 .card-media { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: var(--r-lg); background: var(--tile); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); }
-.card.has-band .card-media { border-radius: 0 0 var(--r-lg) var(--r-lg); }
-/* 안쪽 여백 8 → 4%(결정 114): 레퍼런스 카드는 사진이 타일을 채운다(Bezel · Fashionphile · 1stDibs). 누끼가 작게 떠 있으면 빈 타일이 카드의 반이 된다(10/6 대조 · 첫 화면 사진 비율 Bezel 67% · 우리 45%) */
-.card-media img { width: 100%; height: 100%; object-fit: contain; padding: 4%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out); }
+/* 안쪽 여백 4%(결정 114): 레퍼런스 카드는 사진이 타일을 채운다(Bezel · Fashionphile · 1stDibs) */
+.card-media img { width: 100%; height: 100%; object-fit: contain; padding: 4%; mix-blend-mode: multiply; transition: transform .5s var(--ease-out), opacity .45s var(--ease-out); }
 .card:hover .card-media img { transform: scale(1.03); }
 /* 두 번째 컷 — 마우스를 올리면 다음 사진으로(결정 103 · 1stDibs·Fashionphile). 터치 기기에선 없음
-   결정 112(형 10/6 "사진 바꾸는 거 신경 써"): 크로스페이드만 — 첫 사진의 확대를 끄고(두 움직임이 겹치면 튄다), 둘째 사진은 1.02 → 1 로 아주 천천히 */
+   결정 112(형 10/6 "사진 바꾸는 거 신경 써"): 크로스페이드만 — 첫 사진의 확대를 끄고(두 움직임이 겹치면 튄다), 둘째 사진은 1.02 → 1 로 아주 천천히
+   10/7 형 "바뀌는 게 아니라 겹쳐 보인다": 두 사진이 multiply 라 위 사진의 흰 배경이 투명처럼 곱해져 아래 사진이 비쳤다 → 위가 켜질 때 아래를 끈다(진짜 크로스페이드) */
 .card-alt { position: absolute; inset: 0; opacity: 0; transform: scale(1.02); transition: opacity .45s var(--ease-out), transform 1.2s var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
   .card:hover .card-media img.card-alt { opacity: 1; transform: none; } /* 일반 확대 규칙(.card:hover .card-media img)보다 구체적이어야 1.02 → 1 로 끝난다 */
-  .card:has(.card-alt):hover .card-media img:not(.card-alt) { transform: none; }
+  .card:has(.card-alt):hover .card-media img:not(.card-alt) { transform: none; opacity: 0; }
 }
 /* 빠른 입찰 — hover 에만, 사진 왼쪽 아래(결정 103 · Bezel 경매 카드) */
 .card-bid {
@@ -100,9 +81,9 @@
 }
 @media (hover: none) { .card-compare { display: none; } }
 
-/* 글 3줄 + 배지 */
+/* 글 3줄 + 메타 */
 /* 트랙을 카드 폭으로 묶고 자식의 자동 최소폭을 0으로 — nowrap 제목이 카드 밖으로 밀고 나가지 않게(10/6 390·768 실측) */
-/* align-content: start — 레일·격자에서 카드 높이를 맞출 때 남는 높이가 행에 분배돼 배지가 142px 로 늘어나던 결함(10/6 실측) */
+/* align-content: start — 레일·격자에서 카드 높이를 맞출 때 남는 높이가 행에 분배되던 결함(10/6 실측) */
 .card-body { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 3px; padding: var(--s3) 2px 0; flex: 1; min-width: 0; }
 .card-body > * { min-width: 0; }
 /* 글줄 위계(결정 108 · Bezel 카드 실측: 브랜드는 작은 회색, 이름이 본문, 가격이 주인공) — 세 줄이 같은 굵기로 겹치지 않게 */
@@ -115,23 +96,29 @@
 .card-price .price { font-size: var(--fs-20); font-weight: var(--w-ui); letter-spacing: var(--track-h2); color: var(--ink); white-space: nowrap; }
 .card-price .price.ask { font-size: var(--fs-16); font-weight: 400; color: var(--muted); }
 .card-sub { font-size: var(--fs-12); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.card-left { display: none; }
-.card-status { margin-top: 8px; }
 
-/* 초록 띠 위(홈 Live now) — 카드 띠는 한 단 밝은 초록(여기는 Live bid 만 온다) */
-.on-dark .card-band { background: var(--brand-2); }
-.on-dark .card-band.is-done { background: #6B716D; }
+/* 메타 줄(결정 122) — 왼쪽 점(종류 색) + "Live bid · Ends Oct 10 · 1:45 PM", 오른쪽 남은 시간. 1시간 안 = 빨간 알약 숫자(결정 94) · 글자색은 회색 하나 + 잉크 숫자 */
+.card-meta { display: flex; justify-content: space-between; align-items: center; gap: var(--s2); margin-top: 6px; min-width: 0; font-size: var(--fs-12); color: var(--muted); line-height: 1.4; }
+.card-kind { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+.card-kind .dot { flex: none; width: 6px; height: 6px; }
+.card-kind.is-done .dot { background: var(--line-2); }
+.card-when, .card-time { white-space: nowrap; }
+.card-when { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.card-time { flex: none; }
+.card-ends { flex: none; font-weight: var(--w-ui); color: var(--ink); font-variant-numeric: tabular-nums; border-radius: 4px; transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
+.card-ends.warn { background: var(--ending); color: #FFFFFF; padding: 1px 7px; }
+.card-note { margin-top: 2px; font-size: var(--fs-12); color: var(--muted); }
+
+/* 어두운 바탕 위(지금은 홈 Live now 가 연한 회녹이라 거의 안 쓰인다 · 상태 모음용) */
 .on-dark .card-media { background: #F1F1EE; box-shadow: none; }
-.on-dark .card-brand, .on-dark .card-price .price { color: var(--on-brand); }
-.on-dark .card-title, .on-dark .card-sub { color: var(--on-brand-2); }
+.on-dark .card-brand, .on-dark .card-price .price, .on-dark .card-ends { color: var(--on-brand); }
+.on-dark .card-title, .on-dark .card-sub, .on-dark .card-meta, .on-dark .card-note { color: var(--on-brand-2); }
 .on-dark .card:hover .card-title a { text-decoration-color: rgba(255, 255, 255, .4); }
 
 @media (max-width: 1180px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1180px) and (min-width: 721px) { .card-time { display: none; } }
 @media (max-width: 720px) {
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s6) var(--s3); }
-  /* 띠 대신 한 줄 알약(BaT "Bid $137,500 | ⏱ 15:10:43") */
-  .card-band { display: none; }
-  .card.has-band .card-media { border-radius: var(--r-lg); }
   .card-grade { top: var(--s2); left: var(--s2); width: 26px; height: 26px; font-size: var(--fs-12); }
   .card-save-wrap { top: 4px; right: 4px; }
   .card-save { width: 36px; height: 36px; } /* 터치 타깃 ≥ 36(결정 113) */
@@ -139,14 +126,7 @@
   .card-price { flex-wrap: wrap; gap: 4px var(--s2); }
   .card-price .price { font-size: var(--fs-16); }
   .card-sub { display: none; }
-  .card-left {
-    display: inline-flex; align-items: center; gap: 4px; min-height: 22px; padding: 0 8px; border-radius: var(--r-pill);
-    background: var(--brand); color: var(--on-brand); font-size: var(--fs-12); font-weight: var(--w-ui); font-variant-numeric: tabular-nums;
-  }
-  .card-left.kind-mall { background: var(--kind-mall-band); }
-  .card-left.warn { background: var(--ending); color: var(--on-brand); }
-  .on-dark .card-left { background: var(--brand-2); }
-  .on-dark .card-left.warn { background: var(--ending); }
+  .card-time { display: none; } /* 170px 칸 — 종류 · 날짜 · 남은 시간만 */
 }
 
 /* 등장 뒤에는 마우스 반응을 빠르게 */

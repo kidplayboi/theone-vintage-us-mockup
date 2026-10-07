@@ -3,13 +3,13 @@
 정본 순서: **이 파일 → README 변경 로그 → `docs/design/refs/2026-10-06-v4-lock.md`(결정 68~120 · §12 레퍼런스 대조) → git log**. 진행 상황을 메모리에 두지 않는다.
 
 ## 지금 상태 (2026-10-07 새벽)
-- 라이브 https://kidplayboi.github.io/theone-vintage-us-mockup/ = **이 커밋(10/7 사진 생성·교체 · 결정 121)**. 꼬리표는 `git log -1` 의 stamp 값.
-- 마지막 슬라이스 = **레퍼런스 대조 보드(v4-lock §13 · https://claude.ai/artifact/VHB7bzJEVtuQqGm7z26djf) → 사진 자리표시 8/8 실사진 교체**(힉스필 MCP · 15컷 생성 · 9컷 채택 · 5컷 기각 = 브랜드 무늬). photo-row 632×1500 버그 수정. 원본 PNG = `Downloads/theone-gen-raw-2026-10-07`.
-- 검증 끝: 로컬 4페이지(How · Grade · Sign in · 상세) 404 0 · 콘솔 0 · 넘침 0 · 사진 8/8 로드.
+- 라이브 https://kidplayboi.github.io/theone-vintage-us-mockup/ = **이 커밋(10/7 목록 Bezel 형식 + 카드 띠 제거 · 결정 122·123)**. 꼬리표는 `git log -1` 의 stamp 값. 직전 커밋 4c1ce07 = 사진 8/8 교체(결정 121).
+- 10/7 슬라이스 둘: ① 레퍼런스 대조 보드(v4-lock §13 · https://claude.ai/artifact/VHB7bzJEVtuQqGm7z26djf) → 사진 자리표시 8/8 실사진(힉스필 MCP · 15컷 → 9컷 · 원본 `Downloads/theone-gen-raw-2026-10-07`) ② 목록 = Featured 띠 + 접힌 Filters + 카드 메타 줄(`js/featured.js` 신규 · `js/card.js` v5).
+- 검증 끝: 로컬 7페이지×폭(shop 1440/768/390 · home 1440/390 · lot · saved · states) 404 0 · 콘솔 0 · 넘침 0 · 메타 줄 넘침 0 · 첫 화면 글자색 목록 11 → 5 · 홈 10 → 5.
 
 ## 다음 (형 방향 10/7 확정 — v4-lock §13 끝 "형 방향")
-1. **목록 Bezel 형식**(§13 L1·L2·L3): 제목 아래 Featured 캐러셀(큰 사진 + 현재가 + 마감) · 탭 1줄 + "Filters" 버튼(브랜드·카테고리·가격·상태·검색·Show 는 접힘 · **분류는 1:1 유지**) · 카드 진초록 띠 제거 → 메타 줄(판매 방식 점 + 마감 · 1시간 안 빨간 숫자 알약 유지) · "Green = auctions…" 설명문 삭제. 카드는 `js/card.js`·`css/card.css` 한 곳(홈 레일·New this week·상세 Similar 가 같이 바뀐다).
-2. **홈 다듬기**(§13 H1~H3): 히어로 — 후보 hero-bag.jpg · hero-watch.jpg 를 현 무대(실재고 누끼 4점 + 로트 꼬리표)와 어떻게 합칠지 **형 선택** · 사진 띠 1~2(auction-wide · tokyo-office-wide 재사용) · 브랜드 타일 8 → 흰 바탕 워드마크 줄.
+1. ✅ 목록 Bezel 형식 + 카드 띠 제거(결정 122·123). 남은 것: Featured 띠 실제 운영 선정 기준(의뢰처) · 390 에서 tz 선택이 Featured 위에 놓이는 순서 재고.
+2. **홈 다듬기**(§13 H1~H3): 히어로 — 후보 `hero-bag.jpg` · `hero-watch.jpg` 를 현 무대(실재고 누끼 4점 + 로트 꼬리표)와 어떻게 합칠지 **형 선택** · 사진 띠 1~2(auction-wide · tokyo-office-wide 재사용) · 브랜드 타일 8 → 흰 바탕 워드마크 줄.
 3. **How it works 리듬**(§13 W1): Loupe 식 "사진 + 번호 + 4줄" 한 리듬 · 글 7,084 → 약 3,500 · 칸 13 → 통합 · 비율 2종(풀블리드 21:9 + 본문 3:2/4:5).
 4. **글자색 스윕**(§13 C1): 한 화면 9~11 → 3.
 - 이전 미선택 제안(스냅숏 제목 정규화 · New this week 다양성 · Live now 브랜드 중복 · 썸네일 점)은 그 뒤.

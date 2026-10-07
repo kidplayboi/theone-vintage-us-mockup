@@ -1,22 +1,22 @@
 // 목록 페이지 v3 — 운영 사이트 분류 전부(형 10/6 "없애면 안 댐"): 판매 방식 탭 4 · 카테고리 9(개수) · 브랜드 40(개수) ·
 // 정렬 · 페이지당 20/50/100 · 검색 · 시간대 · 쪽 번호 · Premium/Express/Classic. 탭 모양은 Bezel 경매 목록(Live 327 / Ending soon 108)
-import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=d257100269';
-import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=d257100269';
-import { mountReview, paintNotes } from './review.js?v=d257100269';
-import { cardHTML, bindCards, startTicker } from './card.js?v=d257100269';
-import { icon } from './icons.js?v=d257100269';
-import { openLot } from './lotmodal.js?v=d257100269';
-import { initMotion, revealOnScroll } from './motion.js?v=d257100269';
-import * as store from './store.js?v=d257100269';
+import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=aa557cef18';
+import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=aa557cef18';
+import { mountReview, paintNotes } from './review.js?v=aa557cef18';
+import { cardHTML, bindCards, startTicker } from './card.js?v=aa557cef18';
+import { icon } from './icons.js?v=aa557cef18';
+import { openLot } from './lotmodal.js?v=aa557cef18';
+import { initMotion, revealOnScroll } from './motion.js?v=aa557cef18';
+import { featuredLots, featuredHTML, bindFeatured } from './featured.js?v=aa557cef18';
+import * as store from './store.js?v=aa557cef18';
 
 const KINDS = [['', 'All lots'], ['RT', 'Live bid'], ['LOW', 'Time limit'], ['MALL', 'Mall']];
-// 고른 판매 방식이 뭔지 한 줄로(처음 온 미국 손님용). 두 색: 초록 = 경매(Live bid · Time limit), 슬레이트 = 고정가(Mall) — 결정 95
-// Time limit = 블라인드 입찰(형 10/6 설명) — 의뢰처 확인 항목
-const KIND_HELP = {
-  '': 'Everything we can buy this week. Green = auctions (Live bid, Time limit) · Blue = buy now at a fixed price (Mall).',
-  RT: 'Live bid — open auction. Bid until the timer ends; a late bid adds time, so the lot goes to the highest bidder.',
-  LOW: 'Time limit — sealed bidding. Place your best bid before the deadline; the highest bid at close wins.',
-  MALL: 'Mall — fixed price, in stock now. Buy any time, no bidding.',
+// 탭 툴팁 한 줄(마우스 올리면). 탭 아래 색 설명문은 뺐다(10/7 · 설명이 필요한 색 = 못 읽히는 색). Time limit = 블라인드 입찰(형 10/6) — 의뢰처 확인 항목
+const KIND_TIP = {
+  '': 'Everything listed this week',
+  RT: 'Open auction — bid until the timer ends; a late bid adds time',
+  LOW: 'Sealed bidding — place your best bid before the deadline',
+  MALL: 'Fixed price — buy any time, no bidding',
 };
 const SALES = { premium: 'Premium Auction', express: 'Express', classic: 'Classic' };
 // 운영 정렬 4종 + 마감 임박(경매 목록 Bezel 'Ending soon' — 운영에 없는 추가, 형 확정 10/6 유지 · 결정 91)
@@ -70,7 +70,7 @@ async function main() {
   });
 }
 
-// 모바일 'Filters' 버튼 — 켜진 필터 수 + 요약(결정 113). 데스크톱에선 CSS 가 버튼을 숨기고 줄을 다 펼친다
+// 'Filters' 버튼(모든 폭 · 결정 113 → 123) — 켜진 필터 수 + 요약. 브랜드 · 카테고리 · 검색 · 가격 · 상태 · 페이지당은 접힌 패널 안
 let filtersOpen = false;
 function renderFiltersBar() {
   const active = [];
@@ -86,9 +86,22 @@ function renderFiltersBar() {
   $('[data-filters-more]').classList.toggle('is-open', filtersOpen);
 }
 
+// Featured 띠(결정 123) — 기본 보기(필터 · 검색 없음 · 1쪽)에서만. 입찰(B)은 예시 데이터가 켜져 있어야 현재가가 있다
+function renderFeatured() {
+  const sec = $('[data-featured]');
+  const plain = ui.sale === 'premium' && !ui.kind && !ui.cat && !ui.brand && !ui.q && !ui.price && !ui.grade && ui.page === 1;
+  const sale = store.setting('sale');
+  const lots = plain && (sale !== 'B' || store.setting('examples')) ? featuredLots(data.lots, sale) : [];
+  sec.hidden = !lots.length;
+  if (!lots.length) { sec.innerHTML = ''; return; }
+  sec.innerHTML = featuredHTML(lots, sale);
+  bindFeatured(sec, data.lots, { onOpen: openLot });
+}
+
 function render() {
   renderHead();
   $('[data-filters]').hidden = ui.sale !== 'premium'; // Express · Classic 은 재고 0 — 필터 대신 설명 빈 상태
+  renderFeatured();
   renderFiltersBar();
   renderKinds();
   renderCats();
@@ -135,9 +148,8 @@ function renderKinds() {
   // 세그먼트 + 아이콘(결정 99): 망치 = 실시간 입찰 · 시계 = 블라인드 입찰 · 가격표 = 고정가. 색은 두 묶음(초록 경매 · 파랑 고정가)
   const ICON = { RT: icon.gavel, LOW: icon.clock, MALL: icon.tag };
   $('[data-kinds]').innerHTML = KINDS.map(([code, name]) => `
-    <button type="button" role="tab" class="kind-tab" data-kind="${code}" aria-selected="${ui.kind === code}" title="${KIND_HELP[code]}">
+    <button type="button" role="tab" class="kind-tab" data-kind="${code}" aria-selected="${ui.kind === code}" title="${KIND_TIP[code]}">
       ${ICON[code] || ''}${name}<span class="num">${(k[code] ?? 0).toLocaleString('en-US')}</span></button>`).join('');
-  $('[data-kind-help]').textContent = KIND_HELP[ui.kind];
 }
 
 // 카테고리 — 아이콘 칩. 경매에서 가장 많이 사는 셋(Bags · Watches · Jewelry)을 앞에 모으고 선으로 구분(형 10/6 · 결정 100). 운영 9개는 전부 남는다
@@ -241,7 +253,7 @@ function renderGrid() {
   const start = (ui.page - 1) * ui.per;
   grid.innerHTML = list.slice(start, start + ui.per).map((lot, i) => cardHTML(lot, {
     sale,
-    note: i === 0 && ui.page === 1 ? '카드 v3 — Bezel 상품 칸(타일·브랜드 대문자·이름·가격). 운영 사이트 카드 띠의 정보는 그대로: 판매 방식 = 사진 위 알약, 기한 현지 시각·남은 일수 = 아랫줄, 등급·출발지 = 회색 줄. 1시간 안이면 빨강(더윈 12). 누르면 상세 창(더윈 4).' : '',
+    note: i === 0 && ui.page === 1 ? '카드 v5(결정 122) — 사진이 카드의 전부(Bezel · Fashionphile · 1stDibs 카드엔 띠가 없다). 머리 띠를 빼고 그 정보는 메타 줄에: 점 색 = 판매 방식(경매 초록 · Mall 파랑), 글 = 마감 현지 시각, 오른쪽 숫자 = 남은 시간(1시간 안 = 빨간 알약 · 더윈 12). 리저브는 No reserve · Reserve nearly met 둘만 한 줄. 누르면 상세 창(더윈 4).' : '',
   })).join('');
   renderPages(pages, list.length);
 }

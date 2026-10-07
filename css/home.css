@@ -102,11 +102,7 @@
 .new-rail { display: flex; gap: var(--s4); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
 .new-rail::-webkit-scrollbar { display: none; }
 .new-rail .card { flex: 0 0 280px; scroll-snap-align: start; }
-.rail-nav { display: flex; gap: var(--s2); }
-.rail-nav button { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--r-pill); border: 1px solid var(--line-2); color: var(--ink); transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out); }
-.rail-nav button:hover { border-color: var(--ink); }
-.rail-nav button[disabled] { opacity: .35; cursor: default; }
-.rail-nav svg { width: 16px; height: 16px; }
+/* .rail-nav(화살표 둘)는 base.css — 목록 Featured 띠와 공용(결정 123) */
 .sec-head .sec-head-r { display: flex; align-items: center; gap: var(--s4); }
 
 /* ── 4 How it works — 3단계(실제 순서라 번호 허용) + 사실 줄 + 사진 2장(힉스필드 raw_1·raw_2) ── */
@@ -179,17 +175,11 @@
   .rail { display: flex; gap: var(--s3); margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .rail::-webkit-scrollbar { display: none; }
   .rail .card { flex: 0 0 72%; scroll-snap-align: start; }
-  .rail .card-band { display: flex; }
-  .rail .card.has-band .card-media { border-radius: 0 0 var(--r-lg) var(--r-lg); }
-  .rail .card-left { display: none; }
   .rail .card-sub { display: block; }
   .brand-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
   .brand-mark { padding: 0 10%; }
   .new-rail { margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; gap: var(--s3); }
   .new-rail .card { flex-basis: 72%; }
-  .new-rail .card-band { display: flex; }
-  .new-rail .card.has-band .card-media { border-radius: 0 0 var(--r-lg) var(--r-lg); }
-  .new-rail .card-left { display: none; }
   .new-rail .card-sub { display: block; }
   .rail-nav { display: none; }
   .brand-logo .cat-n { display: none; }

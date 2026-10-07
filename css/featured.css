@@ -3,7 +3,7 @@
 .featured { background: #EEF2EF; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: var(--s5) 0 var(--s6); margin-bottom: var(--s6); }
 .featured-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s4); margin-bottom: var(--s4); }
 .featured-head .label { color: var(--ink); font-size: var(--fs-13); }
-.featured-rail { display: flex; gap: var(--s4); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 2px; }
+.featured-rail { display: flex; gap: var(--s4); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; padding-bottom: 2px; }
 .featured-rail::-webkit-scrollbar { display: none; }
 .feat {
   flex: 0 0 calc((100% - var(--s4) * 2) / 3); scroll-snap-align: start;
@@ -22,8 +22,9 @@
 .feat-brand { font-size: var(--fs-12); color: var(--muted); letter-spacing: var(--track-small); }
 .feat-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--fs-16); font-weight: var(--w-ui); line-height: 1.3; color: var(--ink); }
 .feat:hover .feat-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--line-2); }
-.feat-cells { display: grid; gap: 6px; }
-.feat-cell { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s2); padding: 8px 10px; border-radius: var(--r-md); background: var(--surface); min-width: 0; }
+.feat-cells { display: grid; }
+.feat-cell { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s2); padding: 8px 0; border-top: 1px solid var(--line); min-width: 0; } /* 띠 → 흰 카드 → 회색 칸 상자 3겹이던 것을 hairline 줄로(규칙 A5 · 검사관 P2-10) */
+.feat-cell .label { color: var(--body); }
 .feat-cell b { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .feat-cell .feat-ends { color: var(--live); border-radius: var(--r-md); transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
 .feat-cell .feat-ends.warn { background: var(--ending); color: #FFFFFF; padding: 1px 7px; }
@@ -38,6 +39,6 @@
   .feat { flex-basis: 84%; grid-template-columns: 38% minmax(0, 1fr); }
   .feat-body { padding: var(--s3); gap: var(--s2); }
   .feat-title { font-size: var(--fs-14); }
-  .feat-cell { padding: 6px 8px; }
+  .feat-cell { padding: 6px 0; }
   .feat-cell b { font-size: var(--fs-14); }
 }

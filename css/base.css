@@ -263,7 +263,7 @@ dialog.sheet[open] { animation: sheet-in var(--dur-slow) var(--ease-out); }
 .band-cap .lede { max-width: 64ch; margin: 0; color: var(--body); }
 .band-tokyo { margin-top: var(--s9); }
 @media (max-width: 900px) { .band-cap { grid-template-columns: 1fr; } }
-@media (max-width: 720px) { .band-full .ph { --ar: 3 / 2; } .band-cap { padding-top: var(--s5); padding-bottom: var(--s7); } .band-tokyo { margin-top: var(--s8); } }
+@media (max-width: 720px) { .band-full .ph.ph-wide { --ar: 3 / 2; } /* .ph.ph-wide(21:9) 보다 뒤에서 이기도록 선택자 3개(검사관 P2-5: 390 띠가 167px 로 눌림) */ .band-cap { padding-top: var(--s5); padding-bottom: var(--s7); } .band-tokyo { margin-top: var(--s8); } }
 
 /* 가로 레일 화살표 둘 — 홈 New this week · 목록 Featured 띠 공용(결정 104·123) */
 .rail-nav { display: flex; gap: var(--s2); }
@@ -329,3 +329,6 @@ dialog.sheet[open] { animation: sheet-in var(--dur-slow) var(--ease-out); }
   mask-position: center; mask-size: contain; mask-repeat: no-repeat;
 }
 .brand-text { font-size: var(--fs-14); font-weight: var(--w-ui); letter-spacing: .08em; color: var(--ink); text-align: center; }
+
+/* 비회원에게 가리는 숫자(결정 97 · 134) — 상세 총액표 · 카드 · Featured · 홈 표가 같이 쓴다. 자리표시 글($0,000)에만 건다 */
+.blur { filter: blur(5px); user-select: none; }

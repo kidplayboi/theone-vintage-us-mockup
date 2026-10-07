@@ -1,14 +1,16 @@
 // 실재고 스냅숏(data/lots.json) 읽기와 화면용 표기 도우미
 let cache;
+let RATE = 0; // meta.rate — 엔화가 없는 로트의 '≈ ¥' 환산에(결정 135 · 지어내는 값 아님 · 사이트가 쓰는 환율 그대로)
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=cd632a7b68').then(r => {
+    cache = fetch('data/lots.json?v=0f9cad3939').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     }).then(d => {
+      RATE = Number(d.meta && d.meta.rate) || 0;
       // 제목 정리(결정 131) — 원천 카탈로그 표기를 사람이 읽는 꼴로. 원문은 rawTitle 에 남긴다(About 인용은 lot.name 원문 그대로)
-      d.lots.forEach(l => { l.rawTitle = l.title; l.title = cleanTitle(l.title); });
+      d.lots.forEach(l => { l.rawTitle = l.title; l.title = cleanTitle(l.title, l); });
       return d;
     });
   }
@@ -17,8 +19,10 @@ export function loadData() {
 
 // 제목 정리 규칙(결정 131 · 10/7 스냅숏 125개 중 29개가 원문 그대로 — "Shoulder Shoulder Bag Camera Bag PVC/Leather 19152" · "AIR MAX 90 CW6208-111 Men's" · "Tote Bag Grey W")
 // 지어내지 않는다, 지우기만 한다: ① 같은 낱말 연속 ② 앞머리 상태 문구 ③ 꼬리의 SKU 코드(글자+숫자 5자 이상) ④ 꼬리의 외자·Size·성별 표기 ⑤ "Grey- Brown" 식 끊긴 하이픈 ⑥ 전각 공백
-export function cleanTitle(raw) {
-  let t = String(raw || '').replace(/　/g, ' ').replace(/\s+/g, ' ').trim();
+export function cleanTitle(raw, lot) {
+  let t = String(raw || '').replace(/&amp;/g, '&').replace(/　/g, ' ').replace(/\s+/g, ' ').trim(); // 원천에 &amp; 로 들어온 & ("Men's &amp; Boys'") — 화면에선 esc() 가 다시 감싼다
+  t = t.replace(/^(?:\d{5,}(?:-\d+)?\s+)+/, '');                                   // 앞머리 SKU("739868 520981 Travel tag")
+  t = t.replace(/(\w)'\s/g, '$1 ');                                               // 낱말 뒤 떠 있는 따옴표("Bracelet' Ancre")
   t = t.replace(/^(?:excellent|very good|good|unused|new)\s+condition\s+/i, '');
   t = t.replace(/^with\s+/i, '');                                                // "With G-SHOCK …" — 원천이 잘라 붙인 접속사
   t = t.replace(/\s*\((?:approx\.?|approximately)\)\s*/gi, ' ');                 // "(Approx.)"
@@ -28,7 +32,11 @@ export function cleanTitle(raw) {
   for (let i = 0; i < 3; i++) {                                                  // 꼬리에서 최대 3토큰
     const before = t;
     // 성별 문구는 통째로: "Men's Watch" · "- Men's & Women's" · "Unisex"(앞에 이미 Watch/Case 가 있다)
-    t = t.replace(/\s*-?\s*(?:men's|women's|ladies'|mens|womens|unisex)(?:\s*&\s*(?:men's|women's|ladies'))?(?:\s+watch)?$/i, '');
+    t = t.replace(/\s*-?\s*(?:men's|women's|ladies'?|boys'|girls'|mens|womens|unisex)(?:\s*&\s*(?:men's|women's|ladies'?|boys'|girls'))?(?:\s+watch)?$/i, '');
+    t = t.replace(/\s*\((?:watches|bags|jewelry|jewellery|accessories|clothing|shoes)\)$/i, ''); // 꼬리의 카테고리 괄호("Must21 (Watches)") — 가운데 것은 둔다("Rasta (Bags) and Wallets")
+    t = t.replace(/\s+size\s+[\w.]+$/i, '');                                       // "SIZE 27.0" · "Size M"
+    t = t.replace(/\s+unused$/i, '');                                                 // 상태어 꼬리
+    t = t.replace(/\s+\d{4,}-\d{2,}$/, '');                                          // "616825-995"
     t = t.replace(/\s+(?:[A-Z]|Size)$/i, '');                                     // 외자 · Size(사이즈 약어 GM/PM/MM 은 이름의 일부라 남긴다 — "City Steamer PM")
     // SKU 꼬리만: 글자 1~3 + 숫자 3자리 이상(+ -숫자)(CW6208-111 · M53456 · WS27472) · 숫자+글자+숫자(10I193DM). 모델명 GW-B5600 · DW-8800 · BGD-565US 는 남긴다(시계는 모델 코드가 이름)
     t = t.replace(/\s+(?:[A-Za-z]{1,3}\d{3,}(?:-\d{2,})?|\d+[A-Za-z]\d+[A-Za-z]*)$/, '');
@@ -37,9 +45,21 @@ export function cleanTitle(raw) {
     if (t === before) break;
   }
   t = t.replace(/\s+/g, ' ').trim();
-  return t.split(' ').length >= 2 ? t : String(raw || '').trim();               // 너무 깎여 한 낱말만 남으면 원문
+  const words = t.split(' ');
+  const bare = s => s.toLowerCase().replace(/\(s\)$/, '').replace(/[^a-z0-9]/g, '');
+  if (words.length > 2 && bare(words[0]) === bare(words[words.length - 1])) { words.shift(); t = words.join(' '); } // "Earring(s) Libris Hoop Earring(s)"
+  if (t.split(' ').length >= 2) return t;
+  // 한 낱말만 남았다: 소재·순도·SKU 코드면 원천 품목명을 앞에("Au750" → "Necklace Au750" · itemType 도 원천 필드). 그 밖엔 원문
+  const type = lot && typeof lot.itemType === 'string' ? lot.itemType.split('/')[0].trim() : '';
+  if (type && !/^(?:men's|ladies'|unisex|others)$/i.test(type) && /^(?:au|pt|k)\d{2,4}$|^[a-z]{1,3}\d{3,}$/i.test(t)) return `${type} ${t}`;
+  return String(raw || '').trim();
 }
 
+// 달러 금액의 엔화 — 로트에 둘 다 있으면 그 비율, 없으면 사이트 환율(meta.rate). 0 이면 호출 쪽이 '≈ ¥' 줄을 뺀다(검사관 10/7: 28개 로트가 '≈ ¥0')
+export function yenFor(amount, lot) {
+  if (lot && lot.usd && lot.jpy) return Math.round(amount * lot.jpy / lot.usd);
+  return RATE ? Math.round(amount * RATE) : 0;
+}
 export const usd = n => '$' + Math.round(n).toLocaleString('en-US');
 export const jpy = n => '¥' + Math.round(n).toLocaleString('en-US');
 

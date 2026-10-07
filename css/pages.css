@@ -24,13 +24,16 @@
 .hiw-intro-copy { display: grid; gap: var(--s4); }
 .hiw-intro-copy .lede { max-width: 60ch; margin: 0; color: var(--body); }
 /* 01~06 — 사진 2:1 | 글, 짝수 줄은 좌우 바꿈. 번호는 제목 안(회색) */
-.facts { display: grid; gap: var(--s9); margin-top: var(--s7); }
-.fact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s7); align-items: center; }
+/* Loupe 실측(검사관 10/7 P2-1): 사진 867(66%) · 글은 사진 윗선에 · 줄 간격 553 · 우리 50:50 · 세로 가운데 · 404 → 7:5 · 윗선 · 줄 간격 ~500 */
+.facts { display: grid; gap: clamp(96px, 9vw, 128px); margin-top: var(--s7); }
+.fact { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s7); align-items: start; }
+.fact:nth-child(even) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 .fact:nth-child(even) .fact-photo { order: 2; }
+.fact-photo[data-photo="inspect"] img { object-position: 50% 28%; } /* 4:5 원본을 2:1 로 — 루페가 윗가장자리에서 잘리던 것 */
 .fact-photo { margin: 0; }
 .fact-body { display: grid; gap: var(--s3); max-width: 46ch; }
 .fact-body .display { margin: 0; }
-.fact-n { color: var(--muted); font-variant-numeric: tabular-nums; margin-right: .15em; }
+.fact-n { color: var(--muted); font-variant-numeric: lining-nums tabular-nums; margin-right: .15em; } /* Cormorant 기본 숫자는 옛 숫자꼴 — '01.' 이 'o1.' 로 보였다 */
 .fact-body p { color: var(--body); line-height: 1.65; }
 
 .pay-compare { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s6); }

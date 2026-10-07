@@ -1,14 +1,17 @@
 // 로트 카드 v5 — 사진이 카드의 전부(결정 122 · v4-lock §13 L2 · Bezel · Fashionphile · 1stDibs 카드 실측)
 // 사진 타일(등급 원 · 북마크 → 폴더 1·2·3 · hover 빠른 입찰 · hover 시세 비교) → 브랜드 1줄 · 이름 1줄 · 가격 1 · 메타 1줄(판매 방식 점 + 마감 ← → 남은 시간)
 // 머리 띠(결정 72·93~95)는 뺐다 — 한 화면에 진초록 띠 20개가 격자를 표처럼 보이게 했다(10/7 대조 보드). 띠가 주던 정보는 메타 줄에 그대로:
-// 판매 방식은 점 색(경매 초록 · Mall 파랑), 마감 현지 시각은 글, 남은 시간은 오른쪽 숫자. 1시간 안이면 숫자가 빨간 알약(결정 94 유지 · 더윈 12). 카드 어디를 눌러도 상세 창(더윈 4)
-import { usd, jpy, cardImg, photo, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName, bidStep } from './data.js?v=cd632a7b68';
-import { icon } from './icons.js?v=cd632a7b68';
-import * as store from './store.js?v=cd632a7b68';
-import { toast } from './chrome.js?v=cd632a7b68';
+// 판매 방식은 점 + 종류 글의 색(경매 초록 · Mall 파랑 · 결정 133), 마감 현지 시각은 글, 남은 시간은 오른쪽 숫자. 비회원은 가격 흐림(결정 134). 1시간 안이면 숫자가 빨간 알약(결정 94 유지 · 더윈 12). 카드 어디를 눌러도 상세 창(더윈 4)
+import { usd, jpy, yenFor, cardImg, photo, lotUrl, esc, exampleAuction, countdown, localParts, KIND, shortDate, brandName, gradeName, bidStep } from './data.js?v=0f9cad3939';
+import { icon } from './icons.js?v=0f9cad3939';
+import * as store from './store.js?v=0f9cad3939';
+import { toast } from './chrome.js?v=0f9cad3939';
 
 const HOUR = 3600000;
 const DAY = 86400000;
+// 비회원 자리표시(결정 134) — 흐림은 CSS(.is-locked). 실값 대신 모양만 같은 글이라 DOM·복사로 새지 않는다
+const LOCKED_PRICE = '<b class="price">$0,000</b>';
+const LOCKED_SUB = '≈ ¥000,000';
 // 판매 방식 → 색 클래스(결정 95 · 두 색). 경매 둘(RT 실시간 입찰 · LOW 블라인드 입찰)은 'live' 초록, 고정가 MALL 은 'mall' 파랑. 점·배지·목록 탭·상세 띠가 같은 이름
 export const KIND_CLASS = { RT: 'live', LOW: 'live', MALL: 'mall' };
 
@@ -48,14 +51,14 @@ export function bandLeft(b) {
 function metaHTML(b) {
   if (b.tone === 'done') return `<p class="card-meta"><span class="card-kind is-done"><i class="dot"></i><span class="card-when">Sold · ${esc(b.date)}</span></span></p>`;
   const cls = KIND_CLASS[b.code] || 'live';
-  if (!b.ends) return `<p class="card-meta"><span class="card-kind kind-${cls}"><i class="dot${cls === 'mall' ? ' mall' : ''}"></i><span class="card-when">${esc(b.kind)} · buy it now</span></span><b class="card-ends">${esc(b.right)}</b></p>`;
+  if (!b.ends) return `<p class="card-meta"><span class="card-kind kind-${cls}"><i class="dot${cls === 'mall' ? ' mall' : ''}"></i><span class="card-when">${esc(b.kind)}</span><span class="card-date"> · buy it now</span></span><b class="card-ends">${esc(b.right)}</b></p>`;
   const hot = b.tone === 'hot';
   const when = b.code === 'RT' ? `Ends ${esc(b.date)}` : b.code === 'LOW' ? `Bids close ${esc(b.date)}` : `Buy it now · until ${esc(b.date)}`;
-  const left = `${esc(b.kind)} · ${when}`;
+  const left = esc(b.kind); // 종류만 — 날짜는 .card-date 로 분리(390 에선 숨김 · 검사관 10/7: 메타 잘림 19/20)
   // Mall 은 시계(00:00:00)가 아니라 "144 days left" 꼴 — 경매처럼 보이지 않게(data-clock 없음)
   const clock = b.code === 'MALL' && !hot ? '' : 'data-clock';
   return `<p class="card-meta">
-      <span class="card-kind kind-${cls}"><i class="dot${cls === 'mall' ? ' mall' : ''}"></i><span class="card-when" data-when="${left}">${hot ? 'Ending soon' : left}</span></span>
+      <span class="card-kind kind-${cls}"><i class="dot${cls === 'mall' ? ' mall' : ''}"></i><span class="card-when" data-when="${left}">${hot ? 'Ending soon' : left}</span><span class="card-date"${hot ? ' hidden' : ''}> · ${when}</span></span>
       <b class="card-ends${hot ? ' warn' : ''}" data-ends="${b.ends.getTime()}" ${clock}>${clock ? countdown(b.ends) : remain(b.ends)}</b>
     </p>`;
 }
@@ -77,15 +80,18 @@ export function cardHTML(lot, { sale = 'A', state = 'auto', note = '', kind = ''
   const rank = lot.grade && lot.grade.overall;
   const b = bandInfo(lot, sale, state, kind);
   const sold = b.tone === 'done';
+  const guest = !store.get('signedIn'); // 비회원 = 가격 마스킹(결정 134 · 까사와 같은 흐림). 사진·제목·마감은 보인다
   let price;
   let sub;
   if (sale === 'B' && !sold) {
     const a = exampleAuction(lot);
-    price = `<b class="price">${usd(a.bid)}</b>`;
-    sub = `≈ ${jpy(lot.jpy)}`; // 엔화를 가격 아래에(의뢰처 10/6 · 더윈 5). 입찰 수는 카드에서 빼고 상세·표에만(결정 108 · Bezel 카드 = 가격 한 줄)
+    const yen = yenFor(a.bid, lot);
+    price = guest ? LOCKED_PRICE : `<b class="price">${usd(a.bid)}</b>`;
+    sub = guest ? LOCKED_SUB : yen ? `≈ ${jpy(yen)}` : ''; // 엔화를 가격 아래에(의뢰처 10/6 · 더윈 5). 입찰 수는 카드에서 빼고 상세·표에만(결정 108 · Bezel 카드 = 가격 한 줄)
   } else if (lot.usd) {
-    price = `<b class="price">${usd(lot.usd)}</b>`;
-    sub = sold ? `Sold ${esc(b.date)}` : `≈ ${jpy(lot.jpy)}`;
+    const yen = lot.jpy || yenFor(lot.usd, lot);
+    price = guest ? LOCKED_PRICE : `<b class="price">${usd(lot.usd)}</b>`;
+    sub = sold ? `Sold ${esc(b.date)}` : guest ? LOCKED_SUB : yen ? `≈ ${jpy(yen)}` : '';
   } else {
     price = '<b class="price ask">Price on request</b>';
     sub = '';
@@ -96,7 +102,7 @@ export function cardHTML(lot, { sale = 'A', state = 'auto', note = '', kind = ''
       <img src="${cardImg(lot)}" alt="" width="600" height="600" loading="lazy" decoding="async">
       ${lot.photoTotal > 1 ? `<img class="card-alt" src="${photo(lot, 1)}" alt="" width="600" height="600" loading="lazy" decoding="async">` : ''}
       ${rank ? `<span class="card-grade" title="Rank ${esc(rank)} · ${esc(gradeName(rank))}" aria-label="Rank ${esc(rank)}, ${esc(gradeName(rank))}">${esc(rank)}</span>` : ''}
-      ${sale === 'B' && !sold ? `<button class="card-bid" type="button" data-quick-bid="${exampleAuction(lot).bid + bidStep(exampleAuction(lot).bid)}">${icon.gavel}Bid ${usd(exampleAuction(lot).bid + bidStep(exampleAuction(lot).bid))}</button>` : ''}
+      ${sale === 'B' && !sold ? `<button class="card-bid" type="button" data-quick-bid="${exampleAuction(lot).bid + bidStep(exampleAuction(lot).bid)}">${icon.gavel}${guest ? 'Sign in to bid' : `Bid ${usd(exampleAuction(lot).bid + bidStep(exampleAuction(lot).bid))}`}</button>` : ''}
       <div class="card-save-wrap">
         <button class="card-save" type="button" data-save aria-pressed="${saved}" aria-label="${saved ? 'Remove from saved' : 'Save'}: ${esc(lot.title)}">${saved ? icon.heartOn : icon.heart}</button>
         <div class="card-folders" role="group" aria-label="Save to a folder">
@@ -109,7 +115,7 @@ export function cardHTML(lot, { sale = 'A', state = 'auto', note = '', kind = ''
     <div class="card-body">
       <p class="card-brand">${esc(brandName(lot.brand))}</p>
       <h3 class="card-title"><a href="${lotUrl(lot)}" data-open>${esc(lot.title)}</a></h3>
-      <p class="card-price">${price}${sub ? `<span class="card-sub">${sub}</span>` : ''}</p>
+      <p class="card-price${guest && lot.usd ? ' is-locked' : ''}"${guest && lot.usd ? ' title="Prices are shown to members — log in or create a free account"' : ''}>${price}${sub ? `<span class="card-sub">${sub}</span>` : ''}</p>
       ${metaHTML(b)}
     </div>
   </article>`;
@@ -200,6 +206,8 @@ export function startTicker() {
       if (meta) {
         const when = meta.querySelector('[data-when]');
         if (when) when.textContent = hot ? 'Ending soon' : when.dataset.when;
+        const date = meta.querySelector('.card-date');
+        if (date) date.hidden = hot;
       }
       const info = el.closest('.info-band');
       if (info) info.classList.toggle('is-hot', hot);

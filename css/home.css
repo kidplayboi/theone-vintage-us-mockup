@@ -10,7 +10,7 @@
 .hero-in { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s6); min-height: clamp(400px, 34vw, 520px); padding-top: var(--s8); padding-bottom: var(--s7); }
 .hero-copy { display: grid; gap: var(--s4); max-width: 640px; }
 /* 제목 = 디스플레이 세리프(결정 125 · 홈 히어로 한 자리만): Cormorant Garamond 400 · 66px · 행간 1.02 · 자간 0. Loupe 는 Romano 세리프 디스플레이 + Söhne 본문 — 같은 '세리프 헤드라인 + 그로테스크 본문' 짝 */
-.hero-copy .display.hero-title { font-family: var(--serif); font-weight: 400; color: #FFFFFF; max-width: 20ch; font-size: clamp(40px, 4.6vw, 66px); line-height: 1.02; letter-spacing: 0; text-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
+.hero-copy .display.hero-title { font-family: var(--serif); font-weight: 400; color: #FFFFFF; max-width: 20ch; font-size: clamp(30px, 3.1vw, 44px); line-height: 1.08; letter-spacing: 0; text-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
 .hero-copy .lede { color: rgba(255, 255, 255, .82); max-width: 48ch; font-size: var(--fs-16); }
 .hero-cta { flex: none; min-height: 48px; padding: 0 22px 0 26px; } /* 그림자 없음(결정 76) */
 .hero-photo :focus-visible { outline-color: #FFFFFF; }
@@ -24,14 +24,15 @@
 .live-now .dot { background: var(--live); }
 .live-display { font-family: var(--serif); font-size: clamp(56px, 8vw, 112px); line-height: .95; letter-spacing: -0.015em; font-weight: var(--w-serif); color: var(--ink); }
 .live-sub { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 6px; font-size: var(--fs-14); color: var(--body); }
-.live-sub b { color: var(--live); font-weight: var(--w-ui); font-variant-numeric: tabular-nums; }
+.live-sub b { color: var(--ink); font-weight: var(--w-ui); font-variant-numeric: tabular-nums; } /* 한 줄 색 4 → 2(검사관 10/7 이쁨 포인트 11): 본문 + 잉크, 빨강은 1시간 안에만 */
 .live-sub b.warn { color: var(--ending); }
-.live-when { color: var(--muted); }
+.live-when { color: var(--body); }
 /* 시간대 선택 — 글줄 안의 밑줄 셀렉트(상자 없이) */
-.tz-inline { margin-left: 6px; padding: 0 18px 0 0; border: 0; border-bottom: 1px solid var(--line-2); background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2369706B' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right 2px center; appearance: none; font-size: var(--fs-14); color: var(--muted); cursor: pointer; }
+.tz-inline { margin-left: 6px; padding: 0 18px 0 0; border: 0; border-bottom: 1px solid var(--line-2); background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2369706B' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right 2px center; appearance: none; font-size: var(--fs-14); color: var(--body); cursor: pointer; }
 .tz-inline:hover { color: var(--ink); border-bottom-color: var(--ink); }
 .rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s5); }
 .rail .empty { grid-column: 1 / -1; color: var(--body); }
+.live-sec .sec-foot { justify-content: center; } /* 가운데 제목과 축을 맞춘다(검사관 10/7 P2-2) */
 .rail .empty .display { color: var(--ink); }
 /* 더 보기 = 레일 마지막 타일(결정 129 · Loupe) */
 .rail-more { flex: 0 0 200px; display: grid; place-content: center; justify-items: center; gap: var(--s2); aspect-ratio: 1 / 1; border-radius: var(--r-lg); border: 1px solid var(--line-2); color: var(--ink); font-size: var(--fs-14); transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out); }
@@ -65,30 +66,24 @@
 .brand-logo:hover .brand-mark i { background: var(--brand); }
 .brand-logo:hover .cat-n { color: var(--ink); }
 .brand-logo .cat-n { font-size: var(--fs-12); }
+.brand-logo .brand-mark i { transform: scale(var(--logo-scale, 1)); transform-origin: center; } /* 로고별 배율(결정 135 ⑰) */
 
 /* ── 3.5 New this week — 가로 레일(결정 104 · Bezel 'New arrivals' · 1stDibs 'New & Notable'). 카드 280px, 스냅, 화살표 ── */
 .new-rail-wrap { position: relative; }
-.new-rail { display: flex; gap: var(--s4); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+.new-rail { display: flex; gap: var(--s4); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; padding-bottom: 4px; }
 .new-rail::-webkit-scrollbar { display: none; }
 .new-rail .card { flex: 0 0 280px; scroll-snap-align: start; }
 /* .rail-nav(화살표 둘)는 base.css — 목록 Featured 띠와 공용(결정 123) */
 .sec-head .sec-head-r { display: flex; align-items: center; gap: var(--s4); }
 
-/* ── 4 How it works — 3단계(실제 순서라 번호 허용) + 사실 줄 + 사진 2장(힉스필드 raw_1·raw_2) ── */
-.how-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s7); align-items: start; }
-.how-steps { display: grid; margin-top: var(--s5); } /* 제목과 첫 선 사이 0px 이었다(10/7 검사 B1 · g 꼬리가 선에 닿음) */
+/* ── 4 How it works — 작은 제목 | 3단계(실제 순서라 번호 허용). 사진·체크·버튼은 뺐다(결정 135) — How 소개 두 칸(.hiw-intro-in)과 같은 1:2 ── */
+.how-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--s5) var(--s7); align-items: start; }
+.how-steps { display: grid; }
 .how-steps li { display: grid; grid-template-columns: 32px 1fr; gap: var(--s4); padding: var(--s5) 0; border-top: 1px solid var(--line); }
 .how-steps li:last-child { border-bottom: 1px solid var(--line); }
 .how-n { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.5; }
 .how-steps b { display: block; margin-bottom: 4px; font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); }
 .how-steps p { font-size: var(--fs-14); color: var(--body); max-width: 48ch; }
-.how-facts { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); margin-top: var(--s5); }
-.how-more { margin-top: var(--s5); }
-.how-pics { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
-.how-pic { display: grid; gap: var(--s2); }
-.how-pic span { display: block; aspect-ratio: 4 / 5; border-radius: var(--r-lg); overflow: hidden; background: var(--tile); }
-.how-pic img { width: 100%; height: 100%; object-fit: cover; outline: 1px solid rgba(0, 0, 0, .1); outline-offset: -1px; }
-.how-pic figcaption { font-size: var(--fs-13); color: var(--muted); }
 
 /* ── 5 Ending soon — 표(BaT "Latest bids"). 카드 반복 없이 긴급함(결정 84) ── */
 .ending-table tr { cursor: pointer; transition: background-color var(--dur-fast) var(--ease-out); }
@@ -127,19 +122,20 @@
   .hero-in { min-height: 400px; }
   .hero-bg { object-position: 50% 50%; }
   .hero-photo::after { background: linear-gradient(180deg, rgba(10, 14, 12, .12) 0%, rgba(10, 14, 12, .7) 100%); } /* 폰은 글이 사진 위 아래쪽에 — 아래를 어둡게 */
-  .hero-copy .display.hero-title { font-size: 38px; }
+  .hero-copy .display.hero-title { font-size: 30px; }
   .hero-cta { width: 100%; }
   .cat-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s4) var(--s3); }
   .cat-name { font-size: var(--fs-14); }
   .cat-list { padding: var(--s3); }
   .cat-list a { font-size: var(--fs-13); padding: 5px 0; }
   .cat-list .num { display: none; } /* 111px 칸에서는 이름만 — 개수는 아래 '5,977 lots' 한 줄로 */
-  .rail { display: flex; gap: var(--s3); margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .rail { display: flex; gap: var(--s3); margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; } /* 첫 카드가 left 0 에 붙던 것(검사관 P2-4) */
   .rail::-webkit-scrollbar { display: none; }
   .rail .card { flex: 0 0 72%; scroll-snap-align: start; }
   .rail .card-sub { display: block; }
   .brand-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .brand-logo { padding: var(--s2) var(--s2); }
+  .et-lot i { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.35; } /* 390 Ending 표 제목 잘림 5/8 → 두 줄(검사관 10/7 P1-2) */
   .brand-mark { padding: 0 8%; }
   .live-display { font-size: 48px; }
   .live-sub { font-size: var(--fs-13); }
@@ -148,7 +144,6 @@
   .new-rail .card-sub { display: block; }
   .rail-nav { display: none; }
   .brand-logo .cat-n { display: none; }
-  .how-pics { grid-template-columns: 1fr 1fr; }
   .et-bid span, .et-ends span, .et-go { display: none; }
   .et-ends { width: auto; }
   .et-lot img { width: 40px; height: 40px; }

@@ -95,7 +95,7 @@
 .card-price { display: flex; align-items: baseline; gap: var(--s2); margin-top: 6px; min-width: 0; }
 .card-price .price { font-size: var(--fs-20); font-weight: var(--w-ui); letter-spacing: var(--track-h2); color: var(--ink); white-space: nowrap; }
 .card-price .price.ask { font-size: var(--fs-16); font-weight: 400; color: var(--muted); }
-.card-sub { font-size: var(--fs-12); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-sub { font-size: var(--fs-12); color: var(--body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } /* 회색 글 비중 43% → 본문색(검사관 이쁨 포인트 10) */
 
 /* 메타 줄(결정 122·129) — 왼쪽 점(종류 색) + "Live bid · Ends Oct 10", 오른쪽 남은 시간. 1시간 안 = 빨간 알약 숫자(결정 94)
    글자색은 본문색(회색 아님 · 10/7 검사: 목록 글의 56% 가 회색) · 시각은 뺐다(상세·Ending 표에 있음 · 잘림 15건 → 0) */
@@ -103,11 +103,17 @@
 .card-kind { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
 .card-kind .dot { flex: none; width: 6px; height: 6px; }
 .card-kind.is-done .dot { background: var(--line-2); }
-.card-when { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* 판매 방식 색은 글자에만(결정 133 · 의뢰처의 까사 초록/파랑 칸 → 상자 없이 점 + 종류 글이 같은 색. Bezel·Loupe·1stDibs 카드엔 색 칸 0) */
+.card-kind.kind-live .card-when { color: var(--live); }
+.card-kind.kind-mall .card-when { color: var(--kind-mall); }
+/* 비회원 가격 마스킹(결정 134 · 형 10/7 "회원가입 안 하면 마스킹" · 까사 실측 blur 3.8px) — 자리표시 숫자를 흐린다. 실값은 DOM 에 싣지 않는다 */
+.card-price.is-locked .price, .card-price.is-locked .card-sub { filter: blur(4px); user-select: none; }
+.card-when { flex: none; white-space: nowrap; }
+.card-date { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--body); } /* 날짜는 따로 — 390 에선 숨겨 잘림 0(결정 135) */
 .card-ends { flex: none; font-weight: var(--w-ui); color: var(--ink); font-variant-numeric: tabular-nums; border-radius: var(--r-md); transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
 .card-ends.warn { background: var(--ending); color: #FFFFFF; padding: 1px 7px; }
 /* 리저브 꼬리표 — 사진 왼쪽 아래 흰 알약(Bezel "No reserve"). hover 땐 빠른 입찰 버튼 자리라 숨긴다 */
-.card-tag { position: absolute; left: var(--s3); bottom: var(--s3); z-index: 2; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: var(--r-pill); background: rgba(255, 255, 255, .92); color: var(--ink); font-size: var(--fs-12); font-weight: var(--w-ui); box-shadow: 0 0 0 1px rgba(17, 20, 18, .06); transition: opacity var(--dur-fast) var(--ease-out); }
+.card-tag { position: absolute; left: var(--s3); bottom: var(--s3); z-index: 2; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: var(--r-md); background: rgba(255, 255, 255, .92); color: var(--ink); font-size: var(--fs-12); font-weight: var(--w-ui); box-shadow: 0 0 0 1px rgba(17, 20, 18, .06); transition: opacity var(--dur-fast) var(--ease-out); }
 @media (hover: hover) and (pointer: fine) { .card:hover .card-tag { opacity: 0; } }
 
 /* 어두운 바탕 위(지금은 홈 Live now 가 연한 회녹이라 거의 안 쓰인다 · 상태 모음용) */
@@ -126,7 +132,8 @@
   .card-price { flex-wrap: wrap; gap: 4px var(--s2); }
   .card-price .price { font-size: var(--fs-16); }
   .card-sub { display: none; }
-  .card-tag { left: var(--s2); bottom: var(--s2); min-height: 24px; font-size: 11px; }
+  .card-tag { left: var(--s2); bottom: var(--s2); min-height: 24px; font-size: var(--fs-12); }
+  .card-date { display: none; }
 }
 
 /* 등장 뒤에는 마우스 반응을 빠르게 */

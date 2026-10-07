@@ -1,8 +1,8 @@
 // 목록 Featured 띠(결정 123 · v4-lock §13 L1) — Bezel Auctions 머리 "Featured auctions": 큰 사진 + 제목 + Current bid + Ends in 카드 3장 + 화살표.
 // 선정 기준은 지어내지 않는다: 현재가 높은 순 6점(입찰 B 는 예시 경매의 현재가 = 상품가). 필터·검색이 켜지면 띠는 숨고 결과가 바로 보인다.
-import { usd, esc, exampleAuction, cardImg, lotUrl, brandName, countdown, localParts } from './data.js?v=cd632a7b68';
-import { icon } from './icons.js?v=cd632a7b68';
-import * as store from './store.js?v=cd632a7b68';
+import { usd, esc, exampleAuction, cardImg, lotUrl, brandName, countdown, localParts } from './data.js?v=0f9cad3939';
+import { icon } from './icons.js?v=0f9cad3939';
+import * as store from './store.js?v=0f9cad3939';
 
 const HOUR = 3600000;
 const priceOf = (lot, sale) => (sale === 'B' ? exampleAuction(lot).bid : lot.usd);
@@ -30,7 +30,7 @@ export function featuredHTML(lots, sale) {
         <span class="feat-body">
           <span class="feat-name"><span class="feat-brand">${esc(brandName(lot.brand))}</span><span class="feat-title">${esc(lot.title)}</span></span>
           <span class="feat-cells">
-            <span class="feat-cell"><span class="label">Current bid</span><b>${usd(priceOf(lot, sale))}</b></span>
+            <span class="feat-cell"><span class="label">Current bid</span>${store.get('signedIn') ? `<b>${usd(priceOf(lot, sale))}</b>` : '<b class="blur" title="Shown to members">$0,000</b>'}</span>
             <span class="feat-cell"><span class="label">Ends in</span><b class="feat-ends${hot ? ' warn' : ''}" data-ends="${ends.getTime()}" data-clock title="${esc(p.date)} · ${esc(p.time)}">${countdown(ends)}</b></span>
           </span>
         </span>

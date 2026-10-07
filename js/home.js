@@ -1,13 +1,13 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=cd632a7b68';
-import { mountChrome, bindNewsletter } from './chrome.js?v=cd632a7b68';
-import { mountReview, paintNotes } from './review.js?v=cd632a7b68';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=cd632a7b68';
-import { openLot } from './lotmodal.js?v=cd632a7b68';
-import { initMotion, revealOnScroll } from './motion.js?v=cd632a7b68';
-import { icon } from './icons.js?v=cd632a7b68';
-import * as store from './store.js?v=cd632a7b68';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=0f9cad3939';
+import { mountChrome, bindNewsletter } from './chrome.js?v=0f9cad3939';
+import { mountReview, paintNotes } from './review.js?v=0f9cad3939';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=0f9cad3939';
+import { openLot } from './lotmodal.js?v=0f9cad3939';
+import { initMotion, revealOnScroll } from './motion.js?v=0f9cad3939';
+import { icon } from './icons.js?v=0f9cad3939';
+import * as store from './store.js?v=0f9cad3939';
 
 const HOUR = 3600000;
 // 히어로는 풀블리드 사진 한 장(index.html · 결정 124) — 누끼 무대(hero.js · assets/hero)는 10/7 삭제
@@ -17,8 +17,11 @@ const CAT_REST = [['Variety', 'Variety'], ['Tableware', 'Tableware'], ['Coin', '
 // 브랜드 행 — 40개 중 명품 하우스 8(큐레이션 · 형이 바꿀 수 있음). 이름·개수는 운영 API 그대로
 // 로고 = 위키미디어 공용의 워드마크 SVG(각 상표권자 소유 · 시안 참고용 · 파일 맵 = data.js BRAND_LOGOS). 파일 없는 브랜드는 글자로(형 10/6 "브랜드별 로고")
 const BRAND_ROW = ['HERMES', 'LOUIS VUITTON', 'CHANEL', 'ROLEX', 'Cartier', 'Christian Dior', 'Van Cleef&Arpels', 'Gucci'];
+// 워드마크마다 보이는 글자 높이가 달라(contain 98×33: VCA 9px · DIOR 28px · 검사관 10/7 P2-6) 배율로 맞춘다 — Bezel 'Shop by Brand' 도 로고별 크기
+const LOGO_SCALE = { HERMES: 1.05, 'LOUIS VUITTON': 1.2, CHANEL: 0.95, ROLEX: 0.9, Cartier: 1.05, 'Christian Dior': 0.8, 'Van Cleef&Arpels': 1.5, Gucci: 0.9 };
 
 let data;
+const shown = new Set(); // 이번 렌더에서 이미 보인 로트(결정 135 · 검사관 10/7: Live 4점이 Ending 8행에 그대로, Amazona 3회, GMT-Master 사진 3회)
 const $ = sel => document.querySelector(sel);
 const norm = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 const brandMatch = (lot, option) => { const a = norm(lot.brand), b = norm(option); return a === b || a.startsWith(b) || b.startsWith(a); };
@@ -40,7 +43,6 @@ async function main() {
     return;
   }
   document.querySelectorAll('[data-total]').forEach(el => { el.textContent = data.meta.total.toLocaleString('en-US'); });
-  renderBrowse();
   render();
   bindCards($('[data-live-rail]'), data.lots, { onOpen: openLot });
   bindCards($('[data-new-rail]'), data.lots, { onOpen: openLot });
@@ -56,9 +58,11 @@ async function main() {
 }
 
 function render() {
+  shown.clear();
   renderHeroCta();
-  renderLive();
+  renderLive();   // 먼저 보이는 구획부터 — 뒤 구획은 앞에서 보인 로트를 건너뛴다
   renderNew();
+  renderBrowse();
   renderEnding();
   paintNotes();
   revealOnScroll();
@@ -68,7 +72,8 @@ function render() {
 function renderNew() {
   // 최신 8점이되 브랜드당 2점까지(결정 131 · 10/7 실측: 최신 8점 중 6점이 Casio 디지털 시계 — 한 줄이 같은 얼굴). 순서는 등록일 그대로
   // $300 이상만(10/7: 최신순 그대로면 $24~77 카시오와 'Wholesale' 자리표시 사진의 $74 목걸이가 홈 진열대에 올라왔다 — 진열은 Live now 와 같은 기준)
-  const lots = diversify([...data.lots].filter(x => x.usd >= 300).sort((a, b) => b.listed.localeCompare(a.listed)), 8, 2);
+  const lots = diversify([...data.lots].filter(x => x.usd >= 300 && !shown.has(x.lot)).sort((a, b) => b.listed.localeCompare(a.listed)), 8, 2);
+  lots.forEach(l => shown.add(l.lot));
   // 더 보기는 레일 마지막 타일로(결정 129 · Loupe 마지막 타일 안 링크) — 섹션 머리의 → 링크는 뺐다
   $('[data-new-rail]').innerHTML = lots.map(lot => cardHTML(lot, { sale: store.setting('sale') })).join('')
     + `<a class="rail-more" href="shop.html?sort=new"><span>All new lots</span>${icon.arrow}</a>`;
@@ -139,14 +144,17 @@ function renderLive() {
   const p = localParts(first, tz);
   $('[data-live-when]').textContent = ` (${p.date} · ${p.time})`;
   // 네 장(결정 129) · 브랜드당 1점(결정 131 · 10/7 실측: 넷 중 셋이 Rolex) — 마감 순서는 그대로, 겹치는 브랜드만 건너뛴다
-  rail.innerHTML = diversify(lots, 4, 1).map(lot => cardHTML(lot, { sale: store.setting('sale') })).join('');
+  const picks = diversify(lots, 4, 1);
+  picks.forEach(l => shown.add(l.lot));
+  rail.innerHTML = picks.map(lot => cardHTML(lot, { sale: store.setting('sale') })).join('');
 }
 
 // Browse — 카테고리 타일 6 + 같은 구획 아래 브랜드 행(결정 71)
 function renderBrowse() {
   const counts = Object.fromEntries(data.meta.categories.map(c => [c.name, c.n]));
   $('[data-cat-tiles]').innerHTML = CAT_TILES.map(([genre, label, id]) => {
-    const lot = (id && data.lots.find(x => x.lot === id)) || data.lots.find(x => x.genre === genre && x.usd >= 300) || data.lots.find(x => x.genre === genre);
+    const lot = (id && !shown.has(id) && data.lots.find(x => x.lot === id)) || data.lots.find(x => x.genre === genre && x.usd >= 300 && !shown.has(x.lot)) || data.lots.find(x => x.genre === genre);
+    if (lot) shown.add(lot.lot);
     return `<a class="cat-tile" href="shop.html?cat=${genre}" data-reveal>
       <span class="cat-photo">${lot ? `<img src="${cardImg(lot)}" alt="" width="600" height="600" loading="lazy">` : ''}</span>
       <span class="cat-name">${label}</span><span class="cat-n">${(counts[genre] || 0).toLocaleString('en-US')} lots</span></a>`;
@@ -162,7 +170,7 @@ function renderBrowse() {
       const logo = BRAND_LOGOS[b.name];
       // mask-image 는 인라인으로 — CSS 변수 안의 url() 은 CSS 파일 기준(/css/…)으로 풀려 404 가 났다(10/6 실측)
       const mark = logo
-        ? `<span class="brand-mark" role="img" aria-label="${esc(brandName(b.name))}"><i style="-webkit-mask-image:url(assets/brands/${logo}.svg);mask-image:url(assets/brands/${logo}.svg)"></i></span>`
+        ? `<span class="brand-mark" role="img" aria-label="${esc(brandName(b.name))}"><i style="-webkit-mask-image:url(assets/brands/${logo}.svg);mask-image:url(assets/brands/${logo}.svg);--logo-scale:${LOGO_SCALE[b.name] || 1}"></i></span>`
         : `<span class="brand-mark brand-text">${esc(brandName(b.name))}</span>`;
       return `<a class="brand-logo" href="shop.html?brand=${encodeURIComponent(b.name)}" data-reveal>${mark}<span class="cat-n">${b.n.toLocaleString('en-US')} lots</span></a>`;
     }).join('')}</div>
@@ -172,7 +180,7 @@ function renderBrowse() {
 // Ending soon — BaT "Latest bids" 식 표 8행(결정 84). 카드 반복 없이 마감 순서만
 function renderEnding() {
   const section = $('#ending');
-  const lots = (store.setting('examples') || !bidding() ? liveLots() : []).filter(x => x.usd).slice(0, 8);
+  const lots = (store.setting('examples') || !bidding() ? liveLots() : []).filter(x => x.usd && !shown.has(x.lot)).slice(0, 8); // Live 레일에 보인 4점은 뺀다
   section.hidden = !lots.length;
   if (!lots.length) return;
   const tz = store.setting('tz');
@@ -184,7 +192,7 @@ function renderEnding() {
     return `<tr data-lot="${esc(lot.lot)}">
       <td><a class="et-lot" href="${lotUrl(lot)}" data-open><img src="${cardImg(lot)}" alt="" width="48" height="48" loading="lazy">
         <span><b>${esc(brandName(lot.brand))}</b><i>${esc(lot.title)}</i></span></a></td>
-      <td class="et-bid">${usd(bidding() ? a.bid : lot.usd)}<span>${bidding() ? `${a.bids} bids` : 'price'}</span></td>
+      <td class="et-bid">${store.get('signedIn') ? usd(bidding() ? a.bid : lot.usd) : '<span class="blur">$0,000</span>'}<span>${bidding() ? `${a.bids} bids` : 'price'}</span></td>
       <td class="et-ends"><b class="${hot ? 'warn' : ''}" data-ends="${ends.getTime()}">${remain(ends)}</b><span>${esc(p.date)} · ${esc(p.time)}</span></td>
       <td class="et-go">${icon.arrow}</td>
     </tr>`;

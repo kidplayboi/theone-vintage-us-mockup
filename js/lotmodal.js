@@ -1,11 +1,11 @@
 // 상세 창 — 가방을 누르면 목록을 떠나지 않고 이 창에서 보고 문의한다(더윈 4 · 까사 상세 모달 · 기획안 11쪽)
-import { lotUrl } from './data.js?v=cd632a7b68';
-import { icon } from './icons.js?v=cd632a7b68';
-import { galleryHTML, mountGallery } from './gallery.js?v=cd632a7b68';
-import { buyHTML, lotState } from './buybox.js?v=cd632a7b68';
-import { bindBuy } from './lotactions.js?v=cd632a7b68';
-import { paintNotes } from './review.js?v=cd632a7b68';
-import * as store from './store.js?v=cd632a7b68';
+import { lotUrl } from './data.js?v=0f9cad3939';
+import { icon } from './icons.js?v=0f9cad3939';
+import { galleryHTML, mountGallery } from './gallery.js?v=0f9cad3939';
+import { buyHTML, lotState } from './buybox.js?v=0f9cad3939';
+import { bindBuy } from './lotactions.js?v=0f9cad3939';
+import { paintNotes } from './review.js?v=0f9cad3939';
+import * as store from './store.js?v=0f9cad3939';
 
 let dialog;
 let current = null;
@@ -27,7 +27,7 @@ export function openLot(lot) {
     dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
     dialog.addEventListener('close', () => { if (controller) controller.abort(); current = null; });
     window.addEventListener('store:change', e => {
-      if (current && dialog.open && ['settings', 'offers', 'saved', 'folders'].includes(e.detail.key)) renderInfo();
+      if (current && dialog.open && ['settings', 'offers', 'saved', 'folders', 'signedIn'].includes(e.detail.key)) renderInfo();
     });
   }
   if (controller) controller.abort();

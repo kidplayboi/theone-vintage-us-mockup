@@ -4,7 +4,8 @@
 
 .shop-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s5); margin-bottom: var(--s5); }
 .shop-head .display { margin: 0; }
-.shop-count { margin-top: 6px; font-size: var(--fs-14); }
+.shop-count { margin-top: 6px; font-size: var(--fs-14); color: var(--body); }
+.members-note { margin-top: 4px; font-size: var(--fs-14); color: var(--body); } /* 비회원 안내 한 줄(결정 134) */
 .tz-pick { display: grid; gap: 4px; justify-items: end; }
 .tz-pick .input { width: 240px; min-height: 38px; font-size: var(--fs-13); }
 

@@ -1,12 +1,12 @@
 // 결제 v4 — 낙찰 → 청구서(3일) → 결제 · 에스크로 → 검수·포장(도쿄) → 배송 → 수령(3일 신고) → 완료(결정 78 · v4-lock §7)
 // 서버가 없으니 결제 기록은 이 브라우저에만 남고, My page 행이 그 기록을 읽어 '완료' 칸으로 옮긴다
-import { usd, esc, cardImg, lotUrl, shortDate, fullName, brandName, gradeName, exampleAuction } from './data.js?v=cd632a7b68';
-import { startPage } from './page.js?v=cd632a7b68';
-import { paintNotes } from './review.js?v=cd632a7b68';
-import { toast } from './chrome.js?v=cd632a7b68';
-import { estimate, EXAMPLE_RATES } from './buybox.js?v=cd632a7b68';
-import { icon } from './icons.js?v=cd632a7b68';
-import * as store from './store.js?v=cd632a7b68';
+import { usd, esc, cardImg, lotUrl, shortDate, fullName, brandName, gradeName, exampleAuction } from './data.js?v=0f9cad3939';
+import { startPage } from './page.js?v=0f9cad3939';
+import { paintNotes } from './review.js?v=0f9cad3939';
+import { toast } from './chrome.js?v=0f9cad3939';
+import { estimate, EXAMPLE_RATES } from './buybox.js?v=0f9cad3939';
+import { icon } from './icons.js?v=0f9cad3939';
+import * as store from './store.js?v=0f9cad3939';
 
 const DAY = 86400000;
 const day = n => shortDate(new Date(Date.now() + n * DAY));

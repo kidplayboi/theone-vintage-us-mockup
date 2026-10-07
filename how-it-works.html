@@ -10,11 +10,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/tokens.css?v=cd632a7b68">
-<link rel="stylesheet" href="css/base.css?v=cd632a7b68">
-<link rel="stylesheet" href="css/chrome.css?v=cd632a7b68">
-<link rel="stylesheet" href="css/pages.css?v=cd632a7b68">
-<link rel="stylesheet" href="css/review.css?v=cd632a7b68">
+<link rel="stylesheet" href="css/tokens.css?v=0f9cad3939">
+<link rel="stylesheet" href="css/base.css?v=0f9cad3939">
+<link rel="stylesheet" href="css/chrome.css?v=0f9cad3939">
+<link rel="stylesheet" href="css/pages.css?v=0f9cad3939">
+<link rel="stylesheet" href="css/review.css?v=0f9cad3939">
 </head>
 <body class="has-tabs page-how">
 <div id="review"></div>
@@ -62,7 +62,7 @@
           <div class="fact-body"><h3 class="display d30"><span class="fact-n">02.</span> Bid in dollars, or ask first</h3><p>Set your max bid. A late bid adds time, so the lot goes to the highest bidder, not the fastest. Questions — more photos, measurements, your delivered total — are answered within one business day.</p></div>
         </li>
         <li class="fact" data-reveal>
-          <figure class="ph has-photo fact-photo" data-photo="hero-bag" style="--ar: 2 / 1"><img src="assets/editorial/gen/hero-bag.jpg" alt="A red leather handbag on a linen-covered table beside white cotton gloves and a blank lot card" width="2000" height="1131" loading="lazy"></figure>
+          <figure class="ph has-photo fact-photo" data-photo="auction-paddle" style="--ar: 2 / 1"><img src="assets/editorial/gen/auction-paddle.jpg" alt="A dealer's gloved hand raising a plain white bidding paddle at a Tokyo auction, handbags on the table behind" width="2000" height="1131" loading="lazy"></figure>
           <div class="fact-body"><h3 class="display d30"><span class="fact-n">03.</span> We buy it at the auction</h3><p>We win the lot under our dealer licence and settle with the auction house. Your invoice lists the hammer price, buyer's fee, duties and shipping in one total — pay by card or bank transfer by the date on it.</p></div>
         </li>
         <li class="fact" data-reveal>
@@ -101,7 +101,7 @@
           <p class="pay-foot">Paid separately, some of it when the parcel arrives.</p>
         </div>
       </div>
-      <h3 class="display d3 fees-title" id="fees">Fees</h3>
+      <h3 class="display d30 fees-title" id="fees">Fees</h3>
       <div class="fees" data-fees data-note="요금 숫자는 js/buybox.js EXAMPLE_RATES 한 곳(결정 89) — 형 실값이 오면 여기와 청구서·정산표가 같이 바뀐다." data-ref="결정 89"></div>
     </div>
   </section>
@@ -130,10 +130,10 @@
 
   <!-- 도쿄 — 풀 사진 + 사실 한 줄(옛 '운영 기반' 상자 4개 → 한 줄 · 지어내지 않는다) -->
   <section class="band-full band-tokyo" id="trust" aria-label="Run from Tokyo">
-    <figure class="ph ph-wide has-photo" data-photo="tokyo-office-wide"><img src="assets/editorial/gen/tokyo-office-wide.jpg" alt="A bright inspection office in Tokyo with three plain leather handbags and a wristwatch on a white table" width="2000" height="857" loading="lazy"></figure>
+    <figure class="ph ph-wide has-photo" data-photo="hero-watch" data-note="홈 도쿄 띠(tokyo-office-wide)와 같은 사진·같은 제목이 두 페이지에 반복(검사관 10/7 P2-3) → 다른 컷·다른 제목" data-ref="결정 135"><img src="assets/editorial/gen/hero-watch.jpg" alt="A steel wristwatch, a loupe and white gloves on a white table by a Tokyo window" width="2000" height="1131" loading="lazy"></figure>
     <div class="wrap band-cap" data-note="까사 '특허 4건 · ISO' 자리 — 우리는 있는 사실만 한 줄(딜러 라이선스 · 도쿄 사무실 · 환율 표기 · 결제 보관은 정책 확정 전)." data-ref="결정 107·130">
-      <h2 class="display d2">Run from Tokyo</h2>
-      <p class="lede">Licensed dealer access · every piece through our Tokyo office before it ships · the exchange rate we use ($1 = ¥<span data-fx-rate>—</span>) on every price · your payment held until the piece is delivered (policy details to follow).</p>
+      <h2 class="display d2">From our desk in Tokyo</h2>
+      <p class="lede">We buy under a licensed dealer account, pass every piece through our Tokyo office before it ships, and show the exchange rate we use ($1 = ¥<span data-fx-rate>—</span>) on every price.</p>
     </div>
   </section>
 
@@ -162,8 +162,8 @@
 <footer id="foot"></footer>
 <div id="tabs"></div>
 <script type="module">
-  import { startPage } from './js/page.js?v=cd632a7b68';
-  import { EXAMPLE_RATES, RATES_LABEL } from './js/buybox.js?v=cd632a7b68';
+  import { startPage } from './js/page.js?v=0f9cad3939';
+  import { EXAMPLE_RATES, RATES_LABEL } from './js/buybox.js?v=0f9cad3939';
   // 요금 — EXAMPLE_RATES 한 곳에서(결정 89)
   const r = EXAMPLE_RATES;
   const pct = v => `${Math.round(v * 1000) / 10}%`;

@@ -1,15 +1,15 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=cd632a7b68';
-import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=cd632a7b68';
-import { mountChrome, bindNewsletter } from './chrome.js?v=cd632a7b68';
-import { mountReview, paintNotes } from './review.js?v=cd632a7b68';
-import { cardHTML, bindCards, startTicker } from './card.js?v=cd632a7b68';
-import { openLot } from './lotmodal.js?v=cd632a7b68';
-import { galleryHTML, mountGallery } from './gallery.js?v=cd632a7b68';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=cd632a7b68';
-import { bindBuy } from './lotactions.js?v=cd632a7b68';
-import { initMotion, revealOnScroll } from './motion.js?v=cd632a7b68';
-import * as store from './store.js?v=cd632a7b68';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=0f9cad3939';
+import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=0f9cad3939';
+import { mountChrome, bindNewsletter } from './chrome.js?v=0f9cad3939';
+import { mountReview, paintNotes } from './review.js?v=0f9cad3939';
+import { cardHTML, bindCards, startTicker } from './card.js?v=0f9cad3939';
+import { openLot } from './lotmodal.js?v=0f9cad3939';
+import { galleryHTML, mountGallery } from './gallery.js?v=0f9cad3939';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=0f9cad3939';
+import { bindBuy } from './lotactions.js?v=0f9cad3939';
+import { initMotion, revealOnScroll } from './motion.js?v=0f9cad3939';
+import * as store from './store.js?v=0f9cad3939';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -66,7 +66,7 @@ async function main() {
     if (e.target.closest('[data-ask-lot]')) askInBox('');
   });
   window.addEventListener('store:change', e => {
-    if (e.detail.key === 'settings' || e.detail.key === 'offers') { renderBuy(); renderPrice(); renderSticky(); mountReview({ page: 'lot' }); }
+    if (['settings', 'offers', 'signedIn'].includes(e.detail.key)) { renderBuy(); renderPrice(); renderSticky(); mountReview({ page: 'lot' }); } // signedIn: 마스트 Sign out 즉시 가격 마스킹(결정 134)
   });
 }
 
@@ -100,12 +100,13 @@ function renderCondition() {
       <div class="ungraded"><p>Not graded by the source. Authenticated in Tokyo before it ships — ask us and we'll send detailed photos before you commit.</p>
         <button class="btn ghost small" type="button" data-ask-photos>Ask for photos</button></div>`;
   $('[data-condition]').innerHTML = `
-    <div class="sec-head"><h2 class="display d30">Condition</h2><a class="more-link" href="how-we-grade.html">How we grade</a></div>
+    <div class="sec-head"><h2 class="display d30">Condition</h2></div>
     <div class="score${g ? '' : ' is-na'}" data-reveal data-note="Loupe 스코어카드 + Fashionphile 다섯 칸 척도. 현재 사이트에서 배경과 대비 1.11:1로 안 보이던 등급을 가장 크게. 등급 뜻은 현재 How it works 정의(결정 30). 미등급은 빈 칸 없이 한 문장(결정 127)." data-ref="26쪽 · 결정 127">
       ${card}
       ${marks}
     </div>
-    ${checksHTML()}`;
+    ${checksHTML()}
+    <p class="sec-foot"><a class="text-link" href="how-we-grade.html">How we grade</a></p>`;
 }
 
 // 총액을 항목별로(더윈 1·6·10 · 기획안 27쪽) — 숫자는 EXAMPLE_RATES 한 곳(형 실값 오면 그 파일만 교체 · 결정 89)
@@ -166,8 +167,9 @@ function askInBox(message) {
 function renderSimilar() {
   const list = similar(data.lots, lot, 4);
   const host = $('[data-similar]');
-  host.innerHTML = `<div class="sec-head"><h2 class="display d30">Similar pieces</h2><a class="more-link" href="shop.html?cat=${encodeURIComponent(lot.genre)}">All ${esc(lot.genre.toLowerCase())} lots</a></div>
-    <div class="grid">${list.map(x => cardHTML(x, { sale: store.setting('sale') })).join('')}</div>`;
+  host.innerHTML = `<div class="sec-head"><h2 class="display d30">Similar pieces</h2></div>
+    <div class="grid">${list.map(x => cardHTML(x, { sale: store.setting('sale') })).join('')}</div>
+    <p class="sec-foot"><a class="text-link" href="shop.html?cat=${encodeURIComponent(lot.genre)}">All ${esc(lot.genre.toLowerCase())} lots</a></p>`;
   bindCards(host, data.lots, { onOpen: openLot });
   revealOnScroll();
 }

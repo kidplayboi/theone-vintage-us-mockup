@@ -1,14 +1,14 @@
 // 목록 페이지 v3 — 운영 사이트 분류 전부(형 10/6 "없애면 안 댐"): 판매 방식 탭 4 · 카테고리 9(개수) · 브랜드 40(개수) ·
 // 정렬 · 페이지당 20/50/100 · 검색 · 시간대 · 쪽 번호 · Premium/Express/Classic. 탭 모양은 Bezel 경매 목록(Live 327 / Ending soon 108)
-import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=cd632a7b68';
-import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=cd632a7b68';
-import { mountReview, paintNotes } from './review.js?v=cd632a7b68';
-import { cardHTML, bindCards, startTicker } from './card.js?v=cd632a7b68';
-import { icon } from './icons.js?v=cd632a7b68';
-import { openLot } from './lotmodal.js?v=cd632a7b68';
-import { initMotion, revealOnScroll } from './motion.js?v=cd632a7b68';
-import { featuredLots, featuredHTML, bindFeatured } from './featured.js?v=cd632a7b68';
-import * as store from './store.js?v=cd632a7b68';
+import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=0f9cad3939';
+import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=0f9cad3939';
+import { mountReview, paintNotes } from './review.js?v=0f9cad3939';
+import { cardHTML, bindCards, startTicker } from './card.js?v=0f9cad3939';
+import { icon } from './icons.js?v=0f9cad3939';
+import { openLot } from './lotmodal.js?v=0f9cad3939';
+import { initMotion, revealOnScroll } from './motion.js?v=0f9cad3939';
+import { featuredLots, featuredHTML, bindFeatured } from './featured.js?v=0f9cad3939';
+import * as store from './store.js?v=0f9cad3939';
 
 const KINDS = [['', 'All lots'], ['RT', 'Live bid'], ['LOW', 'Time limit'], ['MALL', 'Mall']];
 // 탭 툴팁 한 줄(마우스 올리면). 탭 아래 색 설명문은 뺐다(10/7 · 설명이 필요한 색 = 못 읽히는 색). Time limit = 블라인드 입찰(형 10/6) — 의뢰처 확인 항목
@@ -99,6 +99,7 @@ function renderFeatured() {
 }
 
 function render() {
+  $('[data-members-note]').hidden = !!store.get('signedIn'); // 결정 134
   renderHead();
   $('[data-filters]').hidden = ui.sale !== 'premium'; // Express · Classic 은 재고 0 — 필터 대신 설명 빈 상태
   renderFeatured();

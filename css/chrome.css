@@ -1,13 +1,18 @@
 /* 공통 틀 v4 — 초록 마스트헤드(검색 포함) · 흰 카테고리 줄(브랜드 ▾ 포함) · 브랜드 펼침 · 서랍 · 흰 푸터 · 모바일 아래 탭
    머리는 2겹(초록 · 흰)으로 줄였다(결정 69). 근거 = v4-lock §2 */
-.site-top { position: relative; z-index: 30; }
+/* 헤더 고정(결정 132 · Bezel 실측: 초록 마스트 57px sticky top 0 + 흰 탭 줄 58px sticky top 57 · 흰 .9 + blur 24 · hairline .06 · 그림자 0).
+   상세 페이지는 따라오는 바(.sticky-bar · 28쪽)가 그 역할이라 헤더는 고정하지 않는다 */
+.site-top { position: sticky; top: 0; z-index: 30; }
+.page-lot .site-top { position: relative; }
+#catbar-slot { position: sticky; top: 60px; z-index: 25; } /* 홈: 히어로 아래로 옮긴 카테고리 줄(결정 129)이 스크롤하면 마스트 밑에 붙는다 */
 
 /* 초록 마스트헤드 — 브랜드색 자리 ① */
 .mast { background: var(--brand); color: var(--on-brand); }
 .mast-in { display: flex; align-items: center; gap: var(--s5); min-height: 60px; }
 .mast-menu { display: none; color: var(--on-brand); }
 .mast-menu:hover { background: rgba(255, 255, 255, .08); }
-.wordmark { font-size: var(--fs-14); font-weight: var(--w-ui); letter-spacing: .16em; white-space: nowrap; color: var(--on-brand); }
+/* 워드마크 = 브랜드 헤드라인 자리 → 디스플레이 세리프(형 10/7 "헤더가 잘 안 보임" · Loupe 세리프 워드마크 28px · 1stDibs 세리프 로고 · 결정 132). 14px Inter 트래킹은 마스트 안에서 묻혔다 */
+.wordmark { font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: .08em; line-height: 1; white-space: nowrap; color: var(--on-brand); }
 .mast-search { position: relative; flex: 1 1 380px; max-width: 440px; }
 .mast-search svg { position: absolute; left: 14px; top: 50%; width: 16px; height: 16px; transform: translateY(-50%); color: var(--on-brand-2); pointer-events: none; }
 .mast-search input {
@@ -29,6 +34,7 @@
 .mast-icon { position: relative; display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: var(--r-pill); color: var(--on-brand); transition: background-color var(--dur-fast) var(--ease-out); }
 .mast-icon:hover, .mast-search-btn:hover { background: rgba(255, 255, 255, .08); }
 .mast-icon svg { width: 19px; height: 19px; }
+.mast-count:empty { display: none; } /* 빈 개수 칸이 inline-grid 둘째 줄을 차지해 하트가 사람 아이콘보다 위에 떠 있었다(형 10/7 캡처) */
 .mast-count:not(:empty) {
   position: absolute; top: 4px; right: 2px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: var(--r-pill);
   background: var(--mint); color: var(--brand); font-size: 10px; font-weight: var(--w-ui); line-height: 16px; text-align: center;
@@ -38,7 +44,7 @@
 .mast-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* 흰 카테고리 줄 — 카테고리 8 + Brands ▾ 한 줄(결정 71). 홈에선 chrome.js 가 #catbar-slot(히어로 아래)으로 옮긴다(결정 129) */
-.catbar { position: relative; background: var(--canvas); border-bottom: 1px solid var(--line); }
+.catbar { position: relative; background: rgba(255, 255, 255, .9); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); border-bottom: 1px solid var(--line); } /* 고정될 때 아래 내용이 비쳐 지나간다(Bezel 탭 줄 .9 + blur 24) */
 #catbar-slot .catbar { z-index: 25; } /* 아래 구획 위로 브랜드 펼침이 뜨게 */
 .catbar-in { display: flex; align-items: center; justify-content: space-between; gap: var(--s5); min-height: 48px; }
 .cat-row, .cat-aside { display: flex; align-items: center; gap: var(--s5); }
@@ -115,8 +121,9 @@ body.no-scroll { overflow: hidden; }
 
 @media (max-width: 960px) {
   .mast-in { gap: var(--s2); min-height: 56px; flex-wrap: wrap; }
+  #catbar-slot { top: 56px; }
   .mast-menu { display: inline-grid; }
-  .wordmark { font-size: 13px; letter-spacing: .14em; }
+  .wordmark { font-size: 20px; letter-spacing: .06em; }
   .mast-nav { display: none; }
   .mast-search { display: none; }
   .site-top.search-open .mast-search { display: block; order: 10; flex: 1 1 100%; max-width: none; margin: 0 0 10px; }
@@ -134,7 +141,7 @@ body.no-scroll { overflow: hidden; }
 
 @media (max-width: 720px) {
   .hide-xs { display: none; }
-  .wordmark { font-size: 12px; letter-spacing: .12em; }
+  .wordmark { font-size: 16px; letter-spacing: .03em; } /* 390: 18px 면 워드마크 166px + 메뉴 40 + 오른쪽 157 > 358 → 마스트가 두 줄(80px)로 꺾였다 */
   .mast-in { gap: 0; }
   .mast-account .btn { min-height: 32px; padding: 0 12px; font-size: 12px; }
   body.has-tabs { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }

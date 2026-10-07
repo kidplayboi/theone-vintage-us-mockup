@@ -32,9 +32,9 @@
   --action-bg: #FFF4D6;
   --selection: #DDEBE3;
 
-  /* ── 서체 — Inter 1벌: 디스플레이 300 · 본문 400 · UI 500 (결정 68) ── */
+  /* ── 서체 — 두 벌(결정 128): 데이터·본문·UI = Inter 400/500 · 편집 제목 = Cormorant Garamond 500 ── */
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  /* 디스플레이 세리프 — 홈 히어로 한 문장에만(결정 125 · 형 10/7 "고급진 폰트로 간단하게 소개만"). 본문·UI 는 Inter 그대로. 폰트는 자리별 */
+  /* 디스플레이 세리프 — 편집 제목 전부(.d-display/.d1/.d2/.d30 · 히어로 · Live 큰 제목 · 워드마크 · 결정 128·132). 데이터 글(상품명 · 가격 · 카드 · UI)은 Inter. 폰트는 자리별 */
   --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
   --fs-12: 12px;
   --fs-13: 13px;
@@ -48,7 +48,7 @@
   --fs-h-page: 64px;    /* 페이지 머리 h1(.d-display) · Inter 56 자리 */
   --fs-h1: 46px;        /* 큰 섹션 제목(.d1) · Inter 40 자리 */
   --fs-h2: 34px;        /* 섹션 제목(.d2) · Inter 28 자리 */
-  --fs-h2s: 32px;       /* 상세 구획 제목(.d30) */
+  --fs-h2s: 28px;       /* 상세 구획 제목(.d30) — 34(.d2)와 6% 차이라 구분이 안 됐다(검사관 10/7) → 28 */
   --w-display: 400;     /* Inter 숫자 디스플레이(스코어 · 통계) — 300 은 가늘어 템플릿 느낌(10/7 대조 · Bezel 디스플레이 400) */
   --w-serif: 500;
   --w-body: 400;
@@ -115,7 +115,7 @@
     --fs-h-page: 40px;
     --fs-h1: 34px;
     --fs-h2: 28px;
-    --fs-h2s: 26px;
+    --fs-h2s: 24px;
     --gutter: 16px;
     --s9: 64px;
     --s8: 48px;

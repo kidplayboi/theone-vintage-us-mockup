@@ -34,13 +34,9 @@
 @media (hover: none) { .card-bid { display: none; } }
 .card.is-sold .card-media img { opacity: .45; }
 
-/* 등급 원(까사 B) — 사진 왼쪽 위 */
-.card-grade {
-  position: absolute; top: var(--s3); left: var(--s3); z-index: 2;
-  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
-  background: var(--canvas); color: var(--ink); font-size: var(--fs-13); font-weight: var(--w-ui);
-  box-shadow: 0 0 0 1px rgba(17, 20, 18, .08);
-}
+/* 등급 — 브랜드 줄 오른쪽 글자 'B · Very good'(결정 138 · 형 10/7 "1번 위치" · Fashionphile 'Condition: Very Good' 13px 글줄). 사진 위 원(까사 B)은 뺐다 — 사진 위 겹침은 저장 하트 + 리저브 꼬리표 둘만 */
+.card-grade { display: inline-flex; align-items: baseline; gap: 5px; flex: none; font-size: var(--fs-12); color: var(--body); letter-spacing: 0; white-space: nowrap; }
+.card-grade b { font-size: var(--fs-13); font-weight: var(--w-ui); color: var(--ink); }
 
 /* 북마크 → 폴더 1·2·3(까사 폴더 행을 hover 팝으로) */
 .card-save-wrap { position: absolute; top: var(--s2); right: var(--s2); z-index: 3; display: grid; justify-items: end; gap: 4px; }
@@ -87,7 +83,8 @@
 .card-body { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 3px; padding: var(--s3) 2px 0; flex: 1; min-width: 0; }
 .card-body > * { min-width: 0; }
 /* 글줄 위계(결정 108 · Bezel 카드 실측: 브랜드는 작은 회색, 이름이 본문, 가격이 주인공) — 세 줄이 같은 굵기로 겹치지 않게 */
-.card-brand { font-size: var(--fs-12); font-weight: 400; color: var(--muted); letter-spacing: var(--track-small); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-brand { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s2); font-size: var(--fs-12); font-weight: 400; color: var(--muted); letter-spacing: var(--track-small); }
+.card-brand > span:first-child { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card-title { font-size: var(--fs-14); font-weight: 400; line-height: 1.4; color: var(--ink); }
 .card-title a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: var(--r-lg); }
@@ -124,7 +121,6 @@
 @media (max-width: 1180px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 720px) {
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s6) var(--s3); }
-  .card-grade { top: var(--s2); left: var(--s2); width: 26px; height: 26px; font-size: var(--fs-12); }
   .card-save-wrap { top: 4px; right: 4px; }
   .card-save { width: 36px; height: 36px; } /* 터치 타깃 ≥ 36(결정 113) */
   .card-title { font-size: var(--fs-13); }

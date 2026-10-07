@@ -1,13 +1,13 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=699d9b4d94';
-import { mountChrome, bindNewsletter } from './chrome.js?v=699d9b4d94';
-import { mountReview, paintNotes } from './review.js?v=699d9b4d94';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=699d9b4d94';
-import { openLot } from './lotmodal.js?v=699d9b4d94';
-import { initMotion, revealOnScroll } from './motion.js?v=699d9b4d94';
-import { icon } from './icons.js?v=699d9b4d94';
-import * as store from './store.js?v=699d9b4d94';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=42b762c5cf';
+import { mountChrome, bindNewsletter } from './chrome.js?v=42b762c5cf';
+import { mountReview, paintNotes } from './review.js?v=42b762c5cf';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=42b762c5cf';
+import { openLot } from './lotmodal.js?v=42b762c5cf';
+import { initMotion, revealOnScroll } from './motion.js?v=42b762c5cf';
+import { icon } from './icons.js?v=42b762c5cf';
+import * as store from './store.js?v=42b762c5cf';
 
 const HOUR = 3600000;
 // 히어로는 풀블리드 사진 한 장(index.html · 결정 124) — 누끼 무대(hero.js · assets/hero)는 10/7 삭제

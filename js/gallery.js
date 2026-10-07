@@ -1,7 +1,7 @@
 // 상세 사진 — 기본은 가로 스크롤 스냅(스크립트 없이도 스와이프),
 // 불러와지면 Embla(MIT)로 끌어 넘기기, PhotoSwipe(MIT)로 확대(결정 48). 불러오기에 실패해도 갤러리는 동작한다
-import { photo, esc, fullName } from './data.js?v=23f64a84d6';
-import { icon } from './icons.js?v=23f64a84d6';
+import { photo, esc, fullName } from './data.js?v=c8a4122705';
+import { icon } from './icons.js?v=c8a4122705';
 
 const EMBLA = 'https://cdn.jsdelivr.net/npm/embla-carousel@8.6.0/esm/embla-carousel.esm.js';
 const PSWP_LIGHTBOX = 'https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js';

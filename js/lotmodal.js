@@ -1,11 +1,11 @@
 // 상세 창 — 가방을 누르면 목록을 떠나지 않고 이 창에서 보고 문의한다(더윈 4 · 까사 상세 모달 · 기획안 11쪽)
-import { lotUrl } from './data.js?v=23f64a84d6';
-import { icon } from './icons.js?v=23f64a84d6';
-import { galleryHTML, mountGallery } from './gallery.js?v=23f64a84d6';
-import { buyHTML, lotState } from './buybox.js?v=23f64a84d6';
-import { bindBuy } from './lotactions.js?v=23f64a84d6';
-import { paintNotes } from './review.js?v=23f64a84d6';
-import * as store from './store.js?v=23f64a84d6';
+import { lotUrl } from './data.js?v=c8a4122705';
+import { icon } from './icons.js?v=c8a4122705';
+import { galleryHTML, mountGallery } from './gallery.js?v=c8a4122705';
+import { buyHTML, lotState } from './buybox.js?v=c8a4122705';
+import { bindBuy } from './lotactions.js?v=c8a4122705';
+import { paintNotes } from './review.js?v=c8a4122705';
+import * as store from './store.js?v=c8a4122705';
 
 let dialog;
 let current = null;
@@ -37,10 +37,11 @@ export function openLot(lot) {
   dialog.innerHTML = `
     <div class="lw">
       <button class="icon-btn lw-close" type="button" aria-label="Close" data-lw-close>${icon.close}</button>
+      <a class="btn ghost small lw-full" href="${lotUrl(lot)}" data-note="전체 페이지 버튼을 창 오른쪽 위로(형 10/7 '사이즈 작아서 찾기 힘듦'). 아래 꼬리의 버튼은 보조." data-ref="형 10/7">Full lot page ${icon.external}</a>
       <section class="lw-gallery" aria-label="Photos" data-lw-gallery>${galleryHTML(lot)}</section>
       <aside class="lw-info info" aria-label="About this lot" data-lw-info></aside>
     </div>
-    <p class="lw-foot"><span class="label">Lot ${lot.lot}</span><a class="text-link" href="${lotUrl(lot)}">Open the full lot page — scorecard, total and details →</a></p>`;
+    <p class="lw-foot"><span class="label">Lot ${lot.lot}</span><a class="btn ghost small" href="${lotUrl(lot)}">Open the full lot page — scorecard, total, details ${icon.arrow}</a></p>`;
   dialog.querySelector('[data-lw-close]').addEventListener('click', () => dialog.close());
   renderInfo();
   bindBuy(dialog.querySelector('[data-lw-info]'), lot, renderInfo, { signal: controller.signal });

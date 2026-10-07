@@ -1,10 +1,11 @@
-// 상세 정보 칸 v2 — 상세 창(모달)과 상세 페이지가 같이 쓴다
-// 순서 = 상태 띠 → 브랜드·제목 → 달러(크게) → 등급표 → 문의 → 신뢰 · 도착일 → 메모 · 시세
-// 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급표 보이게)
-import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, exampleBids, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=23f64a84d6';
-import { icon } from './icons.js?v=23f64a84d6';
-import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=23f64a84d6';
-import * as store from './store.js?v=23f64a84d6';
+// 상세 정보 칸 v3 — 상세 창(모달)과 상세 페이지가 같이 쓴다(결정 126 · 형 10/7 "텍스트가 너무 밀집")
+// 순서 = 상태 띠 → 브랜드 + 도구 아이콘 → 제목 → 로트 번호 · 부제 → 가격/입찰 칸 → 버튼 → 접이식 행 2개(Condition · Authentication & delivery)
+// 덩어리 9 → 6. 2차 정보는 접이식 행으로 — Shopify Dawn main-product.liquid 의 collapsible_tab(213~230행 <details>/<summary>) · Vercel Commerce product-description(5덩어리)
+// 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급은 들어가자마자 — 접이식 행의 머리줄에 Rank 가 보인다)
+import { usd, jpy, esc, gradeName, GRADES, SCORES, exampleAuction, exampleBids, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=c8a4122705';
+import { icon } from './icons.js?v=c8a4122705';
+import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=c8a4122705';
+import * as store from './store.js?v=c8a4122705';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 
@@ -42,14 +43,39 @@ export function estimate(lot, { box = false } = {}) {
   return { item: lot.usd, duty, fee, ship, total: lot.usd + duty + fee + ship };
 }
 
+// 머리 — 상태 띠 · 브랜드 + 도구 아이콘(저장 · 공유 · 메모 · 시세) · 제목 · 로트 번호 + 부제 · 내 메모 칸
+// 도구는 글자 줄 대신 아이콘 줄로 위에(Bezel 제목 옆 하트·공유 · 결정 126) — 아래 글자 줄 4개가 밀도를 만들었다
 function head(lot, sale, state) {
   const b = bandInfo(lot, sale, state === 'sold' ? 'sold' : 'auto');
   const live = b.ends && b.ends - Date.now() < 86400000;
   return `
     <p class="info-band ${b.tone ? 'is-' + b.tone : ''}"><span><span class="dot ${KIND_CLASS[b.code] === 'live' || !KIND_CLASS[b.code] ? '' : KIND_CLASS[b.code]}"></span>${bandLeft(b)}</span><span class="num" ${live ? `data-ends="${b.ends.getTime()}"` : ''}>${esc(b.right)}</span></p>
-    <p class="info-lot"><span class="brand-label">${esc(brandName(lot.brand))}</span><span class="t13 muted">Lot ${esc(lot.lot)}</span></p>
+    <div class="info-lot"><span class="brand-label">${esc(brandName(lot.brand))}</span>${toolBar(lot)}</div>
     <h1 class="display info-title">${esc(lot.title)}</h1>
-    ${lot.sub ? `<p class="info-sub">${esc(lot.sub)}</p>` : ''}`;
+    <p class="info-sub"><span class="num">Lot ${esc(lot.lot)}</span>${lot.sub ? ` · ${esc(lot.sub)}` : ''}</p>
+    <div class="private-note" data-note-box hidden>
+      <label class="field"><span>Only you can see this note.</span>
+        <textarea class="input" data-note-text rows="3" placeholder="e.g. Compare with the Rank A one before Friday">${esc(store.get('notes')[lot.lot] || '')}</textarea></label>
+      <p class="t13 muted" data-note-status role="status"></p>
+    </div>`;
+}
+
+function toolBar(lot) {
+  const saved = store.get('saved')[lot.lot];
+  const folder = saved !== undefined ? store.get('folders')[saved] : '';
+  const saveLabel = saved !== undefined ? `Saved · ${esc(folder)}` : 'Save';
+  return `
+    <div class="info-tools" data-note="관심 폴더 · 공유 · 내 메모 · 시세 비교(더윈 2 · 기획안 11쪽)를 아이콘 줄로 제목 옆에(Bezel 상세 제목 옆 하트·공유 · 결정 126). 글자 줄 4개가 칸 아래를 채우던 것을 뺐다." data-ref="더윈 2 · 결정 126">
+      <button type="button" data-watch aria-expanded="false" aria-pressed="${saved !== undefined}" title="${saveLabel}" aria-label="${saveLabel}">${saved !== undefined ? icon.heartOn : icon.heart}</button>
+      <button type="button" data-share title="Share" aria-label="Share">${icon.share}</button>
+      <button type="button" data-note-toggle aria-expanded="false" title="My note" aria-label="My note">${icon.note}</button>
+      <a href="lot.html?id=${encodeURIComponent(lot.lot)}#price" data-compare title="Compare prices" aria-label="Compare prices">${icon.compare}</a>
+      <div class="watch-pop" data-watch-pop hidden role="menu" aria-label="Save to a list">
+        <p class="label">Save to</p>
+        ${store.get('folders').map((f, i) => `<button type="button" role="menuitemradio" aria-checked="${saved === i}" data-folder="${i}">${esc(f)}</button>`).join('')}
+        ${saved !== undefined ? '<button type="button" class="watch-remove" data-folder="-1">Remove from saved</button>' : ''}
+      </div>
+    </div>`;
 }
 
 function priceBlock(lot) {
@@ -63,20 +89,14 @@ function priceBlock(lot) {
     <p class="yen">≈ ${jpy(lot.jpy)} · item price · US-delivered total itemised below</p></div>`;
 }
 
-// 등급표 — 들어갔을 때 바로 보이게(더윈 14). S~D 척도와 외관·내부 1~3을 한 칸에
-function gradeTable(lot) {
-  const g = lot.grade;
+// 등급 행 — S~D 척도와 외관·내부 1~3(현재 How it works 정의). 접이식 Condition 행 안에서(더윈 14: 머리줄에 Rank 가 늘 보인다)
+function gradeRows(g) {
   const scale = (list, on, names) => list.map(v => `<span class="${v === on ? 'is-on' : ''}" title="${names ? gradeName(v) : ''}">${v}</span>`).join('');
-  if (!g) {
-    return `<div class="grade-box is-na" data-note="등급표가 상세에 들어가자마자 보이게(더윈 14). 이 상품은 원천에 등급이 없다 — 현재 사이트 문장 그대로." data-ref="더윈 14">
-      <p class="label">Condition</p>
-      <p class="t13">Not graded. The source did not publish a grade for this lot — ask and we'll send detailed photos before you commit.</p></div>`;
-  }
-  return `<a class="grade-box" href="#condition" data-note="등급표가 상세에 들어가자마자 보이게(더윈 14). S~D 뜻과 1~3 척도는 현재 How it works 정의." data-ref="더윈 14">
+  return `<div class="grade-rows">
     <div class="grade-row"><p class="label">Overall</p><p class="grade-scale">${scale(GRADES.map(x => x.rank), g.overall, true)}</p><p class="grade-name">${gradeName(g.overall)}</p></div>
     ${g.exterior ? `<div class="grade-row"><p class="label">Exterior</p><p class="grade-scale">${scale(SCORES, g.exterior)}</p><p class="grade-name t13 muted">1 cleanest</p></div>` : ''}
     ${g.interior ? `<div class="grade-row"><p class="label">Interior</p><p class="grade-scale">${scale(SCORES, g.interior)}</p><p class="grade-name t13 muted">3 most wear</p></div>` : ''}
-  </a>`;
+  </div>`;
 }
 
 // 문의 칸 — 요청서 대신 이 창 안에서(더윈 4). 모양 유지 상자 체크(더윈 8)
@@ -142,7 +162,7 @@ function bidHistory(lot, state) {
   </details>`;
 }
 
-// 입찰(B) — 마감·입찰 수·리저브는 예시값
+// 입찰(B) — 마감·입찰 수·리저브는 예시값(화면 문장 대신 검토 메모로 · 결정 126)
 function bidBox(lot, state) {
   const a = exampleAuction(lot);
   const step = bidStep(a.bid);
@@ -172,7 +192,7 @@ function bidBox(lot, state) {
   const reserve = { nearly: ['reserve', 'Reserve nearly met'], met: ['', 'Reserve met'], not: ['ending', 'Reserve not met'], none: ['', 'No reserve'] }[a.reserve];
   const hot = ends - Date.now() < 3600000;
   return `
-    <div class="bid-box">
+    <div class="bid-box" data-note="예시 경매 — 마감 시각·입찰 수·리저브는 이 시안의 예시값(실재고 입찰 0). 화면에 '예시' 문장을 띄우지 않고 이 메모에만 둔다(결정 126 · 칸 밀도)." data-ref="결정 126">
       <div class="bid-cells">
         <div><p class="label">Current bid</p><p class="price lg">${usd(bid)}</p><p class="t13 muted">≈ ${jpy(Math.round(bid * (lot.jpy / (lot.usd || 1))))} · ${a.bids + (state === 'outbid' ? 1 : 0)} bids</p></div>
         <div><p class="label">Ends</p><p class="bid-when">${formatEnds(ends, store.setting('tz'))}</p><p class="t13 ${hot ? 'warn' : 'muted'} num"><span data-ends="${ends.getTime()}">${countdown(ends)}</span></p></div>
@@ -183,15 +203,14 @@ function bidBox(lot, state) {
     ${line}
     ${store.get('signedIn') ? '' : `<div class="bid-gate" data-note="로그아웃이면 입찰 칸 = 'Register to bid'(Loupe 상세 · Bezel 'SIGN UP'). 현재가는 숨기지 않는다. 문의는 계정 없이도 된다(운영 사이트 FAQ)." data-ref="결정 58">
       <a class="btn block" href="sign-in.html?mode=create&amp;next=${encodeURIComponent('lot.html?id=' + lot.lot)}">Register to bid</a>
-      <p class="t13 muted">Bidding needs an account. <a class="text-link" href="sign-in.html?next=${encodeURIComponent('lot.html?id=' + lot.lot)}">Log in</a></p></div>`}
+      <p class="t13 muted">Bidding needs an account · <a class="text-link" href="sign-in.html?next=${encodeURIComponent('lot.html?id=' + lot.lot)}">Log in</a></p></div>`}
     <form class="bid-form" data-bid-form novalidate ${store.get('signedIn') ? '' : 'hidden'}>
       <label class="visually-hidden" for="max-bid">Your max bid</label>
       <input class="input num" id="max-bid" inputmode="numeric" placeholder="Your max bid · ${usd(bid + step)} or more" data-bid-input>
       <div class="bid-steps">${[1, 2, 4].map(k => `<button class="btn ghost small" type="button" data-step="${bid + step * k}">+${usd(step * k)}</button>`).join('')}</div>
       <p class="field-error" data-bid-error role="alert"></p>
       <button class="btn block" type="submit">Place bid</button>
-    </form>
-    <p class="t13 muted">Example auction — times, bids and reserve are illustrative in this preview.</p>`;
+    </form>`;
 }
 
 // 예상 도착 — 오늘 + 회신 1영업일 + 확정 1일 + 배송 6–10일(현재 사이트 문구)
@@ -208,35 +227,31 @@ export function deliveryWindow(from = new Date()) {
   };
 }
 
-function assurance() {
+// 접이식 행 2개(결정 126 · Shopify Dawn collapsible_tab <details>/<summary> · Bezel 상세 Accessories/Condition 접이식)
+// Condition — 머리줄에 Rank 가 늘 보인다(더윈 14), 펼치면 S~D·1~3 척도 / 미등급은 한 문장 + 사진 요청
+// Authentication & delivery — 머리줄에 예상 도착일, 펼치면 사실 3줄(Baymard #543: 배송 속도보다 도착 날짜 · 결정 45)
+function infoRows(lot) {
+  const g = lot.grade;
   const w = deliveryWindow();
-  return `<ul class="assure">
-    <li>${icon.check}<span>Authenticated and inspected by hand in our Tokyo office</span></li>
-    <li>${icon.check}<span>Import duties prepaid — nothing to pay on arrival</span></li>
-    <li data-note="Baymard #543: 배송 속도보다 도착 날짜. 계산 = 회신 1영업일 + 확정 1일 + 배송 6–10일. 검수 소요일은 운영 확인 필요." data-ref="결정 45">${icon.check}<span>Estimated delivery <b class="num">${w.range}</b> if you confirm by ${w.confirmBy}</span></li>
-  </ul>`;
-}
-
-function tools(lot) {
-  const saved = store.get('saved')[lot.lot];
-  const folder = saved !== undefined ? store.get('folders')[saved] : '';
+  const cond = g ? `Rank ${esc(g.overall)} · ${esc(gradeName(g.overall))}` : 'Not graded';
+  const condBody = g
+    ? `${gradeRows(g)}<a class="text-link t13" href="lot.html?id=${encodeURIComponent(lot.lot)}#condition">Full scorecard and marks noted at auction</a>`
+    : `<p class="t13">Not graded by the source. Authenticated in Tokyo before it ships — ask and we'll send detailed photos of the corners, handles and interior before you commit.</p>
+       <button class="btn ghost small" type="button" data-inquire="inquiry">Ask for photos</button>`;
   return `
-    <div class="info-tools" data-note="관심 폴더 · 공유 · 내 메모 · 시세 비교(더윈 2 · 기획안 11쪽)." data-ref="더윈 2">
-      <button type="button" data-watch aria-expanded="false" aria-pressed="${saved !== undefined}">
-        ${saved !== undefined ? icon.heartOn : icon.heart}<span>${saved !== undefined ? `Saved · ${esc(folder)}` : 'Save'}</span></button>
-      <button type="button" data-share>${icon.share}<span>Share</span></button>
-      <button type="button" data-note-toggle aria-expanded="false">${icon.note}<span>My note</span></button>
-      <a href="lot.html?id=${encodeURIComponent(lot.lot)}#price" data-compare>${icon.compare}<span>Compare prices</span></a>
-    </div>
-    <div class="watch-pop" data-watch-pop hidden role="menu" aria-label="Save to a list">
-      <p class="label">Save to</p>
-      ${store.get('folders').map((f, i) => `<button type="button" role="menuitemradio" aria-checked="${saved === i}" data-folder="${i}">${esc(f)}</button>`).join('')}
-      ${saved !== undefined ? '<button type="button" class="watch-remove" data-folder="-1">Remove from saved</button>' : ''}
-    </div>
-    <div class="private-note" data-note-box hidden>
-      <label class="field"><span>Only you can see this note.</span>
-        <textarea class="input" data-note-text rows="3" placeholder="e.g. Compare with the Rank A one before Friday">${esc(store.get('notes')[lot.lot] || '')}</textarea></label>
-      <p class="t13 muted" data-note-status role="status"></p>
+    <div class="info-rows" data-note="2차 정보는 접이식 행으로(결정 126) — Shopify Dawn main-product.liquid collapsible_tab(213~230행 <details>/<summary>) · Bezel 상세의 Accessories·Condition 접이식. 머리줄에 핵심 값(Rank · 도착일)이 보이니 접혀 있어도 정보는 산다. 이전엔 Condition 상자 + 사실 3줄 + 도구 4개가 칸 아래를 채워 '밀집'(형 10/7)." data-ref="Dawn collapsible_tab · 더윈 14 · 결정 45·126">
+      <details class="info-row">
+        <summary><span>Condition</span><span class="row-val">${cond}</span>${icon.down}</summary>
+        <div class="info-row-body">${condBody}</div>
+      </details>
+      <details class="info-row">
+        <summary><span>Authentication &amp; delivery</span><span class="row-val">Est. ${esc(w.range)}</span>${icon.down}</summary>
+        <div class="info-row-body"><ul class="assure">
+          <li>${icon.check}<span>Authenticated and inspected by hand in our Tokyo office</span></li>
+          <li>${icon.check}<span>Import duties prepaid — nothing to pay on arrival</span></li>
+          <li>${icon.check}<span>Estimated delivery <b class="num">${esc(w.range)}</b> if you confirm by ${esc(w.confirmBy)}</span></li>
+        </ul></div>
+      </details>
     </div>`;
 }
 
@@ -249,7 +264,7 @@ export function buyHTML(lot) {
   const state = lotState(lot);
   const sale = store.setting('sale');
   const body = sale === 'B'
-    ? `${bidBox(lot, state)}${gradeTable(lot)}${askB(lot)}`
-    : `${priceBlock(lot)}${gradeTable(lot)}${actions(lot, state)}`;
-  return `${head(lot, sale, state)}<div class="info-body">${body}${assurance()}</div>${tools(lot)}`;
+    ? `${bidBox(lot, state)}${askB(lot)}`
+    : `${priceBlock(lot)}${actions(lot, state)}`;
+  return `${head(lot, sale, state)}<div class="info-body">${body}${infoRows(lot)}</div>`;
 }

@@ -1,5 +1,5 @@
 // 시안 도구(제품 밖) — 검토 막대 · 메모 핀. 한국어, 형 검토용(결정 39)
-import * as store from './store.js?v=23f64a84d6';
+import * as store from './store.js?v=c8a4122705';
 
 export const LOT_STATES = {
   A: [

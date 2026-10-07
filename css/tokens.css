@@ -34,6 +34,8 @@
 
   /* ── 서체 — Inter 1벌: 디스플레이 300 · 본문 400 · UI 500 (결정 68) ── */
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* 디스플레이 세리프 — 홈 히어로 한 문장에만(결정 125 · 형 10/7 "고급진 폰트로 간단하게 소개만"). 본문·UI 는 Inter 그대로. 폰트는 자리별 */
+  --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
   --fs-12: 12px;
   --fs-13: 13px;
   --fs-14: 14px;

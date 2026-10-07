@@ -37,17 +37,36 @@
 .info-band > .num { font-weight: var(--w-ui); white-space: nowrap; color: var(--live); }
 .info-band.is-hot > .num { color: var(--ending); }
 .info-band.is-done > .num { color: var(--muted); }
-.info-lot { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s3); }
-.info-title { font-size: var(--fs-28); line-height: 1.2; }
+.info-lot { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: 36px; }
+.info-title { font-size: var(--fs-28); line-height: 1.2; margin-top: calc(var(--s2) * -1); }
 .info-sub { font-size: var(--fs-14); color: var(--muted); margin-top: calc(var(--s3) * -1); }
 .info-body { display: grid; gap: var(--s4); }
+
+/* 도구 아이콘 줄(결정 126) — 제목 옆 36px 원형 버튼 4개(저장 · 공유 · 메모 · 시세). 글자 줄 대신 아이콘, 폴더 팝은 아래로 띄운다 */
+.info-tools { position: relative; display: flex; gap: 2px; margin-right: -8px; }
+.info-tools > button, .info-tools > a { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: var(--r-pill); color: var(--ink); transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+.info-tools > button:hover, .info-tools > a:hover { background: var(--surface); }
+.info-tools svg { width: 18px; height: 18px; }
+.info-tools [aria-pressed="true"] { color: var(--ending); }
+.info-tools .watch-pop { position: absolute; right: 0; top: calc(100% + 6px); z-index: 6; min-width: 220px; }
+
+/* 접이식 행 2개(결정 126 · Dawn collapsible_tab) — hairline 행, 머리줄 오른쪽에 핵심 값 */
+.info-rows { border-top: 1px solid var(--line); }
+.info-row { border-bottom: 1px solid var(--line); }
+.info-row summary { display: flex; align-items: center; gap: var(--s3); min-height: 52px; list-style: none; cursor: pointer; font-size: var(--fs-14); font-weight: var(--w-ui); color: var(--ink); }
+.info-row summary::-webkit-details-marker { display: none; }
+.info-row summary .row-val { margin-left: auto; font-weight: 400; font-size: var(--fs-13); color: var(--muted); text-align: right; white-space: nowrap; }
+.info-row summary svg { flex: none; width: 16px; height: 16px; color: var(--muted); transition: transform var(--dur-fast) var(--ease-out); }
+.info-row[open] summary svg { transform: rotate(180deg); }
+.info-row summary:hover { color: var(--brand); }
+.info-row-body { display: grid; gap: var(--s3); justify-items: start; padding: 0 0 var(--s4); }
+.info-row-body .assure { padding: 0; border: 0; width: 100%; }
+.info-row-body > p { color: var(--body); line-height: 1.55; }
+.grade-rows { display: grid; gap: var(--s2); width: 100%; }
 .info-price { display: grid; gap: 4px; padding: var(--s4) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .info-price .price.ask { font-size: var(--fs-28); color: var(--muted); font-weight: 400; }
 
-/* 등급표 — 들어가자마자 보이게(더윈 14). 링크라 테두리 허용 */
-.grade-box { display: grid; gap: var(--s2); padding: var(--s4); border-radius: var(--r-lg); border: 1px solid var(--line); transition: border-color var(--dur-fast) var(--ease-out); }
-a.grade-box:hover { border-color: var(--ink); }
-.grade-box.is-na { gap: 6px; background: var(--surface); border-color: transparent; }
+/* 등급 행 — Condition 접이식 행 안(결정 126). S~D · 1~3 척도 */
 .grade-row { display: grid; grid-template-columns: 70px 1fr auto; align-items: center; gap: var(--s3); }
 .grade-scale { display: flex; gap: 4px; }
 .grade-scale span {
@@ -78,18 +97,13 @@ a.grade-box:hover { border-color: var(--ink); }
 .mini-total td.num { text-align: right; }
 .mini-total .sum td { padding-top: var(--s2); border-top: 1px solid var(--ink); font-weight: var(--w-ui); }
 
-/* 신뢰 줄 — 상자 대신 hairline(규칙 A5) */
-.assure { display: grid; gap: var(--s2); padding: var(--s4) 0 0; border-top: 1px solid var(--line); }
+/* 신뢰 줄(Authentication & delivery 접이식 행 안) */
+.assure { display: grid; gap: var(--s2); }
 .assure li { display: flex; gap: var(--s2); align-items: flex-start; font-size: var(--fs-13); line-height: 1.5; color: var(--body); }
 .assure svg { flex: none; width: 16px; height: 16px; margin-top: 1px; color: var(--live); }
 .assure b { font-weight: var(--w-ui); color: var(--ink); }
 
-.info-tools { display: flex; flex-wrap: wrap; gap: 0 var(--s5); padding-top: var(--s2); border-top: 1px solid var(--line); }
-.info-tools > * { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; font-size: var(--fs-13); color: var(--ink); }
-.info-tools svg { width: 16px; height: 16px; }
-.info-tools > *:hover span { text-decoration: underline; text-underline-offset: 3px; }
-.info-tools [aria-pressed="true"] { color: var(--ending); }
-.watch-pop { display: grid; gap: 2px; padding: var(--s3); border-radius: var(--r-lg); background: var(--canvas); box-shadow: var(--shadow-pop); }
+.watch-pop { display: grid; gap: 2px; padding: var(--s3); border-radius: var(--r-lg); background: var(--canvas); box-shadow: var(--shadow-pop); text-align: left; }
 .watch-pop .label { margin-bottom: var(--s1); }
 .watch-pop button { display: flex; justify-content: space-between; min-height: 40px; padding: 0 var(--s3); text-align: left; border-radius: var(--r-md); color: var(--ink); }
 .watch-pop button:hover { background: var(--surface); }
@@ -118,6 +132,9 @@ dialog.lot-window { width: min(1180px, calc(100vw - 32px)); }
 .lw-gallery { padding: var(--s6); position: sticky; top: 0; align-self: start; }
 .lw-info { padding: 64px var(--s6) var(--s6) var(--s2); }
 .lw-close { position: absolute; top: var(--s3); right: var(--s3); z-index: 5; background: var(--surface); }
+/* 전체 페이지로 — 창 오른쪽 위에 보이는 버튼(형 10/7 "전체 페이지 띄우는 거 사이즈 작아서 찾기 힘듦"). 아래 꼬리 글은 보조 */
+.lw-full { position: absolute; top: 14px; right: 60px; z-index: 5; }
+.lw-full svg { width: 14px; height: 14px; }
 .lw-foot { display: flex; justify-content: space-between; align-items: center; gap: var(--s4); padding: var(--s4) var(--s6); border-top: 1px solid var(--line); font-size: var(--fs-13); }
 
 /* ── 상세 페이지 ── */
@@ -149,9 +166,9 @@ dialog.lot-window { width: min(1180px, calc(100vw - 32px)); }
 .blur { filter: blur(5px); user-select: none; }
 .ext { display: inline-block; }
 
-/* 상세 표 — Loupe THE DETAILS: 라벨-값, hairline */
-.specs th { width: 34%; padding: var(--s3) 0; text-align: left; font-weight: 400; font-size: var(--fs-13); color: var(--muted); border-bottom: 1px solid var(--line); }
-.specs td { padding: var(--s3) 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: var(--fs-14); }
+/* 상세 표 — Loupe THE DETAILS: 라벨-값, hairline. 행 14px 패딩 · 라벨 14px(결정 127 · 형 10/7 "밀집") — Loupe 표는 15px/행간 1.47 */
+.specs th { width: 34%; padding: 14px var(--s4) 14px 0; text-align: left; font-weight: 400; font-size: var(--fs-14); line-height: 1.5; color: var(--muted); border-bottom: 1px solid var(--line); vertical-align: top; }
+.specs td { padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: var(--fs-14); line-height: 1.5; }
 
 /* 따라오는 바(28쪽) */
 .sticky-bar {
@@ -195,6 +212,9 @@ dialog.lot-window { width: min(1180px, calc(100vw - 32px)); }
   .scale li { font-size: var(--fs-12); }
   .g-caption { padding: var(--s3) var(--gutter); }
   .lw-foot { flex-direction: column; align-items: flex-start; padding: var(--s4); }
+  .lw-full { display: none; } /* 폰은 아래 꼬리의 버튼으로 */
+  .lw-foot .btn { width: 100%; }
+  .info-tools { margin-right: -6px; }
   .sticky-bar { inset: auto 0 0; transform: none; border-bottom: 0; border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
   .sticky-in { gap: var(--s3); min-height: 72px; }
   .sticky-in img, .sticky-name, .sticky-cell.hide-sm { display: none; }
@@ -217,7 +237,11 @@ dialog.lot-window { width: min(1180px, calc(100vw - 32px)); }
 .catalogue { max-width: 64ch; margin: 0 0 var(--s6); padding: 0 0 0 var(--s5); border-left: 2px solid var(--line-2); }
 .catalogue p { font-size: var(--fs-20); font-weight: var(--w-display); line-height: 1.45; color: var(--ink); text-wrap: pretty; }
 .catalogue footer { margin-top: var(--s2); }
-.specs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--s7); align-items: start; }
+.specs-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--s8); align-items: start; }
+/* 미등급 로트의 Condition — 빈 스코어카드('—' 두 칸) 대신 한 문장 + 버튼만(결정 127 · 10/7 형 캡처: 빈 칸이 밀집·미완성으로 읽혔다) */
+.score.is-na { padding-top: var(--s4); }
+.score.is-na .ungraded { margin-top: var(--s3); }
+.checks ul { gap: var(--s5) var(--s7); }
 .specs-2col .specs { width: 100%; }
 .specs-2col .specs tr:first-child th, .specs-2col .specs tr:first-child td { border-top: 1px solid var(--line-2); }
 

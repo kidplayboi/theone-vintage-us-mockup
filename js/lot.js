@@ -1,15 +1,15 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=23f64a84d6';
-import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=23f64a84d6';
-import { mountChrome, bindNewsletter } from './chrome.js?v=23f64a84d6';
-import { mountReview, paintNotes } from './review.js?v=23f64a84d6';
-import { cardHTML, bindCards, startTicker } from './card.js?v=23f64a84d6';
-import { openLot } from './lotmodal.js?v=23f64a84d6';
-import { galleryHTML, mountGallery } from './gallery.js?v=23f64a84d6';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=23f64a84d6';
-import { bindBuy } from './lotactions.js?v=23f64a84d6';
-import { initMotion, revealOnScroll } from './motion.js?v=23f64a84d6';
-import * as store from './store.js?v=23f64a84d6';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=c8a4122705';
+import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=c8a4122705';
+import { mountChrome, bindNewsletter } from './chrome.js?v=c8a4122705';
+import { mountReview, paintNotes } from './review.js?v=c8a4122705';
+import { cardHTML, bindCards, startTicker } from './card.js?v=c8a4122705';
+import { openLot } from './lotmodal.js?v=c8a4122705';
+import { galleryHTML, mountGallery } from './gallery.js?v=c8a4122705';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=c8a4122705';
+import { bindBuy } from './lotactions.js?v=c8a4122705';
+import { initMotion, revealOnScroll } from './motion.js?v=c8a4122705';
+import * as store from './store.js?v=c8a4122705';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -86,19 +86,23 @@ function renderCondition() {
   const marks = lot.notes && lot.notes.length
     ? `<div class="marks"><p class="label">Marks noted at auction</p><ul>${lot.notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul>
        <p class="t13 muted">In the auction house's own words. Ask us for detailed photos of any area.</p></div>` : '';
-  $('[data-condition]').innerHTML = `
-    <div class="sec-head"><h2 class="display d30">Condition</h2><a class="more-link" href="how-we-grade.html">How we grade</a></div>
-    <div class="score" data-reveal data-note="Loupe 스코어카드 + Fashionphile 다섯 칸 척도. 현재 사이트에서 배경과 대비 1.11:1로 안 보이던 등급을 가장 크게. 등급 뜻은 현재 How it works 정의(결정 30)." data-ref="26쪽">
+  // 미등급(116/125): 빈 스코어카드('—' 칸 · Status 칸) 대신 한 문장 + 버튼(결정 127 · 형 10/7 "밀집"). 등급 있는 로트만 큰 숫자 카드
+  const card = g ? `
       <p class="label">TheOne scorecard</p>
-      <div class="score-cells${g ? '' : ' is-two'}">
-        <div><p class="label">Overall</p><p class="score-big">${g ? big(g.overall) : '—'}</p><p class="t13 muted">${g ? gradeName(g.overall) : 'Not graded'}</p></div>
-        ${g ? `<div><p class="label">Exterior</p><p class="score-big">${big(g.exterior)}</p><p class="t13 muted">${g.exterior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>
-        <div><p class="label">Interior</p><p class="score-big">${big(g.interior)}</p><p class="t13 muted">${g.interior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>` : ''}
+      <div class="score-cells">
+        <div><p class="label">Overall</p><p class="score-big">${big(g.overall)}</p><p class="t13 muted">${gradeName(g.overall)}</p></div>
+        <div><p class="label">Exterior</p><p class="score-big">${big(g.exterior)}</p><p class="t13 muted">${g.exterior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>
+        <div><p class="label">Interior</p><p class="score-big">${big(g.interior)}</p><p class="t13 muted">${g.interior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>
         <div><p class="label">Status</p><p class="score-status">Authenticated<br>in Tokyo</p></div>
       </div>
-      ${g ? `<ol class="scale" aria-label="Overall rank on our five-step scale">${scale}</ol>` : `
-        <div class="ungraded"><p>The source did not publish a condition grade for this lot. Ask us and we'll send detailed photos before you commit.</p>
-        <button class="btn ghost small" type="button" data-ask-photos>Ask for photos</button></div>`}
+      <ol class="scale" aria-label="Overall rank on our five-step scale">${scale}</ol>`
+    : `
+      <div class="ungraded"><p>Not graded by the source. Authenticated in Tokyo before it ships — ask us and we'll send detailed photos before you commit.</p>
+        <button class="btn ghost small" type="button" data-ask-photos>Ask for photos</button></div>`;
+  $('[data-condition]').innerHTML = `
+    <div class="sec-head"><h2 class="display d30">Condition</h2><a class="more-link" href="how-we-grade.html">How we grade</a></div>
+    <div class="score${g ? '' : ' is-na'}" data-reveal data-note="Loupe 스코어카드 + Fashionphile 다섯 칸 척도. 현재 사이트에서 배경과 대비 1.11:1로 안 보이던 등급을 가장 크게. 등급 뜻은 현재 How it works 정의(결정 30). 미등급은 빈 칸 없이 한 문장(결정 127)." data-ref="26쪽 · 결정 127">
+      ${card}
       ${marks}
     </div>
     ${checksHTML()}`;

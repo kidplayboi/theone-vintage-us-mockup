@@ -2,10 +2,10 @@
 // 순서 = 상태 띠 → 브랜드 + 도구 아이콘 → 제목 → 로트 번호 · 부제 → 가격/입찰 칸 → 버튼 → 접이식 행 2개(Condition · Authentication & delivery)
 // 덩어리 9 → 6. 2차 정보는 접이식 행으로 — Shopify Dawn main-product.liquid 의 collapsible_tab(213~230행 <details>/<summary>) · Vercel Commerce product-description(5덩어리)
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급은 들어가자마자 — 접이식 행의 머리줄에 Rank 가 보인다)
-import { usd, jpy, yenFor, esc, gradeName, GRADES, SCORES, exampleAuction, exampleBids, formatEnds, countdown, bidStep, shortDate, brandName, gradeOf } from './data.js?v=37cc061e97';
-import { icon } from './icons.js?v=37cc061e97';
-import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=37cc061e97';
-import * as store from './store.js?v=37cc061e97';
+import { usd, jpy, yenFor, esc, gradeName, GRADES, SCORES, exampleAuction, exampleBids, formatEnds, countdown, bidStep, shortDate, brandName, gradeOf } from './data.js?v=42b9177b63';
+import { icon } from './icons.js?v=42b9177b63';
+import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=42b9177b63';
+import * as store from './store.js?v=42b9177b63';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 
@@ -29,7 +29,7 @@ export const EXAMPLE_RATES = {
   duty: { Bag: 0.09, Watch: 0.064, Jewelry: 0.065, Clothing: 0.16, Accessories: 0.08 },        // 관세(재질·품목별, 더윈 1)
   shipping: 120,                                                                               // DHL Express 미국행(더윈 15)
   box: 45,                                                                                     // 단단한 상자(선택, 더윈 8)
-  cert: 60,                                                                                    // 감정서(선택, 더윈 10)
+  cert: 45,                                                                                    // Entrupy 인증서(선택) — 실값(의뢰처 10/7 "감정은 Entrupy · 인증서 발급 +$45") · 나머지 칸은 아직 예시
   cardMax: 10000,                                                                              // 카드 결제 상한(Loupe 모델)
   cardFee: 0.03,                                                                               // 카드 결제 수수료
   example: true,                                                                               // 실값으로 바꾸면 false → "example rates" 문구가 사라진다
@@ -250,7 +250,7 @@ function infoRows(lot) {
       <details class="info-row">
         <summary><span>Authentication &amp; delivery</span><span class="row-val">Est. ${esc(w.range)}</span>${icon.down}</summary>
         <div class="info-row-body"><ul class="assure">
-          <li>${icon.check}<span>Authenticated and inspected by hand in our Tokyo office</span></li>
+          <li>${icon.check}<span>${lot.genre === 'Bag' ? 'Authenticated with Entrupy, then inspected by hand in our Tokyo office' : 'Inspected by hand in our Tokyo office'}</span></li>
           <li>${icon.check}<span>Import duties prepaid — nothing to pay on arrival</span></li>
           <li>${icon.check}<span>Estimated delivery <b class="num">${esc(w.range)}</b> if you confirm by ${esc(w.confirmBy)}</span></li>
         </ul></div>

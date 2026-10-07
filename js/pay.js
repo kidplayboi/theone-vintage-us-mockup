@@ -1,12 +1,12 @@
 // 결제 v4 — 낙찰 → 청구서(3일) → 결제 · 에스크로 → 검수·포장(도쿄) → 배송 → 수령(3일 신고) → 완료(결정 78 · v4-lock §7)
 // 서버가 없으니 결제 기록은 이 브라우저에만 남고, My page 행이 그 기록을 읽어 '완료' 칸으로 옮긴다
-import { usd, esc, cardImg, lotUrl, shortDate, fullName, brandName, gradeName, exampleAuction, gradeOf } from './data.js?v=37cc061e97';
-import { startPage } from './page.js?v=37cc061e97';
-import { paintNotes } from './review.js?v=37cc061e97';
-import { toast } from './chrome.js?v=37cc061e97';
-import { estimate, EXAMPLE_RATES } from './buybox.js?v=37cc061e97';
-import { icon } from './icons.js?v=37cc061e97';
-import * as store from './store.js?v=37cc061e97';
+import { usd, esc, cardImg, lotUrl, shortDate, fullName, brandName, gradeName, exampleAuction, gradeOf } from './data.js?v=42b9177b63';
+import { startPage } from './page.js?v=42b9177b63';
+import { paintNotes } from './review.js?v=42b9177b63';
+import { toast } from './chrome.js?v=42b9177b63';
+import { estimate, EXAMPLE_RATES } from './buybox.js?v=42b9177b63';
+import { icon } from './icons.js?v=42b9177b63';
+import * as store from './store.js?v=42b9177b63';
 
 const DAY = 86400000;
 const day = n => shortDate(new Date(Date.now() + n * DAY));
@@ -52,7 +52,7 @@ function invoice(opts) {
     ['Shipping · DHL Express', 'Tokyo to your door, insured', EXAMPLE_RATES.shipping],
   ];
   if (opts.box) rows.push(['Rigid box', 'Keeps the shape in transit', EXAMPLE_RATES.box]);
-  if (opts.cert) rows.push(['Certificate of authenticity', 'Issued in Tokyo', CERT]);
+  if (opts.cert) rows.push(['Entrupy certificate', 'Issued with the piece', CERT]);
   let total = rows.reduce((s, r) => s + r[2], 0);
   const over = total > CARD_MAX;
   if (opts.method === 'card' && !over) {
@@ -137,7 +137,7 @@ function invoiceHTML(idx, opts, rec) {
     <p class="invoice-due"><span>${RATE_NOTE}</span><b>Pay by ${day(2)}</b></p>
     ${rowsHTML(inv.rows, inv.total)}
     <label class="check"><input type="checkbox" name="box" ${opts.box ? 'checked' : ''}> <span><b>Rigid box to keep the shape</b> +${usd(EXAMPLE_RATES.box)} · recommended for structured bags</span></label>
-    <label class="check"><input type="checkbox" name="cert" ${opts.cert ? 'checked' : ''}> <span><b>Certificate of authenticity</b> +${usd(CERT)} · optional, issued in Tokyo</span></label>
+    <label class="check"><input type="checkbox" name="cert" ${opts.cert ? 'checked' : ''}> <span><b>Entrupy certificate</b> +${usd(CERT)} · optional</span></label>
     <div class="pay-methods" role="radiogroup" aria-label="How to pay">
       <label class="radio" ${inv.over ? 'aria-disabled="true"' : ''}><input type="radio" name="method" value="card" ${opts.method === 'card' ? 'checked' : ''} ${inv.over ? 'disabled' : ''}>
         <span><b>Card</b><span class="t13">Up to ${usd(CARD_MAX)} · ${Math.round(CARD_FEE * 100)}% processing fee${inv.over ? ' · not available for this total' : ''}</span></span></label>

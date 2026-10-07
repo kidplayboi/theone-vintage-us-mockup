@@ -10,11 +10,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/tokens.css?v=37cc061e97">
-<link rel="stylesheet" href="css/base.css?v=37cc061e97">
-<link rel="stylesheet" href="css/chrome.css?v=37cc061e97">
-<link rel="stylesheet" href="css/pages.css?v=37cc061e97">
-<link rel="stylesheet" href="css/review.css?v=37cc061e97">
+<link rel="stylesheet" href="css/tokens.css?v=42b9177b63">
+<link rel="stylesheet" href="css/base.css?v=42b9177b63">
+<link rel="stylesheet" href="css/chrome.css?v=42b9177b63">
+<link rel="stylesheet" href="css/pages.css?v=42b9177b63">
+<link rel="stylesheet" href="css/review.css?v=42b9177b63">
 </head>
 <body class="has-tabs page-how">
 <div id="review"></div>
@@ -67,7 +67,7 @@
         </li>
         <li class="fact" data-reveal>
           <figure class="ph has-photo fact-photo" data-photo="inspect" style="--ar: 2 / 1"><img src="assets/editorial/gen/inspect.jpg" alt="A grader examines a handbag's hardware through a loupe" width="1200" height="1500" loading="lazy"></figure>
-          <div class="fact-body"><h3 class="display d30"><span class="fact-n">04.</span> Inspected by hand in Tokyo</h3><p>Checked against the auction house's own notes — hardware, stamps, stitching and materials, piece by piece — before anything ships. Ask for detailed photos of any area.</p></div>
+          <div class="fact-body"><h3 class="display d30"><span class="fact-n">04.</span> Inspected by hand in Tokyo</h3><p>Checked against the auction house's own notes — hardware, stamps, stitching and materials, piece by piece — before anything ships. Handbags are also authenticated with Entrupy. Ask for detailed photos of any area.</p></div>
         </li>
         <li class="fact" data-reveal>
           <figure class="ph has-photo fact-photo" data-photo="packing" style="--ar: 2 / 1"><img src="assets/editorial/gen/packing.jpg" alt="A structured handbag packed with tissue in a rigid box" width="1200" height="1500" loading="lazy"></figure>
@@ -144,7 +144,7 @@
         <details><summary>Do I pay anything to ask about a lot?</summary><p>No. Send a question and we reply within one business day with availability and your delivered total. There is no payment at that stage and no obligation to go ahead.</p></details>
         <details><summary>What is included in the price you quote?</summary><p>The lot, our fee, express shipping to the US, and import duties — prepaid. We confirm the total before you pay, and nothing is charged when the parcel arrives.</p></details>
         <details><summary>How long does delivery take?</summary><p>Six to ten days to the US once the piece has cleared inspection in Tokyo.</p></details>
-        <details><summary>How do you know the piece is authentic?</summary><p>Every lot comes from a licensed dealer auction in Japan, where pieces are checked before they are listed, and we inspect it again in our Tokyo office before it ships to you.</p></details>
+        <details><summary>How do you know the piece is authentic?</summary><p>Every lot comes from a licensed dealer auction in Japan, where pieces are checked before they are listed, and we inspect it again in our Tokyo office before it ships to you. Handbags are also authenticated with <a class="text-link" href="https://www.entrupy.com/" target="_blank" rel="noopener noreferrer">Entrupy</a>; an Entrupy certificate is optional at +$<span data-cert-fee>45</span>.</p></details>
         <details><summary>Do I need an account?</summary><p>Not to ask. Questions are open to anyone — name, email and the lot you want is enough. Bidding needs an account.</p></details>
         <details><summary>Can I ask for more photos?</summary><p>Yes. Say so in your message and we will send detailed photos of the areas you care about before you decide.</p></details>
       </div>
@@ -162,8 +162,8 @@
 <footer id="foot"></footer>
 <div id="tabs"></div>
 <script type="module">
-  import { startPage } from './js/page.js?v=37cc061e97';
-  import { EXAMPLE_RATES, RATES_LABEL } from './js/buybox.js?v=37cc061e97';
+  import { startPage } from './js/page.js?v=42b9177b63';
+  import { EXAMPLE_RATES, RATES_LABEL } from './js/buybox.js?v=42b9177b63';
   // 요금 — EXAMPLE_RATES 한 곳에서(결정 89)
   const r = EXAMPLE_RATES;
   const pct = v => `${Math.round(v * 1000) / 10}%`;
@@ -176,7 +176,7 @@
       <tr><td>Import duties<span>By material · ${duty}</span></td><td class="num">by material</td></tr>
       <tr><td>Shipping · DHL Express<span>Tokyo to your door, insured</span></td><td class="num">${usd(r.shipping)}</td></tr>
       <tr><td>Rigid box<span>Optional · structured bags</span></td><td class="num">+${usd(r.box)}</td></tr>
-      <tr><td>Certificate of authenticity<span>Optional</span></td><td class="num">+${usd(r.cert)}</td></tr>
+      <tr><td>Entrupy certificate<span>Optional · handbags</span></td><td class="num">+${usd(r.cert)}</td></tr>
       <tr><td>Card payment<span>Up to ${usd(r.cardMax)}</span></td><td class="num">+${pct(r.cardFee)}</td></tr>
       <tr><td>Bank transfer</td><td class="num">no fee</td></tr>
     </table>`;
@@ -184,6 +184,7 @@
     if (!data) return;
     // 주의: [data-rate] 는 <body data-rate> 에도 맞는다(10/6 실측) — 스팬은 data-fx-rate
     document.querySelectorAll('[data-fx-rate]').forEach(el => { el.textContent = data.meta.rate; });
+    document.querySelectorAll('[data-cert-fee]').forEach(el => { el.textContent = Math.round(EXAMPLE_RATES.cert); }); // 감정서 값은 한 곳(EXAMPLE_RATES)
   });
 </script>
 </body>

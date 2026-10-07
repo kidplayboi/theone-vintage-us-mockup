@@ -1,15 +1,15 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName, gradeOf } from './data.js?v=37cc061e97';
-import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=37cc061e97';
-import { mountChrome, bindNewsletter } from './chrome.js?v=37cc061e97';
-import { mountReview, paintNotes } from './review.js?v=37cc061e97';
-import { cardHTML, bindCards, startTicker } from './card.js?v=37cc061e97';
-import { openLot } from './lotmodal.js?v=37cc061e97';
-import { galleryHTML, mountGallery } from './gallery.js?v=37cc061e97';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=37cc061e97';
-import { bindBuy } from './lotactions.js?v=37cc061e97';
-import { initMotion, revealOnScroll } from './motion.js?v=37cc061e97';
-import * as store from './store.js?v=37cc061e97';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName, gradeOf } from './data.js?v=42b9177b63';
+import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=42b9177b63';
+import { mountChrome, bindNewsletter } from './chrome.js?v=42b9177b63';
+import { mountReview, paintNotes } from './review.js?v=42b9177b63';
+import { cardHTML, bindCards, startTicker } from './card.js?v=42b9177b63';
+import { openLot } from './lotmodal.js?v=42b9177b63';
+import { galleryHTML, mountGallery } from './gallery.js?v=42b9177b63';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=42b9177b63';
+import { bindBuy } from './lotactions.js?v=42b9177b63';
+import { initMotion, revealOnScroll } from './motion.js?v=42b9177b63';
+import * as store from './store.js?v=42b9177b63';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -93,7 +93,7 @@ function renderCondition() {
         <div><p class="label">Overall</p><p class="score-big">${big(g.overall)}</p><p class="t13 muted">${gradeName(g.overall)}</p></div>
         <div><p class="label">Exterior</p><p class="score-big">${big(g.exterior)}</p><p class="t13 muted">${g.exterior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>
         <div><p class="label">Interior</p><p class="score-big">${big(g.interior)}</p><p class="t13 muted">${g.interior ? 'Scale 1 → 3, lower is cleaner' : '—'}</p></div>
-        <div><p class="label">Status</p><p class="score-status">Authenticated<br>in Tokyo</p></div>
+        <div><p class="label">Status</p><p class="score-status">${lot.genre === 'Bag' ? 'Entrupy<br>authenticated' : 'Authenticated<br>in Tokyo'}</p></div>
       </div>
       <ol class="scale" aria-label="Overall rank on our five-step scale">${scale}</ol>`
     : `
@@ -131,7 +131,7 @@ function renderPrice() {
           <tr><td>Express shipping to the US<span>DHL Express · remote-area and oversize surcharges included</span></td>${cell(e ? e.ship : 0)}</tr>
           <tr><td>Rigid box to keep the shape<span>Optional · recommended for structured bags</span></td>${opt(EXAMPLE_RATES.box)}</tr>
           <tr><td>Inspection in Tokyo</td><td class="num">Included</td></tr>
-          <tr><td>Certificate of authenticity<span>Optional</span></td>${opt(EXAMPLE_RATES.cert)}</tr>
+          <tr><td>Entrupy certificate<span>Optional</span></td>${opt(EXAMPLE_RATES.cert)}</tr>
           <tr class="sum"><td>Total, delivered</td>${gate ? blur : `<td class="num">${e ? usd(e.total) : '$ —'}</td>`}</tr>
         </table>
         ${gate ? `<div class="price-gate">

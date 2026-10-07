@@ -1,8 +1,8 @@
 // 상세 페이지 아래 구획 — "About this piece"(카탈로그 문구 + 2열 사양표) · 검수 체크리스트 · 도쿄 팀에 묻기 · 브랜드 띠
 // 레퍼런스 대조(10/6 · v4-lock §12): Loupe 로트 = Introduction 글 + THE DETAILS 2열 11행, Bezel 상세 = Details 띠 + Accessories + 컨시어지 카드 + 브랜드 카드.
 // 우리 상세는 글이 0 이고 표가 9행(로트 번호·카테고리…)뿐이었다. 지어내지 않고 — 원천의 카탈로그 한 줄과 `sub`·`size` 에 들어 있던 사실을 풀어 적는다.
-import { esc, gradeName, brandName, fullName, shortDate, BRAND_LOGOS } from './data.js?v=3da9e83b46';
-import { icon } from './icons.js?v=3da9e83b46';
+import { esc, gradeName, brandName, fullName, shortDate, BRAND_LOGOS } from './data.js?v=d257100269';
+import { icon } from './icons.js?v=d257100269';
 
 // 원천 카탈로그 한 줄 — 전각 공백·겹 공백·끝에 붙은 브랜드 반복만 정리하고 내용은 그대로(경매장 표기 그대로 보여 주는 게 Loupe 'as catalogued' 의 결)
 const rx = s => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // 정규식용 이스케이프(esc 는 HTML 용)
@@ -112,7 +112,7 @@ export function checksHTML() {
 export function askHTML(lot) {
   return `
     <div class="ask-block" data-reveal data-note="Bezel 상세의 컨시어지 카드(제목에 모델명 · 한 문장 · 'Chat with us now' · 사람 영상). 우리는 1영업일 회신 약속 + 계정 없이 질문(FAQ 사실). 사진은 v5-images 의 grading-desk 컷 자리(얼굴 정면 금지 · 결정 119)." data-ref="Bezel 상세 · 결정 119">
-      <figure class="ph ask-photo" data-ph="grading-desk" style="--ar: 4 / 5"><figcaption class="ph-cap">Photo · inspection desk, Tokyo</figcaption></figure>
+      <figure class="ph ask-photo has-photo" data-photo="grading-desk" style="--ar: 4 / 5"><img src="assets/editorial/gen/grading-desk.jpg" alt="Gloved hands writing condition notes beside a steel wristwatch on our Tokyo inspection desk" width="1289" height="1600" loading="lazy"></figure>
       <div class="ask-copy">
         <p class="label">Questions about this lot</p>
         <h2 class="display d30">Ask our Tokyo team about the ${esc(lot.title)}</h2>

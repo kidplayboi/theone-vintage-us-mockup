@@ -9,11 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="css/tokens.css?v=3da9e83b46">
-<link rel="stylesheet" href="css/base.css?v=3da9e83b46">
-<link rel="stylesheet" href="css/chrome.css?v=3da9e83b46">
-<link rel="stylesheet" href="css/pages.css?v=3da9e83b46">
-<link rel="stylesheet" href="css/review.css?v=3da9e83b46">
+<link rel="stylesheet" href="css/tokens.css?v=d257100269">
+<link rel="stylesheet" href="css/base.css?v=d257100269">
+<link rel="stylesheet" href="css/chrome.css?v=d257100269">
+<link rel="stylesheet" href="css/pages.css?v=d257100269">
+<link rel="stylesheet" href="css/review.css?v=d257100269">
 </head>
 <body>
 <div id="review"></div>
@@ -21,7 +21,7 @@
 <main class="auth-page">
   <section class="auth-side" aria-label="Why create an account" data-note="가입할 이유를 왼쪽에 사실로(Bezel 가입 유도 · 21쪽 판매가 회원 전용). 연회색 타일 — 초록은 머리띠·경매 띠·CTA 세 자리만(결정 74). 사진은 실재고. 시안이라 실제 로그인은 없다 — 누르면 로그인 상태로 바뀐다." data-ref="21쪽 · 결정 58·62·74">
     <h2 class="display d1">One account for bidding, saved lots and sold prices</h2>
-    <figure class="ph" data-ph="tokyo-office" style="--ar: 3 / 2" data-note="사진 자리표시(결정 110): 도쿄 검수 사무실 컷(v5-images.md #4, How it works 와 공용)." data-ref="결정 110"><figcaption class="ph-cap">Photo · our Tokyo inspection office</figcaption></figure>
+    <figure class="ph has-photo" data-photo="tokyo-office" style="--ar: 3 / 2" data-note="생성 사진(결정 121): 도쿄 검수 사무실 3:2 — How it works 와이드와 같은 장면." data-ref="결정 110·121"><img src="assets/editorial/gen/tokyo-office.jpg" alt="A bright inspection office in Tokyo with plain leather handbags on a white table" width="1600" height="1062" loading="lazy"></figure>
     <ul class="auth-perks">
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Bid on live auctions in US dollars</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>See the hammer price of every sold lot</li>
@@ -44,8 +44,8 @@
 </main>
 <footer id="foot"></footer>
 <script type="module">
-  import { startPage } from './js/page.js?v=3da9e83b46';
-  import * as store from './js/store.js?v=3da9e83b46';
+  import { startPage } from './js/page.js?v=d257100269';
+  import * as store from './js/store.js?v=d257100269';
   const params = new URLSearchParams(location.search);
   const form = document.querySelector('[data-signin]');
   const setMode = mode => {

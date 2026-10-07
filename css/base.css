@@ -288,6 +288,9 @@ dialog.sheet[open] { animation: sheet-in var(--dur-slow) var(--ease-out); }
 .ph-cap { position: absolute; left: var(--s3); bottom: var(--s3); display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px; border-radius: var(--r-md); background: rgba(255, 255, 255, .86); color: var(--muted); font-size: var(--fs-12); letter-spacing: var(--track-small); }
 .ph-cap::before { content: ""; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--muted); }
 .ph.ph-wide { --ar: 21 / 9; }
+/* 실사진이 들어온 자리(10/7 생성 · 결정 121) — 빗금 대신 사진. 비율·모서리·안쪽 링은 자리표시와 같아서 레이아웃이 안 흔들린다 */
+.ph.has-photo { background: var(--tile); }
+.ph.has-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 /* 브랜드 워드마크 타일 — 홈 브랜드 행 · 상세 브랜드 띠 공용. 로고는 잉크색 한 벌(mask), 타일은 연회색. mask url 은 인라인으로(CSS 변수 url 은 CSS 파일 기준으로 풀려 404 · 10/6 실측) */
 .brand-mark {

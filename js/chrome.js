@@ -1,8 +1,8 @@
 // 제품 공통 틀 v4 — 초록 마스트헤드(워드마크·검색·판매 방식·계정) · 흰 카테고리 줄(카테고리 8 + Brands ▾) · 브랜드 펼침 · 서랍 · 흰 푸터 · 모바일 아래 탭
 // 검은 facts 띠는 뺐다(결정 69). 근거: Bezel 마스트헤드(ref-bezel-s00) · 1stDibs/Rebag/WGACA/Fashionphile 카테고리 줄 안의 Designers 항목(결정 71)
-import { icon } from './icons.js?v=8d2ae80617';
-import * as store from './store.js?v=8d2ae80617';
-import { brandName } from './data.js?v=8d2ae80617';
+import { icon } from './icons.js?v=699d9b4d94';
+import * as store from './store.js?v=699d9b4d94';
+import { brandName } from './data.js?v=699d9b4d94';
 
 // 운영 사이트 상단 메뉴 그대로(Premium Auction · Express · Classic · How It Works) — 셋은 운영사의 판매 프로그램. Express·Classic 은 지금 재고 0.
 // 네 번째 칸 = 마우스 올리면 뜨는 설명(형 10/6 "이거 뭐임?") — 정확한 정의는 의뢰처 확인 항목
@@ -37,10 +37,10 @@ export function mountChrome({ page = '', cat = '', data = null } = {}) {
   const tabs = document.getElementById('tabs');
   if (tabs) tabs.innerHTML = tabsHTML(page === 'pay' ? 'offers' : page);
   bindHeader(top);
-  bindHideOnScroll(top);
+  const hider = bindHideOnScroll(top);
   paintAccount();
   // #앵커로 들어온 경우: 브라우저는 헤더·검토 막대가 아직 없을 때 먼저 스크롤해 둔다(라이브 10/7: #pay 가 258px 위로 지나감) → 머리 장착 뒤와 폰트 로드 뒤에 한 번씩 다시 맞춘다(scroll-margin 적용)
-  const retarget = () => { const id = decodeURIComponent(location.hash.slice(1)); const el = id && document.getElementById(id); if (el) el.scrollIntoView({ block: 'start' }); };
+  const retarget = () => { const id = decodeURIComponent(location.hash.slice(1)); const el = id && document.getElementById(id); if (el) { hider.pause(900); el.scrollIntoView({ block: 'start' }); } }; // 재조준 스크롤을 '내림'으로 읽어 헤더가 숨던 것(검사관 4차: 앵커 5/10)
   if (location.hash) { requestAnimationFrame(retarget); if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(retarget)); }
   window.addEventListener('store:change', e => {
     if (['saved', 'signedIn', '*'].includes(e.detail.key)) paintAccount();
@@ -51,14 +51,19 @@ export function mountChrome({ page = '', cat = '', data = null } = {}) {
 function bindHideOnScroll(top) {
   const mq = window.matchMedia('(max-width: 720px)');
   let lastY = window.scrollY;
+  let up = 0; // 올린 거리 누적 — 2px 씩 천천히 올려도 24px 모이면 복귀(검사관 4차)
+  let pausedUntil = 0;
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
     const dy = y - lastY;
     lastY = y;
+    if (performance.now() < pausedUntil) return;
     if (!mq.matches || top.classList.contains('search-open') || document.body.classList.contains('no-scroll')) { top.classList.remove('is-hidden'); return; }
-    if (y < 80 || dy < -4) top.classList.remove('is-hidden');
+    if (dy < 0) up += -dy; else up = 0;
+    if (y < 80 || up >= 24) { top.classList.remove('is-hidden'); if (up >= 24) up = 0; }
     else if (dy > 4 && y > 160) top.classList.add('is-hidden');
   }, { passive: true });
+  return { pause(ms) { pausedUntil = performance.now() + ms; lastY = window.scrollY; up = 0; top.classList.remove('is-hidden'); } };
 }
 
 // 브랜드 목록 — 'Others' 는 브랜드가 아니라 묶음이라 맨 뒤로

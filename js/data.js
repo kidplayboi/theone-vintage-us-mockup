@@ -1,10 +1,12 @@
 // 실재고 스냅숏(data/lots.json) 읽기와 화면용 표기 도우미
+import * as store from './store.js?v=699d9b4d94';
+
 let cache;
 let RATE = 0; // meta.rate — 엔화가 없는 로트의 '≈ ¥' 환산에(결정 135 · 지어내는 값 아님 · 사이트가 쓰는 환율 그대로)
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=8d2ae80617').then(r => {
+    cache = fetch('data/lots.json?v=699d9b4d94').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     }).then(d => {
@@ -23,17 +25,19 @@ export function cleanTitle(raw, lot) {
   let t = String(raw || '').replace(/&amp;/g, '&').replace(/　/g, ' ').replace(/\s+/g, ' ').trim(); // 원천에 &amp; 로 들어온 & ("Men's &amp; Boys'") — 화면에선 esc() 가 다시 감싼다
   t = t.replace(/^(?:\d{5,}(?:-\d+)?\s+)+/, '');                                   // 앞머리 SKU("739868 520981 Travel tag")
   t = t.replace(/(\w)'\s/g, '$1 ');                                               // 낱말 뒤 떠 있는 따옴표("Bracelet' Ancre")
+  t = t.replace(/\s*\((?:watches|bags|jewelry|jewellery|accessories|clothing|shoes)\)/gi, ''); // 카테고리 괄호는 어디 있든("Rasta (Bags) and Wallets" · "Must21 (Watches) - …")
+  t = t.replace(/\s\d{5,}-\d{2,}\b/g, '');                                        // 가운데 SKU("Blazer MID 616827-995 Men's")
+  t = t.replace(/\s+size\s+[A-Z]{1,3}\b/gi, '');                                   // 가운데 "Size SH"
   t = t.replace(/^(?:excellent|very good|good|unused|new)\s+condition\s+/i, '');
   t = t.replace(/^with\s+/i, '');                                                // "With G-SHOCK …" — 원천이 잘라 붙인 접속사
   t = t.replace(/\s*\((?:approx\.?|approximately)\)\s*/gi, ' ');                 // "(Approx.)"
   t = t.replace(/\s+\/\s*/g, '/');                                               // "Necklace /Pendant" → "Necklace/Pendant"
   t = t.replace(/\b(\w+)\s+\1\b/gi, '$1');                                      // Shoulder Shoulder → Shoulder
   t = t.replace(/(\w)-\s+(\w)/g, '$1-$2');                                       // Grey- Brown → Grey-Brown
-  for (let i = 0; i < 3; i++) {                                                  // 꼬리에서 최대 3토큰
+  for (let i = 0; i < 5; i++) {                                                  // 꼬리에서 최대 5토큰("- Men's & Boys'" 처럼 꼬리가 길면 3으로 모자랐다)
     const before = t;
     // 성별 문구는 통째로: "Men's Watch" · "- Men's & Women's" · "Unisex"(앞에 이미 Watch/Case 가 있다)
     t = t.replace(/\s*-?\s*(?:men's|women's|ladies'?|boys'|girls'|mens|womens|unisex)(?:\s*&\s*(?:men's|women's|ladies'?|boys'|girls'))?(?:\s+watch)?$/i, '');
-    t = t.replace(/\s*\((?:watches|bags|jewelry|jewellery|accessories|clothing|shoes)\)$/i, ''); // 꼬리의 카테고리 괄호("Must21 (Watches)") — 가운데 것은 둔다("Rasta (Bags) and Wallets")
     t = t.replace(/\s+size\s+[\w.]+$/i, '');                                       // "SIZE 27.0" · "Size M"
     t = t.replace(/\s+unused$/i, '');                                                 // 상태어 꼬리
     t = t.replace(/\s+\d{4,}-\d{2,}$/, '');                                          // "616825-995"
@@ -47,13 +51,17 @@ export function cleanTitle(raw, lot) {
   t = t.replace(/\s+/g, ' ').trim();
   const words = t.split(' ');
   const bare = s => s.toLowerCase().replace(/\(s\)$/, '').replace(/[^a-z0-9]/g, '');
-  if (words.length > 2 && bare(words[0]) === bare(words[words.length - 1])) { words.pop(); t = words.join(' '); } // "Bracelet de Chien Bracelet" → "Bracelet de Chien"(에르메스 모델명은 품목이 앞 · 검사관 3차: 앞을 지우면 "de Chien Bracelet")
+  if (words.length > 2 && bare(words[0]) === bare(words[words.length - 1])) { words.pop(); t = words.join(' '); }
+  else { const again = words.findIndex((w, i) => i > 1 && bare(w) === bare(words[0]) && bare(w).length >= 4); if (again > 0) { words.splice(again, 1); t = words.join(' '); } } // 첫 낱말이 가운데서 되풀이("Bracelet Gourmet Bracelet GM") → 뒤의 것을 지운다 // "Bracelet de Chien Bracelet" → "Bracelet de Chien"(에르메스 모델명은 품목이 앞 · 검사관 3차: 앞을 지우면 "de Chien Bracelet")
+  t = t.replace(/\s*[-–&/]\s*$/, '');                                              // 꼬리 정리 뒤 한 번 더
   t = t.replace(/\bPanth re\b/g, 'Panthère');                                      // 원천에서 è 가 빠진 모델명(까르띠에 Panthère) 복원
   if (t.split(' ').length >= 2) return t;
   // 한 낱말만 남았다: 소재·순도·SKU 코드면 원천 품목명을 앞에("Au750" → "Necklace Au750" · itemType 도 원천 필드). 그 밖엔 원문
   const type = lot && typeof lot.itemType === 'string' ? lot.itemType.split('/')[0].trim() : '';
-  if (type && !/^(?:men's|ladies'|unisex|others)$/i.test(type) && /^(?:au|pt|k)\d{2,4}$|^[a-z]{1,3}\d{3,}$/i.test(t)) return `${type} ${t}`;
-  return String(raw || '').trim();
+  const isCode = /^(?:au|pt|k)\d{2,4}$|^[a-z]{1,3}\d{3,}$/i.test(t);
+  if (type && !/^(?:men's|ladies'|unisex|others)$/i.test(type) && isCode) return `${type} ${t}`;
+  if (!isCode && t.length >= 4) return t;                                         // 모델명 한 낱말은 그대로 둔다("Must21" — 원문으로 되돌리면 "(Watches) - Men's & Boys'" 가 다시 붙는다 · 검사관 4차)
+  return String(raw || '').replace(/&amp;/g, '&').trim();
 }
 
 // 달러 금액의 엔화 — 로트에 둘 다 있으면 그 비율, 없으면 사이트 환율(meta.rate). 0 이면 호출 쪽이 '≈ ¥' 줄을 뺀다(검사관 10/7: 28개 로트가 '≈ ¥0')
@@ -73,6 +81,16 @@ export const GRADES = [
   { rank: 'D', name: 'Fair', means: 'Clear wear, described in full on the lot page.' },
 ];
 export const SCORES = ['1', '1+', '2', '2+', '3'];
+
+// 로트의 등급 — 원천에 있으면 그대로(9/125). 없으면 '예시 데이터'가 켜진 동안만 로트 번호로 정한 예시 등급(의뢰처 10/7 "등급 다 왼쪽 위에 보이게" · 결정 138).
+// 실서비스는 도쿄 검수 뒤 전 로트에 등급이 붙는다(How it works 04) — 시안의 예시 등급은 example:true 로 표시만, 화면 문구는 실등급과 같다(예시 입찰과 같은 규칙 · 결정 126)
+const EXAMPLE_RANKS = ['A', 'B', 'A', 'B', 'C', 'S', 'B', 'D'];
+export function gradeOf(lot) {
+  if (lot && lot.grade && lot.grade.overall) return lot.grade;
+  if (!lot || !store.setting('examples')) return null;
+  const s = seed(lot);
+  return { overall: EXAMPLE_RANKS[s % 8], exterior: SCORES[s % 5], interior: SCORES[(s >> 2) % 5], example: true };
+}
 
 export function gradeName(rank) {
   const g = GRADES.find(x => x.rank === rank);

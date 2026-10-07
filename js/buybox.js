@@ -2,10 +2,10 @@
 // 순서 = 상태 띠 → 브랜드 + 도구 아이콘 → 제목 → 로트 번호 · 부제 → 가격/입찰 칸 → 버튼 → 접이식 행 2개(Condition · Authentication & delivery)
 // 덩어리 9 → 6. 2차 정보는 접이식 행으로 — Shopify Dawn main-product.liquid 의 collapsible_tab(213~230행 <details>/<summary>) · Vercel Commerce product-description(5덩어리)
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급은 들어가자마자 — 접이식 행의 머리줄에 Rank 가 보인다)
-import { usd, jpy, yenFor, esc, gradeName, GRADES, SCORES, exampleAuction, exampleBids, formatEnds, countdown, bidStep, shortDate, brandName } from './data.js?v=8d2ae80617';
-import { icon } from './icons.js?v=8d2ae80617';
-import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=8d2ae80617';
-import * as store from './store.js?v=8d2ae80617';
+import { usd, jpy, yenFor, esc, gradeName, GRADES, SCORES, exampleAuction, exampleBids, formatEnds, countdown, bidStep, shortDate, brandName, gradeOf } from './data.js?v=699d9b4d94';
+import { icon } from './icons.js?v=699d9b4d94';
+import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=699d9b4d94';
+import * as store from './store.js?v=699d9b4d94';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 
@@ -196,17 +196,17 @@ function bidBox(lot, state) {
     <div class="bid-box" data-note="예시 경매 — 마감 시각·입찰 수·리저브는 이 시안의 예시값(실재고 입찰 0). 화면에 '예시' 문장을 띄우지 않고 이 메모에만 둔다(결정 126 · 칸 밀도)." data-ref="결정 126">
       <div class="bid-cells">
         <div><p class="label">Current bid</p>${store.get('signedIn')
-          ? `<p class="price lg">${usd(bid)}</p><p class="t13 muted">≈ ${jpy(yenFor(bid, lot))} · ${a.bids + (state === 'outbid' ? 1 : 0)} bids</p>`
-          : `<p class="price lg blur" aria-hidden="true">$0,000</p><p class="t13 muted">${a.bids + (state === 'outbid' ? 1 : 0)} bids · current bid shown to members</p>`}</div>
+          ? `<p class="price lg">${usd(bid)}</p><p class="t13">≈ ${jpy(yenFor(bid, lot))} · ${a.bids + (state === 'outbid' ? 1 : 0)} bids</p>`
+          : `<p class="price lg blur" aria-hidden="true">$0,000</p><span class="visually-hidden">Current bid shown to members</span><p class="t13">${a.bids + (state === 'outbid' ? 1 : 0)} bids · current bid shown to members</p>`}</div>
         <div><p class="label">Ends</p><p class="bid-when">${formatEnds(ends, store.setting('tz'))}</p><p class="t13 ${hot ? 'warn' : 'muted'} num"><span data-ends="${ends.getTime()}">${countdown(ends)}</span></p></div>
       </div>
-      <p class="bid-row"><span><span class="dot ${reserve[0]}"></span> ${reserve[1]}</span><span class="muted">Extended bidding</span></p>
+      <p class="bid-row"><span><span class="dot ${reserve[0]}"></span> ${reserve[1]}</span><span>Extended bidding</span></p>
     </div>
     ${bidHistory(lot, state)}
     ${line}
     ${store.get('signedIn') ? '' : `<div class="bid-gate" data-note="로그아웃이면 입찰 칸 = 'Register to bid'(Loupe 상세 · Bezel 'SIGN UP'). 현재가·상품가는 비회원에게 흐림(결정 134 · 형 10/7 '회원가입 안 하면 마스킹' · 까사 blur 3.8px) — 결정 58 의 '현재가는 숨기지 않는다'를 뒤집음. 문의는 계정 없이도 된다(운영 사이트 FAQ)." data-ref="결정 58·134">
       <a class="btn block" href="sign-in.html?mode=create&amp;next=${encodeURIComponent('lot.html?id=' + lot.lot)}">Register to bid</a>
-      <p class="t13 muted">Bidding needs an account · <a class="text-link" href="sign-in.html?next=${encodeURIComponent('lot.html?id=' + lot.lot)}">Log in</a></p></div>`}
+      <p class="t13">Bidding needs an account · <a class="text-link" href="sign-in.html?next=${encodeURIComponent('lot.html?id=' + lot.lot)}">Log in</a></p></div>`}
     <form class="bid-form" data-bid-form novalidate ${store.get('signedIn') ? '' : 'hidden'}>
       <label class="visually-hidden" for="max-bid">Your max bid</label>
       <input class="input num" id="max-bid" inputmode="numeric" placeholder="Your max bid · ${usd(bid + step)} or more" data-bid-input>
@@ -234,7 +234,7 @@ export function deliveryWindow(from = new Date()) {
 // Condition — 머리줄에 Rank 가 늘 보인다(더윈 14), 펼치면 S~D·1~3 척도 / 미등급은 한 문장 + 사진 요청
 // Authentication & delivery — 머리줄에 예상 도착일, 펼치면 사실 3줄(Baymard #543: 배송 속도보다 도착 날짜 · 결정 45)
 function infoRows(lot) {
-  const g = lot.grade;
+  const g = gradeOf(lot);
   const w = deliveryWindow();
   const cond = g ? `Rank ${esc(g.overall)} · ${esc(gradeName(g.overall))}` : 'Not graded';
   const condBody = g

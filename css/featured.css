@@ -26,7 +26,7 @@
 .feat-cell { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s2); padding: 8px 0; border-top: 1px solid var(--line); min-width: 0; } /* 띠 → 흰 카드 → 회색 칸 상자 3겹이던 것을 hairline 줄로(규칙 A5 · 검사관 P2-10) */
 .feat-cell .label { color: var(--body); }
 .feat-cell b { font-size: var(--fs-16); font-weight: var(--w-ui); color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.feat-cell .feat-ends { color: var(--live); border-radius: var(--r-md); transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
+.feat-cell .feat-ends { color: var(--ink); /* 카드 남은 시간과 같은 잉크(1시간 안에만 빨강 · 검사관 4차) */ border-radius: var(--r-md); transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur-fast) var(--ease-out); }
 .feat-cell .feat-ends.warn { background: var(--ending); color: #FFFFFF; padding: 1px 7px; }
 
 @media (max-width: 1180px) {

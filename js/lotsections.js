@@ -1,8 +1,8 @@
 // 상세 페이지 아래 구획 — "About this piece"(카탈로그 문구 + 2열 사양표) · 검수 체크리스트 · 도쿄 팀에 묻기 · 브랜드 띠
 // 레퍼런스 대조(10/6 · v4-lock §12): Loupe 로트 = Introduction 글 + THE DETAILS 2열 11행, Bezel 상세 = Details 띠 + Accessories + 컨시어지 카드 + 브랜드 카드.
 // 우리 상세는 글이 0 이고 표가 9행(로트 번호·카테고리…)뿐이었다. 지어내지 않고 — 원천의 카탈로그 한 줄과 `sub`·`size` 에 들어 있던 사실을 풀어 적는다.
-import { esc, gradeName, brandName, fullName, shortDate, BRAND_LOGOS } from './data.js?v=8d2ae80617';
-import { icon } from './icons.js?v=8d2ae80617';
+import { esc, gradeName, brandName, fullName, shortDate, BRAND_LOGOS, gradeOf } from './data.js?v=699d9b4d94';
+import { icon } from './icons.js?v=699d9b4d94';
 
 // 원천 카탈로그 한 줄 — 전각 공백·겹 공백·끝에 붙은 브랜드 반복만 정리하고 내용은 그대로(경매장 표기 그대로 보여 주는 게 Loupe 'as catalogued' 의 결)
 const rx = s => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // 정규식용 이스케이프(esc 는 HTML 용)
@@ -64,7 +64,7 @@ export function specRows(lot) {
   (lot.sub || '').split(' · ').forEach(f => { const r = classify(f, lot); if (r) add(r[0], r[1]); });
   const sz = classifySize(lot.size);
   if (sz) add(sz[0], sz[1]);
-  const g = lot.grade;
+  const g = gradeOf(lot);
   const condition = g ? `Rank ${g.overall} · ${gradeName(g.overall)}${g.exterior ? ` · exterior ${g.exterior}` : ''}${g.interior ? ` · interior ${g.interior}` : ''}`
     : 'Not graded by the source · marks and photos below';
   const ORDER = ['Reference', 'Material', 'Colour', 'Hardware', 'Date stamp', 'Size', 'Size · stamp', 'Serial', 'Calibre', 'Movement', 'Details', 'Listing note'];

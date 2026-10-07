@@ -1,14 +1,14 @@
 // 목록 페이지 v3 — 운영 사이트 분류 전부(형 10/6 "없애면 안 댐"): 판매 방식 탭 4 · 카테고리 9(개수) · 브랜드 40(개수) ·
 // 정렬 · 페이지당 20/50/100 · 검색 · 시간대 · 쪽 번호 · Premium/Express/Classic. 탭 모양은 Bezel 경매 목록(Live 327 / Ending soon 108)
-import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=8d2ae80617';
-import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=8d2ae80617';
-import { mountReview, paintNotes } from './review.js?v=8d2ae80617';
-import { cardHTML, bindCards, startTicker } from './card.js?v=8d2ae80617';
-import { icon } from './icons.js?v=8d2ae80617';
-import { openLot } from './lotmodal.js?v=8d2ae80617';
-import { initMotion, revealOnScroll } from './motion.js?v=8d2ae80617';
-import { featuredLots, featuredHTML, bindFeatured } from './featured.js?v=8d2ae80617';
-import * as store from './store.js?v=8d2ae80617';
+import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName, gradeOf } from './data.js?v=699d9b4d94';
+import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=699d9b4d94';
+import { mountReview, paintNotes } from './review.js?v=699d9b4d94';
+import { cardHTML, bindCards, startTicker } from './card.js?v=699d9b4d94';
+import { icon } from './icons.js?v=699d9b4d94';
+import { openLot } from './lotmodal.js?v=699d9b4d94';
+import { initMotion, revealOnScroll } from './motion.js?v=699d9b4d94';
+import { featuredLots, featuredHTML, bindFeatured } from './featured.js?v=699d9b4d94';
+import * as store from './store.js?v=699d9b4d94';
 
 const KINDS = [['', 'All lots'], ['RT', 'Live bid'], ['LOW', 'Time limit'], ['MALL', 'Mall']];
 // 탭 툴팁 한 줄(마우스 올리면). 탭 아래 색 설명문은 뺐다(10/7 · 설명이 필요한 색 = 못 읽히는 색). Time limit = 블라인드 입찰(형 10/6) — 의뢰처 확인 항목
@@ -71,7 +71,7 @@ async function main() {
 }
 
 // 'Filters' 버튼(모든 폭 · 결정 113 → 123) — 켜진 필터 수 + 요약. 브랜드 · 카테고리 · 검색 · 가격 · 상태 · 페이지당은 접힌 패널 안
-let filtersOpen = false;
+let filtersOpen = window.matchMedia('(min-width: 721px)').matches; // 데스크톱은 펼친 채로 시작(의뢰처 10/7 "필터 안 눌러도 보이게" · 결정 138) · 폰은 접힘
 function renderFiltersBar() {
   const active = [];
   if (ui.brand) active.push(brandName(ui.brand));
@@ -204,13 +204,13 @@ function filtered() {
   const q = ui.q.trim().toLowerCase();
   const bidding = store.setting('sale') === 'B';
   const priceOf = x => (bidding ? exampleAuction(x).bid : x.usd);
-  const gradeOf = x => (x.grade && x.grade.overall) || 'none';
+  const rankOf = x => { const g = gradeOf(x); return (g && g.overall) || 'none'; }; // 조건 필터도 카드와 같은 등급(결정 138)
   let list = data.lots.filter(x =>
     (!ui.kind || kindOf(x) === ui.kind) &&
     (!ui.cat || x.genre === ui.cat) &&
     (!ui.brand || brandMatch(x, ui.brand)) &&
     (!ui.price || (priceOf(x) && inPrice(priceOf(x), ui.price))) &&
-    (!ui.grade || gradeOf(x) === ui.grade) &&
+    (!ui.grade || rankOf(x) === ui.grade) &&
     (!q || `${x.brand} ${x.title} ${x.sub} ${x.lot}`.toLowerCase().includes(q)));
   if (ui.sort === 'high') list = [...list].sort((a, b) => b.usd - a.usd);
   if (ui.sort === 'low') list = [...list].sort((a, b) => (a.usd || Infinity) - (b.usd || Infinity));

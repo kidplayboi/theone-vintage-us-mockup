@@ -40,7 +40,7 @@
 .info-lot { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: 36px; }
 .info-title { font-size: var(--fs-28); line-height: 1.2; letter-spacing: -0.015em; margin-top: calc(var(--s2) * -1); } /* 상품명은 Inter 400 — 디스플레이 자간 -0.015(Bezel h1 -0.025 · h2 -0.02) */
 .info-sub { font-size: var(--fs-14); color: var(--body); margin-top: calc(var(--s3) * -1); }
-.bid-cells .label, .info-price .yen { color: var(--body); } /* 상세 첫 화면 회색 글 39.6% → 라벨은 본문색(검사관 3차 · 목록과 같은 처리) */
+.bid-cells .label, .info-price .yen, .bid-when + .t13, .bid-cells .t13 { color: var(--body); } /* 상세 첫 화면 회색 34.5% → 마감 시각 줄까지 본문색(검사관 4차) */ /* 상세 첫 화면 회색 글 39.6% → 라벨은 본문색(검사관 3차 · 목록과 같은 처리) */
 .info-body { display: grid; gap: var(--s4); }
 
 /* 도구 아이콘 줄(결정 126) — 제목 옆 36px 원형 버튼 4개(저장 · 공유 · 메모 · 시세). 글자 줄 대신 아이콘, 폴더 팝은 아래로 띄운다 */

@@ -145,7 +145,7 @@ body.no-scroll { overflow: hidden; }
 
 @media (max-width: 720px) {
   .hide-xs { display: none; }
-  .wordmark { font-size: 15px; letter-spacing: .06em; } /* 390 예산 = 358 − 간격 16 − 메뉴 40 − 오른쪽 157 = 145px. 16px/.06em 은 149 → 두 줄(80px). 15px = 140 */
+  .wordmark { font-size: var(--fs-14); letter-spacing: .06em; } /* 390 예산 = 358 − 간격 16 − 메뉴 40 − 오른쪽 157 = 145px. 16px 은 149 → 두 줄. 토큰 14 ≈ 131(크기 종류 9 → 8 · 검사관 4차) */
   .mast-in { gap: 0; }
   .mast-account .btn { min-height: 32px; padding: 0 12px; font-size: 12px; }
   body.has-tabs { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }

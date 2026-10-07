@@ -256,7 +256,7 @@ dialog.sheet[open] { animation: sheet-in var(--dur-slow) var(--ease-out); }
 /* 더 보기는 구획 끝에(결정 129) — 머리의 → 링크 반복(홈 6개)이 템플릿 느낌을 만들었다. Loupe 0 · Fashionphile 0 */
 .sec-foot { display: flex; margin-top: var(--s5); }
 /* 비회원 가격 안내 한 줄 — 목록 머리 · 홈 Live 머리 공용(결정 134·136) */
-.members-note { margin-top: 4px; font-size: var(--fs-14); color: var(--body); }
+.members-note { margin-top: 4px; font-size: var(--fs-14); color: var(--body); text-wrap: balance; } /* 390 두 줄일 때 'free account' 고아줄 방지 */
 /* 풀 사진 띠 — 홈·How it works 공용(결정 130·131): 화면 폭 전부, 모서리 0, 아래에 제목 + 한 줄 */
 .band-full { padding: 0; }
 .band-full .ph { --ar: 21 / 9; border-radius: 0; max-height: 600px; box-shadow: none; }

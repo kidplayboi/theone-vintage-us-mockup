@@ -1,15 +1,15 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=8d2ae80617';
-import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=8d2ae80617';
-import { mountChrome, bindNewsletter } from './chrome.js?v=8d2ae80617';
-import { mountReview, paintNotes } from './review.js?v=8d2ae80617';
-import { cardHTML, bindCards, startTicker } from './card.js?v=8d2ae80617';
-import { openLot } from './lotmodal.js?v=8d2ae80617';
-import { galleryHTML, mountGallery } from './gallery.js?v=8d2ae80617';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=8d2ae80617';
-import { bindBuy } from './lotactions.js?v=8d2ae80617';
-import { initMotion, revealOnScroll } from './motion.js?v=8d2ae80617';
-import * as store from './store.js?v=8d2ae80617';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName, gradeOf } from './data.js?v=699d9b4d94';
+import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=699d9b4d94';
+import { mountChrome, bindNewsletter } from './chrome.js?v=699d9b4d94';
+import { mountReview, paintNotes } from './review.js?v=699d9b4d94';
+import { cardHTML, bindCards, startTicker } from './card.js?v=699d9b4d94';
+import { openLot } from './lotmodal.js?v=699d9b4d94';
+import { galleryHTML, mountGallery } from './gallery.js?v=699d9b4d94';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=699d9b4d94';
+import { bindBuy } from './lotactions.js?v=699d9b4d94';
+import { initMotion, revealOnScroll } from './motion.js?v=699d9b4d94';
+import * as store from './store.js?v=699d9b4d94';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -79,7 +79,7 @@ function renderBuy() {
 
 // THEONE SCORECARD — 안 보이던 등급을 가장 크게(26쪽 · 결정 5)
 function renderCondition() {
-  const g = lot.grade;
+  const g = gradeOf(lot);
   const active = g ? GRADES.findIndex(x => x.rank === g.overall) : -1;
   const big = v => (v ? esc(v).replace('+', '<sup>+</sup>') : '—');
   const scale = GRADES.map((x, i) => `<li class="${i === active ? 'is-on' : ''}"><span>${x.name}</span></li>`).join('');
@@ -114,7 +114,7 @@ function renderPrice() {
   const e = lot.usd ? estimate(lot) : null; // 상자·감정서는 선택 — 총액에서 빼고 줄에 '선택 시'로(청구서와 같은 값)
   const signedIn = store.get('signedIn');
   const gate = !signedIn; // 항목별 총액은 회원만(형 10/6 · 결정 97) — 상품가는 공개, 나머지 줄은 흐리고 가입 CTA
-  const blur = '<td class="num"><span class="blur">$0,000</span></td>';
+  const blur = '<td class="num"><span class="blur" aria-hidden="true">$0,000</span><span class="visually-hidden">Shown to members</span></td>';
   const cell = v => (gate ? blur : (e ? `<td class="num">${usd(v)}</td>` : '<td class="num muted">In your quote</td>'));
   const opt = v => (gate ? blur : `<td class="num muted">+${usd(v)} if selected</td>`);
   const q = encodeURIComponent(`${lot.brand} ${lot.title}`); // 외부 검색은 브랜드를 붙여야 정확하다
@@ -143,7 +143,7 @@ function renderPrice() {
         <p class="label">Recent results</p>
         <p class="t13 muted">${esc(fullName(lot))} · sold through TheOne</p>
         <table class="total compare">
-          ${['A', 'B', 'C'].map(r => `<tr><td>${esc(lot.title)} · Rank ${r}</td><td class="num">${signedIn ? '<span class="muted">—</span>' : '<span class="blur" aria-hidden="true">$0,000</span>'}</td></tr>`).join('')}
+          ${['A', 'B', 'C'].map(r => `<tr><td>${esc(lot.title)} · Rank ${r}</td><td class="num">${signedIn ? '<span class="muted">—</span>' : '<span class="blur" aria-hidden="true">$0,000</span><span class="visually-hidden">Shown to members</span>'}</td></tr>`).join('')}
         </table>
         ${signedIn ? '<p class="t13 muted">Sold prices fill in from our sales records.</p>'
           : `<div class="lock-band"><span class="label">Sign in to see sold prices</span><a class="label" href="sign-in.html?next=${encodeURIComponent(location.pathname.split('/').pop() + location.search)}">Sign in</a></div>`}
@@ -179,7 +179,7 @@ function renderSticky() {
   const bar = $('[data-sticky]');
   const sale = store.setting('sale');
   const a = exampleAuction(lot);
-  const g = lot.grade;
+  const g = gradeOf(lot);
   bar.innerHTML = `<div class="wrap sticky-in">
     <img src="${cardImg(lot)}" alt="" width="48" height="48">
     <div class="sticky-name"><p class="label">Lot ${esc(lot.lot)}</p><p>${esc(fullName(lot))}</p></div>

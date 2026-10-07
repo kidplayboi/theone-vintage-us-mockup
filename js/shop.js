@@ -1,14 +1,14 @@
 // 목록 페이지 v3 — 운영 사이트 분류 전부(형 10/6 "없애면 안 댐"): 판매 방식 탭 4 · 카테고리 9(개수) · 브랜드 40(개수) ·
 // 정렬 · 페이지당 20/50/100 · 검색 · 시간대 · 쪽 번호 · Premium/Express/Classic. 탭 모양은 Bezel 경매 목록(Live 327 / Ending soon 108)
-import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=0f9cad3939';
-import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=0f9cad3939';
-import { mountReview, paintNotes } from './review.js?v=0f9cad3939';
-import { cardHTML, bindCards, startTicker } from './card.js?v=0f9cad3939';
-import { icon } from './icons.js?v=0f9cad3939';
-import { openLot } from './lotmodal.js?v=0f9cad3939';
-import { initMotion, revealOnScroll } from './motion.js?v=0f9cad3939';
-import { featuredLots, featuredHTML, bindFeatured } from './featured.js?v=0f9cad3939';
-import * as store from './store.js?v=0f9cad3939';
+import { loadData, esc, exampleAuction, tzName, TIMEZONES, brandName } from './data.js?v=95803b7f7b';
+import { mountChrome, bindNewsletter, CATEGORIES, brandList } from './chrome.js?v=95803b7f7b';
+import { mountReview, paintNotes } from './review.js?v=95803b7f7b';
+import { cardHTML, bindCards, startTicker } from './card.js?v=95803b7f7b';
+import { icon } from './icons.js?v=95803b7f7b';
+import { openLot } from './lotmodal.js?v=95803b7f7b';
+import { initMotion, revealOnScroll } from './motion.js?v=95803b7f7b';
+import { featuredLots, featuredHTML, bindFeatured } from './featured.js?v=95803b7f7b';
+import * as store from './store.js?v=95803b7f7b';
 
 const KINDS = [['', 'All lots'], ['RT', 'Live bid'], ['LOW', 'Time limit'], ['MALL', 'Mall']];
 // 탭 툴팁 한 줄(마우스 올리면). 탭 아래 색 설명문은 뺐다(10/7 · 설명이 필요한 색 = 못 읽히는 색). Time limit = 블라인드 입찰(형 10/6) — 의뢰처 확인 항목
@@ -87,11 +87,18 @@ function renderFiltersBar() {
 }
 
 // Featured 띠(결정 123) — 기본 보기(필터 · 검색 없음 · 1쪽)에서만. 입찰(B)은 예시 데이터가 켜져 있어야 현재가가 있다
-function renderFeatured() {
-  const sec = $('[data-featured]');
+// Featured 띠가 보이는 조건 — 필터·검색 없음 · 1쪽. 띠에 오른 6점은 바로 아래 첫 쪽 격자에서 뺀다(검사관 3차: 6점 중 5점이 격자 첫 줄과 겹침)
+function featuredSet() {
   const plain = ui.sale === 'premium' && !ui.kind && !ui.cat && !ui.brand && !ui.q && !ui.price && !ui.grade && ui.page === 1;
   const sale = store.setting('sale');
   const lots = plain && (sale !== 'B' || store.setting('examples')) ? featuredLots(data.lots, sale) : [];
+  return { lots, ids: new Set(lots.map(l => l.lot)), plain };
+}
+
+function renderFeatured() {
+  const sec = $('[data-featured]');
+  const sale = store.setting('sale');
+  const { lots } = featuredSet();
   sec.hidden = !lots.length;
   if (!lots.length) { sec.innerHTML = ''; return; }
   sec.innerHTML = featuredHTML(lots, sale);
@@ -228,7 +235,8 @@ function liveCount() {
 }
 
 function renderGrid() {
-  const list = filtered();
+  const feat = featuredSet();
+  const list = feat.lots.length ? filtered().filter(l => !feat.ids.has(l.lot)) : filtered(); // 띠에 보이는 로트는 격자에서 한 번만(결정 136)
   const pages = Math.max(1, Math.ceil(list.length / ui.per));
   ui.page = Math.min(ui.page, pages);
   const grid = $('[data-grid]');

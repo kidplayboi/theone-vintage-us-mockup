@@ -1,15 +1,15 @@
 // 로트 상세 페이지 — 사진 · 정보 칸(상세 창과 공용) · 스코어카드 · 총액·시세 · 상세 표 · 비슷한 상품 · 따라오는 바
-import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=0f9cad3939';
-import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=0f9cad3939';
-import { mountChrome, bindNewsletter } from './chrome.js?v=0f9cad3939';
-import { mountReview, paintNotes } from './review.js?v=0f9cad3939';
-import { cardHTML, bindCards, startTicker } from './card.js?v=0f9cad3939';
-import { openLot } from './lotmodal.js?v=0f9cad3939';
-import { galleryHTML, mountGallery } from './gallery.js?v=0f9cad3939';
-import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=0f9cad3939';
-import { bindBuy } from './lotactions.js?v=0f9cad3939';
-import { initMotion, revealOnScroll } from './motion.js?v=0f9cad3939';
-import * as store from './store.js?v=0f9cad3939';
+import { loadData, usd, esc, gradeName, GRADES, similar, cardImg, exampleAuction, formatEnds, fullName } from './data.js?v=95803b7f7b';
+import { aboutHTML, checksHTML, askHTML, brandHTML } from './lotsections.js?v=95803b7f7b';
+import { mountChrome, bindNewsletter } from './chrome.js?v=95803b7f7b';
+import { mountReview, paintNotes } from './review.js?v=95803b7f7b';
+import { cardHTML, bindCards, startTicker } from './card.js?v=95803b7f7b';
+import { openLot } from './lotmodal.js?v=95803b7f7b';
+import { galleryHTML, mountGallery } from './gallery.js?v=95803b7f7b';
+import { buyHTML, lotState, estimate, EXAMPLE_RATES, RATES_LABEL } from './buybox.js?v=95803b7f7b';
+import { bindBuy } from './lotactions.js?v=95803b7f7b';
+import { initMotion, revealOnScroll } from './motion.js?v=95803b7f7b';
+import * as store from './store.js?v=95803b7f7b';
 
 const $ = sel => document.querySelector(sel);
 let data;
@@ -143,7 +143,7 @@ function renderPrice() {
         <p class="label">Recent results</p>
         <p class="t13 muted">${esc(fullName(lot))} · sold through TheOne</p>
         <table class="total compare">
-          ${['A', 'B', 'C'].map(r => `<tr><td>${esc(lot.title)} · Rank ${r}</td><td class="num">${signedIn ? '$X,XXX' : '<span class="blur">$0,000</span>'}</td></tr>`).join('')}
+          ${['A', 'B', 'C'].map(r => `<tr><td>${esc(lot.title)} · Rank ${r}</td><td class="num">${signedIn ? '<span class="muted">—</span>' : '<span class="blur" aria-hidden="true">$0,000</span>'}</td></tr>`).join('')}
         </table>
         ${signedIn ? '<p class="t13 muted">Sold prices fill in from our sales records.</p>'
           : `<div class="lock-band"><span class="label">Sign in to see sold prices</span><a class="label" href="sign-in.html?next=${encodeURIComponent(location.pathname.split('/').pop() + location.search)}">Sign in</a></div>`}

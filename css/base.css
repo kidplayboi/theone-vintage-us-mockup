@@ -23,7 +23,8 @@ button { cursor: pointer; background: none; border: 0; padding: 0; touch-action:
 a, button, [role="button"] { -webkit-tap-highlight-color: rgba(12, 34, 25, .08); }
 table { border-collapse: collapse; width: 100%; }
 [hidden] { display: none !important; }
-[id] { scroll-margin-top: 80px; }
+[id] { scroll-margin-top: calc(var(--sticky-h) + 16px); } /* 고정 헤더 아래로 착지(검사관 3차: 80px 이라 5/12 앵커 제목이 29px 가려짐) */
+.page-lot [id] { scroll-margin-top: 89px; } /* 상세는 헤더 대신 따라오는 바 73 */
 
 :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 .on-dark :focus-visible { outline-color: var(--on-brand); }
@@ -254,6 +255,8 @@ dialog.sheet[open] { animation: sheet-in var(--dur-slow) var(--ease-out); }
 .sec-head .muted { font-size: var(--fs-14); }
 /* 더 보기는 구획 끝에(결정 129) — 머리의 → 링크 반복(홈 6개)이 템플릿 느낌을 만들었다. Loupe 0 · Fashionphile 0 */
 .sec-foot { display: flex; margin-top: var(--s5); }
+/* 비회원 가격 안내 한 줄 — 목록 머리 · 홈 Live 머리 공용(결정 134·136) */
+.members-note { margin-top: 4px; font-size: var(--fs-14); color: var(--body); }
 /* 풀 사진 띠 — 홈·How it works 공용(결정 130·131): 화면 폭 전부, 모서리 0, 아래에 제목 + 한 줄 */
 .band-full { padding: 0; }
 .band-full .ph { --ar: 21 / 9; border-radius: 0; max-height: 600px; box-shadow: none; }

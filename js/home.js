@@ -1,13 +1,13 @@
 // 홈 v4 — 구획 5개(결정 70): 히어로(흰) → Live now(초록 띠) → Browse(카테고리 + 브랜드) → How it works → Ending soon 표
 // 목록·분류는 shop.html(형 "원페이지 ㄴㄴ"). 근거 = docs/design/refs/2026-10-06-v4-lock.md §5
-import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=0f9cad3939';
-import { mountChrome, bindNewsletter } from './chrome.js?v=0f9cad3939';
-import { mountReview, paintNotes } from './review.js?v=0f9cad3939';
-import { cardHTML, bindCards, startTicker, remain } from './card.js?v=0f9cad3939';
-import { openLot } from './lotmodal.js?v=0f9cad3939';
-import { initMotion, revealOnScroll } from './motion.js?v=0f9cad3939';
-import { icon } from './icons.js?v=0f9cad3939';
-import * as store from './store.js?v=0f9cad3939';
+import { loadData, usd, esc, exampleAuction, cardImg, brandName, countdown, localParts, lotUrl, TIMEZONES, BRAND_LOGOS } from './data.js?v=95803b7f7b';
+import { mountChrome, bindNewsletter } from './chrome.js?v=95803b7f7b';
+import { mountReview, paintNotes } from './review.js?v=95803b7f7b';
+import { cardHTML, bindCards, startTicker, remain } from './card.js?v=95803b7f7b';
+import { openLot } from './lotmodal.js?v=95803b7f7b';
+import { initMotion, revealOnScroll } from './motion.js?v=95803b7f7b';
+import { icon } from './icons.js?v=95803b7f7b';
+import * as store from './store.js?v=95803b7f7b';
 
 const HOUR = 3600000;
 // 히어로는 풀블리드 사진 한 장(index.html · 결정 124) — 누끼 무대(hero.js · assets/hero)는 10/7 삭제
@@ -18,7 +18,7 @@ const CAT_REST = [['Variety', 'Variety'], ['Tableware', 'Tableware'], ['Coin', '
 // 로고 = 위키미디어 공용의 워드마크 SVG(각 상표권자 소유 · 시안 참고용 · 파일 맵 = data.js BRAND_LOGOS). 파일 없는 브랜드는 글자로(형 10/6 "브랜드별 로고")
 const BRAND_ROW = ['HERMES', 'LOUIS VUITTON', 'CHANEL', 'ROLEX', 'Cartier', 'Christian Dior', 'Van Cleef&Arpels', 'Gucci'];
 // 워드마크마다 보이는 글자 높이가 달라(contain 98×33: VCA 9px · DIOR 28px · 검사관 10/7 P2-6) 배율로 맞춘다 — Bezel 'Shop by Brand' 도 로고별 크기
-const LOGO_SCALE = { HERMES: 1.05, 'LOUIS VUITTON': 1.2, CHANEL: 0.95, ROLEX: 0.9, Cartier: 1.05, 'Christian Dior': 0.8, 'Van Cleef&Arpels': 1.5, Gucci: 0.9 };
+const LOGO_SCALE = { HERMES: 1.05, 'LOUIS VUITTON': 1.2, CHANEL: 0.95, ROLEX: 0.9, Cartier: 1.05, 'Christian Dior': 0.8, 'Van Cleef&Arpels': 1.35, Gucci: 0.9 }; // VCA 1.5 는 칸 폭 100% 라 좌우 여백 0(검사관 3차)
 
 let data;
 const shown = new Set(); // 이번 렌더에서 이미 보인 로트(결정 135 · 검사관 10/7: Live 4점이 Ending 8행에 그대로, Amazona 3회, GMT-Master 사진 3회)
@@ -59,6 +59,7 @@ async function main() {
 
 function render() {
   shown.clear();
+  $('[data-members-note]').hidden = !!store.get('signedIn'); // 결정 136
   renderHeroCta();
   renderLive();   // 먼저 보이는 구획부터 — 뒤 구획은 앞에서 보인 로트를 건너뛴다
   renderNew();
@@ -192,7 +193,7 @@ function renderEnding() {
     return `<tr data-lot="${esc(lot.lot)}">
       <td><a class="et-lot" href="${lotUrl(lot)}" data-open><img src="${cardImg(lot)}" alt="" width="48" height="48" loading="lazy">
         <span><b>${esc(brandName(lot.brand))}</b><i>${esc(lot.title)}</i></span></a></td>
-      <td class="et-bid">${store.get('signedIn') ? usd(bidding() ? a.bid : lot.usd) : '<span class="blur">$0,000</span>'}<span>${bidding() ? `${a.bids} bids` : 'price'}</span></td>
+      <td class="et-bid">${store.get('signedIn') ? usd(bidding() ? a.bid : lot.usd) : '<span class="blur" aria-hidden="true">$0,000</span><span class="visually-hidden">Shown to members</span>'}<span>${bidding() ? `${a.bids} bids` : 'price'}</span></td>
       <td class="et-ends"><b class="${hot ? 'warn' : ''}" data-ends="${ends.getTime()}">${remain(ends)}</b><span>${esc(p.date)} · ${esc(p.time)}</span></td>
       <td class="et-go">${icon.arrow}</td>
     </tr>`;

@@ -1,8 +1,8 @@
 // 제품 공통 틀 v4 — 초록 마스트헤드(워드마크·검색·판매 방식·계정) · 흰 카테고리 줄(카테고리 8 + Brands ▾) · 브랜드 펼침 · 서랍 · 흰 푸터 · 모바일 아래 탭
 // 검은 facts 띠는 뺐다(결정 69). 근거: Bezel 마스트헤드(ref-bezel-s00) · 1stDibs/Rebag/WGACA/Fashionphile 카테고리 줄 안의 Designers 항목(결정 71)
-import { icon } from './icons.js?v=0f9cad3939';
-import * as store from './store.js?v=0f9cad3939';
-import { brandName } from './data.js?v=0f9cad3939';
+import { icon } from './icons.js?v=95803b7f7b';
+import * as store from './store.js?v=95803b7f7b';
+import { brandName } from './data.js?v=95803b7f7b';
 
 // 운영 사이트 상단 메뉴 그대로(Premium Auction · Express · Classic · How It Works) — 셋은 운영사의 판매 프로그램. Express·Classic 은 지금 재고 0.
 // 네 번째 칸 = 마우스 올리면 뜨는 설명(형 10/6 "이거 뭐임?") — 정확한 정의는 의뢰처 확인 항목
@@ -37,10 +37,25 @@ export function mountChrome({ page = '', cat = '', data = null } = {}) {
   const tabs = document.getElementById('tabs');
   if (tabs) tabs.innerHTML = tabsHTML(page === 'pay' ? 'offers' : page);
   bindHeader(top);
+  bindHideOnScroll(top);
   paintAccount();
   window.addEventListener('store:change', e => {
     if (['saved', 'signedIn', '*'].includes(e.detail.key)) paintAccount();
   });
+}
+
+// 720 이하: 내리면 헤더 숨김 · 올리면 복귀(Loupe 실측 · 결정 136) — 폰 고정 영역 163px(19%) 를 줄인다. 검색·서랍이 열려 있으면 숨기지 않는다
+function bindHideOnScroll(top) {
+  const mq = window.matchMedia('(max-width: 720px)');
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const dy = y - lastY;
+    lastY = y;
+    if (!mq.matches || top.classList.contains('search-open') || document.body.classList.contains('no-scroll')) { top.classList.remove('is-hidden'); return; }
+    if (y < 80 || dy < -4) top.classList.remove('is-hidden');
+    else if (dy > 4 && y > 160) top.classList.add('is-hidden');
+  }, { passive: true });
 }
 
 // 브랜드 목록 — 'Others' 는 브랜드가 아니라 묶음이라 맨 뒤로

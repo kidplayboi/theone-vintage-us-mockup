@@ -4,7 +4,7 @@ let RATE = 0; // meta.rate — 엔화가 없는 로트의 '≈ ¥' 환산에(결
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=0f9cad3939').then(r => {
+    cache = fetch('data/lots.json?v=95803b7f7b').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     }).then(d => {
@@ -47,7 +47,8 @@ export function cleanTitle(raw, lot) {
   t = t.replace(/\s+/g, ' ').trim();
   const words = t.split(' ');
   const bare = s => s.toLowerCase().replace(/\(s\)$/, '').replace(/[^a-z0-9]/g, '');
-  if (words.length > 2 && bare(words[0]) === bare(words[words.length - 1])) { words.shift(); t = words.join(' '); } // "Earring(s) Libris Hoop Earring(s)"
+  if (words.length > 2 && bare(words[0]) === bare(words[words.length - 1])) { words.pop(); t = words.join(' '); } // "Bracelet de Chien Bracelet" → "Bracelet de Chien"(에르메스 모델명은 품목이 앞 · 검사관 3차: 앞을 지우면 "de Chien Bracelet")
+  t = t.replace(/\bPanth re\b/g, 'Panthère');                                      // 원천에서 è 가 빠진 모델명(까르띠에 Panthère) 복원
   if (t.split(' ').length >= 2) return t;
   // 한 낱말만 남았다: 소재·순도·SKU 코드면 원천 품목명을 앞에("Au750" → "Necklace Au750" · itemType 도 원천 필드). 그 밖엔 원문
   const type = lot && typeof lot.itemType === 'string' ? lot.itemType.split('/')[0].trim() : '';

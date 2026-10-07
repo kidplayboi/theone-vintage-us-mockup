@@ -1,8 +1,8 @@
 // 목록 Featured 띠(결정 123 · v4-lock §13 L1) — Bezel Auctions 머리 "Featured auctions": 큰 사진 + 제목 + Current bid + Ends in 카드 3장 + 화살표.
 // 선정 기준은 지어내지 않는다: 현재가 높은 순 6점(입찰 B 는 예시 경매의 현재가 = 상품가). 필터·검색이 켜지면 띠는 숨고 결과가 바로 보인다.
-import { usd, esc, exampleAuction, cardImg, lotUrl, brandName, countdown, localParts } from './data.js?v=ec9753df02';
-import { icon } from './icons.js?v=ec9753df02';
-import * as store from './store.js?v=ec9753df02';
+import { usd, esc, exampleAuction, cardImg, lotUrl, brandName, countdown, localParts } from './data.js?v=82afc97f2e';
+import { icon } from './icons.js?v=82afc97f2e';
+import * as store from './store.js?v=82afc97f2e';
 
 const HOUR = 3600000;
 const priceOf = (lot, sale) => (sale === 'B' ? exampleAuction(lot).bid : lot.usd);

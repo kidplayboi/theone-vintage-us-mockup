@@ -89,7 +89,7 @@
 /* 글줄 위계(결정 108 · Bezel 카드 실측: 브랜드는 작은 회색, 이름이 본문, 가격이 주인공) — 세 줄이 같은 굵기로 겹치지 않게 */
 .card-brand { font-size: var(--fs-12); font-weight: 400; color: var(--muted); letter-spacing: var(--track-small); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card-title { font-size: var(--fs-14); font-weight: 400; line-height: 1.4; color: var(--ink); }
-.card-title a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-title a { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } /* 두 줄까지(등급 칸이 옆에 와서 한 줄이면 390 에서 14/20 잘림 · Fashionphile 카드 이름 2줄) */
 .card-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: var(--r-lg); }
 .card:hover .card-title a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--line-2); }
 .card-price { display: flex; align-items: baseline; gap: var(--s2); margin-top: 6px; min-width: 0; }
@@ -132,6 +132,7 @@
   .card-sub { display: none; }
   .card-tag { left: var(--s2); bottom: var(--s2); min-height: 24px; font-size: var(--fs-12); }
   .card-date { display: none; }
+  .card-grade span { display: none; } /* 폰: 등급 글자만 — 이름까지 두면 제목 폭이 모자란다 */
 }
 
 /* 등장 뒤에는 마우스 반응을 빠르게 */

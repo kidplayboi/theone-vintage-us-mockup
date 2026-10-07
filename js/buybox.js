@@ -2,10 +2,10 @@
 // 순서 = 상태 띠 → 브랜드 + 도구 아이콘 → 제목 → 로트 번호 · 부제 → 가격/입찰 칸 → 버튼 → 접이식 행 2개(Condition · Authentication & delivery)
 // 덩어리 9 → 6. 2차 정보는 접이식 행으로 — Shopify Dawn main-product.liquid 의 collapsible_tab(213~230행 <details>/<summary>) · Vercel Commerce product-description(5덩어리)
 // 더윈 4(요청서 대신 창에서 문의) · 5(달러 크게) · 6(가격 표기 전환) · 8(단단한 상자) · 14(등급은 들어가자마자 — 접이식 행의 머리줄에 Rank 가 보인다)
-import { usd, jpy, yenFor, esc, gradeName, GRADES, SCORES, exampleAuction, exampleBids, formatEnds, countdown, bidStep, shortDate, brandName, gradeOf } from './data.js?v=ec9753df02';
-import { icon } from './icons.js?v=ec9753df02';
-import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=ec9753df02';
-import * as store from './store.js?v=ec9753df02';
+import { usd, jpy, yenFor, esc, gradeName, GRADES, SCORES, exampleAuction, exampleBids, formatEnds, countdown, bidStep, shortDate, brandName, gradeOf } from './data.js?v=82afc97f2e';
+import { icon } from './icons.js?v=82afc97f2e';
+import { bandInfo, bandLeft, KIND_CLASS } from './card.js?v=82afc97f2e';
+import * as store from './store.js?v=82afc97f2e';
 
 const day = n => shortDate(new Date(Date.now() + n * 86400000));
 

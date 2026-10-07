@@ -1,12 +1,12 @@
 // 실재고 스냅숏(data/lots.json) 읽기와 화면용 표기 도우미
-import * as store from './store.js?v=ec9753df02';
+import * as store from './store.js?v=82afc97f2e';
 
 let cache;
 let RATE = 0; // meta.rate — 엔화가 없는 로트의 '≈ ¥' 환산에(결정 135 · 지어내는 값 아님 · 사이트가 쓰는 환율 그대로)
 
 export function loadData() {
   if (!cache) {
-    cache = fetch('data/lots.json?v=ec9753df02').then(r => {
+    cache = fetch('data/lots.json?v=82afc97f2e').then(r => {
       if (!r.ok) throw new Error(`lots.json ${r.status}`);
       return r.json();
     }).then(d => {
@@ -25,7 +25,7 @@ export function cleanTitle(raw, lot) {
   let t = String(raw || '').replace(/&amp;/g, '&').replace(/　/g, ' ').replace(/\s+/g, ' ').trim(); // 원천에 &amp; 로 들어온 & ("Men's &amp; Boys'") — 화면에선 esc() 가 다시 감싼다
   t = t.replace(/^(?:\d{5,}(?:-\d+)?\s+)+/, '');                                   // 앞머리 SKU("739868 520981 Travel tag")
   t = t.replace(/(\w)'\s/g, '$1 ');                                               // 낱말 뒤 떠 있는 따옴표("Bracelet' Ancre")
-  t = t.replace(/\s*\((?:watches|bags|jewelry|jewellery|accessories|clothing|shoes)\)/gi, ''); // 카테고리 괄호는 어디 있든("Rasta (Bags) and Wallets" · "Must21 (Watches) - …")
+  t = t.replace(/\s*\((?:watches|bags|jewelry|jewellery|accessories|clothing|shoes|precious metal)\)/gi, ''); // 카테고리 괄호는 어디 있든("Rasta (Bags) and Wallets" · "Must21 (Watches) - …")
   t = t.replace(/\s\d{5,}-\d{2,}\b/g, '');                                        // 가운데 SKU("Blazer MID 616827-995 Men's")
   t = t.replace(/\s+size\s+[A-Z]{1,3}\b/gi, '');                                   // 가운데 "Size SH"
   t = t.replace(/^(?:excellent|very good|good|unused|new)\s+condition\s+/i, '');
@@ -38,6 +38,7 @@ export function cleanTitle(raw, lot) {
     const before = t;
     // 성별 문구는 통째로: "Men's Watch" · "- Men's & Women's" · "Unisex"(앞에 이미 Watch/Case 가 있다)
     t = t.replace(/\s*-?\s*(?:men's|women's|ladies'?|boys'|girls'|mens|womens|unisex)(?:\s*&\s*(?:men's|women's|ladies'?|boys'|girls'))?(?:\s+watch)?$/i, '');
+    t = t.replace(/\s+for\s+(?:women|men|ladies|kids)$/i, '');                         // "… sneakers for women"
     t = t.replace(/\s+size\s+[\w.]+$/i, '');                                       // "SIZE 27.0" · "Size M"
     t = t.replace(/\s+unused$/i, '');                                                 // 상태어 꼬리
     t = t.replace(/\s+\d{4,}-\d{2,}$/, '');                                          // "616825-995"
@@ -84,7 +85,7 @@ export const SCORES = ['1', '1+', '2', '2+', '3'];
 
 // 로트의 등급 — 원천에 있으면 그대로(9/125). 없으면 '예시 데이터'가 켜진 동안만 로트 번호로 정한 예시 등급(의뢰처 10/7 "등급 다 왼쪽 위에 보이게" · 결정 138).
 // 실서비스는 도쿄 검수 뒤 전 로트에 등급이 붙는다(How it works 04) — 시안의 예시 등급은 example:true 로 표시만, 화면 문구는 실등급과 같다(예시 입찰과 같은 규칙 · 결정 126)
-const EXAMPLE_RANKS = ['A', 'B', 'A', 'B', 'C', 'S', 'B', 'D'];
+const EXAMPLE_RANKS = ['C', 'B', 'C', 'A', 'C', 'B', 'C', 'B']; // 실데이터 9개의 분포(C 6 · B 2 · A 1)에 맞춤 — S·D 는 원천에 없어 예시에도 안 쓴다(검사관 5차: D 15% 가 실등급처럼 읽힘)
 export function gradeOf(lot) {
   if (lot && lot.grade && lot.grade.overall) return lot.grade;
   if (!lot || !store.setting('examples')) return null;

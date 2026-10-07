@@ -6,6 +6,7 @@
 .shop-head .display { margin: 0; }
 .shop-count { margin-top: 6px; font-size: var(--fs-14); color: var(--body); }
 .tz-pick { display: grid; gap: 4px; justify-items: end; }
+@media (min-width: 901px) { .tz-pick label { white-space: nowrap; } } /* 1440: "Your local time · Asia/Seoul" 가 두 줄로 꺾이던 것(검사관 5차). 폰은 줄바꿈 허용(nowrap 이면 가로 넘침 16px) */
 .tz-pick .input { width: 240px; min-height: 38px; font-size: var(--fs-13); }
 
 /* 필터 위계(결정 99 · 형 10/6 "똑같은 알약이라 구분 안 됨"): 줄마다 왼쪽 이름 + 모양이 다른 세 줄
